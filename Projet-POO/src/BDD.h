@@ -1,5 +1,4 @@
-#pragma once
-#pragma once
+﻿#pragma once
 
 using namespace System;
 using namespace System::Data::SqlClient;
