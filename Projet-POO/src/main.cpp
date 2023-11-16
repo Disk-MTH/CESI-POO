@@ -11,6 +11,6 @@ int __clrcall WinMain(array<String^>^ args)
     BDD^ mabdd = gcnew BDD();
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
-    Project2::MyForm monFormulaire;//ATTENTION : ici testWin est le nom du projet. Vous devez l'adapter au nom de votre projet
-    Application::Run(% monFormulaire);
+    Project2::MyForm form;
+    Application::Run(% form);
 }

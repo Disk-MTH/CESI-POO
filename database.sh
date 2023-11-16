@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DB_PASSWORD="4pQ4ZVpJz22g6z"
-DB_FILE_PATH="Projet-POO/BDD.cpp"
+DB_FILE_PATH="Projet-POO/src/BDD.cpp"
 DOCKER_CONTAINER="ms-server"
 SEARCH_LINE='String^ connectString = "Data Source=127.0.0.1,1433;Initial Catalog = test;User ID=sa;Password='
 REPLACE_LINE="${SEARCH_LINE}${DB_PASSWORD}\";"
