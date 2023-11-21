@@ -258,6 +258,13 @@ namespace Projet_POO {
 			String^ newValue = safe_cast<String^>(this->customersGridView->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value);
 			String^ columnName;
 			
+			if (newValue == nullptr || newValue->Trim()->Length == 0)
+			{
+				Console::WriteLine("Empty value");
+				MessageBox::Show("La valeur entree est vide !", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+			
 			switch (e->ColumnIndex)
 			{
 				case 1 :
