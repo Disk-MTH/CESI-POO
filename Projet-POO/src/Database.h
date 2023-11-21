@@ -16,8 +16,4 @@ public ref class Database sealed
 
     SqlConnection^ connection;
     Boolean connected;
-    static void Database::log(String^ sql)
-    {
-        Console::WriteLine("Sql query string: " + sql);
-    }
 };

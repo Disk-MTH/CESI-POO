@@ -11,7 +11,7 @@ int __clrcall WinMain(array<String^>^ args)
     Database^ db = gcnew Database();
     
     if (!db->isConnected()) {
-        MessageBox::Show("Erreur de connexion à la base de données", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        MessageBox::Show("Erreur de connexion a la base de données", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
     } else {
         Projet_POO::HomePage form(db);
         Application::Run(% form);

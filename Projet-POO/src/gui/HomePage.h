@@ -14,8 +14,8 @@ namespace Projet_POO {
 		public:
 			HomePage(Database^ db)
 			{
-				InitializeComponent();
 				this->db = db;
+				InitializeComponent();
 			}
 
 		protected:
@@ -28,14 +28,18 @@ namespace Projet_POO {
 			}
 		
 		Database^ db;
+		
 		TableLayoutPanel^ tableLayoutPanel1;
-		Label^ labelTitle;
 		TableLayoutPanel^ tableLayoutPanel2;
+		
+		Label^ labelTitle;
+		
 		Button^ buttonCustomers;
 		Button^ buttonStats;
 		Button^ buttonStocks;
 		Button^ buttonOrders;
 		Button^ buttonStaff;
+		
 		System::ComponentModel::Container ^components;
 		
 		void InitializeComponent()
@@ -168,8 +172,8 @@ namespace Projet_POO {
 		}
 
 		Void button_customers_Click(Object^ sender, EventArgs^ e) {
-			CustomerPage^ customerPage = gcnew CustomerPage(db);
 			this->Hide();
+			CustomerPage^ customerPage = gcnew CustomerPage(db);
 			customerPage->ShowDialog();
 			this->Show();
 		}

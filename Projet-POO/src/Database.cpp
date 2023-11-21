@@ -31,7 +31,6 @@ Boolean Database::isConnected()
 
 Data::DataSet^ Database::query(String^ sql)
 {
-    log(sql);
     SqlDataAdapter^ dataAdapter = gcnew SqlDataAdapter(sql, this->connection);
     Data::DataSet^ dataSet = gcnew Data::DataSet();
     dataAdapter->Fill(dataSet);
@@ -40,14 +39,12 @@ Data::DataSet^ Database::query(String^ sql)
 
 int Database::execute(String^ sql)
 {
-    log(sql);
     SqlCommand^ command = gcnew SqlCommand(sql, this->connection);
     return command->ExecuteNonQuery();
 }
 
 int Database::insert(String^ sql)
 {
-    log(sql);
     SqlCommand^ command = gcnew SqlCommand(sql + ";SELECT @@IDENTITY", this->connection);
     return Decimal::ToInt32(safe_cast<Decimal>(command->ExecuteScalar()));
 }
