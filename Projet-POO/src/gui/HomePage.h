@@ -156,7 +156,7 @@ namespace Projet_POO {
 			this->buttonCustomers->UseVisualStyleBackColor = true;
 			this->buttonCustomers->Click += gcnew EventHandler(this, &HomePage::button_customers_Click);
 
-			/* -------------------- window -------------------- */
+			/* -------------------- form -------------------- */
 			this->AutoScaleDimensions = SizeF(6, 13);
 			this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = Drawing::Size(684, 461);
