@@ -4,13 +4,16 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-[STAThreadAttribute]
-
 int __clrcall WinMain(array<String^>^ args)
 {
-    Database^ mabdd = gcnew Database();
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
-    Project2::HomePage form;
-    Application::Run(% form);
+    Database^ db = gcnew Database();
+    
+    if (!db->isConnected()) {
+        MessageBox::Show("Erreur de connexion à la base de données", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    } else {
+        Projet_POO::HomePage form(db);
+        Application::Run(% form);
+    }
 }
