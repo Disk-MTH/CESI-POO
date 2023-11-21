@@ -1,4 +1,5 @@
 #pragma once
+#include "CustomerPage.h"
 
 
 namespace Project2 {
@@ -198,6 +199,7 @@ namespace Project2 {
 			this->button_customers->TabIndex = 0;
 			this->button_customers->Text = L"Clients";
 			this->button_customers->UseVisualStyleBackColor = true;
+			this->button_customers->Click += gcnew System::EventHandler(this, &HomePage::button_customers_Click);
 			// 
 			// HomePage
 			// 
@@ -216,5 +218,11 @@ namespace Project2 {
 
 		}
 #pragma endregion
+	private: System::Void button_customers_Click(System::Object^ sender, System::EventArgs^ e) {
+		Project2::CustomerPage^ customerPage = gcnew Project2::CustomerPage();
+		this->Hide();
+		customerPage->ShowDialog();
+		this->Show();
+	}
 };
 }

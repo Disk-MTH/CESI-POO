@@ -6,7 +6,7 @@ DB_PASSWORD="4pQ4ZVpJz22g6z"
 DB_DATABASE="database"
 DB_FILE_PATH="Projet-POO/src/BDD.cpp"
 DOCKER_CONTAINER="ms-server"
-SEARCH_LINE="String^ connectString = \"Data Source=$DB_SERVER;Initial Catalog = test;User ID=$DB_USER;Password="
+SEARCH_LINE="String^ connectString = \"Data Source=$DB_SERVER;Initial Catalog = $DB_DATABASE;User ID=$DB_USER;Password="
 REPLACE_LINE="${SEARCH_LINE}${DB_PASSWORD}\";"
 
 sed -i "s|$SEARCH_LINE.*\";|$REPLACE_LINE|" "$DB_FILE_PATH"
@@ -14,6 +14,7 @@ if grep -q "$REPLACE_LINE" "$DB_FILE_PATH"; then
     echo "DB password change to \"$DB_FILE_PATH\""
 else
     echo "Failed to set DB password \"$DB_FILE_PATH\""
+    read -rp "Press enter to exit..."
     exit 1
 fi
 

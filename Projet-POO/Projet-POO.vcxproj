@@ -121,7 +121,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\BDD.cpp">
+    <ClCompile Include="src\Database.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -411,7 +411,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\BDD.h" />
+    <ClInclude Include="src\Database.h" />
     <ClInclude Include="src\gui\CustomerPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>

@@ -43,12 +43,17 @@ namespace Project2 {
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel3;
 	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
 	private: System::Windows::Forms::Button^ button1;
+
+
+
+	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel4;
+	private: System::Windows::Forms::Label^ label_title;
+	private: System::Windows::Forms::Button^ button_back_Click;
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel4;
-	private: System::Windows::Forms::Label^ label_title;
-	private: System::Windows::Forms::Button^ button_back;
+
 
 
 
@@ -92,7 +97,7 @@ namespace Project2 {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel4 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->label_title = (gcnew System::Windows::Forms::Label());
-			this->button_back = (gcnew System::Windows::Forms::Button());
+			this->button_back_Click = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->tableLayoutPanel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -132,7 +137,7 @@ namespace Project2 {
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 			this->tableLayoutPanel2->RowCount = 1;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
+			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 381)));
 			this->tableLayoutPanel2->Size = System::Drawing::Size(654, 381);
 			this->tableLayoutPanel2->TabIndex = 1;
 			// 
@@ -144,6 +149,7 @@ namespace Project2 {
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(468, 375);
 			this->dataGridView1->TabIndex = 0;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CustomerPage::dataGridView1_CellContentClick);
 			// 
 			// tableLayoutPanel3
 			// 
@@ -155,8 +161,8 @@ namespace Project2 {
 			this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
 			this->tableLayoutPanel3->RowCount = 3;
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 123)));
-			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 129)));
+			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 239)));
+			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 66)));
 			this->tableLayoutPanel3->Size = System::Drawing::Size(174, 375);
 			this->tableLayoutPanel3->TabIndex = 1;
 			// 
@@ -167,44 +173,44 @@ namespace Project2 {
 			this->flowLayoutPanel1->Controls->Add(this->button3);
 			this->flowLayoutPanel1->Controls->Add(this->button4);
 			this->flowLayoutPanel1->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
-			this->flowLayoutPanel1->Location = System::Drawing::Point(40, 126);
-			this->flowLayoutPanel1->Margin = System::Windows::Forms::Padding(40, 3, 40, 3);
+			this->flowLayoutPanel1->Location = System::Drawing::Point(30, 73);
+			this->flowLayoutPanel1->Margin = System::Windows::Forms::Padding(30, 3, 30, 3);
 			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			this->flowLayoutPanel1->Size = System::Drawing::Size(94, 117);
+			this->flowLayoutPanel1->Size = System::Drawing::Size(114, 232);
 			this->flowLayoutPanel1->TabIndex = 0;
 			// 
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(3, 3);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(91, 23);
+			this->button1->Size = System::Drawing::Size(110, 52);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"button1";
 			this->button1->UseVisualStyleBackColor = true;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(3, 32);
+			this->button2->Location = System::Drawing::Point(3, 61);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(91, 23);
+			this->button2->Size = System::Drawing::Size(110, 52);
 			this->button2->TabIndex = 1;
 			this->button2->Text = L"button2";
 			this->button2->UseVisualStyleBackColor = true;
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(3, 61);
+			this->button3->Location = System::Drawing::Point(3, 119);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(91, 23);
+			this->button3->Size = System::Drawing::Size(110, 52);
 			this->button3->TabIndex = 2;
 			this->button3->Text = L"button3";
 			this->button3->UseVisualStyleBackColor = true;
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(3, 90);
+			this->button4->Location = System::Drawing::Point(3, 177);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(91, 23);
+			this->button4->Size = System::Drawing::Size(110, 52);
 			this->button4->TabIndex = 3;
 			this->button4->Text = L"button4";
 			this->button4->UseVisualStyleBackColor = true;
@@ -219,7 +225,7 @@ namespace Project2 {
 			this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				45)));
 			this->tableLayoutPanel4->Controls->Add(this->label_title, 1, 0);
-			this->tableLayoutPanel4->Controls->Add(this->button_back, 0, 0);
+			this->tableLayoutPanel4->Controls->Add(this->button_back_Click, 2, 0);
 			this->tableLayoutPanel4->Location = System::Drawing::Point(3, 3);
 			this->tableLayoutPanel4->Name = L"tableLayoutPanel4";
 			this->tableLayoutPanel4->RowCount = 1;
@@ -238,16 +244,17 @@ namespace Project2 {
 			this->label_title->TabIndex = 1;
 			this->label_title->Text = L"Gestion des clients";
 			// 
-			// button_back
+			// button_back_Click
 			// 
-			this->button_back->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->button_back_Click->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button_back->Location = System::Drawing::Point(3, 3);
-			this->button_back->Name = L"button_back";
-			this->button_back->Size = System::Drawing::Size(39, 38);
-			this->button_back->TabIndex = 2;
-			this->button_back->Text = L"<--";
-			this->button_back->UseVisualStyleBackColor = true;
+			this->button_back_Click->Location = System::Drawing::Point(612, 3);
+			this->button_back_Click->Name = L"button_back_Click";
+			this->button_back_Click->Size = System::Drawing::Size(39, 38);
+			this->button_back_Click->TabIndex = 4;
+			this->button_back_Click->Text = L"-->";
+			this->button_back_Click->UseVisualStyleBackColor = true;
+			this->button_back_Click->Click += gcnew System::EventHandler(this, &CustomerPage::button_back_Click_Click);
 			// 
 			// CustomerPage
 			// 
@@ -255,7 +262,7 @@ namespace Project2 {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(684, 461);
 			this->Controls->Add(this->tableLayoutPanel1);
-			this->MinimizeBox = false;
+			this->MaximizeBox = false;
 			this->Name = L"CustomerPage";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"CustomerPage";
@@ -270,5 +277,10 @@ namespace Project2 {
 
 		}
 #pragma endregion
+	private: System::Void button_back_Click_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+}
 };
 }

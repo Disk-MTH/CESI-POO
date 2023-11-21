@@ -1,4 +1,4 @@
-﻿#include "BDD.h"
+﻿#include "Database.h"
 #include "gui/HomePage.h"
 
 using namespace System;
@@ -8,7 +8,7 @@ using namespace System::Windows::Forms;
 
 int __clrcall WinMain(array<String^>^ args)
 {
-    //BDD^ mabdd = gcnew BDD();
+    Database^ mabdd = gcnew Database();
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
     Project2::HomePage form;

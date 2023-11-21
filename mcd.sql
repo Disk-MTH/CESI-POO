@@ -1,7 +1,7 @@
 ﻿IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'database')
-BEGIN
+    BEGIN
         CREATE DATABASE [database];
-END
+    END
 GO;
 
 USE [database];
@@ -99,16 +99,16 @@ GO;
 
 CREATE TABLE orderHasProducts
 (
-     id_product INT,
-     id_order INT,
-     quantity SMALLINT,
-     tf_price REAL NOT NULL,
-     vat_price REAL NOT NULL,
-     price REAL NOT NULL,
-     price_after_discounts REAL NOT NULL,
-     PRIMARY KEY(id_product, id_order),
-     FOREIGN KEY(id_product) REFERENCES product(id_product),
-     FOREIGN KEY(id_order) REFERENCES [order](id_order)
+    id_product INT,
+    id_order INT,
+    quantity SMALLINT,
+    tf_price REAL NOT NULL,
+    vat_price REAL NOT NULL,
+    price REAL NOT NULL,
+    price_after_discounts REAL NOT NULL,
+    PRIMARY KEY(id_product, id_order),
+    FOREIGN KEY(id_product) REFERENCES product(id_product),
+    FOREIGN KEY(id_order) REFERENCES [order](id_order)
 );
 GO;
 
@@ -132,7 +132,7 @@ CREATE TABLE orderHasClients
 );
 GO;
 
-CREATE TABLE billingAddresses
+CREATE TABLE customerHasBillingAddresses
 (
     id_address INT,
     id_customer INT,
@@ -142,7 +142,7 @@ CREATE TABLE billingAddresses
 );
 GO;
 
-CREATE TABLE deliveryAddresses
+CREATE TABLE customerHasDeliveryAddresses
 (
     id_address INT,
     id_customer INT,
