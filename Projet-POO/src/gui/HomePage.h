@@ -12,9 +12,8 @@ namespace Projet_POO {
 	public ref class HomePage : public Form
 	{
 		public:
-			HomePage(Database^ db)
+			HomePage()
 			{
-				this->db = db;
 				InitializeComponent();
 			}
 
@@ -26,8 +25,6 @@ namespace Projet_POO {
 					delete components;
 				}
 			}
-		
-		Database^ db;
 		
 		TableLayoutPanel^ tableLayoutPanel1;
 		TableLayoutPanel^ tableLayoutPanel2;
@@ -173,7 +170,7 @@ namespace Projet_POO {
 
 		Void button_customers_Click(Object^ sender, EventArgs^ e) {
 			this->Hide();
-			CustomerPage^ customerPage = gcnew CustomerPage(db);
+			CustomerPage^ customerPage = gcnew CustomerPage();
 			customerPage->ShowDialog();
 			this->Show();
 		}

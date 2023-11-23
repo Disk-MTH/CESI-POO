@@ -1,10 +1,12 @@
 ﻿#include "Database.h"
 
-Database::Database()
+using namespace Projet_POO;
+
+void Database::connect()
 {
     try
     {
-        String^ connectionString = "Data Source=127.0.0.1,1433;Initial Catalog = database;User ID=sa;Password=4pQ4ZVpJz22g6z";
+        String^ connectionString = "Data Source=127.0.0.1,1433;Initial Catalog = databas;User ID=sa;Password=4pQ4ZVpJz22g6z";
         connection = gcnew SqlConnection(connectionString);
         connection->Open();
         connected = true;
@@ -18,10 +20,20 @@ Database::Database()
     }
 }
 
-Database::~Database()
+void Database::disconnect()
 {
-    connection->Close();
-    Console::WriteLine("Database has been disconnected");
+    try
+    {
+        connection->Close();
+        connected = false;
+        Console::WriteLine("Database has been disconnected");
+    }
+    catch (Exception^ exception)
+    {
+        connected = false;
+        Console::WriteLine("Database disconnection failed");
+        Console::WriteLine(exception->ToString());
+    }
 }
 
 Boolean Database::isConnected()

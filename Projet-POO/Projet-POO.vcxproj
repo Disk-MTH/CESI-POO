@@ -24,7 +24,7 @@
     <EnableManagedPackageReferenceSupport>true</EnableManagedPackageReferenceSupport>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>Project2</RootNamespace>
+    <RootNamespace>Projet_POO</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -121,6 +121,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\Database.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -193,6 +194,7 @@
       <CompileAsManaged>true</CompileAsManaged>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\gui\LoadingScreen.cpp" />
     <ClCompile Include="src\main.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -267,6 +269,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\App.h" />
     <ClInclude Include="src\Database.h" />
     <ClInclude Include="src\gui\AddCustomerForm.h">
       <FileType>CppForm</FileType>
@@ -277,8 +280,12 @@
     <ClInclude Include="src\gui\HomePage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="src\gui\LoadingScreen.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="src\gui\AddCustomerForm.resx" />
     <EmbeddedResource Include="src\gui\CustomerPage.resx">
       <DependentUpon>CustomerPage.h</DependentUpon>
     </EmbeddedResource>

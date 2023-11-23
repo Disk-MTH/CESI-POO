@@ -3,17 +3,19 @@
 using namespace System;
 using namespace System::Data::SqlClient;
 
-public ref class Database sealed
+namespace Projet_POO
 {
-    public:
-        Database();
-        ~Database();
+	public ref class Database sealed
+	{
+		public:
+			void connect();
+			void disconnect();
+			Boolean isConnected();
+			Data::DataSet^ query(String^ sql);
+			int execute(String^ sql);
+			int insert(String^ sql);
 
-        Boolean isConnected();
-        Data::DataSet^ query(String^ sql);
-        int execute(String^ sql);
-        int insert(String^ sql);
-
-    SqlConnection^ connection;
-    Boolean connected;
-};
+			SqlConnection^ connection;
+			Boolean connected;
+	};
+}
