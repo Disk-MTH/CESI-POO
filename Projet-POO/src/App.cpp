@@ -1,7 +1,5 @@
 #include "App.h"
 
-#include <thread>
-
 #include "gui/HomePage.h"
 #include "gui/LoadingScreen.h"
 
