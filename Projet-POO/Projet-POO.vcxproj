@@ -193,6 +193,7 @@
       <CompileAsManaged>true</CompileAsManaged>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\gui\AddCustomerForm.cpp" />
     <ClCompile Include="src\main.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -268,6 +269,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Database.h" />
+    <ClInclude Include="src\gui\AddCustomerForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\gui\CustomerPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
