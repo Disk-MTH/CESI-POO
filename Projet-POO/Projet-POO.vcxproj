@@ -194,7 +194,6 @@
       <CompileAsManaged>true</CompileAsManaged>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="src\gui\LoadingScreen.cpp" />
     <ClCompile Include="src\main.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>

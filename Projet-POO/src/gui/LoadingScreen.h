@@ -14,29 +14,22 @@ namespace Projet_POO
 				initialize();
 			}
 
-			~LoadingScreen()
-			{
-				if (components)
-				{
-					delete components;
-				}
-			}
-
 		private:
 			String^ text = "Chargement";
 			int tickCount = 0;
+
 			Timer^ timer;
-		
+
 			TableLayoutPanel^ tableLayout1;
 
 			Label^ labelLoading;
-		
-			System::ComponentModel::Container^ components;
-		
+
 			void initialize()
 			{
 				this->timer = gcnew Timer();
+
 				this->tableLayout1 = gcnew TableLayoutPanel();
+
 				this->labelLoading = gcnew Label();
 
 				/* -------------------- timer --------------------*/

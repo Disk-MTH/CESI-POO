@@ -18,19 +18,11 @@ namespace Project_POO
 				this->birthdate = birthdate;
 			}
 
-			~AddCustomerForm()
-			{
-				if (components)
-				{
-					delete components;
-				}
-			}
-
 		private:
 			String^* firstName;
 			String^* lastName;
 			String^* birthdate;
-
+		
 			TableLayoutPanel^ tableLayout1;
 			TableLayoutPanel^ tableLayout2;
 
@@ -44,7 +36,6 @@ namespace Project_POO
 
 			Button^ buttonValidate;
 
-			System::ComponentModel::Container^ components;
 
 			void initialize()
 			{

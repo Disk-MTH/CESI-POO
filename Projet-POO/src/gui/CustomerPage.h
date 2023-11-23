@@ -350,12 +350,9 @@ namespace Projet_POO {
 				
 				if (addCustomerForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 				{
-					Console::WriteLine("Data added: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
-
-					String^ sql = "INSERT INTO customer (first_name, last_name, birthdate) VALUES ('" + firstName + "', '" + lastName + "', '" + birthdate + "')";
-					App::app->db->execute(sql);
-
-					// Recharger les données dans le DataGridView
+					int inserted = App::app->db->insert("INSERT INTO customer (first_name, last_name, birthdate) VALUES ('" + firstName + "', '" + lastName + "', '" + birthdate + "')");
+					Console::WriteLine(inserted + " data inserted: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
+					
 					fillCustomersGridView();
 				}
 			}

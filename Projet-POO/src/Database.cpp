@@ -6,7 +6,7 @@ void Database::connect()
 {
     try
     {
-        String^ connectionString = "Data Source=127.0.0.1,1433;Initial Catalog = databas;User ID=sa;Password=4pQ4ZVpJz22g6z";
+        String^ connectionString = "Data Source=127.0.0.1,1433;Initial Catalog = database;User ID=sa;Password=4pQ4ZVpJz22g6z";
         connection = gcnew SqlConnection(connectionString);
         connection->Open();
         connected = true;
