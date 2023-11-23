@@ -1,12 +1,10 @@
 #pragma once
 
 namespace Projet_POO {
+	using namespace Data;
 	using namespace System;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
+	using namespace Drawing;
+	using namespace Windows::Forms;
 	
 	public ref class CustomerPage : public Form
 	{
@@ -14,7 +12,7 @@ namespace Projet_POO {
 			CustomerPage(Database^ db)
 			{
 				this->db = db;
-				initialize();
+				InitializeComponent();
 			}
 		
 			~CustomerPage()
@@ -32,94 +30,98 @@ namespace Projet_POO {
 		DataSet^ customers;
 		Database^ db;
 		
-		TableLayoutPanel^ tableLayout1;
-		TableLayoutPanel^ tableLayout2;
-		TableLayoutPanel^ tableLayout3;
-		TableLayoutPanel^ tableLayout4;
-		FlowLayoutPanel^ flowLayout1;
+		System::Windows::Forms::TableLayoutPanel^ tableLayout1;
+		System::Windows::Forms::TableLayoutPanel^ tableLayout2;
+		System::Windows::Forms::TableLayoutPanel^ tableLayout3;
+		System::Windows::Forms::TableLayoutPanel^ tableLayout4;
+		System::Windows::Forms::FlowLayoutPanel^ flowLayout1;
 
-		Label^ labelTitle;
-		DataGridView^ customersGridView;
+		System::Windows::Forms::Label^ labelTitle;
+		System::Windows::Forms::DataGridView^ customersGridView;
 		
-		Button^ buttonBack;
-		Button^ button1;
-		Button^ button2;
-		Button^ button3;
-		Button^ button4;
-		
+		System::Windows::Forms::Button^ buttonBack;
+		System::Windows::Forms::Button^ button1;
+		System::Windows::Forms::Button^ button2;
+		System::Windows::Forms::Button^ button3;
+		System::Windows::Forms::Button^ button4;
+	
 		System::ComponentModel::Container ^components;
 		
-		void initialize()
+		void InitializeComponent()
 		{
 			/* -------------------- instantiation -------------------- */
-			this->tableLayout1 = gcnew TableLayoutPanel();
-			this->tableLayout2 = gcnew TableLayoutPanel();
-			this->tableLayout3 = gcnew TableLayoutPanel();
-			this->tableLayout4 = gcnew TableLayoutPanel();
-			this->flowLayout1 = gcnew FlowLayoutPanel();
+			this->tableLayout1 = gcnew System::Windows::Forms::TableLayoutPanel();
+			this->tableLayout2 = gcnew System::Windows::Forms::TableLayoutPanel();
+			this->tableLayout3 = gcnew System::Windows::Forms::TableLayoutPanel();
+			this->tableLayout4 = gcnew System::Windows::Forms::TableLayoutPanel();
+			this->flowLayout1 = gcnew System::Windows::Forms::FlowLayoutPanel();
 
-			this->labelTitle = gcnew Label();
-			this->customersGridView = gcnew DataGridView();
+			this->labelTitle = gcnew System::Windows::Forms::Label();
+			this->customersGridView = gcnew System::Windows::Forms::DataGridView();
 			
-			this->buttonBack = gcnew Button();
-			this->button1 = gcnew Button();
-			this->button2 = gcnew Button();
-			this->button3 = gcnew Button();
-			this->button4 = gcnew Button();
+			this->buttonBack = gcnew System::Windows::Forms::Button();
+			this->button1 = gcnew System::Windows::Forms::Button();
+			this->button2 = gcnew System::Windows::Forms::Button();
+			this->button3 = gcnew System::Windows::Forms::Button();
+			this->button4 = gcnew System::Windows::Forms::Button();
 
 			/* -------------------- tableLayout1 -------------------- */
-			this->tableLayout1->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
+			this->tableLayout1->Anchor =
+				System::Windows::Forms::AnchorStyles::Top |
+				System::Windows::Forms::AnchorStyles::Bottom |
+				System::Windows::Forms::AnchorStyles::Left |
+				System::Windows::Forms::AnchorStyles::Right;
 			this->tableLayout1->ColumnCount = 1;
-			this->tableLayout1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+			this->tableLayout1->ColumnStyles->Add(gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50));
 			this->tableLayout1->Controls->Add(this->tableLayout2, 0, 1);
 			this->tableLayout1->Controls->Add(this->tableLayout4, 0, 0);
-			this->tableLayout1->Location = Point(12, 12);
+			this->tableLayout1->Location = System::Drawing::Point(12, 12);
 			this->tableLayout1->Name = L"tableLayoutPanel1";
 			this->tableLayout1->RowCount = 2;
-			this->tableLayout1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
-			this->tableLayout1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 387));
-			this->tableLayout1->Size = Drawing::Size(660, 437);
+			this->tableLayout1->RowStyles->Add(gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50));
+			this->tableLayout1->RowStyles->Add(gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 387));
+			this->tableLayout1->Size = System::Drawing::Size(660, 437);
 			this->tableLayout1->TabIndex = 1;
 	
 			/* -------------------- tableLayout2 -------------------- */
 			this->tableLayout2->ColumnCount = 2;
-			this->tableLayout2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 72.47707F));
-			this->tableLayout2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 27.52294F));
+			this->tableLayout2->ColumnStyles->Add(gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 72.47707F));
+			this->tableLayout2->ColumnStyles->Add(gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 27.52294F));
 			this->tableLayout2->Controls->Add(this->customersGridView, 0, 0);
 			this->tableLayout2->Controls->Add(this->tableLayout3, 1, 0);
-			this->tableLayout2->Location = Point(3, 53);
+			this->tableLayout2->Location = System::Drawing::Point(3, 53);
 			this->tableLayout2->Name = L"tableLayoutPanel2";
 			this->tableLayout2->RowCount = 1;
-			this->tableLayout2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
-			this->tableLayout2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 381));
-			this->tableLayout2->Size = Drawing::Size(654, 381);
+			this->tableLayout2->RowStyles->Add(gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50));
+			this->tableLayout2->RowStyles->Add(gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 381));
+			this->tableLayout2->Size = System::Drawing::Size(654, 381);
 			this->tableLayout2->TabIndex = 1;
 
 			/* -------------------- tableLayout3 -------------------- */
 			this->tableLayout3->ColumnCount = 1;
-			this->tableLayout3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+			this->tableLayout3->ColumnStyles->Add(gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50));
 			this->tableLayout3->Controls->Add(this->flowLayout1, 0, 1);
-			this->tableLayout3->Location = Point(477, 3);
+			this->tableLayout3->Location = System::Drawing::Point(477, 3);
 			this->tableLayout3->Name = L"tableLayoutPanel3";
 			this->tableLayout3->RowCount = 3;
-			this->tableLayout3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
-			this->tableLayout3->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 239));
-			this->tableLayout3->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 66));
-			this->tableLayout3->Size = Drawing::Size(174, 375);
+			this->tableLayout3->RowStyles->Add(gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50));
+			this->tableLayout3->RowStyles->Add(gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 239));
+			this->tableLayout3->RowStyles->Add(gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 66));
+			this->tableLayout3->Size = System::Drawing::Size(174, 375);
 			this->tableLayout3->TabIndex = 1;
 
 			/* -------------------- tableLayout4 -------------------- */
 			this->tableLayout4->ColumnCount = 3;
-			this->tableLayout4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
-			this->tableLayout4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 563));
-			this->tableLayout4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 45));
+			this->tableLayout4->ColumnStyles->Add(gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50));
+			this->tableLayout4->ColumnStyles->Add(gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 563));
+			this->tableLayout4->ColumnStyles->Add(gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 45));
 			this->tableLayout4->Controls->Add(this->labelTitle, 1, 0);
 			this->tableLayout4->Controls->Add(this->buttonBack, 2, 0);
-			this->tableLayout4->Location = Point(3, 3);
+			this->tableLayout4->Location = System::Drawing::Point(3, 3);
 			this->tableLayout4->Name = L"tableLayoutPanel4";
 			this->tableLayout4->RowCount = 1;
-			this->tableLayout4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
-			this->tableLayout4->Size = Drawing::Size(654, 44);
+			this->tableLayout4->RowStyles->Add(gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50));
+			this->tableLayout4->Size = System::Drawing::Size(654, 44);
 			this->tableLayout4->TabIndex = 2;
 
 			/* -------------------- flowLayout1 -------------------- */
@@ -127,57 +129,117 @@ namespace Projet_POO {
 			this->flowLayout1->Controls->Add(this->button2);
 			this->flowLayout1->Controls->Add(this->button3);
 			this->flowLayout1->Controls->Add(this->button4);
-			this->flowLayout1->FlowDirection = FlowDirection::TopDown;
-			this->flowLayout1->Location = Point(30, 73);
-			this->flowLayout1->Margin = Windows::Forms::Padding(30, 3, 30, 3);
+			this->flowLayout1->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
+			this->flowLayout1->Location = System::Drawing::Point(30, 73);
+			this->flowLayout1->Margin = System::Windows::Forms::Padding(30, 3, 30, 3);
 			this->flowLayout1->Name = L"flowLayoutPanel1";
-			this->flowLayout1->Size = Drawing::Size(114, 232);
+			this->flowLayout1->Size = System::Drawing::Size(114, 232);
 			this->flowLayout1->TabIndex = 0;
 
 			/* -------------------- labelTitle -------------------- */
-			this->labelTitle->Anchor = AnchorStyles::None;
+			this->labelTitle->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelTitle->AutoSize = true;
-			this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
-			this->labelTitle->Location = Point(205, 6);
+			this->labelTitle->Font = gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20);
+			this->labelTitle->Location = System::Drawing::Point(205, 6);
 			this->labelTitle->Name = L"label_title";
-			this->labelTitle->Size = Drawing::Size(244, 31);
+			this->labelTitle->Size = System::Drawing::Size(244, 31);
 			this->labelTitle->TabIndex = 1;
 			this->labelTitle->Text = L"Gestion des clients";
 			
 			/* -------------------- customersGridView -------------------- */
-			cli::safe_cast<ISupportInitialize^>(this->customersGridView)->BeginInit();
-			this->customersGridView->Dock = DockStyle::Fill;
-			this->customersGridView->Location = Point(3, 3);
+			//cli::safe_cast<ISupportInitialize^>(this->customersGridView)->BeginInit();
+			this->customersGridView->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->customersGridView->Location = System::Drawing::Point(3, 3);
 			this->customersGridView->Name = L"dataGridView1";
-			this->customersGridView->Size = Drawing::Size(468, 375);
+			this->customersGridView->Size = System::Drawing::Size(468, 375);
 			this->customersGridView->TabIndex = 0;
-			this->customersGridView->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
-			this->customersGridView->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+			this->customersGridView->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->customersGridView->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->customersGridView->RowHeadersVisible = false;
 			this->customersGridView->AllowUserToResizeColumns = false;
 			this->customersGridView->AllowUserToResizeRows = false;
-			this->customersGridView->CellEndEdit += gcnew DataGridViewCellEventHandler(this, &CustomerPage::customersGridView_CellEndEdit);
-			this->customersGridView->UserDeletingRow += gcnew DataGridViewRowCancelEventHandler(this, &CustomerPage::customersGridView_RowDeleting);
+			this->customersGridView->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CustomerPage::customersGridView_CellEndEdit);
+			this->customersGridView->UserDeletingRow += gcnew System::Windows::Forms::DataGridViewRowCancelEventHandler(this, &CustomerPage::customersGridView_RowDeleting);
 
-			DataGridViewTextBoxColumn^ idCustomer = gcnew DataGridViewTextBoxColumn();
-			idCustomer->Name = "id_customer";
+			fillCustomersGridView();
+
+			/* -------------------- buttonBack -------------------- */
+			this->buttonBack->Font = gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 0);
+			this->buttonBack->Location = System::Drawing::Point(612, 3);
+			this->buttonBack->Name = L"button_back_Click";
+			this->buttonBack->Size = System::Drawing::Size(39, 38);
+			this->buttonBack->TabIndex = 4;
+			this->buttonBack->Text = L"-->";
+			this->buttonBack->UseVisualStyleBackColor = true;
+			this->buttonBack->Click += gcnew System::EventHandler(this, &CustomerPage::buttonBack_Click);
+
+			/* -------------------- button1 -------------------- */
+			this->button1->Location = System::Drawing::Point(3, 3);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(110, 52);
+			this->button1->TabIndex = 0;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
+
+			/* -------------------- button2 -------------------- */
+			this->button2->Location = System::Drawing::Point(3, 61);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(110, 52);
+			this->button2->TabIndex = 1;
+			this->button2->Text = L"button2";
+			this->button2->UseVisualStyleBackColor = true;
+
+			/* -------------------- button3 -------------------- */
+			this->button3->Location = System::Drawing::Point(3, 119);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(110, 52);
+			this->button3->TabIndex = 2;
+			this->button3->Text = L"button3";
+			this->button3->UseVisualStyleBackColor = true;
+	
+			/* -------------------- button4 -------------------- */
+			this->button4->Location = System::Drawing::Point(3, 177);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(110, 52);
+			this->button4->TabIndex = 3;
+			this->button4->Text = L"button4";
+			this->button4->UseVisualStyleBackColor = true;
+
+			/* -------------------- form -------------------- */
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(684, 461);
+			this->Controls->Add(this->tableLayout1);
+			this->MaximizeBox = false;
+			this->Name = L"CustomerPage";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"CustomerPage";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &CustomerPage::customerPage_Close);
+		}
+
+		Void fillCustomersGridView()
+		{
+			this->customersGridView->Columns->Clear();
+			
+			System::Windows::Forms::DataGridViewTextBoxColumn^ idCustomer = gcnew System::Windows::Forms::DataGridViewTextBoxColumn();
+			idCustomer->Name = L"id_customer";
 			idCustomer->Visible = false;
 			this->customersGridView->Columns->Add(idCustomer);
 			
-			DataGridViewTextBoxColumn^ firstName = gcnew DataGridViewTextBoxColumn();
-			firstName->Name = "Nom";
+			System::Windows::Forms::DataGridViewTextBoxColumn^ firstName = gcnew System::Windows::Forms::DataGridViewTextBoxColumn();
+			firstName->Name = L"Nom";
 			this->customersGridView->Columns->Add(firstName);
 			
-			DataGridViewTextBoxColumn^ lastName = gcnew DataGridViewTextBoxColumn();
-			lastName->Name = "Prenom";
+			System::Windows::Forms::DataGridViewTextBoxColumn^ lastName = gcnew System::Windows::Forms::DataGridViewTextBoxColumn();
+			lastName->Name = L"Prenom";
 			this->customersGridView->Columns->Add(lastName);
 			
-			DataGridViewTextBoxColumn^ birthdate = gcnew DataGridViewTextBoxColumn();
-			birthdate->Name = "Date de naissance";
+			System::Windows::Forms::DataGridViewTextBoxColumn^ birthdate = gcnew System::Windows::Forms::DataGridViewTextBoxColumn();
+			birthdate->Name = L"Datede";
 			this->customersGridView->Columns->Add(birthdate);
 
-			DataGridViewTextBoxColumn^ addressesCount = gcnew DataGridViewTextBoxColumn();
-			addressesCount->Name = "Nombre d'adresses";
+			System::Windows::Forms::DataGridViewTextBoxColumn^ addressesCount = gcnew System::Windows::Forms::DataGridViewTextBoxColumn();
+			addressesCount->Name = L"yyyy";
 			addressesCount->ReadOnly = true;
 			this->customersGridView->Columns->Add(addressesCount);
 			
@@ -186,73 +248,20 @@ namespace Projet_POO {
 			for (int i = 0; i < customers->Tables[0]->Rows->Count; i++) {
 				this->customersGridView->Rows->Add(customers->Tables[0]->Rows[i]->ItemArray);
 			}
-
-			/* -------------------- buttonBack -------------------- */
-			this->buttonBack->Font = gcnew Drawing::Font(L"Arial Black", 8.25F, FontStyle::Bold, GraphicsUnit::Point, static_cast<Byte>(0));
-			this->buttonBack->Location = Point(612, 3);
-			this->buttonBack->Name = L"button_back_Click";
-			this->buttonBack->Size = Drawing::Size(39, 38);
-			this->buttonBack->TabIndex = 4;
-			this->buttonBack->Text = L"-->";
-			this->buttonBack->UseVisualStyleBackColor = true;
-			this->buttonBack->Click += gcnew EventHandler(this, &CustomerPage::buttonBack_Click);
-
-			/* -------------------- button1 -------------------- */
-			this->button1->Location = Point(3, 3);
-			this->button1->Name = L"button1";
-			this->button1->Size = Drawing::Size(110, 52);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"button1";
-			this->button1->UseVisualStyleBackColor = true;
-
-			/* -------------------- button2 -------------------- */
-			this->button2->Location = Point(3, 61);
-			this->button2->Name = L"button2";
-			this->button2->Size = Drawing::Size(110, 52);
-			this->button2->TabIndex = 1;
-			this->button2->Text = L"button2";
-			this->button2->UseVisualStyleBackColor = true;
-
-			/* -------------------- button3 -------------------- */
-			this->button3->Location = Point(3, 119);
-			this->button3->Name = L"button3";
-			this->button3->Size = Drawing::Size(110, 52);
-			this->button3->TabIndex = 2;
-			this->button3->Text = L"button3";
-			this->button3->UseVisualStyleBackColor = true;
-	
-			/* -------------------- button4 -------------------- */
-			this->button4->Location = Point(3, 177);
-			this->button4->Name = L"button4";
-			this->button4->Size = Drawing::Size(110, 52);
-			this->button4->TabIndex = 3;
-			this->button4->Text = L"button4";
-			this->button4->UseVisualStyleBackColor = true;
-
-			/* -------------------- form -------------------- */
-			this->AutoScaleDimensions = SizeF(6, 13);
-			this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = Drawing::Size(684, 461);
-			this->Controls->Add(this->tableLayout1);
-			this->MaximizeBox = false;
-			this->Name = L"CustomerPage";
-			this->StartPosition = FormStartPosition::CenterScreen;
-			this->Text = L"CustomerPage";
-			this->FormClosing += gcnew FormClosingEventHandler(this, &CustomerPage::customerPage_Close);
 		}
 
-		Void customerPage_Close(Object^ sender, FormClosingEventArgs^ e) {
+		Void customerPage_Close(Object^ sender,  System::Windows::Forms::FormClosingEventArgs^ e) {
 			if (!this->back) {
 				Application::Exit();
 			}
 		}
 		
-		Void buttonBack_Click(Object^ sender, EventArgs^ e) {
+		Void buttonBack_Click(Object^ sender, System::EventArgs^ e) {
 			this->back = true;
 			this->Close();
 		}
 		
-		Void customersGridView_CellEndEdit(Object^ sender, DataGridViewCellEventArgs^ e)
+		Void customersGridView_CellEndEdit(Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
 		{
 			int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[e->RowIndex]->Cells[0]->Value);
 			String^ newValue = safe_cast<String^>(this->customersGridView->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value);
@@ -290,7 +299,7 @@ namespace Projet_POO {
 			Console::WriteLine("Data updated: \"" + columnName + "\" = \"" + newValue + "\"");
 		}
 
-		Void customersGridView_RowDeleting(Object^ sender, DataGridViewRowCancelEventArgs^ e)
+		Void customersGridView_RowDeleting(Object^ sender, System::Windows::Forms::DataGridViewRowCancelEventArgs^ e)
 		{
 			if (pendingCount == 0)
 			{
