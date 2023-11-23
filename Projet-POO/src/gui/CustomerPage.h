@@ -5,6 +5,7 @@ namespace Projet_POO {
 	using namespace Data;
 	using namespace System;
 	using namespace Drawing;
+	using namespace Project_POO;
 	using namespace Windows::Forms;
 	
 	public ref class CustomerPage : public Form
@@ -24,6 +25,7 @@ namespace Projet_POO {
 				}
 			}
 
+	private:
 		bool back = false;
 		Windows::Forms::DialogResult pendingResult = Windows::Forms::DialogResult::None;
 		int pendingCount = 0;
@@ -234,13 +236,13 @@ namespace Projet_POO {
 			idCustomer->Visible = false;
 			this->customersGridView->Columns->Add(idCustomer);
 			
-			DataGridViewTextBoxColumn^ firstName = gcnew DataGridViewTextBoxColumn();
-			firstName->Name = L"Nom";
-			this->customersGridView->Columns->Add(firstName);
-			
 			DataGridViewTextBoxColumn^ lastName = gcnew DataGridViewTextBoxColumn();
-			lastName->Name = L"Prenom";
+			lastName->Name = L"Nom";
 			this->customersGridView->Columns->Add(lastName);
+			
+			DataGridViewTextBoxColumn^ firstName = gcnew DataGridViewTextBoxColumn();
+			firstName->Name = L"Prenom";
+			this->customersGridView->Columns->Add(firstName);
 			
 			DataGridViewTextBoxColumn^ birthdate = gcnew DataGridViewTextBoxColumn();
 			birthdate->Name = L"Datede";
@@ -251,7 +253,7 @@ namespace Projet_POO {
 			addressesCount->ReadOnly = true;
 			this->customersGridView->Columns->Add(addressesCount);
 			
-			customers = db->query("SELECT c.id_customer, c.first_name, c.last_name, CONVERT(VARCHAR, c.birthdate, 101) AS birthdate, ISNULL(b.billingAddressesCount, 0) + ISNULL(d.deliveryAddressesCount, 0) AS addressesCount FROM customer c LEFT JOIN (SELECT id_customer, COUNT(*) AS billingAddressesCount FROM customerHasBillingAddresses GROUP BY id_customer) b ON c.id_customer = b.id_customer LEFT JOIN (SELECT id_customer, COUNT(*) AS deliveryAddressesCount FROM customerHasDeliveryAddresses GROUP BY id_customer) d ON c.id_customer = d.id_customer;");
+			customers = db->query("SELECT c.id_customer, c.first_name, c.last_name, CONVERT(VARCHAR, c.birthdate, 103) AS birthdate, ISNULL(b.billingAddressesCount, 0) + ISNULL(d.deliveryAddressesCount, 0) AS addressesCount FROM customer c LEFT JOIN (SELECT id_customer, COUNT(*) AS billingAddressesCount FROM customerHasBillingAddresses GROUP BY id_customer) b ON c.id_customer = b.id_customer LEFT JOIN (SELECT id_customer, COUNT(*) AS deliveryAddressesCount FROM customerHasDeliveryAddresses GROUP BY id_customer) d ON c.id_customer = d.id_customer;");
 			
 			for (int i = 0; i < customers->Tables[0]->Rows->Count; i++) {
 				this->customersGridView->Rows->Add(customers->Tables[0]->Rows[i]->ItemArray);
@@ -343,13 +345,13 @@ namespace Projet_POO {
 
 		Void buttonAdd_Click(Object^ sender, EventArgs^ e)
 		{
-			Project2::AddCustomerForm^ addCustomerForm = gcnew Project2::AddCustomerForm();
+			String^ firstName = "";
+			String^ lastName = "";
+			String^ birthdate = "";
+			AddCustomerForm^ addCustomerForm = gcnew AddCustomerForm(&firstName, &lastName, &birthdate);
+			
 			if (addCustomerForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 			{
-				String^ firstName = addCustomerForm->textBox1->Text;
-				String^ lastName = addCustomerForm->textBox2->Text;
-				String^ birthdate = addCustomerForm->textBox3->Text;
-
 				Console::WriteLine("Data added: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
 
 				//String^ sql = "INSERT INTO customer (first_name, last_name, birthdate) VALUES ('" + firstName + "', '" + lastName + "', '" + birthdate + "')";

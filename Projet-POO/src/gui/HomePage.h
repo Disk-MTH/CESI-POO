@@ -62,7 +62,7 @@ namespace Projet_POO {
 			this->tableLayoutPanel1->ColumnCount = 1;
 			this->tableLayoutPanel1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
 			this->tableLayoutPanel1->Controls->Add(this->buttonStats, 0, 2);
-			//this->tableLayoutPanel1->Controls->Add(this->labelTitle, 0, 0);
+			this->tableLayoutPanel1->Controls->Add(this->labelTitle, 0, 0);
 			this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 1);
 			this->tableLayoutPanel1->Location = Point(12, 12);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
