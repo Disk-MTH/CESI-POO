@@ -1,5 +1,8 @@
 #pragma once
 #include "CustomerPage.h"
+#include "StaffPage.h"
+#include "OrdersPage.h"
+#include "StocksPage.h"
 
 namespace Projet_POO {
 	using namespace System;
@@ -118,6 +121,7 @@ namespace Projet_POO {
 			this->buttonStocks->TabIndex = 3;
 			this->buttonStocks->Text = L"Stocks";
 			this->buttonStocks->UseVisualStyleBackColor = true;
+			this->buttonStocks->Click += gcnew EventHandler(this, &HomePage::button_stocks_Click);
 
 			/* -------------------- buttonOrders -------------------- */
 			this->buttonOrders->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -129,6 +133,7 @@ namespace Projet_POO {
 			this->buttonOrders->TabIndex = 2;
 			this->buttonOrders->Text = L"Commandes";
 			this->buttonOrders->UseVisualStyleBackColor = true;
+			this->buttonOrders->Click += gcnew EventHandler(this, &HomePage::button_orders_Click);
 			
 			/* -------------------- buttonStaff -------------------- */
 			this->buttonStaff->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -140,6 +145,7 @@ namespace Projet_POO {
 			this->buttonStaff->TabIndex = 1;
 			this->buttonStaff->Text = L"Personnel";
 			this->buttonStaff->UseVisualStyleBackColor = true;
+			this->buttonStaff->Click += gcnew EventHandler(this, &HomePage::button_staff_Click);
 
 			/* -------------------- buttonCustomers -------------------- */
 			this->buttonCustomers->Anchor = AnchorStyles::Top |AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -172,6 +178,27 @@ namespace Projet_POO {
 			this->Hide();
 			CustomerPage^ customerPage = gcnew CustomerPage();
 			customerPage->ShowDialog();
+			this->Show();
+		}
+
+		Void button_staff_Click(Object^ sender, EventArgs^ e) {
+			this->Hide();
+			StaffPage^ staffPage = gcnew StaffPage();
+			staffPage->ShowDialog();
+			this->Show();
+		}
+
+		Void button_orders_Click(Object^ sender, EventArgs^ e) {
+			this->Hide();
+			OrdersPage^ orderPage = gcnew OrdersPage();
+			orderPage->ShowDialog();
+			this->Show();
+		}
+
+		Void button_stocks_Click(Object^ sender, EventArgs^ e) {
+			this->Hide();
+			StocksPage^ stockPage = gcnew StocksPage();
+			stockPage->ShowDialog();
 			this->Show();
 		}
 	};

@@ -285,14 +285,32 @@
     <ClInclude Include="src\gui\LoadingScreen.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="src\gui\OrdersPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\gui\StaffPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\gui\StocksPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="src\gui\AddCustomerForm.resx" />
+    <EmbeddedResource Include="src\gui\CustomerAdressesForm.resx">
+      <DependentUpon>src\gui\CustomerAdressesForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\gui\CustomerPage.resx">
       <DependentUpon>CustomerPage.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\gui\HomePage.resx">
       <DependentUpon>HomePage.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\OrdersPage.resx">
+      <DependentUpon>src\gui\OrdersPage.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\StaffPage.resx">
+      <DependentUpon>src\gui\StaffPage.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
