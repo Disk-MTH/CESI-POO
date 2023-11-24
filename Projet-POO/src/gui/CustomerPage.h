@@ -1,5 +1,6 @@
 #pragma once
 #include "AddCustomerForm.h"
+#include "CustomerAdressesForm.h"
 
 namespace Projet_POO {
 	using namespace Project_POO;
@@ -44,11 +45,12 @@ namespace Projet_POO {
 		    System::Windows::Forms::Button^ button1;
 			System::Windows::Forms::Button^ buttonAdd;
 			System::Windows::Forms::Label^ labelFiters;
-	private: System::Windows::Forms::Button^ button5;
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Label^ labelTitle;
-	private: System::Windows::Forms::Button^ button4;
+
 	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button6;
 
 
 
@@ -65,11 +67,10 @@ namespace Projet_POO {
 				this->button1 = (gcnew System::Windows::Forms::Button());
 				this->labelFiters = (gcnew System::Windows::Forms::Label());
 				this->tableLayout4 = (gcnew System::Windows::Forms::TableLayoutPanel());
-				this->button4 = (gcnew System::Windows::Forms::Button());
-				this->labelTitle = (gcnew System::Windows::Forms::Label());
 				this->button2 = (gcnew System::Windows::Forms::Button());
-				this->button5 = (gcnew System::Windows::Forms::Button());
+				this->labelTitle = (gcnew System::Windows::Forms::Label());
 				this->button3 = (gcnew System::Windows::Forms::Button());
+				this->button6 = (gcnew System::Windows::Forms::Button());
 				this->tableLayout1->SuspendLayout();
 				this->tableLayout2->SuspendLayout();
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->customersGridView))->BeginInit();
@@ -86,13 +87,12 @@ namespace Projet_POO {
 				this->tableLayout1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
 				this->tableLayout1->Controls->Add(this->tableLayout2, 0, 1);
 				this->tableLayout1->Controls->Add(this->tableLayout4, 0, 0);
-				this->tableLayout1->Location = System::Drawing::Point(16, 15);
-				this->tableLayout1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+				this->tableLayout1->Location = System::Drawing::Point(12, 12);
 				this->tableLayout1->Name = L"tableLayout1";
 				this->tableLayout1->RowCount = 2;
 				this->tableLayout1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-				this->tableLayout1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 476)));
-				this->tableLayout1->Size = System::Drawing::Size(880, 538);
+				this->tableLayout1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 387)));
+				this->tableLayout1->Size = System::Drawing::Size(660, 437);
 				this->tableLayout1->TabIndex = 1;
 				// 
 				// tableLayout2
@@ -102,13 +102,12 @@ namespace Projet_POO {
 				this->tableLayout2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 27.52294F)));
 				this->tableLayout2->Controls->Add(this->customersGridView, 0, 0);
 				this->tableLayout2->Controls->Add(this->tableLayout3, 1, 0);
-				this->tableLayout2->Location = System::Drawing::Point(4, 66);
-				this->tableLayout2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+				this->tableLayout2->Location = System::Drawing::Point(3, 53);
 				this->tableLayout2->Name = L"tableLayout2";
 				this->tableLayout2->RowCount = 1;
 				this->tableLayout2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-				this->tableLayout2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 469)));
-				this->tableLayout2->Size = System::Drawing::Size(872, 468);
+				this->tableLayout2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 380)));
+				this->tableLayout2->Size = System::Drawing::Size(654, 380);
 				this->tableLayout2->TabIndex = 1;
 				// 
 				// customersGridView
@@ -118,16 +117,18 @@ namespace Projet_POO {
 				this->customersGridView->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 				this->customersGridView->ColumnHeadersHeight = 29;
 				this->customersGridView->Dock = System::Windows::Forms::DockStyle::Fill;
-				this->customersGridView->Location = System::Drawing::Point(4, 4);
-				this->customersGridView->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+				this->customersGridView->Location = System::Drawing::Point(3, 3);
 				this->customersGridView->Name = L"customersGridView";
 				this->customersGridView->RowHeadersVisible = false;
 				this->customersGridView->RowHeadersWidth = 51;
 				this->customersGridView->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-				this->customersGridView->Size = System::Drawing::Size(624, 460);
+				this->customersGridView->Size = System::Drawing::Size(468, 374);
 				this->customersGridView->TabIndex = 0;
 				this->customersGridView->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CustomerPage::customersGridView_CellEndEdit);
 				this->customersGridView->UserDeletingRow += gcnew System::Windows::Forms::DataGridViewRowCancelEventHandler(this, &CustomerPage::customersGridView_RowDeleting);
+				this->customersGridView->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CustomerPage::addressesCount_Click);
+				
+				fillCustomersGridView();
 				// 
 				// tableLayout3
 				// 
@@ -136,23 +137,21 @@ namespace Projet_POO {
 				this->tableLayout3->Controls->Add(this->buttonAdd, 0, 2);
 				this->tableLayout3->Controls->Add(this->button1, 0, 1);
 				this->tableLayout3->Controls->Add(this->labelFiters, 0, 0);
-				this->tableLayout3->Location = System::Drawing::Point(636, 4);
-				this->tableLayout3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+				this->tableLayout3->Location = System::Drawing::Point(477, 3);
 				this->tableLayout3->Name = L"tableLayout3";
 				this->tableLayout3->RowCount = 3;
 				this->tableLayout3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-				this->tableLayout3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 85)));
-				this->tableLayout3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 85)));
-				this->tableLayout3->Size = System::Drawing::Size(232, 460);
+				this->tableLayout3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 69)));
+				this->tableLayout3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 69)));
+				this->tableLayout3->Size = System::Drawing::Size(174, 374);
 				this->tableLayout3->TabIndex = 1;
 				// 
 				// buttonAdd
 				// 
 				this->buttonAdd->Anchor = System::Windows::Forms::AnchorStyles::None;
-				this->buttonAdd->Location = System::Drawing::Point(24, 383);
-				this->buttonAdd->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+				this->buttonAdd->Location = System::Drawing::Point(18, 312);
 				this->buttonAdd->Name = L"buttonAdd";
-				this->buttonAdd->Size = System::Drawing::Size(183, 68);
+				this->buttonAdd->Size = System::Drawing::Size(137, 55);
 				this->buttonAdd->TabIndex = 1;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
@@ -161,10 +160,9 @@ namespace Projet_POO {
 				// button1
 				// 
 				this->button1->Anchor = System::Windows::Forms::AnchorStyles::None;
-				this->button1->Location = System::Drawing::Point(24, 298);
-				this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+				this->button1->Location = System::Drawing::Point(18, 243);
 				this->button1->Name = L"button1";
-				this->button1->Size = System::Drawing::Size(183, 68);
+				this->button1->Size = System::Drawing::Size(137, 55);
 				this->button1->TabIndex = 0;
 				this->button1->Text = L"button1";
 				this->button1->UseVisualStyleBackColor = true;
@@ -173,10 +171,10 @@ namespace Projet_POO {
 				// 
 				this->labelFiters->Anchor = System::Windows::Forms::AnchorStyles::Top;
 				this->labelFiters->AutoSize = true;
-				this->labelFiters->Location = System::Drawing::Point(91, 25);
-				this->labelFiters->Margin = System::Windows::Forms::Padding(4, 25, 4, 0);
+				this->labelFiters->Location = System::Drawing::Point(67, 20);
+				this->labelFiters->Margin = System::Windows::Forms::Padding(3, 20, 3, 0);
 				this->labelFiters->Name = L"labelFiters";
-				this->labelFiters->Size = System::Drawing::Size(49, 16);
+				this->labelFiters->Size = System::Drawing::Size(40, 13);
 				this->labelFiters->TabIndex = 2;
 				this->labelFiters->Text = L"Filtres :";
 				// 
@@ -185,74 +183,45 @@ namespace Projet_POO {
 				this->tableLayout4->ColumnCount = 5;
 				this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
 				this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-					61)));
+					46)));
 				this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-					624)));
+					468)));
 				this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-					61)));
+					46)));
 				this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-					64)));
-				this->tableLayout4->Controls->Add(this->button5, 0, 0);
-				this->tableLayout4->Controls->Add(this->button2, 0, 0);
-				this->tableLayout4->Controls->Add(this->labelTitle, 0, 0);
-				this->tableLayout4->Controls->Add(this->button4, 0, 0);
-				this->tableLayout4->Controls->Add(this->button3, 0, 0);
-				this->tableLayout4->Location = System::Drawing::Point(4, 4);
-				this->tableLayout4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+					48)));
+				this->tableLayout4->Controls->Add(this->button2, 4, 0);
+				this->tableLayout4->Controls->Add(this->button6, 3, 0);
+				this->tableLayout4->Controls->Add(this->labelTitle, 2, 0);
+				this->tableLayout4->Location = System::Drawing::Point(3, 3);
 				this->tableLayout4->Name = L"tableLayout4";
 				this->tableLayout4->RowCount = 1;
 				this->tableLayout4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-				this->tableLayout4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-				this->tableLayout4->Size = System::Drawing::Size(872, 54);
+				this->tableLayout4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 44)));
+				this->tableLayout4->Size = System::Drawing::Size(654, 44);
 				this->tableLayout4->TabIndex = 2;
 				// 
-				// button4
+				// button2
 				// 
-				this->button4->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				this->button2->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 					static_cast<System::Byte>(0)));
-				this->button4->Location = System::Drawing::Point(4, 4);
-				this->button4->Margin = System::Windows::Forms::Padding(4);
-				this->button4->Name = L"button4";
-				this->button4->Size = System::Drawing::Size(52, 46);
-				this->button4->TabIndex = 7;
-				this->button4->Text = L"-->";
-				this->button4->UseVisualStyleBackColor = true;
+				this->button2->Location = System::Drawing::Point(609, 3);
+				this->button2->Name = L"button2";
+				this->button2->Size = System::Drawing::Size(39, 37);
+				this->button2->TabIndex = 10;
+				this->button2->Text = L"-->";
+				this->button2->UseVisualStyleBackColor = true;
 				// 
 				// labelTitle
 				// 
 				this->labelTitle->Anchor = System::Windows::Forms::AnchorStyles::None;
 				this->labelTitle->AutoSize = true;
 				this->labelTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
-				this->labelTitle->Location = System::Drawing::Point(283, 7);
-				this->labelTitle->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+				this->labelTitle->Location = System::Drawing::Point(204, 6);
 				this->labelTitle->Name = L"labelTitle";
-				this->labelTitle->Size = System::Drawing::Size(304, 39);
+				this->labelTitle->Size = System::Drawing::Size(244, 31);
 				this->labelTitle->TabIndex = 9;
 				this->labelTitle->Text = L"Gestion des clients";
-				// 
-				// button2
-				// 
-				this->button2->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)));
-				this->button2->Location = System::Drawing::Point(812, 4);
-				this->button2->Margin = System::Windows::Forms::Padding(4);
-				this->button2->Name = L"button2";
-				this->button2->Size = System::Drawing::Size(52, 46);
-				this->button2->TabIndex = 10;
-				this->button2->Text = L"-->";
-				this->button2->UseVisualStyleBackColor = true;
-				// 
-				// button5
-				// 
-				this->button5->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-					static_cast<System::Byte>(0)));
-				this->button5->Location = System::Drawing::Point(751, 4);
-				this->button5->Margin = System::Windows::Forms::Padding(4);
-				this->button5->Name = L"button5";
-				this->button5->Size = System::Drawing::Size(52, 46);
-				this->button5->TabIndex = 11;
-				this->button5->Text = L"-->";
-				this->button5->UseVisualStyleBackColor = true;
 				// 
 				// button3
 				// 
@@ -266,13 +235,23 @@ namespace Projet_POO {
 				this->button3->Text = L"-->";
 				this->button3->UseVisualStyleBackColor = true;
 				// 
+				// button6
+				// 
+				this->button6->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+					static_cast<System::Byte>(0)));
+				this->button6->Location = System::Drawing::Point(563, 3);
+				this->button6->Name = L"button6";
+				this->button6->Size = System::Drawing::Size(39, 37);
+				this->button6->TabIndex = 14;
+				this->button6->Text = L"( )";
+				this->button6->UseVisualStyleBackColor = true;
+				// 
 				// CustomerPage
 				// 
-				this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+				this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-				this->ClientSize = System::Drawing::Size(912, 567);
+				this->ClientSize = System::Drawing::Size(684, 461);
 				this->Controls->Add(this->tableLayout1);
-				this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 				this->MaximizeBox = false;
 				this->Name = L"CustomerPage";
 				this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -307,11 +286,11 @@ namespace Projet_POO {
 				this->customersGridView->Columns->Add(firstName);
 				
 				DataGridViewTextBoxColumn^ birthdate = gcnew DataGridViewTextBoxColumn();
-				birthdate->Name = L"Datede";
+				birthdate->Name = L"Date de naissance";
 				this->customersGridView->Columns->Add(birthdate);
 
 				DataGridViewTextBoxColumn^ addressesCount = gcnew DataGridViewTextBoxColumn();
-				addressesCount->Name = L"yyyy";
+				addressesCount->Name = L"Nombre d'adresses";
 				addressesCount->ReadOnly = true;
 				this->customersGridView->Columns->Add(addressesCount);
 				
@@ -425,6 +404,17 @@ namespace Projet_POO {
 					fillCustomersGridView();
 				}
 			}
+
+		Void addressesCount_Click(Object^ sender, DataGridViewCellEventArgs^ e)
+		{
+			int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[0]->Value);
+			String^ firstName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[1]->Value);
+			String^ lastName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[2]->Value);
+			String^ birthdate = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[3]->Value);
+			int^ addressesCount = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[4]->Value);
+			CustomerAdressesForm^ addressesCountForm = gcnew CustomerAdressesForm();
+			addressesCountForm->ShowDialog();
+		}
 
 };
 }
