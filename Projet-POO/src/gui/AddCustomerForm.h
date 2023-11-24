@@ -178,7 +178,8 @@ namespace Project_POO
 					return;
 				}
 
-				if (!DateTime::TryParse(this->textBoxBirthdate->Text, DateTime()))
+				DateTime date;
+				if (!DateTime::TryParseExact(this->textBoxBirthdate->Text, "dd/MM/yyyy", nullptr, Globalization::DateTimeStyles::None, date))
 				{
 					Console::WriteLine("Wrong date format: \"" + this->textBoxBirthdate->Text + "\"");
 					MessageBox::Show("       La date est invalide !\n\"dd/mm/yyyy\" ou \"dd-mm-yyyy\"", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -187,7 +188,7 @@ namespace Project_POO
 
 				*this->firstName = this->textBoxLastName->Text;
 				*this->lastName = this->textBoxFirstName->Text;
-				*this->birthdate = this->textBoxBirthdate->Text;
+				*this->birthdate = date.ToString("yyyy-MM-dd");
 				this->DialogResult = Windows::Forms::DialogResult::OK;
 				this->Close();
 			}

@@ -291,14 +291,18 @@ namespace Projet_POO {
 						columnName = "last_name";
 						break;
 					case 3 :
-						columnName = "birthdate";
-						if (!DateTime::TryParse(newValue, Globalization::CultureInfo::InvariantCulture, Globalization::DateTimeStyles::None, DateTime()))
 						{
-							Console::WriteLine("Wrong date format: \"" + newValue + "\"");
-							MessageBox::Show("La date entree est invalide !", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
-							return;
+							columnName = "birthdate";
+							DateTime date;
+							if (!DateTime::TryParseExact(newValue, "dd/MM/yyyy", nullptr, Globalization::DateTimeStyles::None, date))
+							{
+								Console::WriteLine("Wrong date format: \"" + newValue + "\"");
+								MessageBox::Show("       La date est invalide !\n\"dd/mm/yyyy\" ou \"dd-mm-yyyy\"", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+								return;
+							}
+							newValue = date.ToString("yyyy-MM-dd");
+							break;
 						}
-						break;
 					default :
 						return;
 				}
