@@ -273,7 +273,7 @@
     <ClInclude Include="src\gui\AddCustomerForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="src\gui\CustomerAdressesForm.h">
+    <ClInclude Include="src\gui\CustomerAdressesPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\CustomerPage.h">

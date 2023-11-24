@@ -1,14 +1,15 @@
 #pragma once
 #include "AddCustomerForm.h"
-#include "CustomerAdressesForm.h"
+#include "CustomerAdressesPage.h"
 
-namespace Projet_POO {
+namespace Projet_POO
+{
 	using namespace Project_POO;
 	using namespace Data;
 	using namespace System;
 	using namespace Drawing;
 	using namespace Windows::Forms;
-	
+
 	public ref class CustomerPage : public Form
 	{
 		public:
@@ -16,7 +17,7 @@ namespace Projet_POO {
 			{
 				InitializeComponent();
 			}
-		
+
 			~CustomerPage()
 			{
 				if (components)
@@ -29,34 +30,37 @@ namespace Projet_POO {
 			bool back = false;
 			Windows::Forms::DialogResult pendingResult = Windows::Forms::DialogResult::None;
 			int pendingCount = 0;
-			
+
 			DataSet^ customers;
-			
+
 			System::Windows::Forms::TableLayoutPanel^ tableLayout1;
 			System::Windows::Forms::TableLayoutPanel^ tableLayout2;
 			System::Windows::Forms::TableLayoutPanel^ tableLayout3;
 			System::Windows::Forms::TableLayoutPanel^ tableLayout4;
 
 
-
 			System::Windows::Forms::DataGridView^ customersGridView;
-			
 
-		    System::Windows::Forms::Button^ button1;
+
+			System::Windows::Forms::Button^ button1;
 			System::Windows::Forms::Button^ buttonAdd;
 			System::Windows::Forms::Label^ labelFiters;
 
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Label^ labelTitle;
+		private:
+			System::Windows::Forms::Button^ button2;
 
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button6;
+		private:
+			System::Windows::Forms::Label^ labelTitle;
+
+		private:
+			System::Windows::Forms::Button^ button3;
+
+		private:
+			System::Windows::Forms::Button^ button6;
 
 
+			System::ComponentModel::Container^ components;
 
-
-			System::ComponentModel::Container ^components;
-			
 			void InitializeComponent()
 			{
 				this->tableLayout1 = (gcnew System::Windows::Forms::TableLayoutPanel());
@@ -81,7 +85,7 @@ namespace Projet_POO {
 				// tableLayout1
 				// 
 				this->tableLayout1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-					| System::Windows::Forms::AnchorStyles::Left)
+						| System::Windows::Forms::AnchorStyles::Left)
 					| System::Windows::Forms::AnchorStyles::Right));
 				this->tableLayout1->ColumnCount = 1;
 				this->tableLayout1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
@@ -127,7 +131,7 @@ namespace Projet_POO {
 				this->customersGridView->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CustomerPage::customersGridView_CellEndEdit);
 				this->customersGridView->UserDeletingRow += gcnew System::Windows::Forms::DataGridViewRowCancelEventHandler(this, &CustomerPage::customersGridView_RowDeleting);
 				this->customersGridView->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CustomerPage::addressesCount_Click);
-				
+
 				fillCustomersGridView();
 				// 
 				// tableLayout3
@@ -271,20 +275,20 @@ namespace Projet_POO {
 			Void fillCustomersGridView()
 			{
 				this->customersGridView->Columns->Clear();
-				
+
 				DataGridViewTextBoxColumn^ idCustomer = gcnew DataGridViewTextBoxColumn();
 				idCustomer->Name = L"id_customer";
 				idCustomer->Visible = false;
 				this->customersGridView->Columns->Add(idCustomer);
-				
+
 				DataGridViewTextBoxColumn^ lastName = gcnew DataGridViewTextBoxColumn();
 				lastName->Name = L"Nom";
 				this->customersGridView->Columns->Add(lastName);
-				
+
 				DataGridViewTextBoxColumn^ firstName = gcnew DataGridViewTextBoxColumn();
 				firstName->Name = L"Prenom";
 				this->customersGridView->Columns->Add(firstName);
-				
+
 				DataGridViewTextBoxColumn^ birthdate = gcnew DataGridViewTextBoxColumn();
 				birthdate->Name = L"Date de naissance";
 				this->customersGridView->Columns->Add(birthdate);
@@ -293,38 +297,43 @@ namespace Projet_POO {
 				addressesCount->Name = L"Nombre d'adresses";
 				addressesCount->ReadOnly = true;
 				this->customersGridView->Columns->Add(addressesCount);
-				
-				customers = App::app->db->query("SELECT c.id_customer, c.first_name, c.last_name, CONVERT(VARCHAR, c.birthdate, 103) AS birthdate, ISNULL(b.billingAddressesCount, 0) + ISNULL(d.deliveryAddressesCount, 0) AS addressesCount FROM customer c LEFT JOIN (SELECT id_customer, COUNT(*) AS billingAddressesCount FROM customerHasBillingAddresses GROUP BY id_customer) b ON c.id_customer = b.id_customer LEFT JOIN (SELECT id_customer, COUNT(*) AS deliveryAddressesCount FROM customerHasDeliveryAddresses GROUP BY id_customer) d ON c.id_customer = d.id_customer;");
-				
-				for (int i = 0; i < customers->Tables[0]->Rows->Count; i++) {
+
+				customers = App::app->db->query(
+					"SELECT c.id_customer, c.first_name, c.last_name, CONVERT(VARCHAR, c.birthdate, 103) AS birthdate, ISNULL(b.billingAddressesCount, 0) + ISNULL(d.deliveryAddressesCount, 0) AS addressesCount FROM customer c LEFT JOIN (SELECT id_customer, COUNT(*) AS billingAddressesCount FROM customerHasBillingAddresses GROUP BY id_customer) b ON c.id_customer = b.id_customer LEFT JOIN (SELECT id_customer, COUNT(*) AS deliveryAddressesCount FROM customerHasDeliveryAddresses GROUP BY id_customer) d ON c.id_customer = d.id_customer;");
+
+				for (int i = 0; i < customers->Tables[0]->Rows->Count; i++)
+				{
 					this->customersGridView->Rows->Add(customers->Tables[0]->Rows[i]->ItemArray);
 				}
 			}
 
-			Void customerPage_Close(Object^ sender,  FormClosingEventArgs^ e) {
-				if (!this->back) {
+			Void customerPage_Close(Object^ sender, FormClosingEventArgs^ e)
+			{
+				if (!this->back)
+				{
 					Application::Exit();
 				}
 			}
-			
-			Void buttonBack_Click(Object^ sender, EventArgs^ e) {
+
+			Void buttonBack_Click(Object^ sender, EventArgs^ e)
+			{
 				this->back = true;
 				this->Close();
 			}
-			
+
 			Void customersGridView_CellEndEdit(Object^ sender, DataGridViewCellEventArgs^ e)
 			{
 				int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[e->RowIndex]->Cells[0]->Value);
 				String^ newValue = safe_cast<String^>(this->customersGridView->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value);
 				String^ columnName;
-				
+
 				if (newValue == nullptr || newValue->Trim()->Length == 0)
 				{
 					Console::WriteLine("Empty value");
 					MessageBox::Show("La valeur entree est vide !", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}
-				
+
 				switch (e->ColumnIndex)
 				{
 					case 1 :
@@ -349,7 +358,7 @@ namespace Projet_POO {
 					default :
 						return;
 				}
-				
+
 				App::app->db->execute("UPDATE customer SET " + columnName + " = '" + newValue + "' WHERE id_customer = " + idCustomer);
 				Console::WriteLine("Data updated: \"" + columnName + "\" = \"" + newValue + "\"");
 			}
@@ -394,27 +403,27 @@ namespace Projet_POO {
 				String^ lastName = "";
 				String^ birthdate = "";
 				AddCustomerForm^ addCustomerForm = gcnew AddCustomerForm(&firstName, &lastName, &birthdate);
-				
+
 				if (addCustomerForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 				{
 					//TODO: add try catch
 					int inserted = App::app->db->insert("INSERT INTO customer (first_name, last_name, birthdate) VALUES ('" + firstName + "', '" + lastName + "', '" + birthdate + "')");
 					Console::WriteLine(inserted + " data inserted: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
-					
+
 					fillCustomersGridView();
 				}
 			}
 
-		Void addressesCount_Click(Object^ sender, DataGridViewCellEventArgs^ e)
-		{
-			int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[0]->Value);
-			String^ firstName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[1]->Value);
-			String^ lastName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[2]->Value);
-			String^ birthdate = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[3]->Value);
-			int^ addressesCount = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[4]->Value);
-			CustomerAdressesForm^ addressesCountForm = gcnew CustomerAdressesForm();
-			addressesCountForm->ShowDialog();
-		}
+			Void addressesCount_Click(Object^ sender, DataGridViewCellEventArgs^ e)
+			{
+				int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[0]->Value);
+				String^ firstName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[1]->Value);
+				String^ lastName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[2]->Value);
+				String^ birthdate = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[3]->Value);
+				int^ addressesCount = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[4]->Value);
+				CustomerAdressesForm^ addressesCountForm = gcnew CustomerAdressesForm();
+				addressesCountForm->ShowDialog();
+			}
 
-};
+	};
 }
