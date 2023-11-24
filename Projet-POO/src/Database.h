@@ -8,7 +8,7 @@ namespace Projet_POO
 	public ref class Database sealed
 	{
 		public:
-			void connect();
+			void connect(Object^ connectionString);
 			void disconnect();
 			Boolean isConnected();
 			Data::DataSet^ query(String^ sql);

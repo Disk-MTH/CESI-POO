@@ -2,12 +2,11 @@
 
 using namespace Projet_POO;
 
-void Database::connect()
+void Database::connect(Object^ connectionString)
 {
     try
     {
-        String^ connectionString = "Data Source=127.0.0.1,1433;Initial Catalog = database;User ID=sa;Password=4pQ4ZVpJz22g6z";
-        connection = gcnew SqlConnection(connectionString);
+        connection = gcnew SqlConnection(safe_cast<String^>(connectionString));
         connection->Open();
         connected = true;
         Console::WriteLine("Database has been connected");

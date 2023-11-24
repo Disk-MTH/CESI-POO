@@ -4,10 +4,10 @@ DB_SERVER="127.0.0.1,1433"
 DB_USER="sa"
 DB_PASSWORD="4pQ4ZVpJz22g6z"
 DB_DATABASE="database"
-DB_FILE_PATH="Projet-POO/src/Database.cpp"
+DB_FILE_PATH="Projet-POO/src/App.cpp"
 DOCKER_CONTAINER="ms-server"
-SEARCH_LINE="String^ connectionString = \"Data Source=$DB_SERVER;Initial Catalog = $DB_DATABASE;User ID=$DB_USER;Password="
-REPLACE_LINE="${SEARCH_LINE}${DB_PASSWORD}\";"
+SEARCH_LINE="dbConnectionThread->Start(\"Data Source=$DB_SERVER;Initial Catalog = $DB_DATABASE;User ID=$DB_USER;Password="
+REPLACE_LINE="${SEARCH_LINE}${DB_PASSWORD}\");"
 
 sed -i "s|$SEARCH_LINE.*\";|$REPLACE_LINE|" "$DB_FILE_PATH"
 if grep -q "$REPLACE_LINE" "$DB_FILE_PATH"; then
