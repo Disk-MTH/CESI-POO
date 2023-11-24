@@ -350,6 +350,7 @@ namespace Projet_POO {
 				
 				if (addCustomerForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 				{
+					//TODO: add try catch
 					int inserted = App::app->db->insert("INSERT INTO customer (first_name, last_name, birthdate) VALUES ('" + firstName + "', '" + lastName + "', '" + birthdate + "')");
 					Console::WriteLine(inserted + " data inserted: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
 					
