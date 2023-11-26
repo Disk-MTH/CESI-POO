@@ -18,11 +18,8 @@ void App::launch(array<String^>^ args)
 	LoadingScreen^ loadingPage = gcnew LoadingScreen();
 	loadingPage->Show();
 	
-	//Thread^ dbConnectionThread = gcnew Thread(gcnew ThreadStart(db, &Database::connect));
-	//dbConnectionThread->Start();
 	Thread^ dbConnectionThread = gcnew Thread(gcnew ParameterizedThreadStart(db, &Database::connect));
 	dbConnectionThread->Start("Data Source=127.0.0.1,1433;Initial Catalog = database;User ID=sa;Password=4pQ4ZVpJz22g6z");
-	//create a thread to connect to the database. The "connect" method called on the db objet need a String as parameter
 
 	while (dbConnectionThread->IsAlive)
 	{
