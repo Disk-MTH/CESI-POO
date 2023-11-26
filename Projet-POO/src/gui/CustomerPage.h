@@ -63,7 +63,7 @@ namespace Projet_POO
 				this->tableLayout1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
 				this->tableLayout1->Controls->Add(this->tableLayout2, 0, 1);
 				this->tableLayout1->Controls->Add(this->tableLayout4, 0, 0);
-				this->tableLayout1->Location = System::Drawing::Point(12, 12);
+				this->tableLayout1->Location = Point(12, 12);
 				this->tableLayout1->Name = L"tableLayout1";
 				this->tableLayout1->RowCount = 2;
 				this->tableLayout1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
@@ -288,6 +288,7 @@ namespace Projet_POO
 						return;
 				}
 
+				App::app->toastMessage(this, "this->Location = Point(parent->Location.X + parent->Width / 2 - this->Width / 2, parent->Location.Y + parent->Height + 10);", Color::Red, 3000);
 				App::app->db->execute("UPDATE customer SET " + columnName + " = '" + newValue + "' WHERE id_customer = " + idCustomer);
 				Console::WriteLine("Data updated: \"" + columnName + "\" = \"" + newValue + "\"");
 			}

@@ -12,10 +12,10 @@ namespace Project_POO
 		public:
 			AddCustomerForm(String^* firstName, String^* lastName, String^* birthdate)
 			{
-				initialize();
 				this->firstName = firstName;
 				this->lastName = lastName;
 				this->birthdate = birthdate;
+				initialize();
 			}
 
 		private:
