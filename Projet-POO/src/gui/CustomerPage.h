@@ -1,15 +1,16 @@
 #pragma once
+
 #include "AddCustomerForm.h"
 #include "CustomerAdressesPage.h"
 
+using namespace Project_POO;
+using namespace Data;
+using namespace System;
+using namespace Drawing;
+using namespace Windows::Forms;
+
 namespace Projet_POO
 {
-	using namespace Project_POO;
-	using namespace Data;
-	using namespace System;
-	using namespace Drawing;
-	using namespace Windows::Forms;
-
 	public ref class CustomerPage : public Form
 	{
 		public:
@@ -288,9 +289,17 @@ namespace Projet_POO
 						return;
 				}
 
-				App::app->toastMessage(this, "this->Location = Point(parent->Location.X + parent->Width / 2 - this->Width / 2, parent->Location.Y + parent->Height + 10);", Color::Red, 3000);
-				App::app->db->execute("UPDATE customer SET " + columnName + " = '" + newValue + "' WHERE id_customer = " + idCustomer);
-				Console::WriteLine("Data updated: \"" + columnName + "\" = \"" + newValue + "\"");
+				try
+				{
+					App::app->db->execute("UPDATE customer SET " + columnName + " = '" + newValue + "' WHERE id_customer = " + idCustomer);
+					App::toastMessage(this, "Donnees mises a jour", Color::Green, 3000); 
+					Console::WriteLine("Data updated: \"" + columnName + "\" = \"" + newValue + "\"");
+				}
+				catch (Exception^ exception)
+				{
+					App::toastMessage(this, "Erreur lors de la mise a jour des donnees", Color::Red, 3000);
+					Console::WriteLine(exception->Message);
+				}
 			}
 
 			Void customersGridView_RowDeleting(Object^ sender, DataGridViewRowCancelEventArgs^ e)

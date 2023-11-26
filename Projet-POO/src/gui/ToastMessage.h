@@ -1,12 +1,11 @@
 #pragma once
 
+using namespace System;
+using namespace Drawing;
+using namespace Windows::Forms;
+
 namespace Projet_POO
 {
-
-	using namespace System;
-	using namespace Drawing;
-	using namespace Windows::Forms;
-
 	public ref class ToastMessage : public Form
 	{
 		public:
@@ -67,7 +66,7 @@ namespace Projet_POO
 				this->FormBorderStyle = Windows::Forms::FormBorderStyle::None;
 				this->StartPosition = FormStartPosition::Manual;
 				this->MinimumSize = Drawing::Size(100, 50);
-				this->Size = Drawing::Size(textSize.Width, textSize.Height);
+				this->Size = Drawing::Size(textSize.Width + 10, textSize.Height);
 				this->Location = Point(parent->Location.X + parent->Width / 2 - this->Width / 2, parent->Location.Y + parent->Height + 10);
 				this->Controls->Add(this->tableLayout1);
 				

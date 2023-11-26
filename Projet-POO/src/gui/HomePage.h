@@ -4,14 +4,14 @@
 #include "OrdersPage.h"
 #include "StocksPage.h"
 
+using namespace System;
+using namespace System::ComponentModel;
+using namespace System::Collections;
+using namespace System::Windows::Forms;
+using namespace System::Data;
+using namespace System::Drawing;
+
 namespace Projet_POO {
-	using namespace System;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
-	
 	public ref class HomePage : public Form
 	{
 		public:

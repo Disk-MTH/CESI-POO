@@ -1,12 +1,12 @@
 #pragma once
 
+using namespace Data;
+using namespace System;
+using namespace Drawing;
+using namespace Windows::Forms;
+
 namespace Project_POO
 {
-	using namespace Data;
-	using namespace System;
-	using namespace Drawing;
-	using namespace Windows::Forms;
-
 	public ref class AddCustomerForm : public Form
 	{
 		public:

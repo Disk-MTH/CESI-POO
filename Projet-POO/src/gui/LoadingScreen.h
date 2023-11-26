@@ -1,11 +1,11 @@
 #pragma once
 
+using namespace System;
+using namespace Drawing;
+using namespace Windows::Forms;
+
 namespace Projet_POO
 {
-	using namespace System;
-	using namespace Drawing;
-	using namespace Windows::Forms;
-
 	public ref class LoadingScreen : public Form
 	{
 		public:

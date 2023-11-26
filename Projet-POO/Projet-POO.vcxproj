@@ -194,6 +194,7 @@
       <CompileAsManaged>true</CompileAsManaged>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\main.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -295,6 +296,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\ToastMessage.h" />
+    <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="src\gui\AddCustomerForm.resx" />

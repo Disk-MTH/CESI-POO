@@ -12,8 +12,18 @@ void App::launch(array<String^>^ args)
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-
+	
 	db = gcnew Database();
+	if (args[0]->Contains("logs=") && args[0]->Split('=')[1] == "true")
+	{
+		logger = gcnew Logger("logs", true);
+		logger->log("Launching application with log file " + Logger::GREEN + "enabled");
+	}
+	else
+	{
+		logger = gcnew Logger("logs", false);
+		logger->log("Launching application with log file " + Logger::RED + "disabled");
+	}
 	
 	LoadingScreen^ loadingPage = gcnew LoadingScreen();
 	loadingPage->Show();
@@ -34,7 +44,7 @@ void App::launch(array<String^>^ args)
 		MessageBox::Show("Erreur de connexion a la base de donnees", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
-
+	
 	Application::Run(gcnew HomePage());
 	db->disconnect();
 }
