@@ -271,9 +271,6 @@
   <ItemGroup>
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\Database.h" />
-    <ClInclude Include="src\gui\CustomerPage.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="src\gui\forms\AddCustomerForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -290,6 +287,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\other\ToastMessage.h" />
+    <ClInclude Include="src\gui\pages\CustomerPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\gui\StaffPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -297,9 +297,6 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\Logger.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\gui\pages\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CustomerPage.h"
+#include "pages/CustomerPage.h"
 #include "StaffPage.h"
 #include "OrdersPage.h"
 #include "StocksPage.h"
@@ -178,12 +178,10 @@ namespace Projet_POO
 
 			Void button_staff_Click(Object^ sender, EventArgs^ e)
 			{
-				/*this->Hide();
+				this->Hide();
 				StaffPage^ staffPage = gcnew StaffPage();
 				staffPage->ShowDialog();
-				this->Show();*/
-
-				App::app->toastMessage(this, "Fonctionnalite non implementee", Color::Red, 3000);
+				this->Show(); 
 			}
 
 			Void button_orders_Click(Object^ sender, EventArgs^ e)
