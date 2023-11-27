@@ -1,8 +1,10 @@
 #pragma once
 
-using namespace Data;
+#include "../../App.h"
+
 using namespace System;
 using namespace Drawing;
+using namespace Data;
 using namespace Windows::Forms;
 
 namespace Projet_POO

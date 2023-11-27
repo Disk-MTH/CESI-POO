@@ -1,7 +1,7 @@
 #pragma once
 
-#include "forms/AddCustomerForm.h"
-#include "forms/CustomerAdressesForm.h"
+#include "../forms/AddCustomerForm.h"
+#include "../forms/CustomerAdressesForm.h"
 
 using namespace Projet_POO;
 using namespace Data;
@@ -11,10 +11,10 @@ using namespace Windows::Forms;
 
 namespace Projet_POO
 {
-	public ref class CustomerPage sealed : public Form 
+	public ref class CustomersPage sealed : public Form 
 	{
 		public:
-			CustomerPage()
+			CustomersPage()
 			{
 				initialize();
 				fillCustomersGridView();
@@ -154,9 +154,9 @@ namespace Projet_POO
 				this->customersGridView->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
 				this->customersGridView->Size = Drawing::Size(468, 374);
 				this->customersGridView->TabIndex = 0;
-				this->customersGridView->CellEndEdit += gcnew DataGridViewCellEventHandler(this, &CustomerPage::customersGridView_CellEndEdit);
-				this->customersGridView->UserDeletingRow += gcnew DataGridViewRowCancelEventHandler(this, &CustomerPage::customersGridView_RowDeleting);
-				this->customersGridView->CellClick += gcnew DataGridViewCellEventHandler(this, &CustomerPage::addressesCount_Click);
+				this->customersGridView->CellEndEdit += gcnew DataGridViewCellEventHandler(this, &CustomersPage::customersGridView_CellEndEdit);
+				this->customersGridView->UserDeletingRow += gcnew DataGridViewRowCancelEventHandler(this, &CustomersPage::customersGridView_RowDeleting);
+				this->customersGridView->CellClick += gcnew DataGridViewCellEventHandler(this, &CustomersPage::addressesCount_Click);
 
 				/* -------------------- buttonReload --------------------*/
 				this->buttonReload->Font = gcnew Drawing::Font(L"Arial Black", 8.25F, FontStyle::Bold, GraphicsUnit::Point, 0);
@@ -166,7 +166,7 @@ namespace Projet_POO
 				this->buttonReload->TabIndex = 14;
 				this->buttonReload->Text = L"( )";
 				this->buttonReload->UseVisualStyleBackColor = true;
-				this->buttonReload->Click += gcnew EventHandler(this, &CustomerPage::buttonReload_Click);
+				this->buttonReload->Click += gcnew EventHandler(this, &CustomersPage::buttonReload_Click);
 
 				/* -------------------- buttonBack --------------------*/
 				this->buttonBack->Font = gcnew Drawing::Font(L"Arial Black", 8.25F, FontStyle::Bold, GraphicsUnit::Point, 0);
@@ -176,7 +176,7 @@ namespace Projet_POO
 				this->buttonBack->TabIndex = 10;
 				this->buttonBack->Text = L"-->";
 				this->buttonBack->UseVisualStyleBackColor = true;
-				this->buttonBack->Click += gcnew EventHandler(this, &CustomerPage::buttonBack_Click);
+				this->buttonBack->Click += gcnew EventHandler(this, &CustomersPage::buttonBack_Click);
 
 				/* -------------------- buttonFilters --------------------*/
 				this->buttonFilters->Anchor = AnchorStyles::None;
@@ -195,8 +195,9 @@ namespace Projet_POO
 				this->buttonAdd->TabIndex = 1;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
-				this->buttonAdd->Click += gcnew EventHandler(this, &CustomerPage::buttonAdd_Click);
+				this->buttonAdd->Click += gcnew EventHandler(this, &CustomersPage::buttonAdd_Click);
 
+				/* -------------------- CustomerPage --------------------*/
 				this->AutoScaleDimensions = SizeF(6, 13);
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(684, 461);
@@ -205,7 +206,7 @@ namespace Projet_POO
 				this->Name = L"CustomerPage";
 				this->StartPosition = FormStartPosition::CenterScreen;
 				this->Text = L"CustomerPage";
-				this->FormClosing += gcnew FormClosingEventHandler(this, &CustomerPage::customerPage_Close);
+				this->FormClosing += gcnew FormClosingEventHandler(this, &CustomersPage::customerPage_Close);
 			}
 
 			Void fillCustomersGridView()

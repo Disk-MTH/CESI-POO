@@ -29,7 +29,7 @@ void App::launch(array<String^>^ args)
 		}
 	}
 	logger = gcnew Logger("logs", isFileEnabled, shouldDebug);
-	logger->log("Logger initialized with logs " + (isFileEnabled ? Logger::GREEN + "enable" : Logger::RED + "disable") + Logger::WHITE + " and debug " + (shouldDebug ? Logger::GREEN + "enable" : Logger::RED + "disable"));
+	logger->log("Logger initialized with logs " + (isFileEnabled ? Logger::green + "enable" : Logger::red + "disable") + Logger::white + " and debug " + (shouldDebug ? Logger::green + "enable" : Logger::red + "disable"));
 
 	auto loadingPage = gcnew LoadingScreen();
 	loadingPage->Show();

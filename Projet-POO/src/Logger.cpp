@@ -32,7 +32,7 @@ Logger::~Logger()
 void Logger::formattedPrint(String^ message, String^ color)
 {
 	message = getFormattedTime() + " - " + message;
-	Console::WriteLine(color + message + RESET);
+	Console::WriteLine(color + message + reset);
 
 	if (isFileEnabled)
 	{
@@ -43,23 +43,23 @@ void Logger::formattedPrint(String^ message, String^ color)
 
 void Logger::log(String^ message)
 {
-	formattedPrint("Log: " + message, WHITE);
+	formattedPrint("Log: " + message, white);
 }
 
 void Logger::warn(String^ message)
 {
-	formattedPrint("Warn: " + message, YELLOW);
+	formattedPrint("Warn: " + message, yellow);
 }
 
 void Logger::error(String^ message)
 {
-	formattedPrint("Error: " + message, RED);
+	formattedPrint("Error: " + message, red);
 }
 
 void Logger::debug(String^ message)
 {
 	if (shouldDebug)
 	{
-		formattedPrint("Debug: " + message, CYAN);
+		formattedPrint("Debug: " + message, cyan);
 	}
 }

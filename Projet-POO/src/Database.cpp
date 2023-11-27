@@ -10,7 +10,7 @@ void Database::connect(Object^ connectionString)
         connection = gcnew SqlConnection(safe_cast<String^>(connectionString));
         connection->Open();
         connected = true;
-        App::app->logger->log("Database has been " + Logger::GREEN + "connected");
+        App::app->logger->log("Database has been " + Logger::green + "connected");
     }
     catch (Exception^ exception)
     {
@@ -26,7 +26,7 @@ void Database::disconnect()
     {
         connection->Close();
         connected = false;
-        App::app->logger->log("Database has been " + Logger::RED + "disconnected");
+        App::app->logger->log("Database has been " + Logger::red + "disconnected");
     }
     catch (Exception^ exception)
     {
@@ -43,7 +43,7 @@ Boolean Database::isConnected()
 
 Data::DataSet^ Database::query(String^ sql)
 {
-    App::app->logger->debug("Sql: " + Logger::MAGENTA + "query");
+    App::app->logger->debug("Sql: " + Logger::magenta + "query");
     App::app->logger->debug(sql);
     SqlDataAdapter^ dataAdapter = gcnew SqlDataAdapter(sql, this->connection);
     Data::DataSet^ dataSet = gcnew Data::DataSet();
@@ -53,7 +53,7 @@ Data::DataSet^ Database::query(String^ sql)
 
 int Database::execute(String^ sql)
 {
-    App::app->logger->debug("Sql: " + Logger::MAGENTA + "execute");
+    App::app->logger->debug("Sql: " + Logger::magenta + "execute");
     App::app->logger->debug(sql);
     SqlCommand^ command = gcnew SqlCommand(sql, this->connection);
     return command->ExecuteNonQuery();
@@ -61,7 +61,7 @@ int Database::execute(String^ sql)
 
 int Database::insert(String^ sql)
 {
-    App::app->logger->debug("Sql: " + Logger::MAGENTA + "insert");
+    App::app->logger->debug("Sql: " + Logger::magenta + "insert");
     App::app->logger->debug(sql);
     SqlCommand^ command = gcnew SqlCommand(sql + ";SELECT @@IDENTITY", this->connection);
     return Decimal::ToInt32(safe_cast<Decimal>(command->ExecuteScalar()));

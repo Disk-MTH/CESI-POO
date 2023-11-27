@@ -284,7 +284,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\other\ToastMessage.h" />
-    <ClInclude Include="src\gui\pages\CustomerPage.h">
+    <ClInclude Include="src\gui\pages\CustomersPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\pages\HomePage.h">
