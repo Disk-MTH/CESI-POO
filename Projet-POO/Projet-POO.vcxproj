@@ -277,9 +277,6 @@
     <ClInclude Include="src\gui\forms\CustomerAdressesForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="src\gui\HomePage.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="src\gui\OrdersPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -288,6 +285,9 @@
     </ClInclude>
     <ClInclude Include="src\gui\other\ToastMessage.h" />
     <ClInclude Include="src\gui\pages\CustomerPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\gui\pages\HomePage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\StaffPage.h">
