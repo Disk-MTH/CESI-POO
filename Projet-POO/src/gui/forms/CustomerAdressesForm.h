@@ -1,244 +1,259 @@
 #pragma once
 
-namespace Projet_POO {
+using namespace Projet_POO;
+using namespace Data;
+using namespace System;
+using namespace Drawing;
+using namespace Windows::Forms;
 
-	using namespace System;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
-	
+namespace Projet_POO
+{
 	public ref class CustomerAddressesForm : public System::Windows::Forms::Form
 	{
-	public:
-		CustomerAddressesForm(void)
-		{
-			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
-		}
-
-	protected:
-		/// <summary>
-		/// Nettoyage des ressources utilis�es.
-		/// </summary>
-		~CustomerAddressesForm()
-		{
-			if (components)
+		public:
+			CustomerAddressesForm()
 			{
-				delete components;
+				initialize();
+				fillDeliveryAdressesGridView();
+				fillBillingAdressesGridView();
 			}
-		}
-	private: System::Windows::Forms::TableLayoutPanel^ tableLayout4;
-	protected:
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button6;
-	private: System::Windows::Forms::Label^ labelTitle;
-	private: System::Windows::Forms::TableLayoutPanel^ tableLayout1;
+
+		private:
+
+			bool back = false;
+		
+			DataSet^ customerAdresses;
+
+			TableLayoutPanel^ tableLayout1;
+			TableLayoutPanel^ tableLayout2;
+			TableLayoutPanel^ tableLayout3;
+
+			Label^ labelTitle;
+
+			DataGridView^ BillingAdressGridView;
+			DataGridView^ DeliveryAdressGridView;
+
+			Button^ buttonDelivery;
+			Button^ buttonBack;
+			Button^ buttonReload;
+			Button^ buttonBilling;
 
 
+			void initialize()
+			{
+				this->tableLayout1 = gcnew TableLayoutPanel();
+				this->tableLayout2 = gcnew TableLayoutPanel();
+				this->tableLayout3 = gcnew TableLayoutPanel();
 
-	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
-	private: System::Windows::Forms::Button^ button7;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::DataGridView^ dataGridView2;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+				this->labelTitle = gcnew Label();
 
+				this->BillingAdressGridView = gcnew DataGridView();
+				this->DeliveryAdressGridView = gcnew DataGridView();
 
-	protected:
+				this->buttonDelivery = gcnew Button();
+				this->buttonBack = gcnew Button();
+				this->buttonReload = gcnew Button();
+				this->buttonBilling = gcnew Button();
 
+				/* -------------------- tableLayout1 --------------------*/
+				this->tableLayout1->ColumnCount = 2;
+				this->tableLayout1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+				this->tableLayout1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+				this->tableLayout1->Controls->Add(this->DeliveryAdressGridView, 1, 0);
+				this->tableLayout1->Controls->Add(this->buttonBilling, 1, 1);
+				this->tableLayout1->Controls->Add(this->buttonDelivery, 0, 1);
+				this->tableLayout1->Controls->Add(this->BillingAdressGridView, 0, 0);
+				this->tableLayout1->Location = Point(3, 50);
+				this->tableLayout1->Name = L"tableLayoutPanel1";
+				this->tableLayout1->RowCount = 2;
+				this->tableLayout1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 84.73684F));
+				this->tableLayout1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 15.26316F));
+				this->tableLayout1->Size = Drawing::Size(654, 380);
+				this->tableLayout1->TabIndex = 3;
 
+				/* -------------------- tableLayout2 --------------------*/
+				this->tableLayout2->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
+				this->tableLayout2->ColumnCount = 1;
+				this->tableLayout2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+				this->tableLayout2->Controls->Add(this->tableLayout3, 0, 0);
+				this->tableLayout2->Controls->Add(this->tableLayout1, 0, 1);
+				this->tableLayout2->Location = Point(12, 16);
+				this->tableLayout2->Name = L"tableLayout1";
+				this->tableLayout2->RowCount = 2;
+				this->tableLayout2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
+				this->tableLayout2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 386));
+				this->tableLayout2->Size = Drawing::Size(660, 433);
+				this->tableLayout2->TabIndex = 7;
 
+				/* -------------------- tableLayout3 --------------------*/
+				this->tableLayout3->ColumnCount = 5;
+				this->tableLayout3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+				this->tableLayout3->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Absolute, 46)));
+				this->tableLayout3->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Absolute, 468)));
+				this->tableLayout3->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Absolute, 46)));
+				this->tableLayout3->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Absolute, 48)));
+				this->tableLayout3->Controls->Add(this->buttonBack, 4, 0);
+				this->tableLayout3->Controls->Add(this->buttonReload, 3, 0);
+				this->tableLayout3->Controls->Add(this->labelTitle, 2, 0);
+				this->tableLayout3->Location = Point(3, 3);
+				this->tableLayout3->Name = L"tableLayout4";
+				this->tableLayout3->RowCount = 1;
+				this->tableLayout3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
+				this->tableLayout3->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 40));
+				this->tableLayout3->Size = Drawing::Size(654, 40);
+				this->tableLayout3->TabIndex = 2;
 
+				/* -------------------- labelTitle --------------------*/
+				this->labelTitle->Anchor = AnchorStyles::None;
+				this->labelTitle->AutoSize = true;
+				this->labelTitle->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 20));
+				this->labelTitle->Location = Point(265, 4);
+				this->labelTitle->Name = L"labelTitle";
+				this->labelTitle->Size = Drawing::Size(122, 31);
+				this->labelTitle->TabIndex = 9;
+				this->labelTitle->Text = L"AAAAAA";
 
+				/* -------------------- DeliveryAdressGridView --------------------*/
+				this->DeliveryAdressGridView->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+				this->DeliveryAdressGridView->Location = Point(337, 10);
+				this->DeliveryAdressGridView->Margin = Windows::Forms::Padding(10);
+				this->DeliveryAdressGridView->Name = L"dataGridView2";
+				this->DeliveryAdressGridView->Size = Drawing::Size(307, 301);
+				this->DeliveryAdressGridView->TabIndex = 5;
 
+				/* -------------------- BillingAdressGridView --------------------*/
+				this->BillingAdressGridView->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+				this->BillingAdressGridView->Location = Point(10, 10);
+				this->BillingAdressGridView->Margin = Windows::Forms::Padding(10);
+				this->BillingAdressGridView->Name = L"dataGridView1";
+				this->BillingAdressGridView->Size = Drawing::Size(307, 301);
+				this->BillingAdressGridView->TabIndex = 4;
 
+				/* -------------------- buttonBilling --------------------*/
+				this->buttonBilling->Anchor = AnchorStyles::None;
+				this->buttonBilling->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 15));
+				this->buttonBilling->Location = Point(448, 330);
+				this->buttonBilling->Name = L"button7";
+				this->buttonBilling->Size = Drawing::Size(307, 41);
+				this->buttonBilling->TabIndex = 3;
+				this->buttonBilling->Text = L"Ajouter adresse de facturation";
+				this->buttonBilling->UseVisualStyleBackColor = true;
 
+				/* -------------------- buttonDelivery --------------------*/
+				this->buttonDelivery->Anchor = AnchorStyles::None;
+				this->buttonDelivery->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 15));
+				this->buttonDelivery->Location = Point(121, 330);
+				this->buttonDelivery->Name = L"button1";
+				this->buttonDelivery->Size = Drawing::Size(307, 41);
+				this->buttonDelivery->TabIndex = 0;
+				this->buttonDelivery->Text = L"Ajouter adresse de livraison";
+				this->buttonDelivery->UseVisualStyleBackColor = true;
 
-	private:
-		/// <summary>
-		/// Variable n�cessaire au concepteur.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+				/* -------------------- buttonBack --------------------*/
+				this->buttonBack->Font = gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0));
+				this->buttonBack->Location = System::Drawing::Point(609, 3);
+				this->buttonBack->Name = L"button2";
+				this->buttonBack->Size = System::Drawing::Size(39, 34);
+				this->buttonBack->TabIndex = 10;
+				this->buttonBack->Text = L"-->";
+				this->buttonBack->UseVisualStyleBackColor = true;
+				this->buttonBack->Click += gcnew System::EventHandler(this, &CustomerAddressesForm::buttonBack_Click);
 
-#pragma region Windows Form Designer generated code
-		/// <summary>
-		/// M�thode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette m�thode avec l'�diteur de code.
-		/// </summary>
-		void InitializeComponent(void)
-		{
-			this->tableLayout4 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->labelTitle = (gcnew System::Windows::Forms::Label());
-			this->tableLayout1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->tableLayout4->SuspendLayout();
-			this->tableLayout1->SuspendLayout();
-			this->tableLayoutPanel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
-			this->SuspendLayout();
-			// 
-			// tableLayout4
-			// 
-			this->tableLayout4->ColumnCount = 5;
-			this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				46)));
-			this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				468)));
-			this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				46)));
-			this->tableLayout4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				48)));
-			this->tableLayout4->Controls->Add(this->button2, 4, 0);
-			this->tableLayout4->Controls->Add(this->button6, 3, 0);
-			this->tableLayout4->Controls->Add(this->labelTitle, 2, 0);
-			this->tableLayout4->Location = System::Drawing::Point(3, 3);
-			this->tableLayout4->Name = L"tableLayout4";
-			this->tableLayout4->RowCount = 1;
-			this->tableLayout4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayout4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 40)));
-			this->tableLayout4->Size = System::Drawing::Size(654, 40);
-			this->tableLayout4->TabIndex = 2;
-			// 
-			// button2
-			// 
-			this->button2->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->button2->Location = System::Drawing::Point(609, 3);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(39, 34);
-			this->button2->TabIndex = 10;
-			this->button2->Text = L"-->";
-			this->button2->UseVisualStyleBackColor = true;
-			// 
-			// button6
-			// 
-			this->button6->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->button6->Location = System::Drawing::Point(563, 3);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(39, 34);
-			this->button6->TabIndex = 14;
-			this->button6->Text = L"( )";
-			this->button6->UseVisualStyleBackColor = true;
-			// 
-			// labelTitle
-			// 
-			this->labelTitle->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->labelTitle->AutoSize = true;
-			this->labelTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
-			this->labelTitle->Location = System::Drawing::Point(265, 4);
-			this->labelTitle->Name = L"labelTitle";
-			this->labelTitle->Size = System::Drawing::Size(122, 31);
-			this->labelTitle->TabIndex = 9;
-			this->labelTitle->Text = L"AAAAAA";
-			// 
-			// tableLayout1
-			// 
-			this->tableLayout1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->tableLayout1->ColumnCount = 1;
-			this->tableLayout1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayout1->Controls->Add(this->tableLayout4, 0, 0);
-			this->tableLayout1->Controls->Add(this->tableLayoutPanel1, 0, 1);
-			this->tableLayout1->Location = System::Drawing::Point(12, 16);
-			this->tableLayout1->Name = L"tableLayout1";
-			this->tableLayout1->RowCount = 2;
-			this->tableLayout1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayout1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 386)));
-			this->tableLayout1->Size = System::Drawing::Size(660, 433);
-			this->tableLayout1->TabIndex = 7;
-			// 
-			// tableLayoutPanel1
-			// 
-			this->tableLayoutPanel1->ColumnCount = 2;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				50)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				50)));
-			this->tableLayoutPanel1->Controls->Add(this->dataGridView2, 1, 0);
-			this->tableLayoutPanel1->Controls->Add(this->button7, 1, 1);
-			this->tableLayoutPanel1->Controls->Add(this->button1, 0, 1);
-			this->tableLayoutPanel1->Controls->Add(this->dataGridView1, 0, 0);
-			this->tableLayoutPanel1->Location = System::Drawing::Point(3, 50);
-			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 2;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 84.73684F)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 15.26316F)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(654, 380);
-			this->tableLayoutPanel1->TabIndex = 3;
-			// 
-			// dataGridView2
-			// 
-			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2->Location = System::Drawing::Point(337, 10);
-			this->dataGridView2->Margin = System::Windows::Forms::Padding(10);
-			this->dataGridView2->Name = L"dataGridView2";
-			this->dataGridView2->Size = System::Drawing::Size(307, 301);
-			this->dataGridView2->TabIndex = 5;
-			// 
-			// button7
-			// 
-			this->button7->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->button7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15));
-			this->button7->Location = System::Drawing::Point(448, 330);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(85, 41);
-			this->button7->TabIndex = 3;
-			this->button7->Text = L"Ajouter";
-			this->button7->UseVisualStyleBackColor = true;
-			// 
-			// button1
-			// 
-			this->button1->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15));
-			this->button1->Location = System::Drawing::Point(121, 330);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(85, 41);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"Ajouter";
-			this->button1->UseVisualStyleBackColor = true;
-			// 
-			// dataGridView1
-			// 
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(10, 10);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(10);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(307, 301);
-			this->dataGridView1->TabIndex = 4;
-			// 
-			// CustomerAdressesForm
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(684, 461);
-			this->Controls->Add(this->tableLayout1);
-			this->Margin = System::Windows::Forms::Padding(2);
-			this->Name = L"CustomerAdressesForm";
-			this->Text = L"CustomerAdressesForm";
-			this->tableLayout4->ResumeLayout(false);
-			this->tableLayout4->PerformLayout();
-			this->tableLayout1->ResumeLayout(false);
-			this->tableLayoutPanel1->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
-			this->ResumeLayout(false);
+				/* -------------------- buttonReload --------------------*/
+				this->buttonReload->Font = gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0));
+				this->buttonReload->Location = System::Drawing::Point(563, 3);
+				this->buttonReload->Name = L"button6";
+				this->buttonReload->Size = System::Drawing::Size(39, 34);
+				this->buttonReload->TabIndex = 14;
+				this->buttonReload->Text = L"( )";
+				this->buttonReload->UseVisualStyleBackColor = true;
+				this->buttonReload->Click += gcnew System::EventHandler(this, &CustomerAddressesForm::buttonReload_Click);
+				
+				this->AutoScaleDimensions = SizeF(6, 13);
+				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
+				this->ClientSize = Drawing::Size(684, 461);
+				this->Controls->Add(this->tableLayout2);
+				this->Margin = Windows::Forms::Padding(2);
+				this->Name = L"CustomerAdressesForm";
+				this->Text = L"CustomerAdressesForm";
+			}
 
-		}
-#pragma endregion
-	private: System::Void tableLayoutPanel2_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-	}
-};
+			void fillBillingAdressesGridView()
+			{
+				this->BillingAdressGridView->Columns->Clear();
+
+				DataGridViewTextBoxColumn^ idAddress = gcnew DataGridViewTextBoxColumn();
+				idAddress->Name = L"id_address";
+				idAddress->Visible = false;
+				this->BillingAdressGridView->Columns->Add(idAddress);
+
+				DataGridViewTextBoxColumn^ address = gcnew DataGridViewTextBoxColumn();
+				address->Name = L"address";
+				this->BillingAdressGridView->Columns->Add(address);
+
+				DataGridViewTextBoxColumn^ city = gcnew DataGridViewTextBoxColumn();
+				city->Name = L"city";
+				this->BillingAdressGridView->Columns->Add(city);
+
+				DataGridViewTextBoxColumn^ zipCode = gcnew DataGridViewTextBoxColumn();
+				zipCode->Name = L"zip_code";
+				this->BillingAdressGridView->Columns->Add(zipCode);
+
+				DataGridViewTextBoxColumn^ country = gcnew DataGridViewTextBoxColumn();
+				country->Name = L"country";
+				this->BillingAdressGridView->Columns->Add(country);
+				
+				this->BillingAdressGridView->Rows->Add("1", "25 rue choucroute", "Paris", "75000", "France");
+			}
+
+			void fillDeliveryAdressesGridView()
+			{
+				this->DeliveryAdressGridView->Columns->Clear();
+
+				DataGridViewTextBoxColumn^ idAddress = gcnew DataGridViewTextBoxColumn();
+				idAddress->Name = L"id_address";
+				idAddress->Visible = false;
+				this->DeliveryAdressGridView->Columns->Add(idAddress);
+
+				DataGridViewTextBoxColumn^ address = gcnew DataGridViewTextBoxColumn();
+				address->Name = L"address";
+				this->DeliveryAdressGridView->Columns->Add(address);
+
+				DataGridViewTextBoxColumn^ city = gcnew DataGridViewTextBoxColumn();
+				city->Name = L"city";
+				this->DeliveryAdressGridView->Columns->Add(city);
+
+				DataGridViewTextBoxColumn^ zipCode = gcnew DataGridViewTextBoxColumn();
+				zipCode->Name = L"zip_code";
+				this->DeliveryAdressGridView->Columns->Add(zipCode);
+
+				DataGridViewTextBoxColumn^ country = gcnew DataGridViewTextBoxColumn();
+				country->Name = L"country";
+				this->DeliveryAdressGridView->Columns->Add(country);
+
+				this->DeliveryAdressGridView->Rows->Add("1", "18 rue charcuterie", "Toulouses", "83000", "France");
+			}
+
+			void CustomerAddressesForm_Close()
+			{
+				if (!this->back)
+				{
+					Application::Exit();
+				}
+			}
+
+			void buttonBack_Click(Object^ sender, EventArgs^ e)
+			{
+				this->back = true;
+				this->Close();
+			}
+
+			void buttonReload_Click(Object^ sender, EventArgs^ e)
+			{
+				fillDeliveryAdressesGridView();
+				fillBillingAdressesGridView();
+				App::app->toastMessage(this, "Donnees actualisees", Color::Green, 3000);
+				App::app->logger->log("Data reloaded");
+			}
+	};
 }
