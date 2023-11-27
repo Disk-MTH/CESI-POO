@@ -5,19 +5,21 @@ using namespace IO;
 
 namespace Projet_POO
 {
-	public ref class Logger
+	public ref class Logger sealed
 	{
 		bool isFileEnabled;
+		bool shouldDebug;
 		StreamWriter^ logFile;
 		
 		public:
-			Logger(String^ logFolder, bool isFileEnabled);
+			Logger(String^ logFolder, bool isFileEnabled, bool shouldDebug);
 			~Logger();
 
 			void formattedPrint(String^ message, String^ color);
 			void log(String^ message);
 			void warn(String^ message);
 			void error(String^ message);
+			void debug(String^ message);
 
 			static String^ WHITE = "\033[1;37m";
 			static String^ RED = "\033[1;31m";

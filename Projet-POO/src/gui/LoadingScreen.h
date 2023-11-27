@@ -14,6 +14,11 @@ namespace Projet_POO
 				initialize();
 			}
 
+			~LoadingScreen()
+			{
+				timer->Stop();
+			}
+
 		private:
 			String^ text = "Chargement";
 			int tickCount = 0;

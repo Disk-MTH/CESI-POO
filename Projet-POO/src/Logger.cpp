@@ -1,12 +1,12 @@
 #include "Logger.h"
-#include "cstdio"
 
 using namespace Projet_POO;
 using namespace Globalization;
 
-Logger::Logger(String^ logFolder, bool isFileEnabled)
+Logger::Logger(String^ logFolder, bool isFileEnabled, bool shouldDebug)
 {
 	this->isFileEnabled = isFileEnabled;
+	this->shouldDebug = shouldDebug;
 	int number = 0;
 
 	if (!Directory::Exists(logFolder))
@@ -54,4 +54,12 @@ void Logger::warn(String^ message)
 void Logger::error(String^ message)
 {
 	formattedPrint("Error: " + message, RED);
+}
+
+void Logger::debug(String^ message)
+{
+	if (shouldDebug)
+	{
+		formattedPrint("Debug: " + message, CYAN);
+	}
 }

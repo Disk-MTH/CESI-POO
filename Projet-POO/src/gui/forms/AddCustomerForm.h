@@ -5,9 +5,9 @@ using namespace System;
 using namespace Drawing;
 using namespace Windows::Forms;
 
-namespace Project_POO
+namespace Projet_POO
 {
-	public ref class AddCustomerForm : public Form
+	public ref class AddCustomerForm sealed : public Form
 	{
 		public:
 			AddCustomerForm(String^* firstName, String^* lastName, String^* birthdate)
@@ -166,14 +166,14 @@ namespace Project_POO
 			{
 				if (this->textBoxLastName->Text == nullptr || this->textBoxLastName->Text->Trim()->Length == 0)
 				{
-					Console::WriteLine("Invalid last name");
+					App::app->logger->warn("Invalid last name: empty");
 					MessageBox::Show("Le nom ne peux pas etre vide !", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}
 
 				if (this->textBoxFirstName->Text == nullptr || this->textBoxFirstName->Text->Trim()->Length == 0)
 				{
-					Console::WriteLine("Invalid first name");
+					App::app->logger->warn("Invalid first name: empty");
 					MessageBox::Show("Le prenom ne peux pas etre vide !", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}
@@ -181,7 +181,7 @@ namespace Project_POO
 				DateTime date;
 				if (!DateTime::TryParseExact(this->textBoxBirthdate->Text, "dd/MM/yyyy", nullptr, Globalization::DateTimeStyles::None, date))
 				{
-					Console::WriteLine("Wrong date format: \"" + this->textBoxBirthdate->Text + "\"");
+					App::app->logger->warn("Invalid birthdate: wrong format (\"" + this->textBoxBirthdate->Text + "\")");
 					MessageBox::Show("       La date est invalide !\n\"dd/mm/yyyy\" ou \"dd-mm-yyyy\"", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}

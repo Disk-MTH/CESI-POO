@@ -271,13 +271,13 @@
   <ItemGroup>
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\Database.h" />
-    <ClInclude Include="src\gui\AddCustomerForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="src\gui\CustomerAdressesPage.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="src\gui\CustomerPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\gui\forms\AddCustomerForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\gui\forms\CustomerAdressesForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\HomePage.h">
@@ -289,22 +289,22 @@
     <ClInclude Include="src\gui\OrdersPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="src\gui\other\ToastMessage.h" />
     <ClInclude Include="src\gui\StaffPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\StocksPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="src\gui\ToastMessage.h" />
     <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\gui\AddCustomerForm.resx" />
-    <EmbeddedResource Include="src\gui\CustomerAdressesForm.resx">
-      <DependentUpon>src\gui\CustomerAdressesForm.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\gui\CustomerPage.resx">
       <DependentUpon>CustomerPage.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\forms\AddCustomerForm.resx" />
+    <EmbeddedResource Include="src\gui\forms\CustomerAdressesForm.resx">
+      <DependentUpon>src\gui\CustomerAdressesForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\gui\HomePage.resx">
       <DependentUpon>HomePage.h</DependentUpon>
@@ -315,6 +315,9 @@
     <EmbeddedResource Include="src\gui\StaffPage.resx">
       <DependentUpon>src\gui\StaffPage.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\gui\pages\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

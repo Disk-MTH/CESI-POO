@@ -2,7 +2,7 @@
 
 #include "Database.h"
 #include "Logger.h"
-#include "gui/ToastMessage.h"
+#include "gui/other/ToastMessage.h"
 
 using namespace Projet_POO;
 using namespace Drawing;
@@ -17,18 +17,16 @@ namespace Projet_POO
 
 			Database^ db;
 			Logger^ logger;
-		
+			ToastMessage^ toast;
+
 			void launch(array<String^>^ args);
-
-			static void toastMessage(Form^ parent, String^ message, Color color, int duration)
-			{
-				ToastMessage^ toast = gcnew ToastMessage(parent, message, color, duration);
-				toast->Show();
-			}
-
+			void toastMessage(Form^ parent, String^ message, Color color, int duration);
+		
 		private:
 			App()
 			{
 			}
+		
+			void toastMessageThread(Object^ args);
 	};
 }

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "AddCustomerForm.h"
-#include "CustomerAdressesPage.h"
+#include "forms/AddCustomerForm.h"
+#include "forms/CustomerAdressesForm.h"
 
-using namespace Project_POO;
+using namespace Projet_POO;
 using namespace Data;
 using namespace System;
 using namespace Drawing;
@@ -11,12 +11,13 @@ using namespace Windows::Forms;
 
 namespace Projet_POO
 {
-	public ref class CustomerPage : public Form
+	public ref class CustomerPage sealed : public Form 
 	{
 		public:
 			CustomerPage()
 			{
 				initialize();
+				fillCustomersGridView();
 			}
 
 		private:
@@ -32,7 +33,7 @@ namespace Projet_POO
 			TableLayoutPanel^ tableLayout4;
 
 			Label^ labelTitle;
-			Label^ labelFiters;
+			Label^ labelFilters;
 
 			DataGridView^ customersGridView;
 
@@ -43,20 +44,20 @@ namespace Projet_POO
 
 			void initialize()
 			{
-				this->tableLayout1 = (gcnew TableLayoutPanel());
-				this->tableLayout2 = (gcnew TableLayoutPanel());
-				this->tableLayout3 = (gcnew TableLayoutPanel());
-				this->tableLayout4 = (gcnew TableLayoutPanel());
+				this->tableLayout1 = gcnew TableLayoutPanel();
+				this->tableLayout2 = gcnew TableLayoutPanel();
+				this->tableLayout3 = gcnew TableLayoutPanel();
+				this->tableLayout4 = gcnew TableLayoutPanel();
 
-				this->labelTitle = (gcnew Label());
-				this->labelFiters = (gcnew Label());
+				this->labelTitle = gcnew Label();
+				this->labelFilters = gcnew Label();
 
-				this->customersGridView = (gcnew DataGridView());
+				this->customersGridView = gcnew DataGridView();
 
-				this->buttonBack = (gcnew Button());
-				this->buttonReload = (gcnew Button());
-				this->buttonFilters = (gcnew Button());
-				this->buttonAdd = (gcnew Button());
+				this->buttonBack = gcnew Button();
+				this->buttonReload = gcnew Button();
+				this->buttonFilters = gcnew Button();
+				this->buttonAdd = gcnew Button();
 
 				/* -------------------- tableLayout1 --------------------*/
 				this->tableLayout1->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -91,7 +92,7 @@ namespace Projet_POO
 				this->tableLayout3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
 				this->tableLayout3->Controls->Add(this->buttonAdd, 0, 2);
 				this->tableLayout3->Controls->Add(this->buttonFilters, 0, 1);
-				this->tableLayout3->Controls->Add(this->labelFiters, 0, 0);
+				this->tableLayout3->Controls->Add(this->labelFilters, 0, 0);
 				this->tableLayout3->Location = Point(477, 3);
 				this->tableLayout3->Name = L"tableLayout3";
 				this->tableLayout3->RowCount = 3;
@@ -131,14 +132,14 @@ namespace Projet_POO
 
 
 				/* -------------------- labelFiters --------------------*/
-				this->labelFiters->Anchor = AnchorStyles::Top;
-				this->labelFiters->AutoSize = true;
-				this->labelFiters->Location = Point(67, 20);
-				this->labelFiters->Margin = Windows::Forms::Padding(3, 20, 3, 0);
-				this->labelFiters->Name = L"labelFiters";
-				this->labelFiters->Size = Drawing::Size(40, 13);
-				this->labelFiters->TabIndex = 2;
-				this->labelFiters->Text = L"Filtres :";
+				this->labelFilters->Anchor = AnchorStyles::Top;
+				this->labelFilters->AutoSize = true;
+				this->labelFilters->Location = Point(67, 20);
+				this->labelFilters->Margin = Windows::Forms::Padding(3, 20, 3, 0);
+				this->labelFilters->Name = L"labelFiters";
+				this->labelFilters->Size = Drawing::Size(40, 13);
+				this->labelFilters->TabIndex = 2;
+				this->labelFilters->Text = L"Filtres :";
 
 				/* -------------------- customersGridView --------------------*/
 				this->customersGridView->AllowUserToResizeColumns = false;
@@ -156,7 +157,6 @@ namespace Projet_POO
 				this->customersGridView->CellEndEdit += gcnew DataGridViewCellEventHandler(this, &CustomerPage::customersGridView_CellEndEdit);
 				this->customersGridView->UserDeletingRow += gcnew DataGridViewRowCancelEventHandler(this, &CustomerPage::customersGridView_RowDeleting);
 				this->customersGridView->CellClick += gcnew DataGridViewCellEventHandler(this, &CustomerPage::addressesCount_Click);
-				fillCustomersGridView();
 
 				/* -------------------- buttonReload --------------------*/
 				this->buttonReload->Font = gcnew Drawing::Font(L"Arial Black", 8.25F, FontStyle::Bold, GraphicsUnit::Point, 0);
@@ -259,7 +259,7 @@ namespace Projet_POO
 
 				if (newValue == nullptr || newValue->Trim()->Length == 0)
 				{
-					Console::WriteLine("Empty value");
+					App::app->logger->warn("Invalid value: empty");
 					MessageBox::Show("La valeur entree est vide !", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}
@@ -278,7 +278,7 @@ namespace Projet_POO
 							DateTime date;
 							if (!DateTime::TryParseExact(newValue, "dd/MM/yyyy", nullptr, Globalization::DateTimeStyles::None, date))
 							{
-								Console::WriteLine("Wrong date format: \"" + newValue + "\"");
+								App::app->logger->warn("Invalid birthdate: wrong format (\"" + newValue + "\")");
 								MessageBox::Show("       La date est invalide !\n\"dd/mm/yyyy\" ou \"dd-mm-yyyy\"", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 								return;
 							}
@@ -292,13 +292,14 @@ namespace Projet_POO
 				try
 				{
 					App::app->db->execute("UPDATE customer SET " + columnName + " = '" + newValue + "' WHERE id_customer = " + idCustomer);
-					App::toastMessage(this, "Donnees mises a jour", Color::Green, 3000); 
-					Console::WriteLine("Data updated: \"" + columnName + "\" = \"" + newValue + "\"");
+					App::app->toastMessage(this, "Donnees mises a jour", Color::Green, 3000);
+					App::app->logger->log("Data updated: \"" + columnName + "\" = \"" + newValue + "\"");
 				}
 				catch (Exception^ exception)
 				{
-					App::toastMessage(this, "Erreur lors de la mise a jour des donnees", Color::Red, 3000);
-					Console::WriteLine(exception->Message);
+					App::app->toastMessage(this, "Erreur lors de la mise a jour des donnees", Color::Red, 3000);
+					App::app->logger->error("Error while updating data: \"" + columnName + "\" = \"" + newValue + "\"");
+					App::app->logger->error(exception->Message);
 				}
 			}
 
@@ -315,9 +316,10 @@ namespace Projet_POO
 
 				if (pendingResult == Windows::Forms::DialogResult::Yes)
 				{
-					int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[e->Row->Index]->Cells[0]->Value);
+					auto idCustomer = safe_cast<int^>(this->customersGridView->Rows[e->Row->Index]->Cells[0]->Value);
 					App::app->db->execute("DELETE FROM customer WHERE id_customer = " + idCustomer);
-					Console::WriteLine("Data deleted: \"id_customer\" = \"" + idCustomer + "\"");
+					App::app->toastMessage(this, "Donnees supprimees", Color::Green, 3000);
+					App::app->logger->log("Data deleted: \"id_customer\" = \"" + idCustomer + "\"");
 
 					pendingCount--;
 					if (pendingCount == 0)
@@ -339,6 +341,8 @@ namespace Projet_POO
 			Void buttonReload_Click(Object^ sender, EventArgs^ e)
 			{
 				fillCustomersGridView();
+				App::app->toastMessage(this, "Donnees actualisees", Color::Green, 3000);
+				App::app->logger->log("Data reloaded");
 			}
 
 			Void buttonBack_Click(Object^ sender, EventArgs^ e)
@@ -352,13 +356,23 @@ namespace Projet_POO
 				String^ firstName = "";
 				String^ lastName = "";
 				String^ birthdate = "";
-				AddCustomerForm^ addCustomerForm = gcnew AddCustomerForm(&firstName, &lastName, &birthdate);
+				auto addCustomerForm = gcnew AddCustomerForm(&firstName, &lastName, &birthdate);
 
 				if (addCustomerForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 				{
-					//TODO: add try catch
-					int inserted = App::app->db->insert("INSERT INTO customer (first_name, last_name, birthdate) VALUES ('" + firstName + "', '" + lastName + "', '" + birthdate + "')");
-					Console::WriteLine(inserted + " data inserted: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
+					try
+					{
+						App::app->db->insert("INSERT INTO customer (first_name, last_name, birthdate) VALUES ('" + firstName + "', '" + lastName + "', '" + birthdate + "')");
+						App::app->App::toastMessage(this, "Donnees ajoutees", Color::Green, 3000);
+						App::app->logger->log("Data inserted: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
+					}
+					catch (Exception^ exception)
+					{
+						App::app->toastMessage(this, "Erreur lors de l'ajout des donnees", Color::Red, 3000);
+						App::app->logger->error("Error while inserting data: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
+						App::app->logger->error(exception->Message);
+						return;
+					}
 
 					fillCustomersGridView();
 				}
@@ -368,12 +382,12 @@ namespace Projet_POO
 			{
 				if (e->ColumnIndex == 4)
 				{
-					int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[0]->Value);
+					/*int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[0]->Value);
 					String^ firstName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[1]->Value);
 					String^ lastName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[2]->Value);
 					String^ birthdate = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[3]->Value);
-					int^ addressesCount = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[4]->Value);
-					CustomerAdressesForm^ addressesCountForm = gcnew CustomerAdressesForm();
+					int^ addressesCount = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[4]->Value);*/
+					auto addressesCountForm = gcnew CustomerAddressesForm();
 					addressesCountForm->ShowDialog();
 				}
 			}

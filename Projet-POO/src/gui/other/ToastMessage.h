@@ -1,15 +1,16 @@
 #pragma once
 
+using namespace Projet_POO;
 using namespace System;
 using namespace Drawing;
 using namespace Windows::Forms;
 
 namespace Projet_POO
 {
-	public ref class ToastMessage : public Form
+	public ref class ToastMessage sealed : public Form
 	{
 		public:
-			ToastMessage(Form^ parent, String^ message, Color color, int displayTime)
+			ToastMessage(Form^ parent, String^ message, Color color, const int displayTime)
 			{
 				this->parent = parent;
 				this->message = message;
@@ -18,24 +19,34 @@ namespace Projet_POO
 				initialize();
 			}
 
+			void show()
+			{
+				this->Visible = true;
+			}
+
+			void close()
+			{
+				this->Visible = false;
+			}
+
 		private:
 			Form^ parent;
 			String^ message;
 			Color color;
 			int displayTime;
-		
+
 			Timer^ timer;
-		
+
 			TableLayoutPanel^ tableLayout1;
 
 			Label^ labelMessage;
-		
+
 			void initialize()
 			{
 				this->timer = gcnew Timer();
 				this->tableLayout1 = gcnew TableLayoutPanel();
 				this->labelMessage = gcnew Label();
-				
+
 				/* -------------------- timer --------------------*/
 				this->timer->Interval = this->displayTime;
 				this->timer->Tick += gcnew EventHandler(this, &ToastMessage::timer_Tick);
@@ -59,30 +70,30 @@ namespace Projet_POO
 				this->labelMessage->Name = "labelMessage";
 				this->labelMessage->ForeColor = this->color;
 				this->labelMessage->Text = this->message;
-				
+
 				/* -------------------- ToastMessage --------------------*/
-				Drawing::Size textSize = TextRenderer::MeasureText(message, labelMessage->Font);
-				
+				auto textSize = TextRenderer::MeasureText(message, labelMessage->Font);
 				this->FormBorderStyle = Windows::Forms::FormBorderStyle::None;
 				this->StartPosition = FormStartPosition::Manual;
 				this->MinimumSize = Drawing::Size(100, 50);
 				this->Size = Drawing::Size(textSize.Width + 10, textSize.Height);
-				this->Location = Point(parent->Location.X + parent->Width / 2 - this->Width / 2, parent->Location.Y + parent->Height + 10);
+				this->Location = Point(this->parent->Location.X + this->parent->Width / 2 - this->Width / 2, this->parent->Location.Y + this->parent->Height + 10);
 				this->Controls->Add(this->tableLayout1);
-				
-				Drawing2D::GraphicsPath^ path = gcnew Drawing2D::GraphicsPath();
-				path->AddArc(0, 0, 20, 20, 180, 90);
-				path->AddArc(this->Width - 20, 0, 20, 20, -90, 90);
-				path->AddArc(this->Width - 20, this->Height - 20, 20, 20, 0, 90);
-				path->AddArc(0, this->Height - 20, 20, 20, 90, 90);
+
+				auto path = gcnew Drawing2D::GraphicsPath();
+				path->AddArc(0, 0, 25, 25, 180, 90);
+				path->AddArc(this->Width - 25, 0, 25, 25, -90, 90);
+				path->AddArc(this->Width - 25, this->Height - 25, 25, 25, 0, 90);
+				path->AddArc(0, this->Height - 25, 25, 25, 90, 90);
 				path->CloseAllFigures();
-				
+
 				this->Region = gcnew Drawing::Region(path);
 			}
 
 			void timer_Tick(Object^ sender, EventArgs^ e)
 			{
-				this->Close();
+				this->close();
+				this->timer->Stop();
 			}
 	};
 }

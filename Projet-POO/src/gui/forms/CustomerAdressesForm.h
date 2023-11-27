@@ -9,10 +9,10 @@ namespace Projet_POO {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	
-	public ref class CustomerAdressesForm : public System::Windows::Forms::Form
+	public ref class CustomerAddressesForm : public System::Windows::Forms::Form
 	{
 	public:
-		CustomerAdressesForm(void)
+		CustomerAddressesForm(void)
 		{
 			InitializeComponent();
 			//
@@ -24,7 +24,7 @@ namespace Projet_POO {
 		/// <summary>
 		/// Nettoyage des ressources utilis�es.
 		/// </summary>
-		~CustomerAdressesForm()
+		~CustomerAddressesForm()
 		{
 			if (components)
 			{
