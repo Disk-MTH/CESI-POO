@@ -1,7 +1,7 @@
 #include "App.h"
 
 #include "gui/HomePage.h"
-#include "gui/LoadingScreen.h"
+#include "gui/other/LoadingScreen.h"
 
 using namespace Projet_POO;
 using namespace System;
