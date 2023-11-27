@@ -181,10 +181,10 @@ namespace Projet_POO
 				/* -------------------- buttonFilters --------------------*/
 				this->buttonFilters->Anchor = AnchorStyles::None;
 				this->buttonFilters->Location = Point(18, 243);
-				this->buttonFilters->Name = L"Filtrer";
+				this->buttonFilters->Name = L"buttonFilters";
 				this->buttonFilters->Size = Drawing::Size(137, 55);
 				this->buttonFilters->TabIndex = 0;
-				this->buttonFilters->Text = L"buttonFilters";
+				this->buttonFilters->Text = L"Filtrer";
 				this->buttonFilters->UseVisualStyleBackColor = true;
 
 				/* -------------------- buttonAdd --------------------*/
@@ -236,7 +236,7 @@ namespace Projet_POO
 				this->gridViewCustomers->Columns->Add(addressesCount);
 
 				customers = App::app->db->query(
-					"SELECT c.id_customer, c.first_name, c.last_name, CONVERT(VARCHAR, c.birthdate, 103) AS birthdate, ISNULL(b.billingAddressesCount, 0) + ISNULL(d.deliveryAddressesCount, 0) AS addressesCount FROM customer c LEFT JOIN (SELECT id_customer, COUNT(*) AS billingAddressesCount FROM customerHasBillingAddresses GROUP BY id_customer) b ON c.id_customer = b.id_customer LEFT JOIN (SELECT id_customer, COUNT(*) AS deliveryAddressesCount FROM customerHasDeliveryAddresses GROUP BY id_customer) d ON c.id_customer = d.id_customer;");
+					"SELECT c.id_customer, c.first_name, c.last_name, CONVERT(VARCHAR, c.birthdate, 103) AS birthdate, ISNULL(b.billingAddressesCount, 0) + ISNULL(d.deliveryAddressesCount, 0) AS addressesCount FROM customer c LEFT JOIN (SELECT id_customer, COUNT(*) AS billingAddressesCount FROM customerHasBillingAddresses GROUP BY id_customer) b ON c.id_customer = b.id_customer LEFT JOIN (SELECT id_customer, COUNT(*) AS deliveryAddressesCount FROM customerHasDeliveryAddresses GROUP BY id_customer) d ON c.id_customer = d.id_customer WHERE c.deleted = 0;");
 
 				for (int i = 0; i < customers->Tables[0]->Rows->Count; i++)
 				{
@@ -318,7 +318,7 @@ namespace Projet_POO
 				if (pendingResult == Windows::Forms::DialogResult::Yes)
 				{
 					auto idCustomer = safe_cast<int^>(this->gridViewCustomers->Rows[e->Row->Index]->Cells[0]->Value);
-					App::app->db->execute("DELETE FROM customer WHERE id_customer = " + idCustomer);
+					App::app->db->execute("UPDATE customer SET deleted = 1 WHERE id_customer = " + idCustomer);
 					App::app->toastMessage(this, "Donnees supprimees", Color::Green, 3000);
 					App::app->logger->log("Data deleted: \"id_customer\" = \"" + idCustomer + "\"");
 
