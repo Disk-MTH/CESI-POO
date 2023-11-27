@@ -8,20 +8,19 @@ using namespace Windows::Forms;
 
 namespace Projet_POO
 {
-	public ref class CustomerAddressesForm : public System::Windows::Forms::Form
+	public ref class CustomerAddressesPage sealed : public Form
 	{
 		public:
-			CustomerAddressesForm()
+			CustomerAddressesPage()
 			{
 				initialize();
-				fillDeliveryAdressesGridView();
-				fillBillingAdressesGridView();
+				fillGridViewDeliveryAdresses();
+				fillGridViewBillingAdresses();
 			}
 
 		private:
-
 			bool back = false;
-		
+
 			DataSet^ customerAdresses;
 
 			TableLayoutPanel^ tableLayout1;
@@ -30,14 +29,13 @@ namespace Projet_POO
 
 			Label^ labelTitle;
 
-			DataGridView^ BillingAdressGridView;
-			DataGridView^ DeliveryAdressGridView;
+			DataGridView^ gridViewDeliveryAddresses;
+			DataGridView^ gridViewBillingAddresses;
 
-			Button^ buttonDelivery;
 			Button^ buttonBack;
 			Button^ buttonReload;
 			Button^ buttonBilling;
-
+			Button^ buttonDelivery;
 
 			void initialize()
 			{
@@ -47,22 +45,22 @@ namespace Projet_POO
 
 				this->labelTitle = gcnew Label();
 
-				this->BillingAdressGridView = gcnew DataGridView();
-				this->DeliveryAdressGridView = gcnew DataGridView();
+				this->gridViewDeliveryAddresses = gcnew DataGridView();
+				this->gridViewBillingAddresses = gcnew DataGridView();
 
-				this->buttonDelivery = gcnew Button();
-				this->buttonBack = gcnew Button();
 				this->buttonReload = gcnew Button();
+				this->buttonBack = gcnew Button();
+				this->buttonDelivery = gcnew Button();
 				this->buttonBilling = gcnew Button();
 
 				/* -------------------- tableLayout1 --------------------*/
 				this->tableLayout1->ColumnCount = 2;
 				this->tableLayout1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
 				this->tableLayout1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
-				this->tableLayout1->Controls->Add(this->DeliveryAdressGridView, 1, 0);
+				this->tableLayout1->Controls->Add(this->gridViewDeliveryAddresses, 1, 0);
 				this->tableLayout1->Controls->Add(this->buttonBilling, 1, 1);
 				this->tableLayout1->Controls->Add(this->buttonDelivery, 0, 1);
-				this->tableLayout1->Controls->Add(this->BillingAdressGridView, 0, 0);
+				this->tableLayout1->Controls->Add(this->gridViewBillingAddresses, 0, 0);
 				this->tableLayout1->Location = Point(3, 50);
 				this->tableLayout1->Name = L"tableLayoutPanel1";
 				this->tableLayout1->RowCount = 2;
@@ -88,10 +86,10 @@ namespace Projet_POO
 				/* -------------------- tableLayout3 --------------------*/
 				this->tableLayout3->ColumnCount = 5;
 				this->tableLayout3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
-				this->tableLayout3->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Absolute, 46)));
-				this->tableLayout3->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Absolute, 468)));
-				this->tableLayout3->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Absolute, 46)));
-				this->tableLayout3->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Absolute, 48)));
+				this->tableLayout3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 46));
+				this->tableLayout3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 468));
+				this->tableLayout3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 46));
+				this->tableLayout3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 48));
 				this->tableLayout3->Controls->Add(this->buttonBack, 4, 0);
 				this->tableLayout3->Controls->Add(this->buttonReload, 3, 0);
 				this->tableLayout3->Controls->Add(this->labelTitle, 2, 0);
@@ -106,38 +104,48 @@ namespace Projet_POO
 				/* -------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
 				this->labelTitle->AutoSize = true;
-				this->labelTitle->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 20));
+				this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
 				this->labelTitle->Location = Point(265, 4);
 				this->labelTitle->Name = L"labelTitle";
 				this->labelTitle->Size = Drawing::Size(122, 31);
 				this->labelTitle->TabIndex = 9;
 				this->labelTitle->Text = L"AAAAAA";
 
-				/* -------------------- DeliveryAdressGridView --------------------*/
-				this->DeliveryAdressGridView->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-				this->DeliveryAdressGridView->Location = Point(337, 10);
-				this->DeliveryAdressGridView->Margin = Windows::Forms::Padding(10);
-				this->DeliveryAdressGridView->Name = L"dataGridView2";
-				this->DeliveryAdressGridView->Size = Drawing::Size(307, 301);
-				this->DeliveryAdressGridView->TabIndex = 5;
+				/* -------------------- gridViewDeliveryAddresses --------------------*/
+				this->gridViewDeliveryAddresses->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+				this->gridViewDeliveryAddresses->Location = Point(337, 10);
+				this->gridViewDeliveryAddresses->Margin = Windows::Forms::Padding(10);
+				this->gridViewDeliveryAddresses->Name = L"dataGridView2";
+				this->gridViewDeliveryAddresses->Size = Drawing::Size(307, 301);
+				this->gridViewDeliveryAddresses->TabIndex = 5;
 
-				/* -------------------- BillingAdressGridView --------------------*/
-				this->BillingAdressGridView->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-				this->BillingAdressGridView->Location = Point(10, 10);
-				this->BillingAdressGridView->Margin = Windows::Forms::Padding(10);
-				this->BillingAdressGridView->Name = L"dataGridView1";
-				this->BillingAdressGridView->Size = Drawing::Size(307, 301);
-				this->BillingAdressGridView->TabIndex = 4;
+				/* -------------------- gridViewBillingAddresses --------------------*/
+				this->gridViewBillingAddresses->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+				this->gridViewBillingAddresses->Location = Point(10, 10);
+				this->gridViewBillingAddresses->Margin = Windows::Forms::Padding(10);
+				this->gridViewBillingAddresses->Name = L"dataGridView1";
+				this->gridViewBillingAddresses->Size = Drawing::Size(307, 301);
+				this->gridViewBillingAddresses->TabIndex = 4;
 
-				/* -------------------- buttonBilling --------------------*/
-				this->buttonBilling->Anchor = AnchorStyles::None;
-				this->buttonBilling->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 15));
-				this->buttonBilling->Location = Point(448, 330);
-				this->buttonBilling->Name = L"button7";
-				this->buttonBilling->Size = Drawing::Size(307, 41);
-				this->buttonBilling->TabIndex = 3;
-				this->buttonBilling->Text = L"Ajouter adresse de facturation";
-				this->buttonBilling->UseVisualStyleBackColor = true;
+				/* -------------------- buttonReload --------------------*/
+				this->buttonReload->Font = gcnew Drawing::Font(L"Arial Black", 8.25F, FontStyle::Bold, GraphicsUnit::Point, static_cast<Byte>(0));
+				this->buttonReload->Location = Point(563, 3);
+				this->buttonReload->Name = L"button6";
+				this->buttonReload->Size = Drawing::Size(39, 34);
+				this->buttonReload->TabIndex = 14;
+				this->buttonReload->Text = L"( )";
+				this->buttonReload->UseVisualStyleBackColor = true;
+				this->buttonReload->Click += gcnew EventHandler(this, &CustomerAddressesPage::buttonReload_Click);
+
+				/* -------------------- buttonBack --------------------*/
+				this->buttonBack->Font = gcnew Drawing::Font(L"Arial Black", 8.25F, FontStyle::Bold, GraphicsUnit::Point, static_cast<Byte>(0));
+				this->buttonBack->Location = Point(609, 3);
+				this->buttonBack->Name = L"button2";
+				this->buttonBack->Size = Drawing::Size(39, 34);
+				this->buttonBack->TabIndex = 10;
+				this->buttonBack->Text = L"-->";
+				this->buttonBack->UseVisualStyleBackColor = true;
+				this->buttonBack->Click += gcnew EventHandler(this, &CustomerAddressesPage::buttonBack_Click);
 
 				/* -------------------- buttonDelivery --------------------*/
 				this->buttonDelivery->Anchor = AnchorStyles::None;
@@ -149,92 +157,86 @@ namespace Projet_POO
 				this->buttonDelivery->Text = L"Ajouter adresse de livraison";
 				this->buttonDelivery->UseVisualStyleBackColor = true;
 
-				/* -------------------- buttonBack --------------------*/
-				this->buttonBack->Font = gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0));
-				this->buttonBack->Location = System::Drawing::Point(609, 3);
-				this->buttonBack->Name = L"button2";
-				this->buttonBack->Size = System::Drawing::Size(39, 34);
-				this->buttonBack->TabIndex = 10;
-				this->buttonBack->Text = L"-->";
-				this->buttonBack->UseVisualStyleBackColor = true;
-				this->buttonBack->Click += gcnew System::EventHandler(this, &CustomerAddressesForm::buttonBack_Click);
+				/* -------------------- buttonBilling --------------------*/
+				this->buttonBilling->Anchor = AnchorStyles::None;
+				this->buttonBilling->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 15));
+				this->buttonBilling->Location = Point(448, 330);
+				this->buttonBilling->Name = L"button7";
+				this->buttonBilling->Size = Drawing::Size(307, 41);
+				this->buttonBilling->TabIndex = 3;
+				this->buttonBilling->Text = L"Ajouter adresse de facturation";
+				this->buttonBilling->UseVisualStyleBackColor = true;
 
-				/* -------------------- buttonReload --------------------*/
-				this->buttonReload->Font = gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,static_cast<System::Byte>(0));
-				this->buttonReload->Location = System::Drawing::Point(563, 3);
-				this->buttonReload->Name = L"button6";
-				this->buttonReload->Size = System::Drawing::Size(39, 34);
-				this->buttonReload->TabIndex = 14;
-				this->buttonReload->Text = L"( )";
-				this->buttonReload->UseVisualStyleBackColor = true;
-				this->buttonReload->Click += gcnew System::EventHandler(this, &CustomerAddressesForm::buttonReload_Click);
-				
+				/* -------------------- CustomerAddressesPage --------------------*/
 				this->AutoScaleDimensions = SizeF(6, 13);
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(684, 461);
 				this->Controls->Add(this->tableLayout2);
+				this->MaximizeBox = false;
 				this->Margin = Windows::Forms::Padding(2);
-				this->Name = L"CustomerAdressesForm";
-				this->Text = L"CustomerAdressesForm";
+				this->Name = L"CustomerAddressesPage";
+				this->StartPosition = FormStartPosition::CenterScreen;
+				this->Text = L"CustomerAddressesPage";
+				this->FormClosing += gcnew FormClosingEventHandler(this, &CustomerAddressesPage::customerAddressesForm_Close);
 			}
 
-			void fillBillingAdressesGridView()
+			void fillGridViewDeliveryAdresses()
 			{
-				this->BillingAdressGridView->Columns->Clear();
+				this->gridViewDeliveryAddresses->Columns->Clear();
 
 				DataGridViewTextBoxColumn^ idAddress = gcnew DataGridViewTextBoxColumn();
 				idAddress->Name = L"id_address";
 				idAddress->Visible = false;
-				this->BillingAdressGridView->Columns->Add(idAddress);
+				this->gridViewDeliveryAddresses->Columns->Add(idAddress);
 
 				DataGridViewTextBoxColumn^ address = gcnew DataGridViewTextBoxColumn();
 				address->Name = L"address";
-				this->BillingAdressGridView->Columns->Add(address);
+				this->gridViewDeliveryAddresses->Columns->Add(address);
 
 				DataGridViewTextBoxColumn^ city = gcnew DataGridViewTextBoxColumn();
 				city->Name = L"city";
-				this->BillingAdressGridView->Columns->Add(city);
+				this->gridViewDeliveryAddresses->Columns->Add(city);
 
 				DataGridViewTextBoxColumn^ zipCode = gcnew DataGridViewTextBoxColumn();
 				zipCode->Name = L"zip_code";
-				this->BillingAdressGridView->Columns->Add(zipCode);
+				this->gridViewDeliveryAddresses->Columns->Add(zipCode);
 
 				DataGridViewTextBoxColumn^ country = gcnew DataGridViewTextBoxColumn();
 				country->Name = L"country";
-				this->BillingAdressGridView->Columns->Add(country);
-				
-				this->BillingAdressGridView->Rows->Add("1", "25 rue choucroute", "Paris", "75000", "France");
+				this->gridViewDeliveryAddresses->Columns->Add(country);
+
+				this->gridViewDeliveryAddresses->Rows->Add("1", "18 rue charcuterie", "Toulouses", "83000", "France");
 			}
 
-			void fillDeliveryAdressesGridView()
+			void fillGridViewBillingAdresses()
 			{
-				this->DeliveryAdressGridView->Columns->Clear();
+				this->gridViewBillingAddresses->Columns->Clear();
 
 				DataGridViewTextBoxColumn^ idAddress = gcnew DataGridViewTextBoxColumn();
 				idAddress->Name = L"id_address";
 				idAddress->Visible = false;
-				this->DeliveryAdressGridView->Columns->Add(idAddress);
+				this->gridViewBillingAddresses->Columns->Add(idAddress);
 
 				DataGridViewTextBoxColumn^ address = gcnew DataGridViewTextBoxColumn();
 				address->Name = L"address";
-				this->DeliveryAdressGridView->Columns->Add(address);
+				this->gridViewBillingAddresses->Columns->Add(address);
 
 				DataGridViewTextBoxColumn^ city = gcnew DataGridViewTextBoxColumn();
 				city->Name = L"city";
-				this->DeliveryAdressGridView->Columns->Add(city);
+				this->gridViewBillingAddresses->Columns->Add(city);
 
 				DataGridViewTextBoxColumn^ zipCode = gcnew DataGridViewTextBoxColumn();
 				zipCode->Name = L"zip_code";
-				this->DeliveryAdressGridView->Columns->Add(zipCode);
+				this->gridViewBillingAddresses->Columns->Add(zipCode);
 
 				DataGridViewTextBoxColumn^ country = gcnew DataGridViewTextBoxColumn();
 				country->Name = L"country";
-				this->DeliveryAdressGridView->Columns->Add(country);
+				this->gridViewBillingAddresses->Columns->Add(country);
 
-				this->DeliveryAdressGridView->Rows->Add("1", "18 rue charcuterie", "Toulouses", "83000", "France");
+				this->gridViewBillingAddresses->Rows->Add("1", "25 rue choucroute", "Paris", "75000", "France");
 			}
 
-			void CustomerAddressesForm_Close()
+			void customerAddressesForm_Close(Object^ sender, FormClosingEventArgs^ e)
 			{
 				if (!this->back)
 				{
@@ -250,8 +252,8 @@ namespace Projet_POO
 
 			void buttonReload_Click(Object^ sender, EventArgs^ e)
 			{
-				fillDeliveryAdressesGridView();
-				fillBillingAdressesGridView();
+				fillGridViewDeliveryAdresses();
+				fillGridViewBillingAdresses();
 				App::app->toastMessage(this, "Donnees actualisees", Color::Green, 3000);
 				App::app->logger->log("Data reloaded");
 			}

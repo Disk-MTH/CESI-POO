@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../forms/AddCustomerForm.h"
-#include "../forms/CustomerAdressesForm.h"
+#include "CustomerAddressesPage.h"
 
 using namespace Projet_POO;
 using namespace Data;
@@ -11,13 +11,13 @@ using namespace Windows::Forms;
 
 namespace Projet_POO
 {
-	public ref class CustomersPage sealed : public Form 
+	public ref class CustomersPage sealed : public Form
 	{
 		public:
 			CustomersPage()
 			{
 				initialize();
-				fillCustomersGridView();
+				fillGridViewCustomers();
 			}
 
 		private:
@@ -35,7 +35,7 @@ namespace Projet_POO
 			Label^ labelTitle;
 			Label^ labelFilters;
 
-			DataGridView^ customersGridView;
+			DataGridView^ gridViewCustomers;
 
 			Button^ buttonReload;
 			Button^ buttonBack;
@@ -52,7 +52,7 @@ namespace Projet_POO
 				this->labelTitle = gcnew Label();
 				this->labelFilters = gcnew Label();
 
-				this->customersGridView = gcnew DataGridView();
+				this->gridViewCustomers = gcnew DataGridView();
 
 				this->buttonBack = gcnew Button();
 				this->buttonReload = gcnew Button();
@@ -77,7 +77,7 @@ namespace Projet_POO
 				this->tableLayout2->ColumnCount = 2;
 				this->tableLayout2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 72.47707F));
 				this->tableLayout2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 27.52294F));
-				this->tableLayout2->Controls->Add(this->customersGridView, 0, 0);
+				this->tableLayout2->Controls->Add(this->gridViewCustomers, 0, 0);
 				this->tableLayout2->Controls->Add(this->tableLayout3, 1, 0);
 				this->tableLayout2->Location = Point(3, 53);
 				this->tableLayout2->Name = L"tableLayout2";
@@ -142,26 +142,26 @@ namespace Projet_POO
 				this->labelFilters->Text = L"Filtres :";
 
 				/* -------------------- customersGridView --------------------*/
-				this->customersGridView->AllowUserToResizeColumns = false;
-				this->customersGridView->AllowUserToResizeRows = false;
-				this->customersGridView->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
-				this->customersGridView->ColumnHeadersHeight = 29;
-				this->customersGridView->Dock = DockStyle::Fill;
-				this->customersGridView->Location = Point(3, 3);
-				this->customersGridView->Name = L"customersGridView";
-				this->customersGridView->RowHeadersVisible = false;
-				this->customersGridView->RowHeadersWidth = 51;
-				this->customersGridView->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
-				this->customersGridView->Size = Drawing::Size(468, 374);
-				this->customersGridView->TabIndex = 0;
-				this->customersGridView->CellEndEdit += gcnew DataGridViewCellEventHandler(this, &CustomersPage::customersGridView_CellEndEdit);
-				this->customersGridView->UserDeletingRow += gcnew DataGridViewRowCancelEventHandler(this, &CustomersPage::customersGridView_RowDeleting);
-				this->customersGridView->CellClick += gcnew DataGridViewCellEventHandler(this, &CustomersPage::addressesCount_Click);
+				this->gridViewCustomers->AllowUserToResizeColumns = false;
+				this->gridViewCustomers->AllowUserToResizeRows = false;
+				this->gridViewCustomers->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+				this->gridViewCustomers->ColumnHeadersHeight = 29;
+				this->gridViewCustomers->Dock = DockStyle::Fill;
+				this->gridViewCustomers->Location = Point(3, 3);
+				this->gridViewCustomers->Name = L"customersGridView";
+				this->gridViewCustomers->RowHeadersVisible = false;
+				this->gridViewCustomers->RowHeadersWidth = 51;
+				this->gridViewCustomers->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->gridViewCustomers->Size = Drawing::Size(468, 374);
+				this->gridViewCustomers->TabIndex = 0;
+				this->gridViewCustomers->CellEndEdit += gcnew DataGridViewCellEventHandler(this, &CustomersPage::customersGridView_CellEndEdit);
+				this->gridViewCustomers->UserDeletingRow += gcnew DataGridViewRowCancelEventHandler(this, &CustomersPage::customersGridView_RowDeleting);
+				this->gridViewCustomers->CellClick += gcnew DataGridViewCellEventHandler(this, &CustomersPage::addressesCount_Click);
 
 				/* -------------------- buttonReload --------------------*/
 				this->buttonReload->Font = gcnew Drawing::Font(L"Arial Black", 8.25F, FontStyle::Bold, GraphicsUnit::Point, 0);
 				this->buttonReload->Location = Point(563, 3);
-				this->buttonReload->Name = L"button6";
+				this->buttonReload->Name = L"buttonReload";
 				this->buttonReload->Size = Drawing::Size(39, 37);
 				this->buttonReload->TabIndex = 14;
 				this->buttonReload->Text = L"( )";
@@ -171,7 +171,7 @@ namespace Projet_POO
 				/* -------------------- buttonBack --------------------*/
 				this->buttonBack->Font = gcnew Drawing::Font(L"Arial Black", 8.25F, FontStyle::Bold, GraphicsUnit::Point, 0);
 				this->buttonBack->Location = Point(609, 3);
-				this->buttonBack->Name = L"button2";
+				this->buttonBack->Name = L"buttonBack";
 				this->buttonBack->Size = Drawing::Size(39, 37);
 				this->buttonBack->TabIndex = 10;
 				this->buttonBack->Text = L"-->";
@@ -181,10 +181,10 @@ namespace Projet_POO
 				/* -------------------- buttonFilters --------------------*/
 				this->buttonFilters->Anchor = AnchorStyles::None;
 				this->buttonFilters->Location = Point(18, 243);
-				this->buttonFilters->Name = L"button1";
+				this->buttonFilters->Name = L"Filtrer";
 				this->buttonFilters->Size = Drawing::Size(137, 55);
 				this->buttonFilters->TabIndex = 0;
-				this->buttonFilters->Text = L"button1";
+				this->buttonFilters->Text = L"buttonFilters";
 				this->buttonFilters->UseVisualStyleBackColor = true;
 
 				/* -------------------- buttonAdd --------------------*/
@@ -209,38 +209,38 @@ namespace Projet_POO
 				this->FormClosing += gcnew FormClosingEventHandler(this, &CustomersPage::customerPage_Close);
 			}
 
-			Void fillCustomersGridView()
+			Void fillGridViewCustomers()
 			{
-				this->customersGridView->Columns->Clear();
+				this->gridViewCustomers->Columns->Clear();
 
 				DataGridViewTextBoxColumn^ idCustomer = gcnew DataGridViewTextBoxColumn();
 				idCustomer->Name = L"id_customer";
 				idCustomer->Visible = false;
-				this->customersGridView->Columns->Add(idCustomer);
+				this->gridViewCustomers->Columns->Add(idCustomer);
 
 				DataGridViewTextBoxColumn^ lastName = gcnew DataGridViewTextBoxColumn();
 				lastName->Name = L"Nom";
-				this->customersGridView->Columns->Add(lastName);
+				this->gridViewCustomers->Columns->Add(lastName);
 
 				DataGridViewTextBoxColumn^ firstName = gcnew DataGridViewTextBoxColumn();
 				firstName->Name = L"Prenom";
-				this->customersGridView->Columns->Add(firstName);
+				this->gridViewCustomers->Columns->Add(firstName);
 
 				DataGridViewTextBoxColumn^ birthdate = gcnew DataGridViewTextBoxColumn();
 				birthdate->Name = L"Date de naissance";
-				this->customersGridView->Columns->Add(birthdate);
+				this->gridViewCustomers->Columns->Add(birthdate);
 
 				DataGridViewTextBoxColumn^ addressesCount = gcnew DataGridViewTextBoxColumn();
 				addressesCount->Name = L"Nombre d'adresses";
 				addressesCount->ReadOnly = true;
-				this->customersGridView->Columns->Add(addressesCount);
+				this->gridViewCustomers->Columns->Add(addressesCount);
 
 				customers = App::app->db->query(
 					"SELECT c.id_customer, c.first_name, c.last_name, CONVERT(VARCHAR, c.birthdate, 103) AS birthdate, ISNULL(b.billingAddressesCount, 0) + ISNULL(d.deliveryAddressesCount, 0) AS addressesCount FROM customer c LEFT JOIN (SELECT id_customer, COUNT(*) AS billingAddressesCount FROM customerHasBillingAddresses GROUP BY id_customer) b ON c.id_customer = b.id_customer LEFT JOIN (SELECT id_customer, COUNT(*) AS deliveryAddressesCount FROM customerHasDeliveryAddresses GROUP BY id_customer) d ON c.id_customer = d.id_customer;");
 
 				for (int i = 0; i < customers->Tables[0]->Rows->Count; i++)
 				{
-					this->customersGridView->Rows->Add(customers->Tables[0]->Rows[i]->ItemArray);
+					this->gridViewCustomers->Rows->Add(customers->Tables[0]->Rows[i]->ItemArray);
 				}
 			}
 
@@ -254,8 +254,8 @@ namespace Projet_POO
 
 			Void customersGridView_CellEndEdit(Object^ sender, DataGridViewCellEventArgs^ e)
 			{
-				int^ idCustomer = safe_cast<int^>(this->customersGridView->Rows[e->RowIndex]->Cells[0]->Value);
-				String^ newValue = safe_cast<String^>(this->customersGridView->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value);
+				int^ idCustomer = safe_cast<int^>(this->gridViewCustomers->Rows[e->RowIndex]->Cells[0]->Value);
+				String^ newValue = safe_cast<String^>(this->gridViewCustomers->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value);
 				String^ columnName;
 
 				if (newValue == nullptr || newValue->Trim()->Length == 0)
@@ -311,13 +311,13 @@ namespace Projet_POO
 					pendingResult = MessageBox::Show("Voulez-vous vraiment supprimer la selection ?", "Confirmation", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 					if (pendingResult == Windows::Forms::DialogResult::Yes || pendingResult == Windows::Forms::DialogResult::No)
 					{
-						pendingCount = this->customersGridView->SelectedRows->Count;
+						pendingCount = this->gridViewCustomers->SelectedRows->Count;
 					}
 				}
 
 				if (pendingResult == Windows::Forms::DialogResult::Yes)
 				{
-					auto idCustomer = safe_cast<int^>(this->customersGridView->Rows[e->Row->Index]->Cells[0]->Value);
+					auto idCustomer = safe_cast<int^>(this->gridViewCustomers->Rows[e->Row->Index]->Cells[0]->Value);
 					App::app->db->execute("DELETE FROM customer WHERE id_customer = " + idCustomer);
 					App::app->toastMessage(this, "Donnees supprimees", Color::Green, 3000);
 					App::app->logger->log("Data deleted: \"id_customer\" = \"" + idCustomer + "\"");
@@ -341,7 +341,7 @@ namespace Projet_POO
 
 			Void buttonReload_Click(Object^ sender, EventArgs^ e)
 			{
-				fillCustomersGridView();
+				fillGridViewCustomers();
 				App::app->toastMessage(this, "Donnees actualisees", Color::Green, 3000);
 				App::app->logger->log("Data reloaded");
 			}
@@ -375,7 +375,7 @@ namespace Projet_POO
 						return;
 					}
 
-					fillCustomersGridView();
+					fillGridViewCustomers();
 				}
 			}
 
@@ -388,8 +388,10 @@ namespace Projet_POO
 					String^ lastName = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[2]->Value);
 					String^ birthdate = safe_cast<String^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[3]->Value);
 					int^ addressesCount = safe_cast<int^>(this->customersGridView->Rows[this->customersGridView->CurrentCell->RowIndex]->Cells[4]->Value);*/
-					auto addressesCountForm = gcnew CustomerAddressesForm();
-					addressesCountForm->ShowDialog();
+					this->Hide();
+					auto customerAddressesForm = gcnew CustomerAddressesPage();
+					customerAddressesForm->ShowDialog();
+					this->Show();
 				}
 			}
 
