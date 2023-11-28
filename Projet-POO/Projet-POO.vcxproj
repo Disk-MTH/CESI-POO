@@ -198,7 +198,10 @@
     <ClCompile Include="src\gui\CustomerForm.cpp" />
     <ClCompile Include="src\gui\CustomerPage.cpp" />
     <ClCompile Include="src\gui\HomePage.cpp" />
+    <ClCompile Include="src\gui\OrderDetailForm.cpp" />
     <ClCompile Include="src\gui\OrdersPage.cpp" />
+    <ClCompile Include="src\gui\ProductForm.cpp" />
+    <ClCompile Include="src\gui\StockPage.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\main.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -288,11 +291,20 @@
     <ClInclude Include="src\gui\HomePage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="src\gui\OrderDetailForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\gui\OrdersPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\other\LoadingScreen.h" />
     <ClInclude Include="src\gui\other\ToastMessage.h" />
+    <ClInclude Include="src\gui\ProductForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\gui\StockPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +319,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\gui\HomePage.resx">
       <DependentUpon>src\gui\HomePage.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\ProductForm.resx">
+      <DependentUpon>src\gui\ProductForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\StockPage.resx">
+      <DependentUpon>src\gui\StockPage.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
