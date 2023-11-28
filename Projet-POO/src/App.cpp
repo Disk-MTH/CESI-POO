@@ -1,6 +1,6 @@
 #include "App.h"
 
-#include "gui/pages/HomePage.h"
+#include "gui/HomePage.h"
 #include "gui/other/LoadingScreen.h"
 
 using namespace Projet_POO;

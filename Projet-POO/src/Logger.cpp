@@ -7,18 +7,21 @@ Logger::Logger(String^ logFolder, bool isFileEnabled, bool shouldDebug)
 {
 	this->isFileEnabled = isFileEnabled;
 	this->shouldDebug = shouldDebug;
-	int number = 0;
 
-	if (!Directory::Exists(logFolder))
+	if (isFileEnabled)
 	{
-		Directory::CreateDirectory(logFolder);
-	}
+		if (!Directory::Exists(logFolder))
+		{
+			Directory::CreateDirectory(logFolder);
+		}
 
-	while (File::Exists(logFolder + "\\" + getFormattedDate() + "_" + number + ".log"))
-	{
-		number++;
+		int number = 0;
+		while (File::Exists(logFolder + "\\" + getFormattedDate() + "_" + number + ".log"))
+		{
+			number++;
+		}
+		logFile = gcnew StreamWriter(logFolder + "\\" + getFormattedDate() + "_" + number + ".log");
 	}
-	logFile = gcnew StreamWriter(logFolder + "\\" + getFormattedDate() + "_" + number + ".log");
 }
 
 Logger::~Logger()
