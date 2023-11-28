@@ -22,6 +22,7 @@ namespace Projet_POO
 			Label^ labelTitle;
 
 			DataGridView^ dataGridViewCustomers;
+		
 			CheckBox^ checkBoxDeleted;
 		
 			Button^ buttonCreateOrder;
