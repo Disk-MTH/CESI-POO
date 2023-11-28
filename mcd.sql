@@ -1,4 +1,6 @@
-﻿IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'database')
+﻿IF NOT EXISTS (SELECT *
+               FROM sys.databases
+               WHERE name = 'database')
     BEGIN
         CREATE DATABASE [database];
     END
@@ -7,177 +9,131 @@ GO;
 USE [database];
 GO;
 
+CREATE TABLE address
+(
+    id_address  INT IDENTITY (1,1) NOT NULL,
+    street_name VARCHAR(50)        NOT NULL,
+    city        VARCHAR(50)        NOT NULL,
+    zip_code    SMALLINT           NOT NULL,
+    deleted     BINARY             NOT NULL DEFAULT 0,
+    PRIMARY KEY (id_address)
+);
+GO;
+
 CREATE TABLE customer
 (
     id_customer INT IDENTITY (1,1) NOT NULL,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    birthdate DATE NOT NULL,
-    PRIMARY KEY(id_customer)
+    first_name  VARCHAR(50)        NOT NULL,
+    last_name   VARCHAR(50)        NOT NULL,
+    birthdate   DATE               NOT NULL,
+    deleted     BINARY             NOT NULL DEFAULT 0,
+    PRIMARY KEY (id_customer)
 );
 GO;
 
 CREATE TABLE staff
 (
-    id_staff INT IDENTITY (1,1) NOT NULL,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    hire_date DATE NOT NULL,
-    PRIMARY KEY(id_staff)
+    id_staff   INT IDENTITY (1,1) NOT NULL,
+    first_name VARCHAR(50)        NOT NULL,
+    last_name  VARCHAR(50)        NOT NULL,
+    hire_date  DATE               NOT NULL,
+    deleted    BINARY             NOT NULL DEFAULT 0,
+    id_staff_1 INT,
+    id_address INT                NOT NULL,
+    PRIMARY KEY (id_staff),
+    UNIQUE (id_address),
+    FOREIGN KEY (id_staff_1) REFERENCES staff (id_staff),
+    FOREIGN KEY (id_address) REFERENCES address (id_address)
 );
 GO;
 
 CREATE TABLE product
 (
-    id_product INT IDENTITY (1,1) NOT NULL,
-    reference VARCHAR(50) NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    vat_rate REAL NOT NULL,
-    provisioning_threshold SMALLINT NOT NULL,
-    PRIMARY KEY(id_product)
-);
-GO;
-
-CREATE TABLE stock
-(
-    id_stock INT IDENTITY (1,1) NOT NULL,
-    stock_date DATETIME NOT NULL,
-    quantity SMALLINT NOT NULL,
-    quantity_left SMALLINT NOT NULL,
-    id_product INT NOT NULL,
-    PRIMARY KEY(id_stock),
-    FOREIGN KEY(id_product) REFERENCES product(id_product)
+    id_product             INT IDENTITY (1,1) NOT NULL,
+    reference              VARCHAR(50)        NOT NULL,
+    name                   VARCHAR(50)        NOT NULL,
+    vat_rate               REAL               NOT NULL,
+    provisioning_threshold SMALLINT           NOT NULL,
+    deleted                BINARY             NOT NULL DEFAULT 0,
+    quantity               SMALLINT           NOT NULL,
+    buy_price              REAL               NOT NULL,
+    PRIMARY KEY (id_product)
 );
 GO;
 
 CREATE TABLE [order]
 (
-    id_order INT IDENTITY (1,1) NOT NULL,
-    reference VARCHAR(50) NOT NULL,
-    issue_date VARCHAR(50) NOT NULL,
-    expected_delivery_date VARCHAR(50) NOT NULL,
-    PRIMARY KEY(id_order)
-);
-GO;
-
-CREATE TABLE city
-(
-    id_city INT IDENTITY (1,1) NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    PRIMARY KEY(id_city)
+    id_order               INT IDENTITY (1,1) NOT NULL,
+    reference              VARCHAR(50)        NOT NULL,
+    issue_date             VARCHAR(50)        NOT NULL,
+    expected_delivery_date VARCHAR(50)        NOT NULL,
+    deleted                BINARY             NOT NULL DEFAULT 0,
+    id_address             INT                NOT NULL,
+    id_address_1           INT                NOT NULL,
+    id_customer            INT                NOT NULL,
+    PRIMARY KEY (id_order),
+    FOREIGN KEY (id_address) REFERENCES address (id_address),
+    FOREIGN KEY (id_address_1) REFERENCES address (id_address),
+    FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
 );
 GO;
 
 CREATE TABLE payment
 (
-    id_payment INT IDENTITY (1,1) NOT NULL,
-    payment_date DATETIME NOT NULL,
-    amount REAL,
-    id_order INT NOT NULL,
-    PRIMARY KEY(id_payment),
-    FOREIGN KEY(id_order) REFERENCES [order](id_order)
+    id_payment   INT IDENTITY (1,1) NOT NULL,
+    payment_date DATETIME           NOT NULL,
+    payment_mean SMALLINT           NOT NULL,
+    amount       REAL               NOT NULL,
+    validated    BINARY             NOT NULL DEFAULT 0,
+    deleted      BINARY             NOT NULL DEFAULT 0,
+    id_order     INT                NOT NULL,
+    PRIMARY KEY (id_payment),
+    FOREIGN KEY (id_order) REFERENCES [order] (id_order)
 );
 GO;
 
-CREATE TABLE payment_mean
+CREATE TABLE tiered_price
 (
-    id_payment_mean INT IDENTITY (1,1) NOT NULL,
-    type VARCHAR(50) NOT NULL,
-    PRIMARY KEY(id_payment_mean)
+    id_tiered_price  INT IDENTITY (1,1) NOT NULL,
+    minimal_quantity INT                NOT NULL,
+    tf_price         REAL               NOT NULL,
+    deleted          BINARY             NOT NULL DEFAULT 0,
+    id_product       INT                NOT NULL,
+    PRIMARY KEY (id_tiered_price),
+    FOREIGN KEY (id_product) REFERENCES product (id_product)
 );
 GO;
 
-CREATE TABLE address
+CREATE TABLE suggestion
 (
-    id_address INT IDENTITY (1,1) NOT NULL,
-    street_name VARCHAR(50) NOT NULL,
-    id_city INT NOT NULL,
-    PRIMARY KEY(id_address),
-    FOREIGN KEY(id_city) REFERENCES city(id_city)
+    id_suggestion INT IDENTITY (1,1) NOT NULL,
+    zip_code      SMALLINT           NOT NULL,
+    city          VARCHAR(50)        NOT NULL,
+    PRIMARY KEY (id_suggestion)
 );
 GO;
 
 CREATE TABLE orderHasProducts
 (
     id_product INT,
-    id_order INT,
-    quantity SMALLINT,
-    tf_price REAL NOT NULL,
-    vat_price REAL NOT NULL,
-    price REAL NOT NULL,
-    price_after_discounts REAL NOT NULL,
-    PRIMARY KEY(id_product, id_order),
-    FOREIGN KEY(id_product) REFERENCES product(id_product),
-    FOREIGN KEY(id_order) REFERENCES [order](id_order)
+    id_order   INT,
+    quantity   SMALLINT,
+    tf_price   REAL NOT NULL,
+    vat_price  REAL NOT NULL,
+    price      REAL NOT NULL,
+    PRIMARY KEY (id_product, id_order),
+    FOREIGN KEY (id_product) REFERENCES product (id_product),
+    FOREIGN KEY (id_order) REFERENCES [order] (id_order)
 );
 GO;
 
-CREATE TABLE orderHasStaffs
+CREATE TABLE customerHasAddresses
 (
-    id_staff INT,
-    id_order INT,
-    PRIMARY KEY(id_staff, id_order),
-    FOREIGN KEY(id_staff) REFERENCES staff(id_staff),
-    FOREIGN KEY(id_order) REFERENCES [order](id_order)
-);
-GO;
-
-CREATE TABLE orderHasClients
-(
+    id_address  INT,
     id_customer INT,
-    id_order INT,
-    PRIMARY KEY(id_customer, id_order),
-    FOREIGN KEY(id_customer) REFERENCES customer(id_customer),
-    FOREIGN KEY(id_order) REFERENCES [order](id_order)
-);
-GO;
-
-CREATE TABLE customerHasBillingAddresses
-(
-    id_address INT,
-    id_customer INT,
-    PRIMARY KEY(id_address, id_customer),
-    FOREIGN KEY(id_address) REFERENCES address(id_address),
-    FOREIGN KEY(id_customer) REFERENCES customer(id_customer)
-);
-GO;
-
-CREATE TABLE customerHasDeliveryAddresses
-(
-    id_address INT,
-    id_customer INT,
-    PRIMARY KEY(id_address, id_customer),
-    FOREIGN KEY(id_address) REFERENCES address(id_address),
-    FOREIGN KEY(id_customer) REFERENCES customer(id_customer)
-);
-GO;
-
-CREATE TABLE paymentHasPaymentMeans
-(
-    id_payment INT,
-    id_payment_mean INT,
-    PRIMARY KEY(id_payment, id_payment_mean),
-    FOREIGN KEY(id_payment) REFERENCES payment(id_payment),
-    FOREIGN KEY(id_payment_mean) REFERENCES payment_mean(id_payment_mean)
-);
-GO;
-
-CREATE TABLE staffHasAddresses
-(
-    id_address INT,
-    id_staff INT,
-    PRIMARY KEY(id_address, id_staff),
-    FOREIGN KEY(id_address) REFERENCES address(id_address),
-    FOREIGN KEY(id_staff) REFERENCES staff(id_staff)
-);
-GO;
-
-CREATE TABLE staffHasBoss
-(
-    id_staff INT,
-    id_staff_1 INT,
-    PRIMARY KEY(id_staff, id_staff_1),
-    FOREIGN KEY(id_staff) REFERENCES staff(id_staff),
-    FOREIGN KEY(id_staff_1) REFERENCES staff(id_staff)
+    type        SMALLINT NOT NULL,
+    PRIMARY KEY (id_address, id_customer),
+    FOREIGN KEY (id_address) REFERENCES address (id_address),
+    FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
 );
 GO;
