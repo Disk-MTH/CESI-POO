@@ -194,6 +194,7 @@
       <CompileAsManaged>true</CompileAsManaged>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\gui\pages\CustomersPage.cpp" />
     <ClCompile Include="src\gui\pages\HomePage.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\main.cpp">
@@ -289,6 +290,8 @@
     <ClInclude Include="src\gui\pages\OrdersPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="src\items\Addresse.h" />
+    <ClInclude Include="src\items\Customer.h" />
     <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

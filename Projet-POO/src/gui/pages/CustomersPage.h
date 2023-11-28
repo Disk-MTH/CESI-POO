@@ -1,5 +1,7 @@
 #pragma once
+#include "../../App.h"
 
+using namespace Projet_POO;
 using namespace System;
 using namespace Windows::Forms;
 using namespace Drawing;
@@ -23,12 +25,12 @@ namespace Projet_POO
 
 			DataGridView^ dataGridViewCustomers;
 			CheckBox^ checkBoxDeleted;
-		
+
 			Button^ buttonCreateOrder;
 			Button^ buttonAdd;
 			Button^ buttonEdit;
 			Button^ buttonDelete;
-		
+
 			void initialize()
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
@@ -99,15 +101,38 @@ namespace Projet_POO
 				this->dataGridViewCustomers->Size = Drawing::Size(695, 275);
 				this->dataGridViewCustomers->TabIndex = 1;
 
+				auto idCustomer = gcnew DataGridViewTextBoxColumn();
+				idCustomer->Name = L"id_customer";
+				idCustomer->Visible = false;
+				this->dataGridViewCustomers->Columns->Add(idCustomer);
+
+				auto lastName = gcnew DataGridViewTextBoxColumn();
+				lastName->Name = L"Nom";
+				this->dataGridViewCustomers->Columns->Add(lastName);
+
+				auto firstName = gcnew DataGridViewTextBoxColumn();
+				firstName->Name = L"Prenom";
+				this->dataGridViewCustomers->Columns->Add(firstName);
+
+				auto birthdate = gcnew DataGridViewTextBoxColumn();
+				birthdate->Name = L"Date de naissance";
+				this->dataGridViewCustomers->Columns->Add(birthdate);
+
+				auto addressesCount = gcnew DataGridViewTextBoxColumn();
+				addressesCount->Name = L"Nombre d'adresses";
+				addressesCount->ReadOnly = true;
+				this->dataGridViewCustomers->Columns->Add(addressesCount);
+
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::None;
+				this->checkBoxDeleted->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
 				this->checkBoxDeleted->AutoSize = true;
 				this->checkBoxDeleted->Location = Point(3, 51);
 				this->checkBoxDeleted->Margin = Windows::Forms::Padding(2, 2, 2, 2);
 				this->checkBoxDeleted->Name = L"checkBoxDeleted";
 				this->checkBoxDeleted->Size = Drawing::Size(161, 17);
 				this->checkBoxDeleted->TabIndex = 0;
-				this->checkBoxDeleted->Text = L"Afficher les clients supprimés";
+				this->checkBoxDeleted->Text = L"Afficher les\nclients supprimes";
 				this->checkBoxDeleted->UseVisualStyleBackColor = true;
 
 				/*-------------------- buttonCreateOrder --------------------*/
@@ -120,6 +145,7 @@ namespace Projet_POO
 				this->buttonCreateOrder->TabIndex = 1;
 				this->buttonCreateOrder->Text = L"Commander";
 				this->buttonCreateOrder->UseVisualStyleBackColor = true;
+				this->buttonCreateOrder->Click += gcnew EventHandler(this, &CustomersPage::buttonCreateOrder_Click);
 
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -131,6 +157,7 @@ namespace Projet_POO
 				this->buttonAdd->TabIndex = 2;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
+				this->buttonAdd->Click += gcnew EventHandler(this, &CustomersPage::buttonAdd_Click);
 
 				/*-------------------- buttonEdit --------------------*/
 				this->buttonEdit->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -142,7 +169,8 @@ namespace Projet_POO
 				this->buttonEdit->TabIndex = 3;
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
-	
+				this->buttonEdit->Click += gcnew EventHandler(this, &CustomersPage::buttonEdit_Click);
+
 				/*-------------------- buttonDelete --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonDelete->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 13);
@@ -153,6 +181,7 @@ namespace Projet_POO
 				this->buttonDelete->TabIndex = 4;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
+				this->buttonDelete->Click += gcnew EventHandler(this, &CustomersPage::buttonDelete_Click);
 
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
@@ -165,5 +194,10 @@ namespace Projet_POO
 				this->Name = L"CustomersPage";
 				this->Text = L"CustomersPage";
 			}
+			Void reloadCustomersGridView();
+			Void buttonCreateOrder_Click(Object^ sender, EventArgs^ e);
+			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
+			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
+			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
 	};
 }

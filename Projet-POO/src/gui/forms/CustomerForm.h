@@ -10,12 +10,19 @@ namespace Projet_POO
 	public ref class CustomerForm : public Form
 	{
 		public:
-			CustomerForm()
+			CustomerForm(String^* firstName, String^* lastName, String^* birthdate)
 			{
+				this->firstName = firstName;
+				this->lastName = lastName;
+				this->birthdate = birthdate;
 				initialize();
 			}
 
 		private:
+			String^* firstName;
+			String^* lastName;
+			String^* birthdate;
+
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 			TableLayoutPanel^ tableLayoutPanel3;
@@ -37,10 +44,10 @@ namespace Projet_POO
 			Button^ buttonAdd;
 			Button^ buttonEdit;
 			Button^ buttonDelete;
-			
+
 			Button^ buttonCancel;
 			Button^ buttonValidate;
-		
+
 			void initialize()
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
@@ -56,7 +63,7 @@ namespace Projet_POO
 				this->labelBirthDate = gcnew Label();
 
 				this->dataGridViewAddresses = gcnew DataGridView();
-				
+
 				this->textBoxLastName = gcnew TextBox();
 				this->textBoxFirstName = gcnew TextBox();
 				this->textBoxBirthDate = gcnew TextBox();
@@ -185,7 +192,7 @@ namespace Projet_POO
 				this->labelLastName->Size = Drawing::Size(53, 25);
 				this->labelLastName->TabIndex = 0;
 				this->labelLastName->Text = L"Nom";
-				
+
 				/*-------------------- labelFirstName --------------------*/
 				this->labelFirstName->Anchor = AnchorStyles::Left;
 				this->labelFirstName->AutoSize = true;
@@ -225,6 +232,7 @@ namespace Projet_POO
 				this->textBoxLastName->Name = L"textBoxLastName";
 				this->textBoxLastName->Size = Drawing::Size(168, 20);
 				this->textBoxLastName->TabIndex = 3;
+				this->textBoxLastName->Text = *this->lastName;
 
 				/*-------------------- textBoxFirstName --------------------*/
 				this->textBoxFirstName->Anchor = AnchorStyles::Left;
@@ -233,6 +241,7 @@ namespace Projet_POO
 				this->textBoxFirstName->Name = L"textBoxFirstName";
 				this->textBoxFirstName->Size = Drawing::Size(168, 20);
 				this->textBoxFirstName->TabIndex = 4;
+				this->textBoxFirstName->Text = *this->firstName;
 
 				/*-------------------- textBoxBirthDate --------------------*/
 				this->textBoxBirthDate->Anchor = AnchorStyles::Left;
@@ -241,6 +250,7 @@ namespace Projet_POO
 				this->textBoxBirthDate->Name = L"textBoxBirthDate";
 				this->textBoxBirthDate->Size = Drawing::Size(168, 20);
 				this->textBoxBirthDate->TabIndex = 5;
+				this->textBoxBirthDate->Text = *this->birthdate;
 
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -276,7 +286,7 @@ namespace Projet_POO
 				this->buttonDelete->UseVisualStyleBackColor = true;
 
 				/*-------------------- buttonCancel --------------------*/
-				this->buttonCancel->Anchor =AnchorStyles::Bottom | AnchorStyles::Left;
+				this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 				this->buttonCancel->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonCancel->Location = Point(5, 17);
 				this->buttonCancel->Margin = Windows::Forms::Padding(5, 6, 5, 6);
