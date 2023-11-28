@@ -198,6 +198,7 @@
     <ClCompile Include="src\gui\CustomerForm.cpp" />
     <ClCompile Include="src\gui\CustomerPage.cpp" />
     <ClCompile Include="src\gui\HomePage.cpp" />
+    <ClCompile Include="src\gui\OrdersPage.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\main.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -287,12 +288,18 @@
     <ClInclude Include="src\gui\HomePage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="src\gui\OrdersPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\gui\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="src\gui\AddressesForm.resx">
+      <DependentUpon>src\gui\AddressesForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\gui\CustomerForm.resx">
       <DependentUpon>src\gui\CustomerForm.h</DependentUpon>
     </EmbeddedResource>

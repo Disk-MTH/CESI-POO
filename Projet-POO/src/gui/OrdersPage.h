@@ -10,12 +10,12 @@ namespace Projet_POO {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de CustomerPage
+	/// Description résumée de OrdersPage
 	/// </summary>
-	public ref class CustomerPage : public System::Windows::Forms::Form
+	public ref class OrdersPage : public System::Windows::Forms::Form
 	{
 	public:
-		CustomerPage(void)
+		OrdersPage(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace Projet_POO {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~CustomerPage()
+		~OrdersPage()
 		{
 			if (components)
 			{
@@ -35,22 +35,16 @@ namespace Projet_POO {
 			}
 		}
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
+	protected:
 	private: System::Windows::Forms::Label^ labelTitle;
-	private: System::Windows::Forms::DataGridView^ dataGridViewCustomers;
+	private: System::Windows::Forms::DataGridView^ dataGridViewOrders;
 
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel2;
 	private: System::Windows::Forms::CheckBox^ checkBoxDeleted;
-	private: System::Windows::Forms::Button^ buttonCreateOrder;
+	private: System::Windows::Forms::Button^ buttonOrderDetails;
 	private: System::Windows::Forms::Button^ buttonAdd;
 	private: System::Windows::Forms::Button^ buttonEdit;
 	private: System::Windows::Forms::Button^ buttonDelete;
-
-
-
-
-
-
-	protected:
 
 	private:
 		/// <summary>
@@ -67,15 +61,15 @@ namespace Projet_POO {
 		{
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->labelTitle = (gcnew System::Windows::Forms::Label());
-			this->dataGridViewCustomers = (gcnew System::Windows::Forms::DataGridView());
+			this->dataGridViewOrders = (gcnew System::Windows::Forms::DataGridView());
 			this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->checkBoxDeleted = (gcnew System::Windows::Forms::CheckBox());
-			this->buttonCreateOrder = (gcnew System::Windows::Forms::Button());
+			this->buttonOrderDetails = (gcnew System::Windows::Forms::Button());
 			this->buttonAdd = (gcnew System::Windows::Forms::Button());
 			this->buttonEdit = (gcnew System::Windows::Forms::Button());
 			this->buttonDelete = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewCustomers))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewOrders))->BeginInit();
 			this->tableLayoutPanel2->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -85,38 +79,38 @@ namespace Projet_POO {
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
 			this->tableLayoutPanel1->Controls->Add(this->labelTitle, 0, 0);
-			this->tableLayoutPanel1->Controls->Add(this->dataGridViewCustomers, 0, 1);
+			this->tableLayoutPanel1->Controls->Add(this->dataGridViewOrders, 0, 1);
 			this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 2);
-			this->tableLayoutPanel1->Location = System::Drawing::Point(13, 13);
+			this->tableLayoutPanel1->Location = System::Drawing::Point(13, 12);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 3;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 22.1519F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 77.8481F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 153)));
 			this->tableLayoutPanel1->Size = System::Drawing::Size(957, 628);
-			this->tableLayoutPanel1->TabIndex = 0;
+			this->tableLayoutPanel1->TabIndex = 1;
 			// 
 			// labelTitle
 			// 
 			this->labelTitle->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelTitle->AutoSize = true;
 			this->labelTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
-			this->labelTitle->Location = System::Drawing::Point(404, 28);
+			this->labelTitle->Location = System::Drawing::Point(350, 28);
 			this->labelTitle->Name = L"labelTitle";
-			this->labelTitle->Size = System::Drawing::Size(149, 48);
+			this->labelTitle->Size = System::Drawing::Size(256, 48);
 			this->labelTitle->TabIndex = 0;
-			this->labelTitle->Text = L"Clients";
+			this->labelTitle->Text = L"Commandes";
 			// 
-			// dataGridViewCustomers
+			// dataGridViewOrders
 			// 
-			this->dataGridViewCustomers->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridViewCustomers->Location = System::Drawing::Point(15, 120);
-			this->dataGridViewCustomers->Margin = System::Windows::Forms::Padding(15);
-			this->dataGridViewCustomers->Name = L"dataGridViewCustomers";
-			this->dataGridViewCustomers->RowHeadersWidth = 51;
-			this->dataGridViewCustomers->RowTemplate->Height = 24;
-			this->dataGridViewCustomers->Size = System::Drawing::Size(927, 339);
-			this->dataGridViewCustomers->TabIndex = 1;
+			this->dataGridViewOrders->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridViewOrders->Location = System::Drawing::Point(15, 120);
+			this->dataGridViewOrders->Margin = System::Windows::Forms::Padding(15);
+			this->dataGridViewOrders->Name = L"dataGridViewOrders";
+			this->dataGridViewOrders->RowHeadersWidth = 51;
+			this->dataGridViewOrders->RowTemplate->Height = 24;
+			this->dataGridViewOrders->Size = System::Drawing::Size(927, 339);
+			this->dataGridViewOrders->TabIndex = 1;
 			// 
 			// tableLayoutPanel2
 			// 
@@ -124,9 +118,9 @@ namespace Projet_POO {
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				261)));
+				244)));
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				73)));
+				57)));
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				129)));
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
@@ -134,7 +128,7 @@ namespace Projet_POO {
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				137)));
 			this->tableLayoutPanel2->Controls->Add(this->checkBoxDeleted, 0, 0);
-			this->tableLayoutPanel2->Controls->Add(this->buttonCreateOrder, 1, 0);
+			this->tableLayoutPanel2->Controls->Add(this->buttonOrderDetails, 1, 0);
 			this->tableLayoutPanel2->Controls->Add(this->buttonAdd, 3, 0);
 			this->tableLayoutPanel2->Controls->Add(this->buttonEdit, 4, 0);
 			this->tableLayoutPanel2->Controls->Add(this->buttonDelete, 5, 0);
@@ -149,26 +143,26 @@ namespace Projet_POO {
 			// 
 			this->checkBoxDeleted->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->checkBoxDeleted->AutoSize = true;
-			this->checkBoxDeleted->Location = System::Drawing::Point(11, 64);
+			this->checkBoxDeleted->Location = System::Drawing::Point(5, 64);
 			this->checkBoxDeleted->Name = L"checkBoxDeleted";
-			this->checkBoxDeleted->Size = System::Drawing::Size(201, 20);
+			this->checkBoxDeleted->Size = System::Drawing::Size(246, 20);
 			this->checkBoxDeleted->TabIndex = 0;
-			this->checkBoxDeleted->Text = L"Afficher les clients supprimés";
+			this->checkBoxDeleted->Text = L"Afficher les commandes supprimées";
 			this->checkBoxDeleted->UseVisualStyleBackColor = true;
 			// 
-			// buttonCreateOrder
+			// buttonOrderDetails
 			// 
-			this->buttonCreateOrder->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->buttonOrderDetails->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->buttonCreateOrder->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
-			this->buttonCreateOrder->Location = System::Drawing::Point(239, 15);
-			this->buttonCreateOrder->Margin = System::Windows::Forms::Padding(15);
-			this->buttonCreateOrder->Name = L"buttonCreateOrder";
-			this->buttonCreateOrder->Size = System::Drawing::Size(231, 118);
-			this->buttonCreateOrder->TabIndex = 1;
-			this->buttonCreateOrder->Text = L"Commander";
-			this->buttonCreateOrder->UseVisualStyleBackColor = true;
+			this->buttonOrderDetails->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
+			this->buttonOrderDetails->Location = System::Drawing::Point(272, 15);
+			this->buttonOrderDetails->Margin = System::Windows::Forms::Padding(15);
+			this->buttonOrderDetails->Name = L"buttonOrderDetails";
+			this->buttonOrderDetails->Size = System::Drawing::Size(214, 118);
+			this->buttonOrderDetails->TabIndex = 1;
+			this->buttonOrderDetails->Text = L"Details ";
+			this->buttonOrderDetails->UseVisualStyleBackColor = true;
 			// 
 			// buttonAdd
 			// 
@@ -206,23 +200,22 @@ namespace Projet_POO {
 			this->buttonDelete->Text = L"Supprimer";
 			this->buttonDelete->UseVisualStyleBackColor = true;
 			// 
-			// CustomerPage
+			// OrdersPage
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(982, 653);
 			this->Controls->Add(this->tableLayoutPanel1);
-			this->MaximizeBox = false;
-			this->Name = L"CustomerPage";
-			this->Text = L"CustomerPage";
+			this->Name = L"OrdersPage";
+			this->Text = L"OrdersPage";
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewCustomers))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewOrders))->EndInit();
 			this->tableLayoutPanel2->ResumeLayout(false);
 			this->tableLayoutPanel2->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-};
+	};
 }
