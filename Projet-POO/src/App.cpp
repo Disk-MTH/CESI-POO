@@ -1,7 +1,5 @@
 #include "App.h"
-
-#include "gui/CustomerPage.h"
-#include "gui/HomePage.h"
+#include "gui/pages/HomePage.h"
 #include "gui/other/LoadingScreen.h"
 
 using namespace Projet_POO;
@@ -52,7 +50,7 @@ void App::launch(array<String^>^ args)
 		return;
 	}
 
-	Application::Run(gcnew CustomerPage());
+	Application::Run(gcnew HomePage());
 	db->disconnect();
 }
 

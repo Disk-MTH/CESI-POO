@@ -2,8 +2,9 @@
 
 using namespace Projet_POO;
 using namespace System;
-using namespace Drawing;
 using namespace Windows::Forms;
+using namespace Drawing;
+using namespace Data;
 
 namespace Projet_POO
 {
