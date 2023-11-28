@@ -1,5 +1,6 @@
 #include "App.h"
 
+#include "gui/CustomerPage.h"
 #include "gui/HomePage.h"
 #include "gui/other/LoadingScreen.h"
 
@@ -51,7 +52,7 @@ void App::launch(array<String^>^ args)
 		return;
 	}
 
-	Application::Run(gcnew HomePage());
+	Application::Run(gcnew CustomerPage());
 	db->disconnect();
 }
 
