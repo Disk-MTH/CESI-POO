@@ -1,6 +1,7 @@
 #include "HomePage.h"
 #include "CustomersPage.h"
 #include "OrdersPage.h"
+#include "CatalogPage.h"
 
 Void HomePage::buttonCustomers_Click(Object^ sender, EventArgs^ e)
 {
@@ -12,12 +13,15 @@ Void HomePage::buttonCustomers_Click(Object^ sender, EventArgs^ e)
 
 Void HomePage::buttonStaff_Click(Object^ sender, EventArgs^ e)
 {
-	App::app->toastMessage(this, "Fonctionnalite non implementee: Personnel", Color::Red, 2000);
+	App::app->toastMessage(this, "Fonctionnalite non implementee: staff", Color::Red, 2000);
 }
 
 Void HomePage::buttonCatalog_Click(Object^ sender, EventArgs^ e)
 {
-	App::app->toastMessage(this, "Fonctionnalite non implementee: Catalogue", Color::Red, 2000);
+	this->Hide();
+	auto catalogPage = gcnew CatalogPage();
+	catalogPage->ShowDialog();
+	this->Show();
 }
 
 Void HomePage::buttonStats_Click(Object^ sender, EventArgs^ e)

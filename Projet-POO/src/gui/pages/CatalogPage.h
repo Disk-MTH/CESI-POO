@@ -7,10 +7,10 @@ using namespace Data;
 
 namespace Projet_POO
 {
-    public ref class StockPage : public Form
+    public ref class CatalogPage : public Form
     {
     public:
-        StockPage()
+        CatalogPage()
         {
             initialize();
         }
@@ -140,14 +140,14 @@ namespace Projet_POO
             this->buttonDelete->Text = L"Supprimer";
             this->buttonDelete->UseVisualStyleBackColor = true;
             
-            /*-------------------- StockPage --------------------*/
+            /*-------------------- CatalogPage --------------------*/
             this->AutoScaleDimensions = SizeF(8, 16);
             this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
             this->ClientSize = Drawing::Size(982, 653);
             this->Controls->Add(this->tableLayoutPanel1);
             this->MaximizeBox = false;
-            this->Name = L"StockPage";
-            this->Text = L"StockPage";
+            this->Name = L"CatalogPage";
+            this->Text = L"CatalogPage";
         }
     };
 }

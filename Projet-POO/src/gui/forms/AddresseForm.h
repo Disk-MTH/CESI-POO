@@ -10,12 +10,12 @@ namespace Projet_POO {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description r�sum�e de AddressesForm
+	/// Description r�sum�e de AddresseForm
 	/// </summary>
-	public ref class AddressesForm : public System::Windows::Forms::Form
+	public ref class AddresseForm : public System::Windows::Forms::Form
 	{
 	public:
-		AddressesForm(void)
+		AddresseForm(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace Projet_POO {
 		/// <summary>
 		/// Nettoyage des ressources utilis�es.
 		/// </summary>
-		~AddressesForm()
+		~AddresseForm()
 		{
 			if (components)
 			{
@@ -121,7 +121,7 @@ namespace Projet_POO {
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 58)));
 			this->tableLayoutPanel1->Size = System::Drawing::Size(663, 439);
 			this->tableLayoutPanel1->TabIndex = 0;
-			this->tableLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &AddressesForm::tableLayoutPanel1_Paint);
+			this->tableLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &AddresseForm::tableLayoutPanel1_Paint);
 			// 
 			// labelTitle
 			// 
@@ -133,7 +133,7 @@ namespace Projet_POO {
 			this->labelTitle->Name = L"labelTitle";
 			this->labelTitle->Size = System::Drawing::Size(159, 39);
 			this->labelTitle->TabIndex = 0;
-			this->labelTitle->Text = L"Adresses";
+			this->labelTitle->Text = L"Adresse";
 			// 
 			// tableLayoutPanel2
 			// 
@@ -335,16 +335,16 @@ namespace Projet_POO {
 			this->buttonCancel->Text = L"Annuler";
 			this->buttonCancel->UseVisualStyleBackColor = true;
 			// 
-			// AddressesForm
+			// AddresseForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(684, 461);
-			this->Controls->Add(this->tableLayoutPanel1); 
+			this->Controls->Add(this->tableLayoutPanel1);
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->Name = L"AddressesForm";
-			this->Text = L"AddressesForm";
-			this->Load += gcnew System::EventHandler(this, &AddressesForm::AddressesForm_Load);
+			this->Name = L"AddresseForm";
+			this->Text = L"AddresseForm";
+			this->Load += gcnew System::EventHandler(this, &AddresseForm::AddressesForm_Load);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
 			this->tableLayoutPanel2->ResumeLayout(false);

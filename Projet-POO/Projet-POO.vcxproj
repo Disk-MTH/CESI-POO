@@ -273,10 +273,7 @@
   <ItemGroup>
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\Database.h" />
-    <ClInclude Include="src\gui\AddressesForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="src\gui\forms\AddressesForm.h" />
+    <ClInclude Include="src\gui\forms\AddresseForm.h" />
     <ClInclude Include="src\gui\forms\CustomerForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -284,16 +281,14 @@
     <ClInclude Include="src\gui\forms\ProductForm.h" />
     <ClInclude Include="src\gui\other\LoadingScreen.h" />
     <ClInclude Include="src\gui\other\ToastMessage.h" />
-    <ClInclude Include="src\gui\pages\CustomersPage.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
+    <ClInclude Include="src\gui\pages\CustomersPage.h" />
     <ClInclude Include="src\gui\pages\HomePage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\pages\OrdersPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="src\gui\pages\StockPage.h" />
+    <ClInclude Include="src\gui\pages\CatalogPage.h" />
     <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
