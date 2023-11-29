@@ -291,15 +291,15 @@
     <ClInclude Include="src\gui\HomePage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="src\gui\OrderDetailForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="src\gui\OrdersPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\other\LoadingScreen.h" />
     <ClInclude Include="src\gui\other\ToastMessage.h" />
-    <ClInclude Include="src\gui\ProductForm.h">
+    <ClInclude Include="src\gui\pages\OrderDetailForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="src\gui\pages\ProductForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\StockPage.h">

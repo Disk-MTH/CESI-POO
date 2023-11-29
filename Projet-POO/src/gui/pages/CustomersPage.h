@@ -91,8 +91,7 @@ namespace Projet_POO
             this->labelTitle->Text = L"Clients";
 
             /*-------------------- dataGridViewCustomers --------------------*/
-            this->dataGridViewCustomers->ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+            this->dataGridViewCustomers->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
             this->dataGridViewCustomers->Location = Point(11, 97);
             this->dataGridViewCustomers->Margin = Windows::Forms::Padding(11, 12, 11, 12);
             this->dataGridViewCustomers->Name = L"dataGridViewCustomers";
