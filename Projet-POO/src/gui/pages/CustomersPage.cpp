@@ -14,7 +14,6 @@ void CustomersPage::reloadCustomersGridView()
 	}
 }
 
-
 Void CustomersPage::buttonCreateOrder_Click(Object^ sender, EventArgs^ e)
 {
 	App::app->toastMessage(this, "Fonctionnalite non implementee: Creer une commande", Color::Red, 2000);
