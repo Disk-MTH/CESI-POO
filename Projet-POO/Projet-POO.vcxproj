@@ -269,6 +269,7 @@
     <ClCompile Include="src\gui\OrdersPage.cpp" />
     <ClCompile Include="src\gui\pages\CustomersPage.cpp" />
     <ClCompile Include="src\gui\pages\HomePage.cpp" />
+    <ClCompile Include="src\gui\StaffPage.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\main.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -357,7 +358,15 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="src\gui\pages\CatalogPage.h" />
+    <ClInclude Include="src\gui\StaffPage.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\Logger.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\gui\OrdersPage.resx">
+      <DependentUpon>src\gui\OrdersPage.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
