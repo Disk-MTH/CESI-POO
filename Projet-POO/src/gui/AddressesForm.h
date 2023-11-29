@@ -10,7 +10,7 @@ namespace Projet_POO {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de AddressesForm
+	/// Description rï¿½sumï¿½e de AddressesForm
 	/// </summary>
 	public ref class AddressesForm : public System::Windows::Forms::Form
 	{
@@ -25,7 +25,7 @@ namespace Projet_POO {
 
 	protected:
 		/// <summary>
-		/// Nettoyage des ressources utilisées.
+		/// Nettoyage des ressources utilisï¿½es.
 		/// </summary>
 		~AddressesForm()
 		{
@@ -67,14 +67,14 @@ namespace Projet_POO {
 
 	private:
 		/// <summary>
-		/// Variable nécessaire au concepteur.
+		/// Variable nï¿½cessaire au concepteur.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette méthode avec l'éditeur de code.
+		/// Mï¿½thode requise pour la prise en charge du concepteur - ne modifiez pas
+		/// le contenu de cette mï¿½thode avec l'ï¿½diteur de code.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -340,7 +340,7 @@ namespace Projet_POO {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(684, 461);
-			this->Controls->Add(this->tableLayoutPanel1);
+			this->Controls->Add(this->tableLayoutPanel1); 
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"AddressesForm";
 			this->Text = L"AddressesForm";
