@@ -178,6 +178,7 @@ namespace Projet_POO {
 			this->buttonCreateOrder->TabIndex = 1;
 			this->buttonCreateOrder->Text = L"Commander";
 			this->buttonCreateOrder->UseVisualStyleBackColor = true;
+			this->buttonCreateOrder->Click += gcnew System::EventHandler(this, &CustomersPage::buttonCreateOrder_Click);
 			// 
 			// buttonAdd
 			// 
@@ -190,6 +191,7 @@ namespace Projet_POO {
 			this->buttonAdd->TabIndex = 2;
 			this->buttonAdd->Text = L"Ajouter";
 			this->buttonAdd->UseVisualStyleBackColor = true;
+			this->buttonAdd->Click += gcnew System::EventHandler(this, &CustomersPage::buttonAdd_Click);
 			// 
 			// buttonEdit
 			// 
@@ -202,6 +204,7 @@ namespace Projet_POO {
 			this->buttonEdit->TabIndex = 3;
 			this->buttonEdit->Text = L"Modifier";
 			this->buttonEdit->UseVisualStyleBackColor = true;
+			this->buttonEdit->Click += gcnew System::EventHandler(this, &CustomersPage::buttonEdit_Click);
 			// 
 			// buttonDelete
 			// 
@@ -214,9 +217,11 @@ namespace Projet_POO {
 			this->buttonDelete->TabIndex = 4;
 			this->buttonDelete->Text = L"Supprimer";
 			this->buttonDelete->UseVisualStyleBackColor = true;
+			this->buttonDelete->Click += gcnew System::EventHandler(this, &CustomersPage::buttonDelete_Click);
 			// 
 			// CustomersPage
-			// 
+			//
+			this->StartPosition = FormStartPosition::CenterScreen;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(984, 661);

@@ -14,7 +14,7 @@ CREATE TABLE address
     id_address  INT IDENTITY (1,1) NOT NULL,
     street_name VARCHAR(50)        NOT NULL,
     city        VARCHAR(50)        NOT NULL,
-    zip_code    SMALLINT           NOT NULL,
+    zip_code    INT           NOT NULL,
     deleted     BINARY             NOT NULL DEFAULT 0,
     PRIMARY KEY (id_address)
 );
@@ -53,9 +53,9 @@ CREATE TABLE product
     reference              VARCHAR(50)        NOT NULL,
     name                   VARCHAR(50)        NOT NULL,
     vat_rate               REAL               NOT NULL,
-    provisioning_threshold SMALLINT           NOT NULL,
+    provisioning_threshold INT           NOT NULL,
     deleted                BINARY             NOT NULL DEFAULT 0,
-    quantity               SMALLINT           NOT NULL,
+    quantity               INT           NOT NULL,
     buy_price              REAL               NOT NULL,
     PRIMARY KEY (id_product)
 );
@@ -107,7 +107,7 @@ GO;
 CREATE TABLE suggestion
 (
     id_suggestion INT IDENTITY (1,1) NOT NULL,
-    zip_code      SMALLINT           NOT NULL,
+    zip_code      INT           NOT NULL,
     city          VARCHAR(50)        NOT NULL,
     PRIMARY KEY (id_suggestion)
 );
@@ -117,7 +117,7 @@ CREATE TABLE orderHasProducts
 (
     id_product INT,
     id_order   INT,
-    quantity   SMALLINT,
+    quantity   INT,
     tf_price   REAL NOT NULL,
     vat_price  REAL NOT NULL,
     price      REAL NOT NULL,
@@ -131,8 +131,8 @@ CREATE TABLE customerHasAddresses
 (
     id_address  INT,
     id_customer INT,
-    type        SMALLINT NOT NULL,
-    PRIMARY KEY (id_address, id_customer),
+    type        INT NOT NULL,
+    PRIMARY KEY (id_address, id_customer, type),
     FOREIGN KEY (id_address) REFERENCES address (id_address),
     FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
 );

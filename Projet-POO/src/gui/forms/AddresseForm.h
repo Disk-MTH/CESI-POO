@@ -336,7 +336,8 @@ namespace Projet_POO {
 			this->buttonCancel->UseVisualStyleBackColor = true;
 			// 
 			// AddresseForm
-			// 
+			//
+			this->StartPosition = FormStartPosition::CenterScreen;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(684, 461);

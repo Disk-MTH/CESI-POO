@@ -141,6 +141,7 @@ namespace Projet_POO
             this->buttonDelete->UseVisualStyleBackColor = true;
             
             /*-------------------- CatalogPage --------------------*/
+            this->StartPosition = FormStartPosition::CenterScreen;
             this->AutoScaleDimensions = SizeF(8, 16);
             this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
             this->ClientSize = Drawing::Size(982, 653);

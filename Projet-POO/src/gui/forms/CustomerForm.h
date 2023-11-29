@@ -1,5 +1,7 @@
 #pragma once
+#include "../../App.h"
 
+using namespace Projet_POO;
 using namespace System;
 using namespace Windows::Forms;
 using namespace Drawing;
@@ -262,6 +264,7 @@ namespace Projet_POO
 				this->buttonAdd->TabIndex = 0;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
+				this->buttonAdd->Click += gcnew EventHandler(this, &CustomerForm::buttonAdd_Click);
 
 				/*-------------------- buttonEdit --------------------*/
 				this->buttonEdit->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -273,6 +276,7 @@ namespace Projet_POO
 				this->buttonEdit->TabIndex = 1;
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
+				this->buttonEdit->Click += gcnew EventHandler(this, &CustomerForm::buttonEdit_Click);
 
 				/*-------------------- buttonDelete --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -284,6 +288,7 @@ namespace Projet_POO
 				this->buttonDelete->TabIndex = 2;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
+				this->buttonDelete->Click += gcnew EventHandler(this, &CustomerForm::buttonDelete_Click);
 
 				/*-------------------- buttonCancel --------------------*/
 				this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -295,6 +300,7 @@ namespace Projet_POO
 				this->buttonCancel->TabIndex = 0;
 				this->buttonCancel->Text = L"Annuler";
 				this->buttonCancel->UseVisualStyleBackColor = true;
+				this->buttonCancel->Click += gcnew EventHandler(this, &CustomerForm::buttonCancel_Click);
 
 				/*-------------------- buttonValidate --------------------*/
 				this->buttonValidate->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -306,6 +312,7 @@ namespace Projet_POO
 				this->buttonValidate->TabIndex = 1;
 				this->buttonValidate->Text = L"Valider";
 				this->buttonValidate->UseVisualStyleBackColor = true;
+				this->buttonValidate->Click += gcnew EventHandler(this, &CustomerForm::buttonValidate_Click);
 
 				/*-------------------- CustomerForm --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
@@ -317,5 +324,12 @@ namespace Projet_POO
 				this->Name = L"CustomerForm";
 				this->Text = L"CustomerForm";
 			}
+
+			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
+			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
+			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
+			Void buttonCancel_Click(Object^ sender, EventArgs^ e);
+			Void buttonValidate_Click(Object^ sender, EventArgs^ e);
+
 	};
 }
