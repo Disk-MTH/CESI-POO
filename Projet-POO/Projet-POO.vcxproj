@@ -199,6 +199,7 @@
     <ClCompile Include="src\gui\CustomerPage.cpp" />
     <ClCompile Include="src\gui\HomePage.cpp" />
     <ClCompile Include="src\gui\OrderDetailForm.cpp" />
+    <ClCompile Include="src\gui\OrderForm.cpp" />
     <ClCompile Include="src\gui\OrdersPage.cpp" />
     <ClCompile Include="src\gui\ProductForm.cpp" />
     <ClCompile Include="src\gui\StockPage.cpp" />
@@ -294,6 +295,9 @@
     <ClInclude Include="src\gui\OrderDetailForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="src\gui\OrderForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\gui\OrdersPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -319,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\gui\HomePage.resx">
       <DependentUpon>src\gui\HomePage.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\gui\OrderDetailForm.resx">
+      <DependentUpon>src\gui\OrderDetailForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\gui\ProductForm.resx">
       <DependentUpon>src\gui\ProductForm.h</DependentUpon>
