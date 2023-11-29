@@ -1,7 +1,5 @@
 #pragma once
-#include "../../App.h"
 
-using namespace Projet_POO;
 using namespace System;
 using namespace Windows::Forms;
 using namespace Drawing;

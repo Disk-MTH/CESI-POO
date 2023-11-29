@@ -5,6 +5,8 @@
 #include "StaffPage.h"
 #include "../forms/OrderForm.h"
 
+using namespace Projet_POO;
+
 Void HomePage::buttonCustomers_Click(Object^ sender, EventArgs^ e)
 {
 	this->Hide();
