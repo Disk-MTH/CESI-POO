@@ -1,6 +1,8 @@
 #include "CustomersPage.h"
 #include "../forms/CustomerForm.h"
 
+using namespace Projet_POO;
+
 void CustomersPage::reloadCustomersGridView()
 {
 	this->dataGridViewCustomers->Columns->Clear();
