@@ -10,12 +10,12 @@ namespace Projet_POO {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de CustomerForm
+	/// Description rï¿½sumï¿½e de CustomerForm
 	/// </summary>
 	public ref class CustomerForm : public System::Windows::Forms::Form
 	{
 	public:
-		CustomerForm(void)
+		CustomerForm(String^ firstName, String^ lastName, String^ birthDate)
 		{
 			InitializeComponent();
 			//
@@ -25,7 +25,7 @@ namespace Projet_POO {
 
 	protected:
 		/// <summary>
-		/// Nettoyage des ressources utilisées.
+		/// Nettoyage des ressources utilisï¿½es.
 		/// </summary>
 		~CustomerForm()
 		{
@@ -63,14 +63,14 @@ namespace Projet_POO {
 
 	private:
 		/// <summary>
-		/// Variable nécessaire au concepteur.
+		/// Variable nï¿½cessaire au concepteur.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette méthode avec l'éditeur de code.
+		/// Mï¿½thode requise pour la prise en charge du concepteur - ne modifiez pas
+		/// le contenu de cette mï¿½thode avec l'ï¿½diteur de code.
 		/// </summary>
 		void InitializeComponent(void)
 		{

@@ -13,6 +13,7 @@ namespace Projet_POO
 			CustomersPage()
 			{
 				initialize();
+				reloadCustomersGridView();
 			}
 
 		private:
@@ -103,6 +104,39 @@ namespace Projet_POO
 				this->dataGridViewCustomers->RowTemplate->Height = 24;
 				this->dataGridViewCustomers->Size = Drawing::Size(941, 354);
 				this->dataGridViewCustomers->TabIndex = 1;
+				this->dataGridViewCustomers->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->dataGridViewCustomers->ReadOnly = true;
+				this->dataGridViewCustomers->AllowUserToResizeRows = false;
+				this->dataGridViewCustomers->AllowUserToAddRows = false;
+				this->dataGridViewCustomers->RowHeadersVisible = false;
+				//expansion des colonnes pour remplir le tableau
+				//this->dataGridViewCustomers->AutoResizeColumns();
+				this->dataGridViewCustomers->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+
+				
+				this->dataGridViewCustomers->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->dataGridViewCustomers->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+
+				auto idCustomer = gcnew DataGridViewTextBoxColumn();
+				idCustomer->Name = L"id_customer";
+				idCustomer->Visible = false;
+				this->dataGridViewCustomers->Columns->Add(idCustomer);
+				
+				auto lastName = gcnew DataGridViewTextBoxColumn();
+				lastName->Name = L"Nom";
+				this->dataGridViewCustomers->Columns->Add(lastName);
+				
+				auto firstName = gcnew DataGridViewTextBoxColumn();
+				firstName->Name = L"Prenom";
+				this->dataGridViewCustomers->Columns->Add(firstName);
+				
+				auto birthdate = gcnew DataGridViewTextBoxColumn();
+				birthdate->Name = L"Date de naissance";
+				this->dataGridViewCustomers->Columns->Add(birthdate);
+
+				auto addressesCount = gcnew DataGridViewTextBoxColumn();
+				addressesCount->Name = L"Nombre d'adresses";
+				this->dataGridViewCustomers->Columns->Add(addressesCount);
 				
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Left;

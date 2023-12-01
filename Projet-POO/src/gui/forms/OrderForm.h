@@ -49,9 +49,9 @@ namespace Projet_POO
 			ComboBox^ comboBoxType;
 			ComboBox^ comboBoxColour;
 
+			Button^ buttonAdd;
 			Button^ buttonDelete;
 			Button^ buttonCancel;
-			Button^ buttonAdd;
 			Button^ buttonValidate;
 
 			void initialize()
