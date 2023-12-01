@@ -21,6 +21,29 @@ namespace Projet_POO
 
 			void launch(array<String^>^ args);
 			void toastMessage(Form^ parent, String^ message, Color color, int duration);
+
+			static bool isEmpty(String^ name, String^ data)
+			{
+				if (data == "")
+				{
+					app->logger->warn("Invalid data \"" + name + "\": empty");
+					MessageBox::Show("Le champ \"" + name + "\" est vide !", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return true;
+				}
+				return false;
+			}
+		
+			static String^ isValidDate(String^ name, String^ data)
+			{
+				DateTime date;
+				if (isEmpty(name, data) || !DateTime::TryParseExact(data, "dd/mm/yyyy", nullptr, Globalization::DateTimeStyles::None, date))
+				{
+					app->logger->warn("Invalid date \"" + name + "\": wrong format (\"" + data + "\")");
+					MessageBox::Show("       La date est invalide !\n\"dd/mm/yyyy\" ou \"dd-mm-yyyy\"", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return "";
+				}
+				return date.ToString("yyyy-mm-dd");
+			}
 		
 		private:
 			App()

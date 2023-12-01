@@ -132,7 +132,7 @@ namespace Projet_POO
             this->dataGridViewCatalog->Columns->Add(name);
 
             auto addressesCount = gcnew DataGridViewTextBoxColumn();
-            addressesCount->Name = L"couleur";
+            addressesCount->Name = L"Couleur";
             this->dataGridViewCatalog->Columns->Add(addressesCount);
 
             auto buyPrice = gcnew DataGridViewTextBoxColumn();

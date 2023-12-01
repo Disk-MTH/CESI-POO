@@ -109,6 +109,8 @@ namespace Projet_POO
 				this->dataGridViewCustomers->AllowUserToResizeRows = false;
 				this->dataGridViewCustomers->AllowUserToAddRows = false;
 				this->dataGridViewCustomers->RowHeadersVisible = false;
+				this->dataGridViewCustomers->AllowUserToDeleteRows = false;
+				this->dataGridViewCustomers->MultiSelect = false;
 				this->dataGridViewCustomers->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->dataGridViewCustomers->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
 				this->dataGridViewCustomers->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
@@ -151,6 +153,7 @@ namespace Projet_POO
 				this->checkBoxDeleted->TabIndex = 0;
 				this->checkBoxDeleted->Text = L"Afficher les clients\nsupprimes";
 				this->checkBoxDeleted->UseVisualStyleBackColor = true;
+				this->checkBoxDeleted->Click += gcnew EventHandler(this, &CustomersPage::checkBoxDeleted_Click);
 
 				/*-------------------- buttonCreateOrder --------------------*/
 				this->buttonCreateOrder->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -213,6 +216,8 @@ namespace Projet_POO
 			}
 
 			Void reloadCustomersGridView();
+			Void openCustomerForm(String^ customerId, String^ firstName, String^ lastName, String^ birthdate);
+			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
 			Void buttonCreateOrder_Click(Object^ sender, EventArgs^ e);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
