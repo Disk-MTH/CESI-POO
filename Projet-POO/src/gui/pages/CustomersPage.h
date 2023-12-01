@@ -139,11 +139,11 @@ namespace Projet_POO
 				this->dataGridViewCustomers->Columns->Add(addressesCount);
 				
 				/*-------------------- checkBoxDeleted --------------------*/
-				this->checkBoxDeleted->Anchor = AnchorStyles::Left;
+				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 				this->checkBoxDeleted->AutoSize = true;
 				this->checkBoxDeleted->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->checkBoxDeleted->Location = Point(10, 60);
-				this->checkBoxDeleted->Margin = Windows::Forms::Padding(10, 2, 10, 2);
+				this->checkBoxDeleted->Margin = Windows::Forms::Padding(10, 6, 10, 6);
 				this->checkBoxDeleted->Name = L"checkBoxDeleted";
 				this->checkBoxDeleted->Size = Drawing::Size(247, 29);
 				this->checkBoxDeleted->TabIndex = 0;
@@ -154,7 +154,7 @@ namespace Projet_POO
 				this->buttonCreateOrder->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
 				this->buttonCreateOrder->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 20));
 				this->buttonCreateOrder->Location = Drawing::Point(278, 12);
-				this->buttonCreateOrder->Margin = Windows::Forms::Padding(11, 12, 11, 12);
+				this->buttonCreateOrder->Margin = Windows::Forms::Padding(11, 6, 11, 6);
 				this->buttonCreateOrder->Name = L"buttonCreateOrder";
 				this->buttonCreateOrder->Size = Drawing::Size(269, 126);
 				this->buttonCreateOrder->TabIndex = 1;

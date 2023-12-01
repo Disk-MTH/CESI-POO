@@ -21,7 +21,7 @@ Void CustomersPage::buttonCreateOrder_Click(Object^ sender, EventArgs^ e)
 
 Void CustomersPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
-	String^ firstName = "";
+	/*String^ firstName = "";
 	String^ lastName = "";
 	String^ birthdate = "";
 	auto addCustomerForm = gcnew CustomerForm(&firstName, &lastName, &birthdate);
@@ -43,12 +43,12 @@ Void CustomersPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 		}
 
 		//fillCustomersGridView();
-	}
+	}*/
 }
 
 Void CustomersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
 {
-	String^ firstName = this->dataGridViewCustomers->CurrentRow->Cells[1]->Value->ToString();
+	/*String^ firstName = this->dataGridViewCustomers->CurrentRow->Cells[1]->Value->ToString();
 	String^ lastName = this->dataGridViewCustomers->CurrentRow->Cells[2]->Value->ToString();
 	String^ birthdate = this->dataGridViewCustomers->CurrentRow->Cells[3]->Value->ToString();
 	auto addCustomerForm = gcnew CustomerForm(&firstName, &lastName, &birthdate);
@@ -70,7 +70,7 @@ Void CustomersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
 		}
 
 		//fillCustomersGridView();
-	}
+	}*/
 }
 
 Void CustomersPage::buttonDelete_Click(Object^ sender, EventArgs^ e)
