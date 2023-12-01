@@ -1,21 +1,18 @@
 #pragma once
-#include "../../App.h"
 
 using namespace System;
-using namespace System::ComponentModel;
-using namespace System::Collections;
-using namespace System::Windows::Forms;
-using namespace System::Data;
-using namespace System::Drawing;
+using namespace Windows::Forms;
+using namespace Drawing;
+using namespace Data;
 
 namespace Projet_POO
 {
 	public ref class OrderForm : public Form
 	{
 		public:
-			OrderForm(void)
+			OrderForm()
 			{
-				InitializeComponent();
+				initialize();
 			}
 
 		private:
@@ -57,7 +54,7 @@ namespace Projet_POO
 			Button^ buttonAdd;
 			Button^ buttonValidate;
 
-			void InitializeComponent()
+			void initialize()
 			{
 				this->tableLayoutPanel1 = (gcnew TableLayoutPanel());
 				this->tableLayoutPanel2 = (gcnew TableLayoutPanel());

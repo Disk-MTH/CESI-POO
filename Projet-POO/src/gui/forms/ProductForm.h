@@ -245,8 +245,7 @@ namespace Projet_POO
             this->labelRestockThreshold->Text = L"Restock";
 
             /*-------------------- dataGridViewTieredPrice --------------------*/
-            this->dataGridViewTieredPrice->ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+            this->dataGridViewTieredPrice->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
             this->dataGridViewTieredPrice->Location = Point(15, 444);
             this->dataGridViewTieredPrice->Margin = Windows::Forms::Padding(15);
             this->dataGridViewTieredPrice->Name = L"dataGridViewTieredPrice";
@@ -347,8 +346,7 @@ namespace Projet_POO
             this->buttonEdit->UseVisualStyleBackColor = true;
 
             /*-------------------- buttonCancel --------------------*/
-            this->buttonCancel->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left |
-                AnchorStyles::Right;
+            this->buttonCancel->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
             this->buttonCancel->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->buttonCancel->Location = Point(15, 15);
             this->buttonCancel->Margin = Windows::Forms::Padding(15);
@@ -359,8 +357,7 @@ namespace Projet_POO
             this->buttonCancel->UseVisualStyleBackColor = true;
 
             /*-------------------- buttonValidate --------------------*/
-            this->buttonValidate->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left |
-                AnchorStyles::Right;
+            this->buttonValidate->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
             this->buttonValidate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->buttonValidate->Location = Point(467, 15);
             this->buttonValidate->Margin = Windows::Forms::Padding(15);
@@ -371,11 +368,10 @@ namespace Projet_POO
             this->buttonValidate->UseVisualStyleBackColor = true;
 
             /*-------------------- buttonApply --------------------*/
-            this->buttonApply->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left |
-                AnchorStyles::Right;
-            this->buttonApply->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 15));
+            this->buttonApply->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
+            this->buttonApply->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->buttonApply->Location = Point(235, 15);
-            this->buttonApply->Margin = Padding(15);
+            this->buttonApply->Margin = Windows::Forms::Padding(15);
             this->buttonApply->Name = L"buttonApply";
             this->buttonApply->Size = Drawing::Size(202, 69);
             this->buttonApply->TabIndex = 1;

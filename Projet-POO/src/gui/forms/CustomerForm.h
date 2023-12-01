@@ -1,7 +1,5 @@
 #pragma once
-#include "../../App.h"
 
-using namespace Projet_POO;
 using namespace System;
 using namespace Windows::Forms;
 using namespace Drawing;
@@ -330,6 +328,5 @@ namespace Projet_POO
 			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
 			Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 			Void buttonValidate_Click(Object^ sender, EventArgs^ e);
-
 	};
 }

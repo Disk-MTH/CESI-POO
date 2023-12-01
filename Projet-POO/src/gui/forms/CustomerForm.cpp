@@ -1,5 +1,6 @@
 #include "CustomerForm.h"
 #include "AddresseForm.h"
+#include "../../App.h"
 
 Void CustomerForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {

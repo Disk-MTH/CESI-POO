@@ -1,7 +1,6 @@
 #include "CustomersPage.h"
 #include "../forms/CustomerForm.h"
-
-using namespace Projet_POO;
+#include "../../App.h"
 
 void CustomersPage::reloadCustomersGridView()
 {

@@ -1,11 +1,9 @@
 #include "HomePage.h"
+#include "../../App.h"
 #include "CustomersPage.h"
 #include "OrdersPage.h"
 #include "CatalogPage.h"
 #include "StaffPage.h"
-#include "../forms/OrderForm.h"
-
-using namespace Projet_POO;
 
 Void HomePage::buttonCustomers_Click(Object^ sender, EventArgs^ e)
 {
