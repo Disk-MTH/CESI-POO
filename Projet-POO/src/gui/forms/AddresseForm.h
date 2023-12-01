@@ -10,12 +10,26 @@ namespace Projet_POO
     public ref class AddresseForm : public Form
     {
     public:
-        AddresseForm()
+        AddresseForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type, String^ customerId)
         {
+            this->addressId = addressId;
+            this->address = address;
+            this->zipCode = zipCode;
+            this->city = city;
+            this->type = type;
+            this->customerId = customerId;
             initialize();
         }
+        
 
     private:
+        String^ addressId;
+        String^ address;
+        String^ zipCode;
+        String^ city;
+        String^ type;
+        String^ customerId;
+        
         TableLayoutPanel^ tableLayoutPanel1;
         TableLayoutPanel^ tableLayoutPanel2;
         TableLayoutPanel^ tableLayoutPanel3;
@@ -253,6 +267,7 @@ namespace Projet_POO
             this->buttonValidate->TabIndex = 2;
             this->buttonValidate->Text = L"Valider";
             this->buttonValidate->UseVisualStyleBackColor = true;
+            this->buttonValidate->Click += gcnew EventHandler(this, &AddresseForm::buttonValidate_Click);
 
             /*-------------------- buttonCancel --------------------*/
             this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -264,6 +279,7 @@ namespace Projet_POO
             this->buttonCancel->TabIndex = 1;
             this->buttonCancel->Text = L"Annuler";
             this->buttonCancel->UseVisualStyleBackColor = true;
+            this->buttonCancel->Click += gcnew EventHandler(this, &AddresseForm::buttonCancel_Click);
 
             /*-------------------- AddresseForm --------------------*/
             this->StartPosition = FormStartPosition::CenterScreen;
@@ -275,5 +291,8 @@ namespace Projet_POO
             this->Name = L"AddresseForm";
             this->Text = L"AddresseForm";
         }
+
+        void buttonCancel_Click(Object^ sender, EventArgs^ e);
+        void buttonValidate_Click(Object^ sender, EventArgs^ e);
     };
 }

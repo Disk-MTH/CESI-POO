@@ -169,6 +169,33 @@ namespace Projet_POO
 				this->dataGridViewAddresses->Size = Drawing::Size(358, 219);
 				this->dataGridViewAddresses->TabIndex = 1;
 
+				auto idAddress = gcnew DataGridViewTextBoxColumn();
+				idAddress->Name = L"id_address";
+				idAddress->Visible = false;
+				this->dataGridViewAddresses->Columns->Add(idAddress);
+
+				auto address = gcnew DataGridViewTextBoxColumn();
+				address->Name = L"address";
+				this->dataGridViewAddresses->Columns->Add(address);
+
+				auto zipCode = gcnew DataGridViewTextBoxColumn();
+				zipCode->Name = L"zip_code";
+				this->dataGridViewAddresses->Columns->Add(zipCode);
+
+				auto city = gcnew DataGridViewTextBoxColumn();
+				city->Name = L"city";
+				this->dataGridViewAddresses->Columns->Add(city);
+
+				auto type = gcnew DataGridViewTextBoxColumn();
+				type->Name = L"type";
+				this->dataGridViewAddresses->Columns->Add(type);
+				
+
+				
+
+				
+				
+				
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
 				this->labelTitle->AutoSize = true;
@@ -319,5 +346,6 @@ namespace Projet_POO
 			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
 			Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 			Void buttonValidate_Click(Object^ sender, EventArgs^ e);
+			Void openAddressesForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type);
 	};
 }

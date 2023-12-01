@@ -20,7 +20,6 @@ void CustomersPage::openCustomerForm(String^ customerId, String^ firstName, Stri
 	auto addCustomerForm = gcnew CustomerForm(customerId, firstName, lastName, birthdate);
 	if (addCustomerForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 	{
-		App::app->logger->log("####################");
 		App::app->App::toastMessage(this, "Modifications enregistrees", Color::Green, 3000);
 		reloadCustomersGridView();
 	}
