@@ -13,6 +13,7 @@ namespace Projet_POO
         CatalogPage()
         {
             initialize();
+            reloadCatalogGridView();
         }
 
     private:
@@ -21,7 +22,7 @@ namespace Projet_POO
         
         Label^ labelTitle;
         
-        DataGridView^ dataGridViewStock;
+        DataGridView^ dataGridViewCatalog;
         
         CheckBox^ checkBoxDeleted;
         
@@ -33,9 +34,13 @@ namespace Projet_POO
         {
             this->tableLayoutPanel1 = gcnew TableLayoutPanel();
             this->tableLayoutPanel2 = gcnew TableLayoutPanel();
+            
             this->labelTitle = gcnew Label();
-            this->dataGridViewStock = gcnew DataGridView();
+            
+            this->dataGridViewCatalog = gcnew DataGridView();
+            
             this->checkBoxDeleted = gcnew CheckBox();
+            
             this->buttonAdd = gcnew Button();
             this->buttonEdit = gcnew Button();
             this->buttonDelete = gcnew Button();
@@ -44,7 +49,7 @@ namespace Projet_POO
             this->tableLayoutPanel1->ColumnCount = 1;
             this->tableLayoutPanel1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent,50));
             this->tableLayoutPanel1->Controls->Add(this->labelTitle, 0, 0);
-            this->tableLayoutPanel1->Controls->Add(this->dataGridViewStock, 0, 1);
+            this->tableLayoutPanel1->Controls->Add(this->dataGridViewCatalog, 0, 1);
             this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 2);
             this->tableLayoutPanel1->Location = Point(13, 12);
             this->tableLayoutPanel1->Margin = Windows::Forms::Padding(3, 2, 3, 2);
@@ -86,15 +91,65 @@ namespace Projet_POO
             this->labelTitle->TabIndex = 0;
             this->labelTitle->Text = L"Catalogue";
             
-            /*-------------------- dataGridViewStock --------------------*/
-            this->dataGridViewStock->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-            this->dataGridViewStock->Location = Point(15, 120);
-            this->dataGridViewStock->Margin = Windows::Forms::Padding(15);
-            this->dataGridViewStock->Name = L"dataGridViewStock";
-            this->dataGridViewStock->RowHeadersWidth = 51;
-            this->dataGridViewStock->RowTemplate->Height = 24;
-            this->dataGridViewStock->Size = Drawing::Size(927, 338);
-            this->dataGridViewStock->TabIndex = 1;
+            /*-------------------- dataGridViewCatalog --------------------*/
+            this->dataGridViewCatalog->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+            this->dataGridViewCatalog->Location = Point(15, 120);
+            this->dataGridViewCatalog->Margin = Windows::Forms::Padding(15);
+            this->dataGridViewCatalog->Name = L"dataGridViewCatalog";
+            this->dataGridViewCatalog->RowHeadersWidth = 51;
+            this->dataGridViewCatalog->RowTemplate->Height = 24;
+            this->dataGridViewCatalog->Size = Drawing::Size(927, 338);
+            this->dataGridViewCatalog->TabIndex = 1;
+            this->dataGridViewCatalog->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+            this->dataGridViewCatalog->ReadOnly = true;
+            this->dataGridViewCatalog->AllowUserToResizeRows = false;
+            this->dataGridViewCatalog->AllowUserToAddRows = false;
+            this->dataGridViewCatalog->RowHeadersVisible = false;
+            this->dataGridViewCatalog->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->dataGridViewCatalog->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+            this->dataGridViewCatalog->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::DisableResizing;
+            this->dataGridViewCatalog->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+            this->dataGridViewCatalog->ColumnHeadersHeight = 40;
+            
+            auto idProduct = gcnew DataGridViewTextBoxColumn();
+            idProduct->Visible = false;
+            this->dataGridViewCatalog->Columns->Add(idProduct);
+
+            auto deleted = gcnew DataGridViewTextBoxColumn();
+            deleted->Visible = false;
+            this->dataGridViewCatalog->Columns->Add(deleted);
+
+            auto reference = gcnew DataGridViewTextBoxColumn();
+            reference->Name = L"Reference";
+            this->dataGridViewCatalog->Columns->Add(reference);
+
+            auto type = gcnew DataGridViewTextBoxColumn();
+            type->Name = L"Nature";
+            this->dataGridViewCatalog->Columns->Add(type);
+
+            auto name = gcnew DataGridViewTextBoxColumn();
+            name->Name = L"Nom";
+            this->dataGridViewCatalog->Columns->Add(name);
+
+            auto addressesCount = gcnew DataGridViewTextBoxColumn();
+            addressesCount->Name = L"couleur";
+            this->dataGridViewCatalog->Columns->Add(addressesCount);
+
+            auto buyPrice = gcnew DataGridViewTextBoxColumn();
+            buyPrice->Name = L"Prix d'achat";
+            this->dataGridViewCatalog->Columns->Add(buyPrice);
+
+            auto vatRate = gcnew DataGridViewTextBoxColumn();
+            vatRate->Name = L"TVA";
+            this->dataGridViewCatalog->Columns->Add(vatRate);
+
+            auto quantity = gcnew DataGridViewTextBoxColumn();
+            quantity->Name = L"Stock";
+            this->dataGridViewCatalog->Columns->Add(quantity);
+
+            auto provisioningThreshold = gcnew DataGridViewTextBoxColumn();
+            provisioningThreshold->Name = L"Limite de reapprovisionnement";
+            this->dataGridViewCatalog->Columns->Add(provisioningThreshold);
             
             /*-------------------- checkBoxDeleted --------------------*/
             this->checkBoxDeleted->Anchor = AnchorStyles::None;
@@ -117,6 +172,7 @@ namespace Projet_POO
             this->buttonAdd->TabIndex = 2;
             this->buttonAdd->Text = L"Ajouter";
             this->buttonAdd->UseVisualStyleBackColor = true;
+            this->buttonAdd->Click += gcnew EventHandler(this, &CatalogPage::buttonAdd_Click);
             
             /*-------------------- buttonEdit --------------------*/
             this->buttonEdit->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -128,6 +184,7 @@ namespace Projet_POO
             this->buttonEdit->TabIndex = 3;
             this->buttonEdit->Text = L"Modifier";
             this->buttonEdit->UseVisualStyleBackColor = true;
+            this->buttonEdit->Click += gcnew EventHandler(this, &CatalogPage::buttonEdit_Click);
             
             /*-------------------- buttonDelete --------------------*/
             this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -139,6 +196,7 @@ namespace Projet_POO
             this->buttonDelete->TabIndex = 4;
             this->buttonDelete->Text = L"Supprimer";
             this->buttonDelete->UseVisualStyleBackColor = true;
+            this->buttonDelete->Click += gcnew EventHandler(this, &CatalogPage::buttonDelete_Click);
             
             /*-------------------- CatalogPage --------------------*/
             this->StartPosition = FormStartPosition::CenterScreen;
@@ -150,5 +208,10 @@ namespace Projet_POO
             this->Name = L"CatalogPage";
             this->Text = L"CatalogPage";
         }
+
+        Void reloadCatalogGridView();
+        Void buttonAdd_Click(Object^ sender, EventArgs^ e);
+        Void buttonEdit_Click(Object^ sender, EventArgs^ e);
+        Void buttonDelete_Click(Object^ sender, EventArgs^ e);
     };
 }

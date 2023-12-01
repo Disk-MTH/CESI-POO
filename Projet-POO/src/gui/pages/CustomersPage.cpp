@@ -1,5 +1,4 @@
 #include "CustomersPage.h"
-#include "../forms/CustomerForm.h"
 #include "../../App.h"
 
 void CustomersPage::reloadCustomersGridView()
@@ -10,16 +9,17 @@ void CustomersPage::reloadCustomersGridView()
 	
 	for (int i = 0; i < customers->Tables[0]->Rows->Count; i++)
 	{
+		if (i == 0) continue;
 		this->dataGridViewCustomers->Rows->Add(customers->Tables[0]->Rows[i]->ItemArray);
 	}
 }
 
-Void CustomersPage::buttonCreateOrder_Click(Object^ sender, EventArgs^ e)
+void CustomersPage::buttonCreateOrder_Click(Object^ sender, EventArgs^ e)
 {
 	App::app->toastMessage(this, "Fonctionnalite non implementee: Creer une commande", Color::Red, 2000);
 }
 
-Void CustomersPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
+void CustomersPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
 	/*String^ firstName = "";
 	String^ lastName = "";
@@ -46,7 +46,7 @@ Void CustomersPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 	}*/
 }
 
-Void CustomersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
+void CustomersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
 {
 	/*String^ firstName = this->dataGridViewCustomers->CurrentRow->Cells[1]->Value->ToString();
 	String^ lastName = this->dataGridViewCustomers->CurrentRow->Cells[2]->Value->ToString();
@@ -73,7 +73,7 @@ Void CustomersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
 	}*/
 }
 
-Void CustomersPage::buttonDelete_Click(Object^ sender, EventArgs^ e)
+void CustomersPage::buttonDelete_Click(Object^ sender, EventArgs^ e)
 {
 	App::app->toastMessage(this, "Fonctionnalite non implementee: Modifier un client", Color::Red, 2000);
 }

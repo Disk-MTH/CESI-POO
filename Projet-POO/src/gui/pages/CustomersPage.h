@@ -19,29 +19,29 @@ namespace Projet_POO
 		private:
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
-		
+
 			Label^ labelTitle;
-		
+
 			DataGridView^ dataGridViewCustomers;
 
 			CheckBox^ checkBoxDeleted;
-		
+
 			Button^ buttonCreateOrder;
 			Button^ buttonAdd;
 			Button^ buttonEdit;
 			Button^ buttonDelete;
-		
+
 			void initialize()
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel2 = gcnew TableLayoutPanel();
-				
+
 				this->labelTitle = gcnew Label();
-				
+
 				this->dataGridViewCustomers = gcnew DataGridView();
-				
+
 				this->checkBoxDeleted = gcnew CheckBox();
-				
+
 				this->buttonCreateOrder = gcnew Button();
 				this->buttonAdd = gcnew Button();
 				this->buttonEdit = gcnew Button();
@@ -80,7 +80,7 @@ namespace Projet_POO
 				this->tableLayoutPanel2->Margin = Windows::Forms::Padding(2);
 				this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 				this->tableLayoutPanel2->RowCount = 1;
-				this->tableLayoutPanel2->RowStyles->Add((gcnew RowStyle(SizeType::Percent, 50)));
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel2->Size = Drawing::Size(959, 150);
 				this->tableLayoutPanel2->TabIndex = 2;
 
@@ -109,27 +109,24 @@ namespace Projet_POO
 				this->dataGridViewCustomers->AllowUserToResizeRows = false;
 				this->dataGridViewCustomers->AllowUserToAddRows = false;
 				this->dataGridViewCustomers->RowHeadersVisible = false;
-				//expansion des colonnes pour remplir le tableau
-				//this->dataGridViewCustomers->AutoResizeColumns();
-				this->dataGridViewCustomers->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
-
-				
 				this->dataGridViewCustomers->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->dataGridViewCustomers->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+				this->dataGridViewCustomers->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+				this->dataGridViewCustomers->ColumnHeadersHeight = 40;
 
 				auto idCustomer = gcnew DataGridViewTextBoxColumn();
 				idCustomer->Name = L"id_customer";
 				idCustomer->Visible = false;
 				this->dataGridViewCustomers->Columns->Add(idCustomer);
-				
+
 				auto lastName = gcnew DataGridViewTextBoxColumn();
 				lastName->Name = L"Nom";
 				this->dataGridViewCustomers->Columns->Add(lastName);
-				
+
 				auto firstName = gcnew DataGridViewTextBoxColumn();
 				firstName->Name = L"Prenom";
 				this->dataGridViewCustomers->Columns->Add(firstName);
-				
+
 				auto birthdate = gcnew DataGridViewTextBoxColumn();
 				birthdate->Name = L"Date de naissance";
 				this->dataGridViewCustomers->Columns->Add(birthdate);
@@ -137,7 +134,12 @@ namespace Projet_POO
 				auto addressesCount = gcnew DataGridViewTextBoxColumn();
 				addressesCount->Name = L"Nombre d'adresses";
 				this->dataGridViewCustomers->Columns->Add(addressesCount);
-				
+
+				for (int i = 0; i < this->dataGridViewCustomers->Columns->Count; i++)
+				{
+					this->dataGridViewCustomers->Columns[i]->Resizable = DataGridViewTriState::False;
+				}
+
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 				this->checkBoxDeleted->AutoSize = true;
@@ -147,13 +149,13 @@ namespace Projet_POO
 				this->checkBoxDeleted->Name = L"checkBoxDeleted";
 				this->checkBoxDeleted->Size = Drawing::Size(247, 29);
 				this->checkBoxDeleted->TabIndex = 0;
-				this->checkBoxDeleted->Text = L"Afficher les clients supprimés";
+				this->checkBoxDeleted->Text = L"Afficher les clients\nsupprimes";
 				this->checkBoxDeleted->UseVisualStyleBackColor = true;
 
 				/*-------------------- buttonCreateOrder --------------------*/
 				this->buttonCreateOrder->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->buttonCreateOrder->Font = (gcnew Drawing::Font(L"Microsoft Sans Serif", 20));
-				this->buttonCreateOrder->Location = Drawing::Point(278, 12);
+				this->buttonCreateOrder->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
+				this->buttonCreateOrder->Location = Point(278, 12);
 				this->buttonCreateOrder->Margin = Windows::Forms::Padding(11, 6, 11, 6);
 				this->buttonCreateOrder->Name = L"buttonCreateOrder";
 				this->buttonCreateOrder->Size = Drawing::Size(269, 126);
