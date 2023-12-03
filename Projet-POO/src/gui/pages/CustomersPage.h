@@ -210,7 +210,7 @@ namespace Projet_POO
 			}
 
 			Void reloadCustomersGridView();
-			Void openCustomerForm(String^ customerId, String^ firstName, String^ lastName, String^ birthdate);
+			Void openCustomerForm(String^ customerId, String^ lastName, String^ firstName, String^ birthdate);
 			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
 			Void buttonCreateOrder_Click(Object^ sender, EventArgs^ e);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
