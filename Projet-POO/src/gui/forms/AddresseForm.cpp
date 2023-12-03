@@ -1,8 +1,14 @@
 #include "AddresseForm.h"
 
-#include <type_traits>
-
 #include "../../App.h"
+
+void AddresseForm::textBoxZipCode_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+{
+	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+	{
+		e->Handled = true;
+	}
+}
 
 void AddresseForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 {
@@ -11,40 +17,34 @@ void AddresseForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 
 void AddresseForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 {
-	address = this->textBoxStreetName->Text;
+	street = this->textBoxStreet->Text;
 	zipCode = this->textBoxZipCode->Text;
 	city = this->comboBoxCity->Text;
-	type = "1";
-	customerId = this->customerId;
+	String^ addressTypeId = this->checkBoxDelivery->Checked && this->checkBoxDelivery->Checked ? "3" : this->checkBoxDelivery->Checked ? "2" : this->checkBoxBilling->Checked ? "1" : "";
 
-	if (App::isEmpty ("Adresse", address) || App::isEmpty ("Code postal", zipCode) || App::isEmpty ("Ville", city))
+	if (App::isEmpty ("Adresse", street) || App::isEmpty ("Code postal", zipCode) || App::isEmpty ("Ville", city) || App::isEmpty ("Type", addressTypeId))
 	{
 		return;
 	}
 
 	try
 	{
-		if (addressId =="")
+		if (addressId != "")
 		{
-			App::app->logger->log("111111111111");
-			int InsertedAddressID = App::app->db->insert("INSERT INTO address (street_name, zip_code, city) VALUES ('" + address + "', '" + zipCode + "', '" + city + "');");
-			App::app->logger->log("2222222222");
-			App::app->db->insert("INSERT INTO customerHasAddresses (id_customer, id_address, type) VALUES ('" + customerId + "', '" + InsertedAddressID + "', '" + type + "');");
-			App::app->logger->log("3333333333");
-		}
-		else
-		{
-			App::app->db->execute("UPDATE address SET street_name = '" + address + "', zip_code = '" + zipCode + "', city = '" + city + "' WHERE id_address = " + addressId + ";");
+			App::app->db->execute("UPDATE address SET deleted = 1 WHERE id_address = " + addressId + ";");
 		}
 
-		App::app->logger->log("Address saved: \"" + address + "\", \"" + zipCode + "\", \"" + city + "\", \"" + type + "\"");
+		auto addressId = App::app->db->insert("INSERT INTO address (street, zip_code, city) VALUES ('" + street + "', '" + zipCode + "', '" + city + "');");
+		App::app->db->insert("INSERT INTO customerHasAddresses (id_customer, id_address, id_address_type) VALUES ('" + this->customerId + "', '" + addressId + "', '" + addressTypeId + "');");
+
+		App::app->logger->log("Address saved: \"" + street + "\", \"" + zipCode + "\", \"" + city + "\", \"" + addressTypeId + "\"");
 		this->DialogResult = Windows::Forms::DialogResult::OK;
 		this->Close();
 	}
 	catch (Exception^ exception)
 	{
-		App::app->logger->error("Error while saving address: \"" + address + "\", \"" + zipCode + "\", \"" + city + "\", \"" + type + "\"");
-		App::app->logger->error(exception->Message);
+		App::app->logger->error("Error while saving address: \"" + street + "\", \"" + zipCode + "\", \"" + city + "\", \"" + addressTypeId + "\"");
+		App::app->logger->error(exception);
 		App::app->toastMessage(this, "Erreur lors de l'enregistrement de l'adresse", Color::Red, 3000);
 	}
 }

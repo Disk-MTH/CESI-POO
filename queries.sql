@@ -1,15 +1,16 @@
 USE [database];
 GO;
 
+/* ------------------------- Customer -------------------------*/
+
 /* Query to fill CustomerPage */
-/* add the count of addresseswhere deleted = 0  in the column "addressesCount" */
-SELECT c.id_customer,
-       c.first_name,
-       c.last_name,
-       CONVERT(VARCHAR, c.birthdate, 103)                                                            AS birthdate,
-       (SELECT COUNT(*) FROM customerHasAddresses WHERE id_customer = c.id_customer AND deleted = 0) AS addressesCount
-FROM customer c/*;
-WHERE c.deleted = 0;*/
+SELECT id_customer,
+       first_name,
+       last_name,
+       CONVERT(VARCHAR(10), birthdate, 103) AS birthdate
+FROM customer;
+/*
+WHERE deleted = 0;*/
 
 /* Query to insert new customer */
 INSERT INTO customer (first_name, last_name, birthdate)
@@ -26,6 +27,37 @@ WHERE id_customer = 1;
 UPDATE customer
 SET deleted = 1
 WHERE id_customer = 1;
+/*should delete user delete addresses of user ?*/
+
+/* ------------------------- Addresses -------------------------*/
+
+/* Query to get addresses from a client */
+SELECT a.id_address,
+       a.street,
+       a.zip_code,
+       a.city,
+       at.type
+FROM address a
+         INNER JOIN customerHasAddresses cha ON a.id_address = cha.id_address
+         INNER JOIN address_type at ON cha.id_address_type = at.id_address_type
+WHERE a.deleted = 0
+  AND cha.id_customer = 1;
+
+/* Query to insert new address */
+INSERT INTO address (street, zip_code, city)
+VALUES ('aa', 'bb', 'cc');
+
+INSERT INTO customerHasAddresses (id_customer, id_address, id_address_type)
+VALUES (1, 1, 1);
+
+/* Query to update an address */
+UPDATE address
+SET deleted = 1
+WHERE id_address = 1; /* Then insert new*/
+
+
+
+/* ------------------------- Catalog -------------------------*/
 
 /* Query to fill CatalogPage */
 SELECT id_product,
@@ -39,20 +71,3 @@ SELECT id_product,
        quantity,
        provisioning_threshold
 FROM product;
-
-/* Query to get addresses from a client */
-SELECT a.id_address,
-       a.street,
-       a.zip_code,
-       a.city,
-       at.type
-FROM address a
-         INNER JOIN customerHasAddresses cha ON a.id_address = cha.id_address
-         INNER JOIN address_type at ON cha.id_address_type = at.id_address_type
-WHERE cha.id_customer = 1;
-
-SELECT a.id_address, a.street, a.zip_code, a.city, at.type
-FROM address a
-         INNER JOIN customerHasAddresses cha ON a.id_address = cha.id_address
-         INNER JOIN address_type at ON cha.id_address_type = at.id_address_type
-WHERE cha.id_customer = 1;

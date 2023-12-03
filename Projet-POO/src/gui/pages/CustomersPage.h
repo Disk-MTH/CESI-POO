@@ -100,8 +100,6 @@ namespace Projet_POO
 				this->dataGridViewCustomers->Location = Point(11, 119);
 				this->dataGridViewCustomers->Margin = Windows::Forms::Padding(11, 12, 11, 12);
 				this->dataGridViewCustomers->Name = L"dataGridViewCustomers";
-				this->dataGridViewCustomers->RowHeadersWidth = 51;
-				this->dataGridViewCustomers->RowTemplate->Height = 24;
 				this->dataGridViewCustomers->Size = Drawing::Size(941, 354);
 				this->dataGridViewCustomers->TabIndex = 1;
 				this->dataGridViewCustomers->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
@@ -132,10 +130,6 @@ namespace Projet_POO
 				auto birthdate = gcnew DataGridViewTextBoxColumn();
 				birthdate->Name = L"Date de naissance";
 				this->dataGridViewCustomers->Columns->Add(birthdate);
-
-				auto addressesCount = gcnew DataGridViewTextBoxColumn();
-				addressesCount->Name = L"Nombre d'adresses";
-				this->dataGridViewCustomers->Columns->Add(addressesCount);
 
 				for (int i = 0; i < this->dataGridViewCustomers->Columns->Count; i++)
 				{

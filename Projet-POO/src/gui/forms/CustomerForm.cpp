@@ -9,8 +9,7 @@ void CustomerForm::reloadAddressesGridView()
 		this->dataGridViewAddresses->Rows->Clear();
 
 		DataSet^ addresses = App::app->db->query(
-		"SELECT a.id_address,a.street_name,a.zip_code,cha.type,a.city FROM address a JOIN customerHasAddresses cha ON a.id_address = cha.id_address WHERE cha.id_customer = " + customerId + ";");
-
+		"SELECT a.id_address, a.street, a.zip_code, a.city, at.type FROM address a INNER JOIN customerHasAddresses cha ON a.id_address = cha.id_address INNER JOIN address_type at ON cha.id_address_type = at.id_address_type WHERE a.deleted = 0 AND cha.id_customer = " + customerId + ";");
 		for (int i = 0; i < addresses->Tables[0]->Rows->Count; i++)
 		{
 			this->dataGridViewAddresses->Rows->Add(addresses->Tables[0]->Rows[i]->ItemArray);
@@ -20,18 +19,17 @@ void CustomerForm::reloadAddressesGridView()
 
 void CustomerForm::openAddressesForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type)
 {
-	auto addAddressForm = gcnew AddresseForm(addressId, address, zipCode, city, type, customerId);
+	auto addAddressForm = gcnew AddresseForm(addressId, address, zipCode, city, type, this->customerId);
 	if (addAddressForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 	{
-		App::app->App::toastMessage(this, "Modifications enregistrees", Color::Green, 3000);
+		App::app->App::toastMessage(this, "Addresses enregistrees", Color::Green, 3000);
 		reloadAddressesGridView();
 	}
 }
 
-
 void CustomerForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
-	openAddressesForm("","","","","");
+	openAddressesForm("", "", "", "", "");
 }
 
 void CustomerForm::buttonEdit_Click(Object^ sender, EventArgs^ e)
@@ -49,7 +47,7 @@ void CustomerForm::buttonDelete_Click(Object^ sender, EventArgs^ e)
 {
 	try
 	{
-		App::app->db->execute("UPDATE customerHasAddresses SET deleted = 1 WHERE id_customer = " + customerId + " AND id_address = " + this->dataGridViewAddresses->CurrentRow->Cells[0]->Value->ToString() + ";");
+		App::app->db->execute("UPDATE address SET deleted = 1 WHERE id_address = " + this->dataGridViewAddresses->CurrentRow->Cells[0]->Value->ToString() + ";");
 		App::app->logger->log("Address deleted: \"" + this->dataGridViewAddresses->CurrentRow->Cells[1]->Value->ToString() + "\", \"" + this->dataGridViewAddresses->CurrentRow->Cells[2]->Value->ToString() + "\", \"" + this->dataGridViewAddresses->CurrentRow->Cells[3]->Value->ToString() + "\", \"" + this->dataGridViewAddresses->CurrentRow->Cells[4]->Value->ToString() + "\"");
 		App::app->toastMessage(this, "Adresse supprimee", Color::Green, 2000);
 		reloadAddressesGridView();
@@ -57,13 +55,14 @@ void CustomerForm::buttonDelete_Click(Object^ sender, EventArgs^ e)
 	catch (Exception^ exception)
 	{
 		App::app->logger->error("Error while deleting address: \"" + this->dataGridViewAddresses->CurrentRow->Cells[1]->Value->ToString() + "\", \"" + this->dataGridViewAddresses->CurrentRow->Cells[2]->Value->ToString() + "\", \"" + this->dataGridViewAddresses->CurrentRow->Cells[3]->Value->ToString() + "\", \"" + this->dataGridViewAddresses->CurrentRow->Cells[4]->Value->ToString() + "\"");
-		App::app->logger->error(exception->Message);
+		App::app->logger->error(exception);
 		App::app->toastMessage(this, "Erreur lors de la suppression de l'adresse", Color::Red, 3000);
 	}
 }
 
 void CustomerForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 {
+	//remove all addresses and customerHasAddresses and customer
 	this->Close();
 }
 
@@ -77,7 +76,7 @@ void CustomerForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 	{
 		return;
 	}
-	
+
 	try
 	{
 		if (customerId == "")

@@ -10,10 +10,10 @@ namespace Projet_POO
     public ref class AddresseForm : public Form
     {
     public:
-        AddresseForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type, String^ customerId)
+        AddresseForm(String^ addressId, String^ street, String^ zipCode, String^ city, String^ type, String^ customerId)
         {
             this->addressId = addressId;
-            this->address = address;
+            this->street = street;
             this->zipCode = zipCode;
             this->city = city;
             this->type = type;
@@ -21,10 +21,9 @@ namespace Projet_POO
             initialize();
         }
         
-
     private:
         String^ addressId;
-        String^ address;
+        String^ street;
         String^ zipCode;
         String^ city;
         String^ type;
@@ -37,12 +36,12 @@ namespace Projet_POO
         TableLayoutPanel^ tableLayoutPanel5;
 
         Label^ labelTitle;
-        Label^ labelCity;
-        Label^ labelZipCode;
         Label^ labelWording;
+        Label^ labelZipCode;
+        Label^ labelCity;
         Label^ labelAdressType;
 
-        TextBox^ textBoxStreetName;
+        TextBox^ textBoxStreet;
         TextBox^ textBoxZipCode;
 
         CheckBox^ checkBoxDelivery;
@@ -60,16 +59,20 @@ namespace Projet_POO
             this->tableLayoutPanel3 = gcnew TableLayoutPanel();
             this->tableLayoutPanel4 = gcnew TableLayoutPanel();
             this->tableLayoutPanel5 = gcnew TableLayoutPanel();
+            
             this->labelTitle = gcnew Label();
             this->labelCity = gcnew Label();
             this->labelZipCode = gcnew Label();
             this->labelWording = gcnew Label();
             this->labelAdressType = gcnew Label();
-            this->textBoxStreetName = gcnew TextBox();
+            
+            this->textBoxStreet = gcnew TextBox();
             this->textBoxZipCode = gcnew TextBox();
+            this->comboBoxCity = gcnew ComboBox();
+
             this->checkBoxDelivery = gcnew CheckBox();
             this->checkBoxBilling = gcnew CheckBox();
-            this->comboBoxCity = gcnew ComboBox();
+
             this->buttonValidate = gcnew Button();
             this->buttonCancel = gcnew Button();
 
@@ -99,7 +102,7 @@ namespace Projet_POO
             this->tableLayoutPanel2->Controls->Add(this->labelCity, 2, 0);
             this->tableLayoutPanel2->Controls->Add(this->labelZipCode, 1, 0);
             this->tableLayoutPanel2->Controls->Add(this->labelWording, 0, 0);
-            this->tableLayoutPanel2->Controls->Add(this->textBoxStreetName, 0, 1);
+            this->tableLayoutPanel2->Controls->Add(this->textBoxStreet, 0, 1);
             this->tableLayoutPanel2->Controls->Add(this->textBoxZipCode, 1, 1);
             this->tableLayoutPanel2->Controls->Add(this->comboBoxCity, 2, 1);
             this->tableLayoutPanel2->Location = Point(2, 81);
@@ -164,28 +167,6 @@ namespace Projet_POO
             this->labelTitle->TabIndex = 0;
             this->labelTitle->Text = L"Adresse";
 
-            /*-------------------- labelCity --------------------*/
-            this->labelCity->Anchor = AnchorStyles::Left;
-            this->labelCity->AutoSize = true;
-            this->labelCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-            this->labelCity->Location = Point(422, 12);
-            this->labelCity->Margin = Windows::Forms::Padding(8, 0, 2, 0);
-            this->labelCity->Name = L"labelCity";
-            this->labelCity->Size = Drawing::Size(49, 25);
-            this->labelCity->TabIndex = 2;
-            this->labelCity->Text = L"Ville";
-
-            /*-------------------- labelZipCode --------------------*/
-            this->labelZipCode->Anchor = AnchorStyles::Left;
-            this->labelZipCode->AutoSize = true;
-            this->labelZipCode->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-            this->labelZipCode->Location = Point(292, 12);
-            this->labelZipCode->Margin = Windows::Forms::Padding(8, 0, 2, 0);
-            this->labelZipCode->Name = L"labelZipCode";
-            this->labelZipCode->Size = Drawing::Size(117, 25);
-            this->labelZipCode->TabIndex = 1;
-            this->labelZipCode->Text = L"Code postal";
-
             /*-------------------- labelWording --------------------*/
             this->labelWording->Anchor = AnchorStyles::Left;
             this->labelWording->AutoSize = true;
@@ -196,7 +177,30 @@ namespace Projet_POO
             this->labelWording->Size = Drawing::Size(68, 25);
             this->labelWording->TabIndex = 0;
             this->labelWording->Text = L"Libelle";
+            
+            /*-------------------- labelZipCode --------------------*/
+            this->labelZipCode->Anchor = AnchorStyles::Left;
+            this->labelZipCode->AutoSize = true;
+            this->labelZipCode->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->labelZipCode->Location = Point(292, 12);
+            this->labelZipCode->Margin = Windows::Forms::Padding(8, 0, 2, 0);
+            this->labelZipCode->Name = L"labelZipCode";
+            this->labelZipCode->Size = Drawing::Size(117, 25);
+            this->labelZipCode->TabIndex = 1;
+            this->labelZipCode->Text = L"Code postal";
+            this->textBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::textBoxZipCode_KeyPress);
 
+            /*-------------------- labelCity --------------------*/
+            this->labelCity->Anchor = AnchorStyles::Left;
+            this->labelCity->AutoSize = true;
+            this->labelCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->labelCity->Location = Point(422, 12);
+            this->labelCity->Margin = Windows::Forms::Padding(8, 0, 2, 0);
+            this->labelCity->Name = L"labelCity";
+            this->labelCity->Size = Drawing::Size(49, 25);
+            this->labelCity->TabIndex = 2;
+            this->labelCity->Text = L"Ville";
+            
             /*-------------------- labelAdressType --------------------*/
             this->labelAdressType->Anchor = AnchorStyles::Left;
             this->labelAdressType->AutoSize = true;
@@ -208,13 +212,14 @@ namespace Projet_POO
             this->labelAdressType->TabIndex = 0;
             this->labelAdressType->Text = L"Type d\'adresse";
 
-            /*-------------------- textBoxStreetName --------------------*/
-            this->textBoxStreetName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-            this->textBoxStreetName->Location = Point(8, 58);
-            this->textBoxStreetName->Margin = Windows::Forms::Padding(8);
-            this->textBoxStreetName->Name = L"textBoxStreetName";
-            this->textBoxStreetName->Size = Drawing::Size(268, 30);
-            this->textBoxStreetName->TabIndex = 3;
+            /*-------------------- textBoxStreet --------------------*/
+            this->textBoxStreet->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->textBoxStreet->Location = Point(8, 58);
+            this->textBoxStreet->Margin = Windows::Forms::Padding(8);
+            this->textBoxStreet->Name = L"textBoxStreet";
+            this->textBoxStreet->Size = Drawing::Size(268, 30);
+            this->textBoxStreet->TabIndex = 3;
+            this->textBoxStreet->Text = this->street;
 
             /*-------------------- textBoxZipCode --------------------*/
             this->textBoxZipCode->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -223,7 +228,18 @@ namespace Projet_POO
             this->textBoxZipCode->Name = L"textBoxZipCode";
             this->textBoxZipCode->Size = Drawing::Size(112, 30);
             this->textBoxZipCode->TabIndex = 4;
+            this->textBoxZipCode->Text = this->zipCode;
 
+            /*-------------------- comboBoxCity --------------------*/
+            this->comboBoxCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->comboBoxCity->FormattingEnabled = true;
+            this->comboBoxCity->Location = Point(422, 58);
+            this->comboBoxCity->Margin = Windows::Forms::Padding(8);
+            this->comboBoxCity->Name = L"comboBoxCity";
+            this->comboBoxCity->Size = Drawing::Size(229, 33);
+            this->comboBoxCity->TabIndex = 5;
+            this->comboBoxCity->Text = this->city;
+            
             /*-------------------- checkBoxDelivery --------------------*/
             this->checkBoxDelivery->Anchor = AnchorStyles::Left;
             this->checkBoxDelivery->AutoSize = true;
@@ -235,7 +251,8 @@ namespace Projet_POO
             this->checkBoxDelivery->TabIndex = 1;
             this->checkBoxDelivery->Text = L"Adresse de livraison";
             this->checkBoxDelivery->UseVisualStyleBackColor = true;
-
+            this->checkBoxDelivery->Checked = this->type->Equals("Livraison") || this->type->Equals("Livraison et Facturation");
+            
             /*-------------------- checkBoxBilling --------------------*/
             this->checkBoxBilling->Anchor = AnchorStyles::Left;
             this->checkBoxBilling->AutoSize = true;
@@ -247,15 +264,7 @@ namespace Projet_POO
             this->checkBoxBilling->TabIndex = 0;
             this->checkBoxBilling->Text = L"Adresse de facturation";
             this->checkBoxBilling->UseVisualStyleBackColor = true;
-
-            /*-------------------- comboBoxCity --------------------*/
-            this->comboBoxCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-            this->comboBoxCity->FormattingEnabled = true;
-            this->comboBoxCity->Location = Point(422, 58);
-            this->comboBoxCity->Margin = Windows::Forms::Padding(8);
-            this->comboBoxCity->Name = L"comboBoxCity";
-            this->comboBoxCity->Size = Drawing::Size(229, 33);
-            this->comboBoxCity->TabIndex = 5;
+            this->checkBoxBilling->Checked = this->type->Equals("Facturation") || this->type->Equals("Livraison et Facturation");
 
             /*-------------------- buttonValidate --------------------*/
             this->buttonValidate->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -292,7 +301,8 @@ namespace Projet_POO
             this->Text = L"AddresseForm";
         }
 
-        void buttonCancel_Click(Object^ sender, EventArgs^ e);
-        void buttonValidate_Click(Object^ sender, EventArgs^ e);
+        Void textBoxZipCode_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+        Void buttonCancel_Click(Object^ sender, EventArgs^ e);
+        Void buttonValidate_Click(Object^ sender, EventArgs^ e);
     };
 }

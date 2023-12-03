@@ -54,9 +54,27 @@ void Logger::warn(String^ message)
 	formattedPrint("Warn: " + message, yellow);
 }
 
+void Logger::warn(Exception^ exception)
+{
+	warn(exception->Message);
+	for each (String^ line in exception->StackTrace->Split('\n'))
+	{
+		warn(line);
+	}
+}
+
 void Logger::error(String^ message)
 {
 	formattedPrint("Error: " + message, red);
+}
+
+void Logger::error(Exception^ exception)
+{
+	error(exception->Message);
+	for each (String^ line in exception->StackTrace->Split('\n'))
+	{
+		error(line);
+	}
 }
 
 void Logger::debug(String^ message)

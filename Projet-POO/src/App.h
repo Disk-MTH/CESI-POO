@@ -10,7 +10,7 @@ using namespace Windows::Forms;
 
 namespace Projet_POO
 {
-	public ref class App sealed
+	public ref class App
 	{
 		public:
 			static App^ app = gcnew App();

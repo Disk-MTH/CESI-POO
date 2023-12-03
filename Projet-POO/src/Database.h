@@ -1,19 +1,20 @@
 ﻿#pragma once
 
 using namespace System;
-using namespace System::Data::SqlClient;
+using namespace Data;
+using namespace SqlClient;
 
 namespace Projet_POO
 {
-	public ref class Database sealed
+	public ref class Database
 	{
 		public:
 			void connect(Object^ connectionString);
 			void disconnect();
-			Boolean isConnected();
-			Data::DataSet^ query(String^ sql);
-			int execute(String^ sql);
-			int insert(String^ sql);
+			bool^ isConnected();
+			DataSet^ query(String^ sql);
+			String^ execute(String^ sql);
+			String^ insert(String^ sql);
 
 			SqlConnection^ connection;
 			Boolean connected;

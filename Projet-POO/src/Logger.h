@@ -5,7 +5,7 @@ using namespace IO;
 
 namespace Projet_POO
 {
-	public ref class Logger sealed
+	public ref class Logger
 	{
 		bool isFileEnabled;
 		bool shouldDebug;
@@ -18,7 +18,9 @@ namespace Projet_POO
 			void formattedPrint(String^ message, String^ color);
 			void log(String^ message);
 			void warn(String^ message);
+			void warn(Exception^ exception);
 			void error(String^ message);
+			void error(Exception^ exception);
 			void debug(String^ message);
 
 			static String^ white = "\033[1;37m";

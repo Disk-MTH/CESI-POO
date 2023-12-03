@@ -36,33 +36,34 @@ void Database::disconnect()
     }
 }
 
-Boolean Database::isConnected()
+bool^ Database::isConnected()
 {
     return connected;
 }
 
-Data::DataSet^ Database::query(String^ sql)
+DataSet^ Database::query(String^ sql)
 {
     App::app->logger->debug("Sql: " + Logger::magenta + "query");
     App::app->logger->debug(sql);
     SqlDataAdapter^ dataAdapter = gcnew SqlDataAdapter(sql, this->connection);
-    Data::DataSet^ dataSet = gcnew Data::DataSet();
+    DataSet^ dataSet = gcnew DataSet();
     dataAdapter->Fill(dataSet);
     return dataSet;
 }
 
-int Database::execute(String^ sql)
+String^ Database::execute(String^ sql)
 {
     App::app->logger->debug("Sql: " + Logger::magenta + "execute");
     App::app->logger->debug(sql);
-    SqlCommand^ command = gcnew SqlCommand(sql, this->connection);
-    return command->ExecuteNonQuery();
+    auto command = gcnew SqlCommand(sql, this->connection);
+    return command->ExecuteNonQuery().ToString();
 }
 
-int Database::insert(String^ sql)
+String^ Database::insert(String^ sql)
 {
+    sql += ";SELECT @@IDENTITY";
     App::app->logger->debug("Sql: " + Logger::magenta + "insert");
     App::app->logger->debug(sql);
-    SqlCommand^ command = gcnew SqlCommand(sql + ";SELECT @@IDENTITY", this->connection);
-    return Decimal::ToInt32(safe_cast<Decimal>(command->ExecuteScalar()));
+    auto command = gcnew SqlCommand(sql, this->connection);
+    return command->ExecuteScalar()->ToString();
 }

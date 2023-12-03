@@ -96,8 +96,6 @@ namespace Projet_POO
             this->dataGridViewCatalog->Location = Point(15, 120);
             this->dataGridViewCatalog->Margin = Windows::Forms::Padding(15);
             this->dataGridViewCatalog->Name = L"dataGridViewCatalog";
-            this->dataGridViewCatalog->RowHeadersWidth = 51;
-            this->dataGridViewCatalog->RowTemplate->Height = 24;
             this->dataGridViewCatalog->Size = Drawing::Size(927, 338);
             this->dataGridViewCatalog->TabIndex = 1;
             this->dataGridViewCatalog->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
@@ -105,6 +103,7 @@ namespace Projet_POO
             this->dataGridViewCatalog->AllowUserToResizeRows = false;
             this->dataGridViewCatalog->AllowUserToAddRows = false;
             this->dataGridViewCatalog->RowHeadersVisible = false;
+            this->dataGridViewCatalog->MultiSelect = false;
             this->dataGridViewCatalog->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->dataGridViewCatalog->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
             this->dataGridViewCatalog->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::DisableResizing;

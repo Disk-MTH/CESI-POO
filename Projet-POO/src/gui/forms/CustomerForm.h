@@ -168,6 +168,17 @@ namespace Projet_POO
 				this->dataGridViewAddresses->Name = L"dataGridViewAddresses";
 				this->dataGridViewAddresses->Size = Drawing::Size(358, 219);
 				this->dataGridViewAddresses->TabIndex = 1;
+				this->dataGridViewAddresses->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->dataGridViewAddresses->ReadOnly = true;
+				this->dataGridViewAddresses->AllowUserToResizeRows = false;
+				this->dataGridViewAddresses->AllowUserToAddRows = false;
+				this->dataGridViewAddresses->RowHeadersVisible = false;
+				this->dataGridViewAddresses->MultiSelect = false;
+				this->dataGridViewAddresses->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->dataGridViewAddresses->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+				this->dataGridViewAddresses->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::DisableResizing;
+				this->dataGridViewAddresses->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+				this->dataGridViewAddresses->ColumnHeadersHeight = 40;
 
 				auto idAddress = gcnew DataGridViewTextBoxColumn();
 				idAddress->Name = L"id_address";
@@ -175,26 +186,20 @@ namespace Projet_POO
 				this->dataGridViewAddresses->Columns->Add(idAddress);
 
 				auto address = gcnew DataGridViewTextBoxColumn();
-				address->Name = L"address";
+				address->Name = L"Libelle";
 				this->dataGridViewAddresses->Columns->Add(address);
 
 				auto zipCode = gcnew DataGridViewTextBoxColumn();
-				zipCode->Name = L"zip_code";
+				zipCode->Name = L"Code postal";
 				this->dataGridViewAddresses->Columns->Add(zipCode);
 
 				auto city = gcnew DataGridViewTextBoxColumn();
-				city->Name = L"city";
+				city->Name = L"Ville";
 				this->dataGridViewAddresses->Columns->Add(city);
 
 				auto type = gcnew DataGridViewTextBoxColumn();
-				type->Name = L"type";
+				type->Name = L"Type d'adresse";
 				this->dataGridViewAddresses->Columns->Add(type);
-				
-
-				
-
-				
-				
 				
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
@@ -341,11 +346,11 @@ namespace Projet_POO
 			}
 
 			Void reloadAddressesGridView();
+			Void openAddressesForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
 			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
 			Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 			Void buttonValidate_Click(Object^ sender, EventArgs^ e);
-			Void openAddressesForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type);
 	};
 }
