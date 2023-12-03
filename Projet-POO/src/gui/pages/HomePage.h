@@ -53,7 +53,6 @@ namespace Projet_POO
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 77.8481F));
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 153));
 				this->tableLayoutPanel1->Size = Drawing::Size(957, 628);
-				this->tableLayoutPanel1->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel2 --------------------*/
 				this->tableLayoutPanel2->ColumnCount = 2;
@@ -69,7 +68,6 @@ namespace Projet_POO
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel2->Size = Drawing::Size(951, 363);
-				this->tableLayoutPanel2->TabIndex = 1;
 
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
@@ -78,7 +76,6 @@ namespace Projet_POO
 				this->labelTitle->Location = Point(338, 23);
 				this->labelTitle->Name = L"labelTitle";
 				this->labelTitle->Size = Drawing::Size(280, 58);
-				this->labelTitle->TabIndex = 0;
 				this->labelTitle->Text = L"Projet POO";
 
 				/*-------------------- buttonCustomers --------------------*/
@@ -88,7 +85,7 @@ namespace Projet_POO
 				this->buttonCustomers->Margin = Windows::Forms::Padding(20);
 				this->buttonCustomers->Name = L"buttonCustomers";
 				this->buttonCustomers->Size = Drawing::Size(435, 141);
-				this->buttonCustomers->TabIndex = 0;
+				this->buttonCustomers->TabIndex = 1;
 				this->buttonCustomers->Text = L"Clients";
 				this->buttonCustomers->UseVisualStyleBackColor = true;
 				this->buttonCustomers->Click += gcnew EventHandler(this, &HomePage::buttonCustomers_Click);
@@ -112,7 +109,7 @@ namespace Projet_POO
 				this->buttonCatalog->Margin = Windows::Forms::Padding(20);
 				this->buttonCatalog->Name = L"buttonCatalog";
 				this->buttonCatalog->Size = Drawing::Size(436, 141);
-				this->buttonCatalog->TabIndex = 1;
+				this->buttonCatalog->TabIndex = 3;
 				this->buttonCatalog->Text = L"Catalogue";
 				this->buttonCatalog->UseVisualStyleBackColor = true;
 				this->buttonCatalog->Click += gcnew EventHandler(this, &HomePage::buttonCatalog_Click);
@@ -124,7 +121,7 @@ namespace Projet_POO
 				this->buttonStats->Margin = Windows::Forms::Padding(20);
 				this->buttonStats->Name = L"buttonStats";
 				this->buttonStats->Size = Drawing::Size(436, 142);
-				this->buttonStats->TabIndex = 3;
+				this->buttonStats->TabIndex = 4;
 				this->buttonStats->Text = L"Statistiques";
 				this->buttonStats->UseVisualStyleBackColor = true;
 				this->buttonStats->Click += gcnew EventHandler(this, &HomePage::buttonStats_Click);
@@ -136,7 +133,7 @@ namespace Projet_POO
 				this->buttonOrders->Margin = Windows::Forms::Padding(20);
 				this->buttonOrders->Name = L"buttonOrders";
 				this->buttonOrders->Size = Drawing::Size(917, 114);
-				this->buttonOrders->TabIndex = 2;
+				this->buttonOrders->TabIndex = 5;
 				this->buttonOrders->Text = L"Commandes";
 				this->buttonOrders->UseVisualStyleBackColor = true;
 				this->buttonOrders->Click += gcnew EventHandler(this, &HomePage::buttonOrders_Click);

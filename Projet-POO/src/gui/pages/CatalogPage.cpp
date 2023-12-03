@@ -1,5 +1,6 @@
 #include "CatalogPage.h"
 #include "../../App.h"
+#include "../forms/ProductForm.h"
 
 void CatalogPage::reloadCatalogGridView()
 {
@@ -15,7 +16,12 @@ void CatalogPage::reloadCatalogGridView()
 
 void CatalogPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
-	
+	auto addCustomerForm = gcnew ProductForm();
+	if (addCustomerForm->ShowDialog() == Windows::Forms::DialogResult::OK)
+	{
+		App::app->App::toastMessage(this, "Modifications enregistrees", Color::Green, 3000);
+		reloadCatalogGridView();
+	}
 }
 
 void CatalogPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
