@@ -34,14 +34,14 @@ namespace Projet_POO
 			TableLayoutPanel^ tableLayoutPanel4;
 			TableLayoutPanel^ tableLayoutPanel5;
 			TableLayoutPanel^ tableLayoutPanel6;
-
-			DataGridView^ dataGridViewAddresses;
-
+		
 			Label^ labelTitle;
 			Label^ labelLastName;
 			Label^ labelFirstName;
 			Label^ labelBirthDate;
 
+			DataGridView^ dataGridViewAddresses;
+		
 			TextBox^ textBoxLastName;
 			TextBox^ textBoxFirstName;
 			TextBox^ textBoxBirthdate;
@@ -91,7 +91,6 @@ namespace Projet_POO
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 84.81927F));
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 66));
 				this->tableLayoutPanel1->Size = Drawing::Size(659, 436);
-				this->tableLayoutPanel1->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel2 --------------------*/
 				this->tableLayoutPanel2->ColumnCount = 2;
@@ -104,7 +103,6 @@ namespace Projet_POO
 				this->tableLayoutPanel2->RowCount = 1;
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel2->Size = Drawing::Size(653, 307);
-				this->tableLayoutPanel2->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel3 --------------------*/
 				this->tableLayoutPanel3->ColumnCount = 1;
@@ -117,7 +115,6 @@ namespace Projet_POO
 				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 75.08091F));
 				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 24.91909F));
 				this->tableLayoutPanel3->Size = Drawing::Size(366, 301);
-				this->tableLayoutPanel3->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel4 --------------------*/
 				this->tableLayoutPanel4->ColumnCount = 3;
@@ -132,7 +129,6 @@ namespace Projet_POO
 				this->tableLayoutPanel4->RowCount = 1;
 				this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel4->Size = Drawing::Size(358, 70);
-				this->tableLayoutPanel4->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel5 --------------------*/
 				this->tableLayoutPanel5->ColumnCount = 1;
@@ -153,7 +149,6 @@ namespace Projet_POO
 				this->tableLayoutPanel5->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 52));
 				this->tableLayoutPanel5->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 48));
 				this->tableLayoutPanel5->Size = Drawing::Size(275, 301);
-				this->tableLayoutPanel5->TabIndex = 1;
 
 				/*-------------------- tableLayoutPanel6 --------------------*/
 				this->tableLayoutPanel6->ColumnCount = 2;
@@ -166,14 +161,52 @@ namespace Projet_POO
 				this->tableLayoutPanel6->RowCount = 1;
 				this->tableLayoutPanel6->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel6->Size = Drawing::Size(653, 61);
-				this->tableLayoutPanel6->TabIndex = 2;
+				
+				/*-------------------- labelTitle --------------------*/
+				this->labelTitle->Anchor = AnchorStyles::None;
+				this->labelTitle->AutoSize = true;
+				this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 25);
+				this->labelTitle->Location = Point(277, 8);
+				this->labelTitle->Name = L"labelTitle";
+				this->labelTitle->Size = Drawing::Size(105, 39);
+				this->labelTitle->Text = L"Client";
+				
+				/*-------------------- labelLastName --------------------*/
+				this->labelLastName->Anchor = AnchorStyles::Left;
+				this->labelLastName->AutoSize = true;
+				this->labelLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->labelLastName->Location = Point(10, 12);
+				this->labelLastName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
+				this->labelLastName->Name = L"labelLastName";
+				this->labelLastName->Size = Drawing::Size(53, 25);
+				this->labelLastName->Text = L"Nom";
 
+				/*-------------------- labelFirstName --------------------*/
+				this->labelFirstName->Anchor = AnchorStyles::Left;
+				this->labelFirstName->AutoSize = true;
+				this->labelFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->labelFirstName->Location = Point(10, 112);
+				this->labelFirstName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
+				this->labelFirstName->Name = L"labelFirstName";
+				this->labelFirstName->Size = Drawing::Size(80, 25);
+				this->labelFirstName->Text = L"Prenom";
+
+				/*-------------------- labelBirthDate --------------------*/
+				this->labelBirthDate->Anchor = AnchorStyles::Left;
+				this->labelBirthDate->AutoSize = true;
+				this->labelBirthDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->labelBirthDate->Location = Point(10, 214);
+				this->labelBirthDate->Margin = Windows::Forms::Padding(10, 0, 3, 0);
+				this->labelBirthDate->Name = L"labelBirthDate";
+				this->labelBirthDate->Size = Drawing::Size(174, 25);
+				this->labelBirthDate->Text = L"Date de naissance";
+				
 				/*-------------------- dataGridViewAddresses --------------------*/
 				this->dataGridViewAddresses->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 				this->dataGridViewAddresses->Location = Point(3, 3);
 				this->dataGridViewAddresses->Name = L"dataGridViewAddresses";
 				this->dataGridViewAddresses->Size = Drawing::Size(358, 219);
-				this->dataGridViewAddresses->TabIndex = 1;
+				this->dataGridViewAddresses->TabIndex = 3;
 				this->dataGridViewAddresses->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
 				this->dataGridViewAddresses->ReadOnly = true;
 				this->dataGridViewAddresses->AllowUserToResizeRows = false;
@@ -211,49 +244,6 @@ namespace Projet_POO
 				auto type = gcnew DataGridViewTextBoxColumn();
 				type->Name = L"Type d'adresse";
 				this->dataGridViewAddresses->Columns->Add(type);
-				
-				/*-------------------- labelTitle --------------------*/
-				this->labelTitle->Anchor = AnchorStyles::None;
-				this->labelTitle->AutoSize = true;
-				this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 25);
-				this->labelTitle->Location = Point(277, 8);
-				this->labelTitle->Name = L"labelTitle";
-				this->labelTitle->Size = Drawing::Size(105, 39);
-				this->labelTitle->TabIndex = 1;
-				this->labelTitle->Text = L"Client";
-				
-				/*-------------------- labelLastName --------------------*/
-				this->labelLastName->Anchor = AnchorStyles::Left;
-				this->labelLastName->AutoSize = true;
-				this->labelLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelLastName->Location = Point(10, 12);
-				this->labelLastName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
-				this->labelLastName->Name = L"labelLastName";
-				this->labelLastName->Size = Drawing::Size(53, 25);
-				this->labelLastName->TabIndex = 0;
-				this->labelLastName->Text = L"Nom";
-
-				/*-------------------- labelFirstName --------------------*/
-				this->labelFirstName->Anchor = AnchorStyles::Left;
-				this->labelFirstName->AutoSize = true;
-				this->labelFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelFirstName->Location = Point(10, 112);
-				this->labelFirstName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
-				this->labelFirstName->Name = L"labelFirstName";
-				this->labelFirstName->Size = Drawing::Size(80, 25);
-				this->labelFirstName->TabIndex = 1;
-				this->labelFirstName->Text = L"Prenom";
-
-				/*-------------------- labelBirthDate --------------------*/
-				this->labelBirthDate->Anchor = AnchorStyles::Left;
-				this->labelBirthDate->AutoSize = true;
-				this->labelBirthDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelBirthDate->Location = Point(10, 214);
-				this->labelBirthDate->Margin = Windows::Forms::Padding(10, 0, 3, 0);
-				this->labelBirthDate->Name = L"labelBirthDate";
-				this->labelBirthDate->Size = Drawing::Size(174, 25);
-				this->labelBirthDate->TabIndex = 2;
-				this->labelBirthDate->Text = L"Date de naissance";
 
 				/*-------------------- textBoxLastName --------------------*/
 				this->textBoxLastName->Anchor = AnchorStyles::Left;
@@ -262,7 +252,7 @@ namespace Projet_POO
 				this->textBoxLastName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->textBoxLastName->Name = L"textBoxLastName";
 				this->textBoxLastName->Size = Drawing::Size(255, 30);
-				this->textBoxLastName->TabIndex = 3;
+				this->textBoxLastName->TabIndex = 0;
 				this->textBoxLastName->Text = this->lastName;
 
 				/*-------------------- textBoxFirstName --------------------*/
@@ -272,7 +262,7 @@ namespace Projet_POO
 				this->textBoxFirstName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->textBoxFirstName->Name = L"textBoxFirstName";
 				this->textBoxFirstName->Size = Drawing::Size(255, 30);
-				this->textBoxFirstName->TabIndex = 4;
+				this->textBoxFirstName->TabIndex = 1;
 				this->textBoxFirstName->Text = this->firstName;
 
 				/*-------------------- textBoxBirthdate --------------------*/
@@ -282,7 +272,7 @@ namespace Projet_POO
 				this->textBoxBirthdate->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->textBoxBirthdate->Name = L"textBoxBirthdate";
 				this->textBoxBirthdate->Size = Drawing::Size(255, 30);
-				this->textBoxBirthdate->TabIndex = 5;
+				this->textBoxBirthdate->TabIndex = 2;
 				this->textBoxBirthdate->Text = this->birthdate;
 
 				/*-------------------- buttonAdd --------------------*/
@@ -292,7 +282,7 @@ namespace Projet_POO
 				this->buttonAdd->Margin = Windows::Forms::Padding(7);
 				this->buttonAdd->Name = L"buttonAdd";
 				this->buttonAdd->Size = Drawing::Size(101, 56);
-				this->buttonAdd->TabIndex = 0;
+				this->buttonAdd->TabIndex = 4;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
 				this->buttonAdd->Click += gcnew EventHandler(this, &CustomerForm::buttonAdd_Click);
@@ -304,7 +294,7 @@ namespace Projet_POO
 				this->buttonEdit->Margin = Windows::Forms::Padding(7);
 				this->buttonEdit->Name = L"buttonEdit";
 				this->buttonEdit->Size = Drawing::Size(103, 56);
-				this->buttonEdit->TabIndex = 1;
+				this->buttonEdit->TabIndex = 4;
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
 				this->buttonEdit->Click += gcnew EventHandler(this, &CustomerForm::buttonEdit_Click);
@@ -316,7 +306,7 @@ namespace Projet_POO
 				this->buttonDelete->Margin = Windows::Forms::Padding(7);
 				this->buttonDelete->Name = L"buttonDelete";
 				this->buttonDelete->Size = Drawing::Size(112, 56);
-				this->buttonDelete->TabIndex = 2;
+				this->buttonDelete->TabIndex = 6;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
 				this->buttonDelete->Click += gcnew EventHandler(this, &CustomerForm::buttonDelete_Click);
@@ -328,7 +318,7 @@ namespace Projet_POO
 				this->buttonCancel->Margin = Windows::Forms::Padding(7);
 				this->buttonCancel->Name = L"buttonCancel";
 				this->buttonCancel->Size = Drawing::Size(136, 36);
-				this->buttonCancel->TabIndex = 0;
+				this->buttonCancel->TabIndex = 7;
 				this->buttonCancel->Text = L"Annuler";
 				this->buttonCancel->UseVisualStyleBackColor = true;
 				this->buttonCancel->Click += gcnew EventHandler(this, &CustomerForm::buttonCancel_Click);
@@ -340,7 +330,7 @@ namespace Projet_POO
 				this->buttonValidate->Margin = Windows::Forms::Padding(7);
 				this->buttonValidate->Name = L"buttonValidate";
 				this->buttonValidate->Size = Drawing::Size(136, 36);
-				this->buttonValidate->TabIndex = 1;
+				this->buttonValidate->TabIndex = 8;
 				this->buttonValidate->Text = L"Valider";
 				this->buttonValidate->UseVisualStyleBackColor = true;
 				this->buttonValidate->Click += gcnew EventHandler(this, &CustomerForm::buttonValidate_Click);

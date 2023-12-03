@@ -34,9 +34,13 @@ namespace Projet_POO
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel2 = gcnew TableLayoutPanel();
+				
 				this->labelTitle = gcnew Label();
+				
 				this->dataGridViewOrders = gcnew DataGridView();
+				
 				this->checkBoxDeleted = gcnew CheckBox();
+				
 				this->buttonOrderDetails = gcnew Button();
 				this->buttonAdd = gcnew Button();
 				this->buttonDelete = gcnew Button();
@@ -55,7 +59,6 @@ namespace Projet_POO
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 82.47233F));
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 90));
 				this->tableLayoutPanel1->Size = Drawing::Size(959, 636);
-				this->tableLayoutPanel1->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel2 --------------------*/
 				this->tableLayoutPanel2->ColumnCount = 5;
@@ -74,7 +77,6 @@ namespace Projet_POO
 				this->tableLayoutPanel2->RowCount = 1;
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel2->Size = Drawing::Size(953, 85);
-				this->tableLayoutPanel2->TabIndex = 0;
 
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
@@ -83,7 +85,6 @@ namespace Projet_POO
 				this->labelTitle->Location = Point(374, 28);
 				this->labelTitle->Name = L"labelTitle";
 				this->labelTitle->Size = Drawing::Size(210, 39);
-				this->labelTitle->TabIndex = 2;
 				this->labelTitle->Text = L"Commandes";
 				
 				/*-------------------- dataGridViewOrders --------------------*/
@@ -92,7 +93,7 @@ namespace Projet_POO
 				this->dataGridViewOrders->Margin = Windows::Forms::Padding(15);
 				this->dataGridViewOrders->Name = L"dataGridViewOrders";
 				this->dataGridViewOrders->Size = Drawing::Size(929, 420);
-				this->dataGridViewOrders->TabIndex = 1;
+				this->dataGridViewOrders->TabIndex = 0;
 				
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Left;
@@ -102,7 +103,7 @@ namespace Projet_POO
 				this->checkBoxDeleted->Margin = Windows::Forms::Padding(10, 3, 3, 3);
 				this->checkBoxDeleted->Name = L"checkBoxDeleted";
 				this->checkBoxDeleted->Size = Drawing::Size(346, 29);
-				this->checkBoxDeleted->TabIndex = 0;
+				this->checkBoxDeleted->TabIndex = 1;
 				this->checkBoxDeleted->Text = L"Montrer les commandes supprimees";
 				this->checkBoxDeleted->UseVisualStyleBackColor = true;
 
@@ -113,7 +114,7 @@ namespace Projet_POO
 				this->buttonOrderDetails->Margin = Windows::Forms::Padding(10);
 				this->buttonOrderDetails->Name = L"buttonOrderDetails";
 				this->buttonOrderDetails->Size = Drawing::Size(219, 65);
-				this->buttonOrderDetails->TabIndex = 4;
+				this->buttonOrderDetails->TabIndex = 2;
 				this->buttonOrderDetails->Text = L"Details";
 				this->buttonOrderDetails->UseVisualStyleBackColor = true;
 				
@@ -124,7 +125,7 @@ namespace Projet_POO
 				this->buttonAdd->Margin = Windows::Forms::Padding(7);
 				this->buttonAdd->Name = L"buttonAdd";
 				this->buttonAdd->Size = Drawing::Size(86, 35);
-				this->buttonAdd->TabIndex = 1;
+				this->buttonAdd->TabIndex = 3;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
 
@@ -135,7 +136,7 @@ namespace Projet_POO
 				this->buttonEdit->Margin = Windows::Forms::Padding(7);
 				this->buttonEdit->Name = L"buttonEdit";
 				this->buttonEdit->Size = Drawing::Size(101, 35);
-				this->buttonEdit->TabIndex = 3;
+				this->buttonEdit->TabIndex = 4;
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
 
@@ -146,7 +147,7 @@ namespace Projet_POO
 				this->buttonDelete->Margin = Windows::Forms::Padding(7);
 				this->buttonDelete->Name = L"buttonDelete";
 				this->buttonDelete->Size = Drawing::Size(110, 35);
-				this->buttonDelete->TabIndex = 2;
+				this->buttonDelete->TabIndex = 5;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
 				
