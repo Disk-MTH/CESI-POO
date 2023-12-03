@@ -5,21 +5,21 @@ GO;
 
 /* Query to fill CustomerPage */
 SELECT id_customer,
-       first_name,
        last_name,
+       first_name,
        CONVERT(VARCHAR(10), birthdate, 103) AS birthdate
 FROM customer;
 /*
 WHERE deleted = 0;*/
 
 /* Query to insert new customer */
-INSERT INTO customer (first_name, last_name, birthdate)
+INSERT INTO customer (last_name, first_name, birthdate)
 VALUES ('aa', 'bb', 'cc');
 
 /* Query to update a customer */
 UPDATE customer
-SET first_name = 'aa',
-    last_name  = 'bb',
+SET last_name  = 'aa',
+    first_name = 'bb',
     birthdate  = 'cc'
 WHERE id_customer = 1;
 
@@ -27,7 +27,10 @@ WHERE id_customer = 1;
 UPDATE customer
 SET deleted = 1
 WHERE id_customer = 1;
-/*should delete user delete addresses of user ?*/
+
+/* Query to really delete customer (in case of cancel) */
+DELETE FROM customer
+WHERE id_customer = 1;
 
 /* ------------------------- Addresses -------------------------*/
 
@@ -36,6 +39,7 @@ SELECT a.id_address,
        a.street,
        a.zip_code,
        a.city,
+       at.id_address_type,
        at.type
 FROM address a
          INNER JOIN customerHasAddresses cha ON a.id_address = cha.id_address
@@ -50,12 +54,12 @@ VALUES ('aa', 'bb', 'cc');
 INSERT INTO customerHasAddresses (id_customer, id_address, id_address_type)
 VALUES (1, 1, 1);
 
-/* Query to update an address */
+/* Query to delete an address */
 UPDATE address
 SET deleted = 1
-WHERE id_address = 1; /* Then insert new*/
+WHERE id_address = 1;
 
-
+/* query to update an address = delete + insert*/
 
 /* ------------------------- Catalog -------------------------*/
 

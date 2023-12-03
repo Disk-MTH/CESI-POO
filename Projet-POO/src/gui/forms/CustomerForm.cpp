@@ -9,7 +9,7 @@ void CustomerForm::reloadAddressesGridView()
 		this->dataGridViewAddresses->Rows->Clear();
 
 		DataSet^ addresses = App::app->db->query(
-		"SELECT a.id_address, a.street, a.zip_code, a.city, at.type FROM address a INNER JOIN customerHasAddresses cha ON a.id_address = cha.id_address INNER JOIN address_type at ON cha.id_address_type = at.id_address_type WHERE a.deleted = 0 AND cha.id_customer = " + customerId + ";");
+		"SELECT a.id_address, a.street, a.zip_code, a.city, at.id_address_type, at.type FROM address a INNER JOIN customerHasAddresses cha ON a.id_address = cha.id_address INNER JOIN address_type at ON cha.id_address_type = at.id_address_type WHERE a.deleted = 0 AND cha.id_customer = " + customerId + ";");
 		for (int i = 0; i < addresses->Tables[0]->Rows->Count; i++)
 		{
 			this->dataGridViewAddresses->Rows->Add(addresses->Tables[0]->Rows[i]->ItemArray);
@@ -17,13 +17,52 @@ void CustomerForm::reloadAddressesGridView()
 	}
 }
 
+int^ CustomerForm::createCustomer()
+{
+	lastName = this->textBoxLastName->Text;
+	firstName = this->textBoxFirstName->Text;
+	birthdate = this->textBoxBirthdate->Text;
+
+	if (App::isEmpty("Nom", lastName) || App::isEmpty("Prenom", firstName) || App::isValidDate("Date de naissance", birthdate) == "")
+	{
+		return 0;
+	}
+
+	birthdate = App::isValidDate("Date de naissance", birthdate);
+	
+	try
+	{
+		if (customerId == "")
+		{
+			customerId = App::app->db->insert("INSERT INTO customer (last_name, first_name, birthdate) VALUES ('" + lastName + "', '" + firstName + "', '" + birthdate + "')");
+		}
+		else
+		{
+			App::app->db->execute("UPDATE customer SET last_name = '" + lastName + "', first_name = '" + firstName + "', birthdate = '" + birthdate + "' WHERE id_customer = " + customerId);
+		}
+
+		App::app->logger->log("Customer edited: \"" + lastName + "\", \"" + firstName + "\", \"" + birthdate + "\"");
+		return 1;
+	}
+	catch (Exception^ exception)
+	{
+		App::app->logger->error("Error while editing customer: \"" + lastName + "\", \"" + firstName + "\", \"" + birthdate + "\"");
+		App::app->logger->error(exception->Message);
+		App::app->toastMessage(this, "Erreur lors de la modifications du client", Color::Red, 3000);
+	}
+	return 0;
+}
+
 void CustomerForm::openAddressesForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type)
 {
-	auto addAddressForm = gcnew AddresseForm(addressId, address, zipCode, city, type, this->customerId);
-	if (addAddressForm->ShowDialog() == Windows::Forms::DialogResult::OK)
+	if (createCustomer()->Equals(1))
 	{
-		App::app->App::toastMessage(this, "Addresses enregistrees", Color::Green, 3000);
-		reloadAddressesGridView();
+		auto addAddressForm = gcnew AddresseForm(addressId, address, zipCode, city, type, this->customerId);
+		if (addAddressForm->ShowDialog() == Windows::Forms::DialogResult::OK)
+		{
+			App::app->App::toastMessage(this, "Addresses enregistrees", Color::Green, 3000);
+			reloadAddressesGridView();
+		}
 	}
 }
 
@@ -62,40 +101,32 @@ void CustomerForm::buttonDelete_Click(Object^ sender, EventArgs^ e)
 
 void CustomerForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 {
-	//remove all addresses and customerHasAddresses and customer
+	if (this->mode->Equals(0) && customerId != "" && this->DialogResult != Windows::Forms::DialogResult::OK)
+	{
+		try
+		{
+			DataSet^ addresses = App::app->db->query("SELECT id_address FROM customerHasAddresses WHERE id_customer = " + customerId + ";");
+			App::app->db->execute("DELETE FROM customerHasAddresses WHERE id_customer = " + customerId + ";");
+			App::app->db->execute("DELETE FROM customer WHERE id_customer = " + customerId + ";");
+			for (int i = 0; i < addresses->Tables[0]->Rows->Count; i++)
+			{
+				App::app->db->execute("DELETE FROM address WHERE id_address = " + addresses->Tables[0]->Rows[i]->ItemArray[0]->ToString() + ";");
+			}
+		}
+		catch (Exception^ exception)
+		{
+			App::app->logger->error(exception);
+		}
+	}
+	
 	this->Close();
 }
 
 void CustomerForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 {
-	firstName = this->textBoxFirstName->Text;
-	lastName = this->textBoxLastName->Text;
-	birthdate = App::isValidDate("Date de naissance", this->textBoxBirthdate->Text);
-
-	if (App::isEmpty("Prenom", firstName) || App::isEmpty("Nom", lastName) || birthdate == "")
+	if (createCustomer()->Equals(1))
 	{
-		return;
-	}
-
-	try
-	{
-		if (customerId == "")
-		{
-			App::app->db->insert("INSERT INTO customer (first_name, last_name, birthdate) VALUES ('" + firstName + "', '" + lastName + "', '" + birthdate + "')");
-		}
-		else
-		{
-			App::app->db->execute("UPDATE customer SET first_name = '" + firstName + "', last_name = '" + lastName + "', birthdate = '" + birthdate + "' WHERE id_customer = " + customerId);
-		}
-
-		App::app->logger->log("Data edited: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
 		this->DialogResult = Windows::Forms::DialogResult::OK;
 		this->Close();
-	}
-	catch (Exception^ exception)
-	{
-		App::app->logger->error("Error while editing data: \"" + firstName + "\", \"" + lastName + "\", \"" + birthdate + "\"");
-		App::app->logger->error(exception->Message);
-		App::app->toastMessage(this, "Erreur lors de l'enregistrement des modifications", Color::Red, 3000);
 	}
 }

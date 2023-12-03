@@ -10,21 +10,23 @@ namespace Projet_POO
 	public ref class CustomerForm : public Form
 	{
 		public:
-			CustomerForm(String^ customerId, String^ firstName, String^ lastName, String^ birthdate)
+			CustomerForm(String^ customerId, String^ lastName, String^ firstName, String^ birthdate)
 			{
 				this->customerId = customerId;
 				this->firstName = firstName;
 				this->lastName = lastName;
 				this->birthdate = birthdate;
+				
 				initialize();
 				reloadAddressesGridView();
 			}
 
 		private:
 			String^ customerId;
-			String^ firstName;
 			String^ lastName;
+			String^ firstName;
 			String^ birthdate;
+			int^ mode = customerId == "" ? 0 : 1; //0 = add, 1 = edit
 
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
@@ -36,12 +38,12 @@ namespace Projet_POO
 			DataGridView^ dataGridViewAddresses;
 
 			Label^ labelTitle;
-			Label^ labelFirstName;
 			Label^ labelLastName;
+			Label^ labelFirstName;
 			Label^ labelBirthDate;
 
-			TextBox^ textBoxFirstName;
 			TextBox^ textBoxLastName;
+			TextBox^ textBoxFirstName;
 			TextBox^ textBoxBirthdate;
 
 			Button^ buttonAdd;
@@ -58,19 +60,23 @@ namespace Projet_POO
 				this->tableLayoutPanel4 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel5 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel6 = gcnew TableLayoutPanel();
+				
 				this->dataGridViewAddresses = gcnew DataGridView();
+				
 				this->labelTitle = gcnew Label();
-				this->labelFirstName = gcnew Label();
 				this->labelLastName = gcnew Label();
+				this->labelFirstName = gcnew Label();
 				this->labelBirthDate = gcnew Label();
+				
 				this->textBoxFirstName = gcnew TextBox();
 				this->textBoxLastName = gcnew TextBox();
 				this->textBoxBirthdate = gcnew TextBox();
+				
 				this->buttonAdd = gcnew Button();
 				this->buttonEdit = gcnew Button();
+				this->buttonDelete = gcnew Button();
 				this->buttonCancel = gcnew Button();
 				this->buttonValidate = gcnew Button();
-				this->buttonDelete = gcnew Button();
 
 				/*-------------------- tableLayoutPanel1 --------------------*/
 				this->tableLayoutPanel1->ColumnCount = 1;
@@ -197,6 +203,11 @@ namespace Projet_POO
 				city->Name = L"Ville";
 				this->dataGridViewAddresses->Columns->Add(city);
 
+				auto idType = gcnew DataGridViewTextBoxColumn();
+				idType->Name = L"id_address_type";
+				idType->Visible = false;
+				this->dataGridViewAddresses->Columns->Add(idType);
+
 				auto type = gcnew DataGridViewTextBoxColumn();
 				type->Name = L"Type d'adresse";
 				this->dataGridViewAddresses->Columns->Add(type);
@@ -210,6 +221,17 @@ namespace Projet_POO
 				this->labelTitle->Size = Drawing::Size(105, 39);
 				this->labelTitle->TabIndex = 1;
 				this->labelTitle->Text = L"Client";
+				
+				/*-------------------- labelLastName --------------------*/
+				this->labelLastName->Anchor = AnchorStyles::Left;
+				this->labelLastName->AutoSize = true;
+				this->labelLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->labelLastName->Location = Point(10, 12);
+				this->labelLastName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
+				this->labelLastName->Name = L"labelLastName";
+				this->labelLastName->Size = Drawing::Size(53, 25);
+				this->labelLastName->TabIndex = 0;
+				this->labelLastName->Text = L"Nom";
 
 				/*-------------------- labelFirstName --------------------*/
 				this->labelFirstName->Anchor = AnchorStyles::Left;
@@ -222,17 +244,6 @@ namespace Projet_POO
 				this->labelFirstName->TabIndex = 1;
 				this->labelFirstName->Text = L"Prenom";
 
-				/*-------------------- labelLastName --------------------*/
-				this->labelLastName->Anchor = AnchorStyles::Left;
-				this->labelLastName->AutoSize = true;
-				this->labelLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelLastName->Location = Point(10, 12);
-				this->labelLastName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
-				this->labelLastName->Name = L"labelLastName";
-				this->labelLastName->Size = Drawing::Size(53, 25);
-				this->labelLastName->TabIndex = 0;
-				this->labelLastName->Text = L"Nom";
-
 				/*-------------------- labelBirthDate --------------------*/
 				this->labelBirthDate->Anchor = AnchorStyles::Left;
 				this->labelBirthDate->AutoSize = true;
@@ -244,16 +255,6 @@ namespace Projet_POO
 				this->labelBirthDate->TabIndex = 2;
 				this->labelBirthDate->Text = L"Date de naissance";
 
-				/*-------------------- textBoxFirstName --------------------*/
-				this->textBoxFirstName->Anchor = AnchorStyles::Left;
-				this->textBoxFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->textBoxFirstName->Location = Point(10, 160);
-				this->textBoxFirstName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
-				this->textBoxFirstName->Name = L"textBoxFirstName";
-				this->textBoxFirstName->Size = Drawing::Size(255, 30);
-				this->textBoxFirstName->TabIndex = 4;
-				this->textBoxFirstName->Text = this->firstName;
-
 				/*-------------------- textBoxLastName --------------------*/
 				this->textBoxLastName->Anchor = AnchorStyles::Left;
 				this->textBoxLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -263,6 +264,16 @@ namespace Projet_POO
 				this->textBoxLastName->Size = Drawing::Size(255, 30);
 				this->textBoxLastName->TabIndex = 3;
 				this->textBoxLastName->Text = this->lastName;
+
+				/*-------------------- textBoxFirstName --------------------*/
+				this->textBoxFirstName->Anchor = AnchorStyles::Left;
+				this->textBoxFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->textBoxFirstName->Location = Point(10, 160);
+				this->textBoxFirstName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
+				this->textBoxFirstName->Name = L"textBoxFirstName";
+				this->textBoxFirstName->Size = Drawing::Size(255, 30);
+				this->textBoxFirstName->TabIndex = 4;
+				this->textBoxFirstName->Text = this->firstName;
 
 				/*-------------------- textBoxBirthdate --------------------*/
 				this->textBoxBirthdate->Anchor = AnchorStyles::Left;
@@ -297,18 +308,6 @@ namespace Projet_POO
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
 				this->buttonEdit->Click += gcnew EventHandler(this, &CustomerForm::buttonEdit_Click);
-
-				/*-------------------- buttonCancel --------------------*/
-				this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
-				this->buttonCancel->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->buttonCancel->Location = Point(7, 18);
-				this->buttonCancel->Margin = Windows::Forms::Padding(7);
-				this->buttonCancel->Name = L"buttonCancel";
-				this->buttonCancel->Size = Drawing::Size(136, 36);
-				this->buttonCancel->TabIndex = 0;
-				this->buttonCancel->Text = L"Annuler";
-				this->buttonCancel->UseVisualStyleBackColor = true;
-				this->buttonCancel->Click += gcnew EventHandler(this, &CustomerForm::buttonCancel_Click);
 				
 				/*-------------------- buttonDelete --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -321,6 +320,18 @@ namespace Projet_POO
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
 				this->buttonDelete->Click += gcnew EventHandler(this, &CustomerForm::buttonDelete_Click);
+
+				/*-------------------- buttonCancel --------------------*/
+				this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
+				this->buttonCancel->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->buttonCancel->Location = Point(7, 18);
+				this->buttonCancel->Margin = Windows::Forms::Padding(7);
+				this->buttonCancel->Name = L"buttonCancel";
+				this->buttonCancel->Size = Drawing::Size(136, 36);
+				this->buttonCancel->TabIndex = 0;
+				this->buttonCancel->Text = L"Annuler";
+				this->buttonCancel->UseVisualStyleBackColor = true;
+				this->buttonCancel->Click += gcnew EventHandler(this, &CustomerForm::buttonCancel_Click);
 
 				/*-------------------- buttonValidate --------------------*/
 				this->buttonValidate->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -346,6 +357,7 @@ namespace Projet_POO
 			}
 
 			Void reloadAddressesGridView();
+			int^ createCustomer();
 			Void openAddressesForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);

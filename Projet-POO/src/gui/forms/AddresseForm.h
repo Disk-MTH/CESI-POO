@@ -251,7 +251,7 @@ namespace Projet_POO
             this->checkBoxDelivery->TabIndex = 1;
             this->checkBoxDelivery->Text = L"Adresse de livraison";
             this->checkBoxDelivery->UseVisualStyleBackColor = true;
-            this->checkBoxDelivery->Checked = this->type->Equals("Livraison") || this->type->Equals("Livraison et Facturation");
+            this->checkBoxDelivery->Checked = this->type == "1" || this->type == "3";
             
             /*-------------------- checkBoxBilling --------------------*/
             this->checkBoxBilling->Anchor = AnchorStyles::Left;
@@ -264,7 +264,7 @@ namespace Projet_POO
             this->checkBoxBilling->TabIndex = 0;
             this->checkBoxBilling->Text = L"Adresse de facturation";
             this->checkBoxBilling->UseVisualStyleBackColor = true;
-            this->checkBoxBilling->Checked = this->type->Equals("Facturation") || this->type->Equals("Livraison et Facturation");
+            this->checkBoxBilling->Checked = this->type == "2" || this->type == "3";
 
             /*-------------------- buttonValidate --------------------*/
             this->buttonValidate->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;

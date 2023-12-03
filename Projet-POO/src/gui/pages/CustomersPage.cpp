@@ -7,7 +7,7 @@ void CustomersPage::reloadCustomersGridView()
 	this->dataGridViewCustomers->Rows->Clear();
 
 	DataSet^ customers = App::app->db->query(
-		"SELECT id_customer, first_name, last_name, CONVERT(VARCHAR, birthdate, 103) AS birthdate FROM customer" + (this->checkBoxDeleted->Checked ? ";" : " WHERE deleted = 0;"));
+		"SELECT id_customer, last_name, first_name, CONVERT(VARCHAR, birthdate, 103) AS birthdate FROM customer" + (this->checkBoxDeleted->Checked ? ";" : " WHERE deleted = 0;"));
 
 	for (int i = 0; i < customers->Tables[0]->Rows->Count; i++)
 	{
@@ -15,9 +15,9 @@ void CustomersPage::reloadCustomersGridView()
 	}
 }
 
-void CustomersPage::openCustomerForm(String^ customerId, String^ firstName, String^ lastName, String^ birthdate)
+void CustomersPage::openCustomerForm(String^ customerId, String^ lastName, String^ firstName, String^ birthdate)
 {
-	auto addCustomerForm = gcnew CustomerForm(customerId, firstName, lastName, birthdate);
+	auto addCustomerForm = gcnew CustomerForm(customerId, lastName, firstName, birthdate);
 	if (addCustomerForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 	{
 		App::app->App::toastMessage(this, "Modifications enregistrees", Color::Green, 3000);

@@ -22,7 +22,7 @@ void AddresseForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 	city = this->comboBoxCity->Text;
 	String^ addressTypeId = this->checkBoxDelivery->Checked && this->checkBoxDelivery->Checked ? "3" : this->checkBoxDelivery->Checked ? "2" : this->checkBoxBilling->Checked ? "1" : "";
 
-	if (App::isEmpty ("Adresse", street) || App::isEmpty ("Code postal", zipCode) || App::isEmpty ("Ville", city) || App::isEmpty ("Type", addressTypeId))
+	if (App::isEmpty ("Libelle", street) || App::isEmpty ("Code postal", zipCode) || App::isEmpty ("Ville", city) || App::isEmpty ("Type", addressTypeId))
 	{
 		return;
 	}
@@ -37,7 +37,7 @@ void AddresseForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 		auto addressId = App::app->db->insert("INSERT INTO address (street, zip_code, city) VALUES ('" + street + "', '" + zipCode + "', '" + city + "');");
 		App::app->db->insert("INSERT INTO customerHasAddresses (id_customer, id_address, id_address_type) VALUES ('" + this->customerId + "', '" + addressId + "', '" + addressTypeId + "');");
 
-		App::app->logger->log("Address saved: \"" + street + "\", \"" + zipCode + "\", \"" + city + "\", \"" + addressTypeId + "\"");
+		App::app->logger->log("Address saved: \"" + street + "\", \"" + zipCode + "\", \"" + city + "\", \"" + addressTypeId + "\" and asociated to customer id: \"" + this->customerId + "\"");
 		this->DialogResult = Windows::Forms::DialogResult::OK;
 		this->Close();
 	}
