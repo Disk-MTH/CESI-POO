@@ -73,6 +73,13 @@ void CustomerForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 
 void CustomerForm::buttonEdit_Click(Object^ sender, EventArgs^ e)
 {
+	if (this->dataGridViewAddresses->SelectedRows->Count == 0)
+	{
+		App::app->logger->warn("Can't edit: no address selected");
+		App::app->toastMessage(this, "Veuillez selectionner une adresse", Color::Red, 2000);
+		return;
+	}
+	
 	openAddressesForm(
 		this->dataGridViewAddresses->CurrentRow->Cells[0]->Value->ToString(),
 		this->dataGridViewAddresses->CurrentRow->Cells[1]->Value->ToString(),
@@ -84,6 +91,13 @@ void CustomerForm::buttonEdit_Click(Object^ sender, EventArgs^ e)
 
 void CustomerForm::buttonDelete_Click(Object^ sender, EventArgs^ e)
 {
+	if (this->dataGridViewAddresses->SelectedRows->Count == 0)
+	{
+		App::app->logger->warn("Can't delete: no address selected");
+		App::app->toastMessage(this, "Veuillez selectionner une adresse", Color::Red, 2000);
+		return;
+	}
+	
 	try
 	{
 		App::app->db->execute("UPDATE address SET deleted = 1 WHERE id_address = " + this->dataGridViewAddresses->CurrentRow->Cells[0]->Value->ToString() + ";");
