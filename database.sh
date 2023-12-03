@@ -57,6 +57,7 @@ do
       else 
         echo "Restore container \"$DOCKER_CONTAINER\" from \"./backups/$backupFile\""
         docker cp "./backups/$backupFile" "$DOCKER_CONTAINER:/tmp/$backupFile"
+        docker exec $DOCKER_CONTAINER sh -c "/opt/mssql-tools/bin/sqlcmd -U $DB_USER -P $DB_PASSWORD -Q \"IF EXISTS(SELECT * FROM sys.databases WHERE name = '$DB_DATABASE') DROP DATABASE [$DB_DATABASE];\""
         docker exec $DOCKER_CONTAINER sh -c "/opt/mssql-tools/bin/sqlcmd -U $DB_USER -P $DB_PASSWORD -Q \"RESTORE DATABASE [$DB_DATABASE] FROM DISK = '/tmp/$backupFile' WITH REPLACE;\""
       fi
   elif [ "$MODE" = "e" ]; then

@@ -9,7 +9,7 @@ void CustomerForm::reloadAddressesGridView()
 		this->dataGridViewAddresses->Rows->Clear();
 
 		DataSet^ addresses = App::app->db->query(
-		"SELECT a.id_address, a.street, a.zip_code, a.city, at.id_address_type, at.type FROM address a INNER JOIN customerHasAddresses cha ON a.id_address = cha.id_address INNER JOIN address_type at ON cha.id_address_type = at.id_address_type WHERE a.deleted = 0 AND cha.id_customer = " + customerId + ";");
+		"SELECT a.id_address, a.street, a.zip_code, a.city, at.id_address_type, at.type FROM address a INNER JOIN customerHasAddresse cha ON a.id_address = cha.id_address INNER JOIN address_type at ON cha.id_address_type = at.id_address_type WHERE a.deleted = 0 AND cha.id_customer = " + customerId + ";");
 		for (int i = 0; i < addresses->Tables[0]->Rows->Count; i++)
 		{
 			this->dataGridViewAddresses->Rows->Add(addresses->Tables[0]->Rows[i]->ItemArray);
@@ -105,8 +105,8 @@ void CustomerForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 	{
 		try
 		{
-			DataSet^ addresses = App::app->db->query("SELECT id_address FROM customerHasAddresses WHERE id_customer = " + customerId + ";");
-			App::app->db->execute("DELETE FROM customerHasAddresses WHERE id_customer = " + customerId + ";");
+			DataSet^ addresses = App::app->db->query("SELECT id_address FROM customerHasAddresse WHERE id_customer = " + customerId + ";");
+			App::app->db->execute("DELETE FROM customerHasAddresse WHERE id_customer = " + customerId + ";");
 			App::app->db->execute("DELETE FROM customer WHERE id_customer = " + customerId + ";");
 			for (int i = 0; i < addresses->Tables[0]->Rows->Count; i++)
 			{

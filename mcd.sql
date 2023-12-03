@@ -123,7 +123,7 @@ CREATE TABLE suggestion
 );
 GO;
 
-CREATE TABLE orderHasProducts
+CREATE TABLE orderHasProduct
 (
     id_product INT,
     id_order   INT,
@@ -137,7 +137,7 @@ CREATE TABLE orderHasProducts
 );
 GO;
 
-CREATE TABLE customerHasAddresses
+CREATE TABLE customerHasAddresse
 (
     id_address      INT,
     id_customer     INT,
