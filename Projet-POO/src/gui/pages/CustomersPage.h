@@ -118,21 +118,18 @@ namespace Projet_POO
 
 				auto lastName = gcnew DataGridViewTextBoxColumn();
 				lastName->Name = L"Nom";
+				lastName->Resizable = DataGridViewTriState::False;
 				this->dataGridViewCustomers->Columns->Add(lastName);
-
 				auto firstName = gcnew DataGridViewTextBoxColumn();
 				firstName->Name = L"Prenom";
+				firstName->Resizable = DataGridViewTriState::False;
 				this->dataGridViewCustomers->Columns->Add(firstName);
 
 				auto birthdate = gcnew DataGridViewTextBoxColumn();
 				birthdate->Name = L"Date de naissance";
+				birthdate->Resizable = DataGridViewTriState::False;
 				this->dataGridViewCustomers->Columns->Add(birthdate);
-
-				for (int i = 0; i < this->dataGridViewCustomers->Columns->Count; i++)
-				{
-					this->dataGridViewCustomers->Columns[i]->Resizable = DataGridViewTriState::False;
-				}
-
+				
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 				this->checkBoxDeleted->AutoSize = true;

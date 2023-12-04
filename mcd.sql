@@ -34,7 +34,7 @@ CREATE TABLE customer
     first_name  VARCHAR(50)        NOT NULL,
     last_name   VARCHAR(50)        NOT NULL,
     birthdate   DATE               NOT NULL,
-    deleted     BIT             NOT NULL DEFAULT 0,
+    deleted     BIT                NOT NULL DEFAULT 0,
     PRIMARY KEY (id_customer)
 );
 GO;
@@ -45,7 +45,7 @@ CREATE TABLE staff
     first_name VARCHAR(50)        NOT NULL,
     last_name  VARCHAR(50)        NOT NULL,
     hire_date  DATE               NOT NULL,
-    deleted    BIT             NOT NULL DEFAULT 0,
+    deleted    BIT                NOT NULL DEFAULT 0,
     id_staff_1 INT,
     id_address INT                NOT NULL,
     PRIMARY KEY (id_staff),
@@ -62,7 +62,7 @@ CREATE TABLE product
     name                   VARCHAR(50)        NOT NULL,
     vat_rate               REAL               NOT NULL,
     provisioning_threshold INT                NOT NULL,
-    deleted                BIT             NOT NULL DEFAULT 0,
+    deleted                BIT                NOT NULL DEFAULT 0,
     quantity               INT                NOT NULL,
     buy_price              REAL               NOT NULL,
     colour                 VARCHAR(50)        NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE [order]
     reference              VARCHAR(50)        NOT NULL,
     issue_date             VARCHAR(50)        NOT NULL,
     expected_delivery_date VARCHAR(50)        NOT NULL,
-    deleted                BIT             NOT NULL DEFAULT 0,
+    deleted                BIT                NOT NULL DEFAULT 0,
     id_address             INT                NOT NULL,
     id_address_1           INT                NOT NULL,
     id_customer            INT                NOT NULL,
@@ -94,8 +94,8 @@ CREATE TABLE payment
     payment_date DATETIME           NOT NULL,
     payment_mean SMALLINT           NOT NULL,
     amount       REAL               NOT NULL,
-    validated    BIT             NOT NULL DEFAULT 0,
-    deleted      BIT             NOT NULL DEFAULT 0,
+    validated    BIT                NOT NULL DEFAULT 0,
+    deleted      BIT                NOT NULL DEFAULT 0,
     id_order     INT                NOT NULL,
     PRIMARY KEY (id_payment),
     FOREIGN KEY (id_order) REFERENCES [order] (id_order)
@@ -107,7 +107,7 @@ CREATE TABLE tiered_price
     id_tiered_price  INT IDENTITY (1,1) NOT NULL,
     minimal_quantity INT                NOT NULL,
     tf_price         REAL               NOT NULL,
-    deleted          BIT             NOT NULL DEFAULT 0,
+    deleted          BIT                NOT NULL DEFAULT 0,
     id_product       INT                NOT NULL,
     PRIMARY KEY (id_tiered_price),
     FOREIGN KEY (id_product) REFERENCES product (id_product)

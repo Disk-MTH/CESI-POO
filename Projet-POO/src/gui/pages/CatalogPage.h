@@ -25,7 +25,8 @@ namespace Projet_POO
         DataGridView^ dataGridViewCatalog;
         
         CheckBox^ checkBoxDeleted;
-        
+
+        Button^ buttonProductDetails;
         Button^ buttonAdd;
         Button^ buttonEdit;
         Button^ buttonDelete;
@@ -40,7 +41,8 @@ namespace Projet_POO
             this->dataGridViewCatalog = gcnew DataGridView();
             
             this->checkBoxDeleted = gcnew CheckBox();
-            
+
+            this->buttonProductDetails = gcnew Button();
             this->buttonAdd = gcnew Button();
             this->buttonEdit = gcnew Button();
             this->buttonDelete = gcnew Button();
@@ -69,6 +71,7 @@ namespace Projet_POO
             this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 117));
             this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 135));
             this->tableLayoutPanel2->Controls->Add(this->checkBoxDeleted, 0, 0);
+            this->tableLayoutPanel2->Controls->Add(this->buttonProductDetails, 1, 0);
             this->tableLayoutPanel2->Controls->Add(this->buttonAdd, 3, 0);
             this->tableLayoutPanel2->Controls->Add(this->buttonEdit, 4, 0);
             this->tableLayoutPanel2->Controls->Add(this->buttonDelete, 5, 0);
@@ -101,10 +104,11 @@ namespace Projet_POO
             this->dataGridViewCatalog->AllowUserToResizeRows = false;
             this->dataGridViewCatalog->AllowUserToAddRows = false;
             this->dataGridViewCatalog->RowHeadersVisible = false;
+            this->dataGridViewCatalog->AllowUserToDeleteRows = false;
             this->dataGridViewCatalog->MultiSelect = false;
+            this->dataGridViewCatalog->ColumnHeadersDefaultCellStyle->WrapMode = DataGridViewTriState::False;
             this->dataGridViewCatalog->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->dataGridViewCatalog->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
-            this->dataGridViewCatalog->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::DisableResizing;
             this->dataGridViewCatalog->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
             this->dataGridViewCatalog->ColumnHeadersHeight = 40;
             
@@ -145,7 +149,8 @@ namespace Projet_POO
             this->dataGridViewCatalog->Columns->Add(quantity);
 
             auto provisioningThreshold = gcnew DataGridViewTextBoxColumn();
-            provisioningThreshold->Name = L"Limite de reapprovisionnement";
+            provisioningThreshold->Name = L"Limite de restock";
+            provisioningThreshold->AutoSizeMode = DataGridViewAutoSizeColumnMode::Fill;
             this->dataGridViewCatalog->Columns->Add(provisioningThreshold);
             
             /*-------------------- checkBoxDeleted --------------------*/
@@ -160,6 +165,18 @@ namespace Projet_POO
             this->checkBoxDeleted->Text = L"Afficher les produits\nsupprimes";
             this->checkBoxDeleted->UseVisualStyleBackColor = true;
             //this->checkBoxDeleted->Click += gcnew EventHandler(this, &CustomersPage::checkBoxDeleted_Click);
+
+            /*-------------------- buttonProductDetails --------------------*/
+            this->buttonProductDetails->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
+            this->buttonProductDetails->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
+            this->buttonProductDetails->Location = Point(278, 12);
+            this->buttonProductDetails->Margin = Windows::Forms::Padding(11, 6, 11, 6);
+            this->buttonProductDetails->Name = L"buttonProductDetails";
+            this->buttonProductDetails->Size = Drawing::Size(269, 126);
+            this->buttonProductDetails->TabIndex = 2;
+            this->buttonProductDetails->Text = L"Details";
+            this->buttonProductDetails->UseVisualStyleBackColor = true;
+            this->buttonProductDetails->Click += gcnew EventHandler(this, &CatalogPage::buttonProductDetails_Click);
             
             /*-------------------- buttonAdd --------------------*/
             this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -209,6 +226,7 @@ namespace Projet_POO
         }
 
         Void reloadCatalogGridView();
+        Void buttonProductDetails_Click(Object^ sender, EventArgs^ e);
         Void buttonAdd_Click(Object^ sender, EventArgs^ e);
         Void buttonEdit_Click(Object^ sender, EventArgs^ e);
         Void buttonDelete_Click(Object^ sender, EventArgs^ e);

@@ -218,13 +218,13 @@ namespace Projet_POO
             this->labelColour->Size = Drawing::Size(101, 29);
             this->labelColour->Text = L"Couleur";
 
-            /*-------------------- labelVAT --------------------*/
+            /*-------------------- labelVat --------------------*/
             this->labelVAT->Anchor = AnchorStyles::Left;
             this->labelVAT->AutoSize = true;
             this->labelVAT->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->labelVAT->Location = Point(197, 113);
             this->labelVAT->Margin = Windows::Forms::Padding(10, 0, 3, 0);
-            this->labelVAT->Name = L"labelVAT";
+            this->labelVAT->Name = L"labelVat";
             this->labelVAT->Size = Drawing::Size(159, 29);
             this->labelVAT->Text = L"Taux de TVA";
 

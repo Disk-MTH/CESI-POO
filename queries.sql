@@ -29,7 +29,8 @@ SET deleted = 1
 WHERE id_customer = 1;
 
 /* Query to really delete customer (in case of cancel) */
-DELETE FROM customer
+DELETE
+FROM customer
 WHERE id_customer = 1;
 
 /* ------------------------- Addresses -------------------------*/
@@ -75,3 +76,12 @@ SELECT id_product,
        quantity,
        provisioning_threshold
 FROM product;
+
+/* Query to fill TieredPrices */
+SELECT minimal_quantity,
+       tf_price,
+       ROUND(tf_price * (1 + vat_rate / 100), 2) AS price
+FROM tiered_price
+         INNER JOIN product p ON tiered_price.id_product = p.id_product
+WHERE p.deleted = 0
+  AND p.id_product = 1;
