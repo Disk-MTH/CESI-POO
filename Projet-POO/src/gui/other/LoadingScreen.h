@@ -67,6 +67,7 @@ namespace Projet_POO
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(184, 61);
 				this->Controls->Add(this->tableLayout1);
+				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
 				this->MaximizeBox = false;
 				this->Name = L"LoadingScreen";
 				this->StartPosition = FormStartPosition::CenterScreen;

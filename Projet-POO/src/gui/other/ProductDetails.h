@@ -231,6 +231,7 @@ namespace Projet_POO
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(684, 461);
 				this->Controls->Add(this->tableLayoutPanel1);
+				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
 				this->MaximizeBox = false;
 				this->Name = L"ProductDetails";
 				this->Text = L"ProductDetails";

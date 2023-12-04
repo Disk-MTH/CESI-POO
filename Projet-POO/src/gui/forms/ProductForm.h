@@ -374,11 +374,13 @@ namespace Projet_POO
             this->buttonApply->UseVisualStyleBackColor = true;
 
             /*-------------------- ProductForm --------------------*/
+            this->StartPosition = FormStartPosition::CenterScreen;
             this->AutoScaleDimensions = SizeF(8, 16);
             this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
             this->ClientSize = Drawing::Size(682, 953);
             this->Controls->Add(this->tableLayoutPanel1);
             this->MaximizeBox = false;
+            this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
             this->Name = L"ProductForm";
             this->Text = L"ProductForm";
         }

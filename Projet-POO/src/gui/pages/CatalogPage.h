@@ -220,6 +220,7 @@ namespace Projet_POO
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(984, 661);
 				this->Controls->Add(this->tableLayoutPanel1);
+				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
 				this->MaximizeBox = false;
 				this->Name = L"CatalogPage";
 				this->Text = L"CatalogPage";

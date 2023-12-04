@@ -13,11 +13,13 @@ namespace Projet_POO
 			OrdersPage()
 			{
 				initialize();
+				reloadOrdersGridView();
 			}
 
 		private:
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
+			TableLayoutPanel^ tableLayoutPanel3;
 
 			Label^ labelTitle;
 
@@ -25,6 +27,7 @@ namespace Projet_POO
 
 			CheckBox^ checkBoxDeleted;
 
+			Button^ buttonPayments;
 			Button^ buttonOrderDetails;
 			Button^ buttonEdit;
 			Button^ buttonAdd;
@@ -34,6 +37,7 @@ namespace Projet_POO
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel2 = gcnew TableLayoutPanel();
+				this->tableLayoutPanel3 = gcnew TableLayoutPanel();
 
 				this->labelTitle = gcnew Label();
 
@@ -41,6 +45,7 @@ namespace Projet_POO
 
 				this->checkBoxDeleted = gcnew CheckBox();
 
+				this->buttonPayments = gcnew Button();
 				this->buttonOrderDetails = gcnew Button();
 				this->buttonAdd = gcnew Button();
 				this->buttonDelete = gcnew Button();
@@ -69,7 +74,7 @@ namespace Projet_POO
 				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 117));
 				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 135));
 				this->tableLayoutPanel2->Controls->Add(this->checkBoxDeleted, 0, 0);
-				this->tableLayoutPanel2->Controls->Add(this->buttonOrderDetails, 1, 0);
+				this->tableLayoutPanel2->Controls->Add(this->tableLayoutPanel3, 1, 0);
 				this->tableLayoutPanel2->Controls->Add(this->buttonAdd, 3, 0);
 				this->tableLayoutPanel2->Controls->Add(this->buttonEdit, 4, 0);
 				this->tableLayoutPanel2->Controls->Add(this->buttonDelete, 5, 0);
@@ -79,6 +84,18 @@ namespace Projet_POO
 				this->tableLayoutPanel2->RowCount = 1;
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel2->Size = Drawing::Size(959, 150);
+
+				/*-------------------- tableLayoutPanel3 --------------------*/
+				this->tableLayoutPanel3->ColumnCount = 1;
+				this->tableLayoutPanel3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+				this->tableLayoutPanel3->Controls->Add(this->buttonPayments, 0, 0);
+				this->tableLayoutPanel3->Controls->Add(this->buttonOrderDetails, 0, 1);
+				this->tableLayoutPanel3->Location = Point(13, 13);
+				this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
+				this->tableLayoutPanel3->RowCount = 2;
+				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
+				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
+				this->tableLayoutPanel3->Size = Drawing::Size(963, 639);
 
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
@@ -109,7 +126,20 @@ namespace Projet_POO
 				this->checkBoxDeleted->TabIndex = 1;
 				this->checkBoxDeleted->Text = L"Montrer les commandes\nsupprimees";
 				this->checkBoxDeleted->UseVisualStyleBackColor = true;
+				this->checkBoxDeleted->CheckedChanged += gcnew EventHandler(this, &OrdersPage::checkBoxDeleted_Click);
 
+				/*-------------------- buttonPayments --------------------*/
+				this->buttonPayments->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
+				this->buttonPayments->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
+				this->buttonPayments->Location = Point(278, 12);
+				this->buttonPayments->Margin = Windows::Forms::Padding(11, 6, 11, 6);
+				this->buttonPayments->Name = L"buttonPayments";
+				this->buttonPayments->Size = Drawing::Size(269, 126);
+				this->buttonPayments->TabIndex = 2;
+				this->buttonPayments->Text = L"Paiements";
+				this->buttonPayments->UseVisualStyleBackColor = true;
+				this->buttonPayments->Click += gcnew EventHandler(this, &OrdersPage::buttonPayments_Click);
+				
 				/*-------------------- buttonOrderDetails --------------------*/
 				this->buttonOrderDetails->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
 				this->buttonOrderDetails->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
@@ -120,6 +150,7 @@ namespace Projet_POO
 				this->buttonOrderDetails->TabIndex = 2;
 				this->buttonOrderDetails->Text = L"Details";
 				this->buttonOrderDetails->UseVisualStyleBackColor = true;
+				this->buttonOrderDetails->Click += gcnew EventHandler(this, &OrdersPage::buttonOrderDetails_Click);
 
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -131,6 +162,7 @@ namespace Projet_POO
 				this->buttonAdd->TabIndex = 3;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
+				this->buttonAdd->Click += gcnew EventHandler(this, &OrdersPage::buttonAdd_Click);
 
 				/*-------------------- buttonEdit --------------------*/
 				this->buttonEdit->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -142,6 +174,7 @@ namespace Projet_POO
 				this->buttonEdit->TabIndex = 4;
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
+				this->buttonEdit->Click += gcnew EventHandler(this, &OrdersPage::buttonEdit_Click);
 
 				/*-------------------- buttonDelete --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -153,16 +186,28 @@ namespace Projet_POO
 				this->buttonDelete->TabIndex = 5;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
+				this->buttonDelete->Click += gcnew EventHandler(this, &OrdersPage::buttonDelete_Click);
 
 				/*-------------------- OrdersPage --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
 				this->AutoScaleDimensions = SizeF(6, 13);
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(984, 661);
+				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
+				this->MaximizeBox = false;
 				this->Controls->Add(this->tableLayoutPanel1);
 				this->Name = L"OrdersPage";
 				this->Text = L"OrdersPage";
 			}
 
+			Void reloadOrdersGridView();
+			Void openOrderDetailsForm();
+			Void openOrderForm();
+			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
+			Void buttonPayments_Click(Object^ sender, EventArgs^ e);
+			Void buttonOrderDetails_Click(Object^ sender, EventArgs^ e);
+			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
+			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
+			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
 	};
 }

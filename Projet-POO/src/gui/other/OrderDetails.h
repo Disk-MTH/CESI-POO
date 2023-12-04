@@ -332,6 +332,8 @@ namespace Projet_POO
 				this->ClientSize = Drawing::Size(684, 461);
 				this->Controls->Add(this->tableLayoutPanel1);
 				this->Margin = Windows::Forms::Padding(2, 2, 2, 2);
+				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
+				this->MaximizeBox = false;
 				this->Name = L"OrderDetails";
 				this->Text = L"OrderDetails";
 			}

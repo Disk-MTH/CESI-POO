@@ -342,6 +342,8 @@ namespace Projet_POO
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(684, 461);
 				this->Controls->Add(this->tableLayoutPanel1);
+				this->MaximizeBox = false;
+				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
 				this->Name = L"CustomerForm";
 				this->Text = L"CustomerForm";
 				this->Closed += gcnew EventHandler(this, &CustomerForm::buttonCancel_Click);

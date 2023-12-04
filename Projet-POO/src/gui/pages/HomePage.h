@@ -144,6 +144,7 @@ namespace Projet_POO
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(982, 653);
 				this->Controls->Add(this->tableLayoutPanel1);
+				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
 				this->MaximizeBox = false;
 				this->Name = L"HomePage";
 				this->Text = L"HomePage";

@@ -449,10 +449,13 @@ namespace Projet_POO
             this->buttonValidate->UseVisualStyleBackColor = true;
 
             /*-------------------- OrderForm --------------------*/
+            this->StartPosition = FormStartPosition::CenterScreen;
             this->AutoScaleDimensions = SizeF(6, 13);
             this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
             this->ClientSize = Drawing::Size(684, 941);
             this->Controls->Add(this->tableLayoutPanel1);
+            this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
+            this->MaximizeBox = false;
             this->Name = L"OrderForm";
             this->Text = L"OrderForm";
         }
