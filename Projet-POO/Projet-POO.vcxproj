@@ -129,6 +129,7 @@
     <ClCompile Include="src\gui\pages\CatalogPage.cpp" />
     <ClCompile Include="src\gui\pages\CustomersPage.cpp" />
     <ClCompile Include="src\gui\pages\HomePage.cpp" />
+    <ClCompile Include="src\gui\pages\OrdersPage.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>

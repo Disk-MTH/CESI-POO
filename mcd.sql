@@ -78,12 +78,12 @@ CREATE TABLE [order]
     issue_date             VARCHAR(50)        NOT NULL,
     expected_delivery_date VARCHAR(50)        NOT NULL,
     deleted                BIT                NOT NULL DEFAULT 0,
-    id_address             INT                NOT NULL,
-    id_address_1           INT                NOT NULL,
+    id_billing_address     INT                NOT NULL,
+    id_delivery_address    INT                NOT NULL,
     id_customer            INT                NOT NULL,
     PRIMARY KEY (id_order),
-    FOREIGN KEY (id_address) REFERENCES address (id_address),
-    FOREIGN KEY (id_address_1) REFERENCES address (id_address),
+    FOREIGN KEY (id_billing_address) REFERENCES address (id_address),
+    FOREIGN KEY (id_delivery_address) REFERENCES address (id_address),
     FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
 );
 GO;
@@ -91,8 +91,8 @@ GO;
 CREATE TABLE payment
 (
     id_payment   INT IDENTITY (1,1) NOT NULL,
-    payment_date DATETIME           NOT NULL,
-    payment_mean SMALLINT           NOT NULL,
+    payment_date DATE               NOT NULL,
+    payment_mean VARCHAR(50)        NOT NULL,
     amount       REAL               NOT NULL,
     validated    BIT                NOT NULL DEFAULT 0,
     deleted      BIT                NOT NULL DEFAULT 0,
