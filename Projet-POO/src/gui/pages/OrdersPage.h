@@ -115,6 +115,10 @@ namespace Projet_POO
 				this->dataGridViewOrders->Size = Drawing::Size(941, 354);
 				this->dataGridViewOrders->TabIndex = 0;
 
+				auto idOrder = gcnew DataGridViewTextBoxColumn();
+				idOrder->Visible = false;
+				this->dataGridViewOrders->Columns->Add(idOrder);
+
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 				this->checkBoxDeleted->AutoSize = true;

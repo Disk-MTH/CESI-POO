@@ -43,7 +43,7 @@ SELECT a.id_address,
        at.id_address_type,
        at.type
 FROM address a
-         INNER JOIN customerHasAddresse cha ON a.id_address = cha.id_address
+         INNER JOIN customerHasAddress cha ON a.id_address = cha.id_address
          INNER JOIN address_type at ON cha.id_address_type = at.id_address_type
 WHERE a.deleted = 0
   AND cha.id_customer = 1;
@@ -52,7 +52,7 @@ WHERE a.deleted = 0
 INSERT INTO address (street, zip_code, city)
 VALUES ('aa', 'bb', 'cc');
 
-INSERT INTO customerHasAddresse (id_customer, id_address, id_address_type)
+INSERT INTO customerHasAddress (id_customer, id_address, id_address_type)
 VALUES (1, 1, 1);
 
 /* Query to delete an address */

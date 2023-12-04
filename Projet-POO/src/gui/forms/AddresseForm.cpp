@@ -35,7 +35,7 @@ void AddresseForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 		}
 
 		auto addressId = App::app->db->insert("INSERT INTO address (street, zip_code, city) VALUES ('" + street + "', '" + zipCode + "', '" + city + "');");
-		App::app->db->insert("INSERT INTO customerHasAddresse (id_customer, id_address, id_address_type) VALUES ('" + this->customerId + "', '" + addressId + "', '" + addressTypeId + "');");
+		App::app->db->insert("INSERT INTO customerHasAddress (id_customer, id_address, id_address_type) VALUES ('" + this->customerId + "', '" + addressId + "', '" + addressTypeId + "');");
 
 		App::app->logger->log("Address saved: \"" + street + "\", \"" + zipCode + "\", \"" + city + "\", \"" + addressTypeId + "\" and asociated to customer id: \"" + this->customerId + "\"");
 		this->DialogResult = Windows::Forms::DialogResult::OK;

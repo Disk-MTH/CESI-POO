@@ -41,16 +41,16 @@ GO;
 
 CREATE TABLE staff
 (
-    id_staff   INT IDENTITY (1,1) NOT NULL,
-    first_name VARCHAR(50)        NOT NULL,
-    last_name  VARCHAR(50)        NOT NULL,
-    hire_date  DATE               NOT NULL,
-    deleted    BIT                NOT NULL DEFAULT 0,
-    id_staff_1 INT,
-    id_address INT                NOT NULL,
+    id_staff      INT IDENTITY (1,1) NOT NULL,
+    first_name    VARCHAR(50)        NOT NULL,
+    last_name     VARCHAR(50)        NOT NULL,
+    hire_date     DATE               NOT NULL,
+    deleted       BIT                NOT NULL DEFAULT 0,
+    id_staff_boss INT,
+    id_address    INT                NOT NULL,
     PRIMARY KEY (id_staff),
     UNIQUE (id_address),
-    FOREIGN KEY (id_staff_1) REFERENCES staff (id_staff),
+    FOREIGN KEY (id_staff_boss) REFERENCES staff (id_staff),
     FOREIGN KEY (id_address) REFERENCES address (id_address)
 );
 GO;
@@ -75,8 +75,8 @@ CREATE TABLE [order]
 (
     id_order               INT IDENTITY (1,1) NOT NULL,
     reference              VARCHAR(50)        NOT NULL,
-    issue_date             VARCHAR(50)        NOT NULL,
-    expected_delivery_date VARCHAR(50)        NOT NULL,
+    issue_date             DATE               NOT NULL,
+    expected_delivery_date DATE               NOT NULL,
     deleted                BIT                NOT NULL DEFAULT 0,
     id_billing_address     INT                NOT NULL,
     id_delivery_address    INT                NOT NULL,
@@ -114,15 +114,6 @@ CREATE TABLE tiered_price
 );
 GO;
 
-CREATE TABLE suggestion
-(
-    id_suggestion INT IDENTITY (1,1) NOT NULL,
-    zip_code      INT                NOT NULL,
-    city          VARCHAR(50)        NOT NULL,
-    PRIMARY KEY (id_suggestion)
-);
-GO;
-
 CREATE TABLE orderHasProduct
 (
     id_product INT,
@@ -137,7 +128,7 @@ CREATE TABLE orderHasProduct
 );
 GO;
 
-CREATE TABLE customerHasAddresse
+CREATE TABLE customerHasAddress
 (
     id_address      INT,
     id_customer     INT,
