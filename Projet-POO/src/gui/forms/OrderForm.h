@@ -74,23 +74,23 @@ namespace Projet_POO
             this->labelType = gcnew Label();
             this->labelQuantity = gcnew Label();
 
-            this->dataGridViewProductList = (gcnew DataGridView());
+            this->dataGridViewProductList = gcnew DataGridView();
 
-            this->textBoxQuantity = (gcnew TextBox());
-            this->textBoxBirthDate = (gcnew TextBox());
+            this->textBoxQuantity = gcnew TextBox();
+            this->textBoxBirthDate = gcnew TextBox();
 
-            this->comboBoxLastName = (gcnew ComboBox());
-            this->comboBoxFirstName = (gcnew ComboBox());
-            this->comboBoxBillingAddress = (gcnew ComboBox());
-            this->comboBoxDeliveryAddress = (gcnew ComboBox());
-            this->comboBoxProductName = (gcnew ComboBox());
-            this->comboBoxType = (gcnew ComboBox());
-            this->comboBoxColour = (gcnew ComboBox());
+            this->comboBoxLastName = gcnew ComboBox();
+            this->comboBoxFirstName = gcnew ComboBox();
+            this->comboBoxBillingAddress = gcnew ComboBox();
+            this->comboBoxDeliveryAddress = gcnew ComboBox();
+            this->comboBoxProductName = gcnew ComboBox();
+            this->comboBoxType = gcnew ComboBox();
+            this->comboBoxColour = gcnew ComboBox();
 
-            this->buttonDelete = (gcnew Button());
-            this->buttonCancel = (gcnew Button());
-            this->buttonAdd = (gcnew Button());
-            this->buttonValidate = (gcnew Button());
+            this->buttonDelete = gcnew Button();
+            this->buttonCancel = gcnew Button();
+            this->buttonAdd = gcnew Button();
+            this->buttonValidate = gcnew Button();
 
             /*-------------------- tableLayoutPanel1 --------------------*/
             this->tableLayoutPanel1->ColumnCount = 1;
