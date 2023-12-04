@@ -115,7 +115,7 @@ void CustomerForm::buttonDelete_Click(Object^ sender, EventArgs^ e)
 
 void CustomerForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 {
-	if (this->mode->Equals(0) && customerId != "" && this->DialogResult != Windows::Forms::DialogResult::OK)
+	if (this->mode == "0" && customerId != "" && this->DialogResult != Windows::Forms::DialogResult::OK)
 	{
 		try
 		{

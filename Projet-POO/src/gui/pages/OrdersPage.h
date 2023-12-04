@@ -20,27 +20,27 @@ namespace Projet_POO
 			TableLayoutPanel^ tableLayoutPanel2;
 
 			Label^ labelTitle;
-		
+
 			DataGridView^ dataGridViewOrders;
-		
+
 			CheckBox^ checkBoxDeleted;
 
 			Button^ buttonOrderDetails;
 			Button^ buttonEdit;
 			Button^ buttonAdd;
 			Button^ buttonDelete;
-		
+
 			void initialize()
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel2 = gcnew TableLayoutPanel();
-				
+
 				this->labelTitle = gcnew Label();
-				
+
 				this->dataGridViewOrders = gcnew DataGridView();
-				
+
 				this->checkBoxDeleted = gcnew CheckBox();
-				
+
 				this->buttonOrderDetails = gcnew Button();
 				this->buttonAdd = gcnew Button();
 				this->buttonDelete = gcnew Button();
@@ -89,15 +89,15 @@ namespace Projet_POO
 				this->labelTitle->Name = L"labelTitle";
 				this->labelTitle->Size = Drawing::Size(122, 39);
 				this->labelTitle->Text = L"Commandes";
-				
+
 				/*-------------------- dataGridViewOrders --------------------*/
 				this->dataGridViewOrders->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-				this->dataGridViewOrders->Location = Point(11, 119); 
+				this->dataGridViewOrders->Location = Point(11, 119);
 				this->dataGridViewOrders->Margin = Windows::Forms::Padding(11, 12, 11, 12);
 				this->dataGridViewOrders->Name = L"dataGridViewOrders";
 				this->dataGridViewOrders->Size = Drawing::Size(941, 354);
 				this->dataGridViewOrders->TabIndex = 0;
-				
+
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 				this->checkBoxDeleted->AutoSize = true;
@@ -120,7 +120,7 @@ namespace Projet_POO
 				this->buttonOrderDetails->TabIndex = 2;
 				this->buttonOrderDetails->Text = L"Details";
 				this->buttonOrderDetails->UseVisualStyleBackColor = true;
-				
+
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonAdd->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -153,7 +153,7 @@ namespace Projet_POO
 				this->buttonDelete->TabIndex = 5;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
-				
+
 				/*-------------------- OrdersPage --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
 				this->AutoScaleDimensions = SizeF(6, 13);
@@ -163,5 +163,6 @@ namespace Projet_POO
 				this->Name = L"OrdersPage";
 				this->Text = L"OrdersPage";
 			}
+
 	};
 }

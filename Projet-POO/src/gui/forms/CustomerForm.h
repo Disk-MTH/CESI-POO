@@ -16,6 +16,7 @@ namespace Projet_POO
 				this->firstName = firstName;
 				this->lastName = lastName;
 				this->birthdate = birthdate;
+				this->mode = customerId == "" ? "0" : "1"; //0 = add, 1 = edit
 				
 				initialize();
 				reloadAddressesGridView();
@@ -26,7 +27,7 @@ namespace Projet_POO
 			String^ lastName;
 			String^ firstName;
 			String^ birthdate;
-			int^ mode = customerId == "" ? 0 : 1; //0 = add, 1 = edit
+			String^ mode;
 
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
