@@ -55,65 +55,68 @@ namespace Projet_POO
 				this->tableLayoutPanel1->Location = Point(13, 13);
 				this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 				this->tableLayoutPanel1->RowCount = 3;
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 17.52768F));
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 82.47233F));
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 90));
-				this->tableLayoutPanel1->Size = Drawing::Size(959, 636);
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 22.1519F));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 77.8481F));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 153));
+				this->tableLayoutPanel1->Size = Drawing::Size(963, 639);
 
 				/*-------------------- tableLayoutPanel2 --------------------*/
-				this->tableLayoutPanel2->ColumnCount = 5;
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 60.46128F));
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 39.53872F));
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 107));
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 118));
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 123));
-				this->tableLayoutPanel2->Controls->Add(this->buttonEdit, 3, 0);
+				this->tableLayoutPanel2->ColumnCount = 6;
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 291));
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 30));
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 119));
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 117));
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 135));
 				this->tableLayoutPanel2->Controls->Add(this->checkBoxDeleted, 0, 0);
-				this->tableLayoutPanel2->Controls->Add(this->buttonAdd, 2, 0);
-				this->tableLayoutPanel2->Controls->Add(this->buttonDelete, 4, 0);
 				this->tableLayoutPanel2->Controls->Add(this->buttonOrderDetails, 1, 0);
-				this->tableLayoutPanel2->Location = Point(3, 548);
+				this->tableLayoutPanel2->Controls->Add(this->buttonAdd, 3, 0);
+				this->tableLayoutPanel2->Controls->Add(this->buttonEdit, 4, 0);
+				this->tableLayoutPanel2->Controls->Add(this->buttonDelete, 5, 0);
+				this->tableLayoutPanel2->Location = Point(2, 487);
+				this->tableLayoutPanel2->Margin = Windows::Forms::Padding(2);
 				this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 				this->tableLayoutPanel2->RowCount = 1;
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
-				this->tableLayoutPanel2->Size = Drawing::Size(953, 85);
+				this->tableLayoutPanel2->Size = Drawing::Size(959, 150);
 
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
 				this->labelTitle->AutoSize = true;
 				this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 25);
-				this->labelTitle->Location = Point(374, 28);
+				this->labelTitle->Location = Point(420, 34);
+				this->labelTitle->Margin = Windows::Forms::Padding(2, 0, 2, 0);
 				this->labelTitle->Name = L"labelTitle";
-				this->labelTitle->Size = Drawing::Size(210, 39);
+				this->labelTitle->Size = Drawing::Size(122, 39);
 				this->labelTitle->Text = L"Commandes";
 				
 				/*-------------------- dataGridViewOrders --------------------*/
 				this->dataGridViewOrders->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-				this->dataGridViewOrders->Location = Point(15, 110);
-				this->dataGridViewOrders->Margin = Windows::Forms::Padding(15);
+				this->dataGridViewOrders->Location = Point(11, 119); 
+				this->dataGridViewOrders->Margin = Windows::Forms::Padding(11, 12, 11, 12);
 				this->dataGridViewOrders->Name = L"dataGridViewOrders";
-				this->dataGridViewOrders->Size = Drawing::Size(929, 420);
+				this->dataGridViewOrders->Size = Drawing::Size(941, 354);
 				this->dataGridViewOrders->TabIndex = 0;
 				
 				/*-------------------- checkBoxDeleted --------------------*/
-				this->checkBoxDeleted->Anchor = AnchorStyles::Left;
+				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 				this->checkBoxDeleted->AutoSize = true;
 				this->checkBoxDeleted->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->checkBoxDeleted->Location = Point(10, 28);
-				this->checkBoxDeleted->Margin = Windows::Forms::Padding(10, 3, 3, 3);
+				this->checkBoxDeleted->Location = Point(10, 60);
+				this->checkBoxDeleted->Margin = Windows::Forms::Padding(10, 6, 10, 6);
 				this->checkBoxDeleted->Name = L"checkBoxDeleted";
-				this->checkBoxDeleted->Size = Drawing::Size(346, 29);
+				this->checkBoxDeleted->Size = Drawing::Size(247, 29);
 				this->checkBoxDeleted->TabIndex = 1;
-				this->checkBoxDeleted->Text = L"Montrer les commandes supprimees";
+				this->checkBoxDeleted->Text = L"Montrer les commandes\nsupprimees";
 				this->checkBoxDeleted->UseVisualStyleBackColor = true;
 
 				/*-------------------- buttonOrderDetails --------------------*/
 				this->buttonOrderDetails->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->buttonOrderDetails->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->buttonOrderDetails->Location = Point(375, 10);
-				this->buttonOrderDetails->Margin = Windows::Forms::Padding(10);
+				this->buttonOrderDetails->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
+				this->buttonOrderDetails->Location = Point(278, 12);
+				this->buttonOrderDetails->Margin = Windows::Forms::Padding(11, 6, 11, 6);
 				this->buttonOrderDetails->Name = L"buttonOrderDetails";
-				this->buttonOrderDetails->Size = Drawing::Size(219, 65);
+				this->buttonOrderDetails->Size = Drawing::Size(269, 126);
 				this->buttonOrderDetails->TabIndex = 2;
 				this->buttonOrderDetails->Text = L"Details";
 				this->buttonOrderDetails->UseVisualStyleBackColor = true;
@@ -121,10 +124,10 @@ namespace Projet_POO
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonAdd->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->buttonAdd->Location = Point(618, 43);
-				this->buttonAdd->Margin = Windows::Forms::Padding(7);
+				this->buttonAdd->Location = Point(595, 106);
+				this->buttonAdd->Margin = Windows::Forms::Padding(5, 6, 5, 6);
 				this->buttonAdd->Name = L"buttonAdd";
-				this->buttonAdd->Size = Drawing::Size(86, 35);
+				this->buttonAdd->Size = Drawing::Size(107, 38);
 				this->buttonAdd->TabIndex = 3;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
@@ -132,10 +135,10 @@ namespace Projet_POO
 				/*-------------------- buttonEdit --------------------*/
 				this->buttonEdit->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonEdit->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->buttonEdit->Location = Point(721, 43);
-				this->buttonEdit->Margin = Windows::Forms::Padding(7);
+				this->buttonEdit->Location = Point(712, 106);
+				this->buttonEdit->Margin = Windows::Forms::Padding(5, 6, 5, 6);
 				this->buttonEdit->Name = L"buttonEdit";
-				this->buttonEdit->Size = Drawing::Size(101, 35);
+				this->buttonEdit->Size = Drawing::Size(107, 38);
 				this->buttonEdit->TabIndex = 4;
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
@@ -143,10 +146,10 @@ namespace Projet_POO
 				/*-------------------- buttonDelete --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonDelete->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->buttonDelete->Location = Point(836, 43);
-				this->buttonDelete->Margin = Windows::Forms::Padding(7);
+				this->buttonDelete->Location = Point(829, 106);
+				this->buttonDelete->Margin = Windows::Forms::Padding(5, 6, 5, 6);
 				this->buttonDelete->Name = L"buttonDelete";
-				this->buttonDelete->Size = Drawing::Size(110, 35);
+				this->buttonDelete->Size = Drawing::Size(125, 38);
 				this->buttonDelete->TabIndex = 5;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;

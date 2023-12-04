@@ -185,7 +185,7 @@ namespace Projet_POO
             this->buttonAdd->Margin = Windows::Forms::Padding(5, 6, 5, 6);
             this->buttonAdd->Name = L"buttonAdd";
             this->buttonAdd->Size = Drawing::Size(107, 38);
-            this->buttonAdd->TabIndex = 2;
+            this->buttonAdd->TabIndex = 3;
             this->buttonAdd->Text = L"Ajouter";
             this->buttonAdd->UseVisualStyleBackColor = true;
             this->buttonAdd->Click += gcnew EventHandler(this, &CatalogPage::buttonAdd_Click);
@@ -197,7 +197,7 @@ namespace Projet_POO
             this->buttonEdit->Margin = Windows::Forms::Padding(5, 6, 5, 6);
             this->buttonEdit->Name = L"buttonEdit";
             this->buttonEdit->Size = Drawing::Size(107, 38);
-            this->buttonEdit->TabIndex = 3;
+            this->buttonEdit->TabIndex = 4;
             this->buttonEdit->Text = L"Modifier";
             this->buttonEdit->UseVisualStyleBackColor = true;
             this->buttonEdit->Click += gcnew EventHandler(this, &CatalogPage::buttonEdit_Click);
@@ -209,7 +209,7 @@ namespace Projet_POO
             this->buttonDelete->Margin = Windows::Forms::Padding(5, 6, 5, 6);
             this->buttonDelete->Name = L"buttonDelete";
             this->buttonDelete->Size = Drawing::Size(125, 38);
-            this->buttonDelete->TabIndex = 4;
+            this->buttonDelete->TabIndex = 5;
             this->buttonDelete->Text = L"Supprimer";
             this->buttonDelete->UseVisualStyleBackColor = true;
             this->buttonDelete->Click += gcnew EventHandler(this, &CatalogPage::buttonDelete_Click);
