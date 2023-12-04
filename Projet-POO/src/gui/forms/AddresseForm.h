@@ -49,8 +49,8 @@ namespace Projet_POO
 
         ComboBox^ comboBoxCity;
 
-        Button^ buttonValidate;
         Button^ buttonCancel;
+        Button^ buttonValidate;
 
         void initialize()
         {
@@ -73,8 +73,8 @@ namespace Projet_POO
             this->checkBoxDelivery = gcnew CheckBox();
             this->checkBoxBilling = gcnew CheckBox();
 
-            this->buttonValidate = gcnew Button();
             this->buttonCancel = gcnew Button();
+            this->buttonValidate = gcnew Button();
 
             /*-------------------- tableLayoutPanel1 --------------------*/
             this->tableLayoutPanel1->ColumnCount = 1;
@@ -92,7 +92,6 @@ namespace Projet_POO
             this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 172));
             this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 58));
             this->tableLayoutPanel1->Size = Drawing::Size(663, 439);
-            this->tableLayoutPanel1->TabIndex = 0;
 
             /*-------------------- tableLayoutPanel2 --------------------*/
             this->tableLayoutPanel2->ColumnCount = 3;
@@ -112,7 +111,6 @@ namespace Projet_POO
             this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 42.01681F));
             this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 57.98319F));
             this->tableLayoutPanel2->Size = Drawing::Size(659, 120);
-            this->tableLayoutPanel2->TabIndex = 1;
 
             /*-------------------- tableLayoutPanel3 --------------------*/
             this->tableLayoutPanel3->ColumnCount = 1;
@@ -126,7 +124,6 @@ namespace Projet_POO
             this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 43.75F));
             this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 56.25F));
             this->tableLayoutPanel3->Size = Drawing::Size(659, 168);
-            this->tableLayoutPanel3->TabIndex = 2;
 
             /*-------------------- tableLayoutPanel4 --------------------*/
             this->tableLayoutPanel4->ColumnCount = 2;
@@ -140,7 +137,6 @@ namespace Projet_POO
             this->tableLayoutPanel4->RowCount = 1;
             this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
             this->tableLayoutPanel4->Size = Drawing::Size(655, 91);
-            this->tableLayoutPanel4->TabIndex = 1;
 
             /*-------------------- tableLayoutPanel5 --------------------*/
             this->tableLayoutPanel5->ColumnCount = 2;
@@ -154,7 +150,6 @@ namespace Projet_POO
             this->tableLayoutPanel5->RowCount = 1;
             this->tableLayoutPanel5->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
             this->tableLayoutPanel5->Size = Drawing::Size(659, 54);
-            this->tableLayoutPanel5->TabIndex = 3;
 
             /*-------------------- labelTitle --------------------*/
             this->labelTitle->Anchor = AnchorStyles::None;
@@ -164,7 +159,6 @@ namespace Projet_POO
             this->labelTitle->Margin = Windows::Forms::Padding(2, 0, 2, 0);
             this->labelTitle->Name = L"labelTitle";
             this->labelTitle->Size = Drawing::Size(159, 39);
-            this->labelTitle->TabIndex = 0;
             this->labelTitle->Text = L"Adresse";
 
             /*-------------------- labelWording --------------------*/
@@ -175,7 +169,6 @@ namespace Projet_POO
             this->labelWording->Margin = Windows::Forms::Padding(8, 0, 2, 0);
             this->labelWording->Name = L"labelWording";
             this->labelWording->Size = Drawing::Size(68, 25);
-            this->labelWording->TabIndex = 0;
             this->labelWording->Text = L"Libelle";
             
             /*-------------------- labelZipCode --------------------*/
@@ -186,7 +179,6 @@ namespace Projet_POO
             this->labelZipCode->Margin = Windows::Forms::Padding(8, 0, 2, 0);
             this->labelZipCode->Name = L"labelZipCode";
             this->labelZipCode->Size = Drawing::Size(117, 25);
-            this->labelZipCode->TabIndex = 1;
             this->labelZipCode->Text = L"Code postal";
             this->textBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::textBoxZipCode_KeyPress);
 
@@ -198,7 +190,6 @@ namespace Projet_POO
             this->labelCity->Margin = Windows::Forms::Padding(8, 0, 2, 0);
             this->labelCity->Name = L"labelCity";
             this->labelCity->Size = Drawing::Size(49, 25);
-            this->labelCity->TabIndex = 2;
             this->labelCity->Text = L"Ville";
             
             /*-------------------- labelAdressType --------------------*/
@@ -209,7 +200,6 @@ namespace Projet_POO
             this->labelAdressType->Margin = Windows::Forms::Padding(8, 0, 2, 0);
             this->labelAdressType->Name = L"labelAdressType";
             this->labelAdressType->Size = Drawing::Size(199, 31);
-            this->labelAdressType->TabIndex = 0;
             this->labelAdressType->Text = L"Type d\'adresse";
 
             /*-------------------- textBoxStreet --------------------*/
@@ -218,7 +208,7 @@ namespace Projet_POO
             this->textBoxStreet->Margin = Windows::Forms::Padding(8);
             this->textBoxStreet->Name = L"textBoxStreet";
             this->textBoxStreet->Size = Drawing::Size(268, 30);
-            this->textBoxStreet->TabIndex = 3;
+            this->textBoxStreet->TabIndex = 0;
             this->textBoxStreet->Text = this->street;
 
             /*-------------------- textBoxZipCode --------------------*/
@@ -227,7 +217,7 @@ namespace Projet_POO
             this->textBoxZipCode->Margin = Windows::Forms::Padding(8);
             this->textBoxZipCode->Name = L"textBoxZipCode";
             this->textBoxZipCode->Size = Drawing::Size(112, 30);
-            this->textBoxZipCode->TabIndex = 4;
+            this->textBoxZipCode->TabIndex = 1;
             this->textBoxZipCode->Text = this->zipCode;
 
             /*-------------------- comboBoxCity --------------------*/
@@ -237,7 +227,7 @@ namespace Projet_POO
             this->comboBoxCity->Margin = Windows::Forms::Padding(8);
             this->comboBoxCity->Name = L"comboBoxCity";
             this->comboBoxCity->Size = Drawing::Size(229, 33);
-            this->comboBoxCity->TabIndex = 5;
+            this->comboBoxCity->TabIndex = 2;
             this->comboBoxCity->Text = this->city;
             
             /*-------------------- checkBoxDelivery --------------------*/
@@ -248,7 +238,7 @@ namespace Projet_POO
             this->checkBoxDelivery->Margin = Windows::Forms::Padding(8, 2, 8, 2);
             this->checkBoxDelivery->Name = L"checkBoxDelivery";
             this->checkBoxDelivery->Size = Drawing::Size(207, 29);
-            this->checkBoxDelivery->TabIndex = 1;
+            this->checkBoxDelivery->TabIndex = 3;
             this->checkBoxDelivery->Text = L"Adresse de livraison";
             this->checkBoxDelivery->UseVisualStyleBackColor = true;
             this->checkBoxDelivery->Checked = this->type == "1" || this->type == "3";
@@ -261,22 +251,10 @@ namespace Projet_POO
             this->checkBoxBilling->Margin = Windows::Forms::Padding(8, 2, 8, 2);
             this->checkBoxBilling->Name = L"checkBoxBilling";
             this->checkBoxBilling->Size = Drawing::Size(226, 29);
-            this->checkBoxBilling->TabIndex = 0;
+            this->checkBoxBilling->TabIndex = 4;
             this->checkBoxBilling->Text = L"Adresse de facturation";
             this->checkBoxBilling->UseVisualStyleBackColor = true;
             this->checkBoxBilling->Checked = this->type == "2" || this->type == "3";
-
-            /*-------------------- buttonValidate --------------------*/
-            this->buttonValidate->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
-            this->buttonValidate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-            this->buttonValidate->Location = Point(562, 17);
-            this->buttonValidate->Margin = Windows::Forms::Padding(5, 6, 5, 6);
-            this->buttonValidate->Name = L"buttonValidate";
-            this->buttonValidate->Size = Drawing::Size(92, 31);
-            this->buttonValidate->TabIndex = 2;
-            this->buttonValidate->Text = L"Valider";
-            this->buttonValidate->UseVisualStyleBackColor = true;
-            this->buttonValidate->Click += gcnew EventHandler(this, &AddresseForm::buttonValidate_Click);
 
             /*-------------------- buttonCancel --------------------*/
             this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -285,11 +263,23 @@ namespace Projet_POO
             this->buttonCancel->Margin = Windows::Forms::Padding(5, 6, 5, 6);
             this->buttonCancel->Name = L"buttonCancel";
             this->buttonCancel->Size = Drawing::Size(103, 31);
-            this->buttonCancel->TabIndex = 1;
+            this->buttonCancel->TabIndex = 5;
             this->buttonCancel->Text = L"Annuler";
             this->buttonCancel->UseVisualStyleBackColor = true;
             this->buttonCancel->Click += gcnew EventHandler(this, &AddresseForm::buttonCancel_Click);
-
+            
+            /*-------------------- buttonValidate --------------------*/
+            this->buttonValidate->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
+            this->buttonValidate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->buttonValidate->Location = Point(562, 17);
+            this->buttonValidate->Margin = Windows::Forms::Padding(5, 6, 5, 6);
+            this->buttonValidate->Name = L"buttonValidate";
+            this->buttonValidate->Size = Drawing::Size(92, 31);
+            this->buttonValidate->TabIndex = 6;
+            this->buttonValidate->Text = L"Valider";
+            this->buttonValidate->UseVisualStyleBackColor = true;
+            this->buttonValidate->Click += gcnew EventHandler(this, &AddresseForm::buttonValidate_Click);
+            
             /*-------------------- AddresseForm --------------------*/
             this->StartPosition = FormStartPosition::CenterScreen;
             this->AutoScaleDimensions = SizeF(6, 13);

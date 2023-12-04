@@ -42,6 +42,13 @@ void CustomersPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 
 void CustomersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
 {
+	if (this->dataGridViewCustomers->SelectedRows->Count == 0)
+	{
+		App::app->logger->warn("Can't edit: no customer selected");
+		App::app->toastMessage(this, "Veuillez selectionner un client", Color::Red, 2000);
+		return;
+	}
+	
 	openCustomerForm(
 		this->dataGridViewCustomers->CurrentRow->Cells[0]->Value->ToString(),
 		this->dataGridViewCustomers->CurrentRow->Cells[1]->Value->ToString(),
@@ -52,7 +59,13 @@ void CustomersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
 
 void CustomersPage::buttonDelete_Click(Object^ sender, EventArgs^ e)
 {
-try
+	if (this->dataGridViewCustomers->SelectedRows->Count == 0)
+	{
+		App::app->logger->warn("Can't delete: no customer selected");
+		App::app->toastMessage(this, "Veuillez selectionner un client", Color::Red, 2000);
+		return;
+	}
+	try
 	{
 		App::app->db->execute("UPDATE customer SET deleted = 1 WHERE id_customer = " + this->dataGridViewCustomers->CurrentRow->Cells[0]->Value->ToString() + ";");
 		App::app->logger->log("Customer deleted: \"" + this->dataGridViewCustomers->CurrentRow->Cells[1]->Value->ToString() + "\", \"" + this->dataGridViewCustomers->CurrentRow->Cells[2]->Value->ToString() + "\", \"" + this->dataGridViewCustomers->CurrentRow->Cells[3]->Value->ToString() + "\"");

@@ -24,10 +24,7 @@ namespace Projet_POO
         TableLayoutPanel^ tableLayoutPanel6;
         TableLayoutPanel^ tableLayoutPanel7;
 
-        DataGridView^ dataGridViewProductList;
-
         Label^ labelTitle;
-
         Label^ labelBirthDate;
         Label^ labelFirstName;
         Label^ labelLastName;
@@ -37,6 +34,8 @@ namespace Projet_POO
         Label^ labelType;
         Label^ labelColour;
         Label^ labelQuantity;
+
+        DataGridView^ dataGridViewProductList;
 
         TextBox^ textBoxBirthDate;
         TextBox^ textBoxQuantity;
@@ -56,43 +55,42 @@ namespace Projet_POO
 
         void initialize()
         {
-            this->tableLayoutPanel1 = (gcnew TableLayoutPanel());
-            this->tableLayoutPanel2 = (gcnew TableLayoutPanel());
-            this->tableLayoutPanel3 = (gcnew TableLayoutPanel());
-            this->tableLayoutPanel4 = (gcnew TableLayoutPanel());
-            this->tableLayoutPanel5 = (gcnew TableLayoutPanel());
-            this->tableLayoutPanel6 = (gcnew TableLayoutPanel());
-            this->tableLayoutPanel7 = (gcnew TableLayoutPanel());
+            this->tableLayoutPanel1 = gcnew TableLayoutPanel();
+            this->tableLayoutPanel2 = gcnew TableLayoutPanel();
+            this->tableLayoutPanel3 = gcnew TableLayoutPanel();
+            this->tableLayoutPanel4 = gcnew TableLayoutPanel();
+            this->tableLayoutPanel5 = gcnew TableLayoutPanel();
+            this->tableLayoutPanel6 = gcnew TableLayoutPanel();
+            this->tableLayoutPanel7 = gcnew TableLayoutPanel();
+            
+            this->labelTitle = gcnew Label();
+            this->labelBirthDate = gcnew Label();
+            this->labelLastName = gcnew Label();
+            this->labelFirstName = gcnew Label();
+            this->labelBillingAddress = gcnew Label();
+            this->labelDeliveryAddress = gcnew Label();
+            this->labelProductName = gcnew Label();
+            this->labelColour = gcnew Label();
+            this->labelType = gcnew Label();
+            this->labelQuantity = gcnew Label();
 
-            this->dataGridViewProductList = (gcnew DataGridView());
+            this->dataGridViewProductList = gcnew DataGridView();
 
-            this->labelTitle = (gcnew Label());
+            this->textBoxQuantity = gcnew TextBox();
+            this->textBoxBirthDate = gcnew TextBox();
 
-            this->labelBirthDate = (gcnew Label());
-            this->labelLastName = (gcnew Label());
-            this->labelFirstName = (gcnew Label());
-            this->labelBillingAddress = (gcnew Label());
-            this->labelDeliveryAddress = (gcnew Label());
-            this->labelProductName = (gcnew Label());
-            this->labelColour = (gcnew Label());
-            this->labelType = (gcnew Label());
-            this->labelQuantity = (gcnew Label());
+            this->comboBoxLastName = gcnew ComboBox();
+            this->comboBoxFirstName = gcnew ComboBox();
+            this->comboBoxBillingAddress = gcnew ComboBox();
+            this->comboBoxDeliveryAddress = gcnew ComboBox();
+            this->comboBoxProductName = gcnew ComboBox();
+            this->comboBoxType = gcnew ComboBox();
+            this->comboBoxColour = gcnew ComboBox();
 
-            this->textBoxQuantity = (gcnew TextBox());
-            this->textBoxBirthDate = (gcnew TextBox());
-
-            this->comboBoxLastName = (gcnew ComboBox());
-            this->comboBoxFirstName = (gcnew ComboBox());
-            this->comboBoxBillingAddress = (gcnew ComboBox());
-            this->comboBoxDeliveryAddress = (gcnew ComboBox());
-            this->comboBoxProductName = (gcnew ComboBox());
-            this->comboBoxType = (gcnew ComboBox());
-            this->comboBoxColour = (gcnew ComboBox());
-
-            this->buttonDelete = (gcnew Button());
-            this->buttonCancel = (gcnew Button());
-            this->buttonAdd = (gcnew Button());
-            this->buttonValidate = (gcnew Button());
+            this->buttonDelete = gcnew Button();
+            this->buttonCancel = gcnew Button();
+            this->buttonAdd = gcnew Button();
+            this->buttonValidate = gcnew Button();
 
             /*-------------------- tableLayoutPanel1 --------------------*/
             this->tableLayoutPanel1->ColumnCount = 1;
@@ -107,7 +105,6 @@ namespace Projet_POO
             this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 88.01956F));
             this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 97));
             this->tableLayoutPanel1->Size = Drawing::Size(659, 916);
-            this->tableLayoutPanel1->TabIndex = 0;
 
             /*-------------------- tableLayoutPanel2 --------------------*/
             this->tableLayoutPanel2->ColumnCount = 3;
@@ -121,7 +118,6 @@ namespace Projet_POO
             this->tableLayoutPanel2->RowCount = 1;
             this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
             this->tableLayoutPanel2->Size = Drawing::Size(653, 92);
-            this->tableLayoutPanel2->TabIndex = 0;
 
             /*-------------------- tableLayoutPanel3 --------------------*/
             this->tableLayoutPanel3->ColumnCount = 2;
@@ -134,7 +130,6 @@ namespace Projet_POO
             this->tableLayoutPanel3->RowCount = 1;
             this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
             this->tableLayoutPanel3->Size = Drawing::Size(653, 714);
-            this->tableLayoutPanel3->TabIndex = 1;
 
             /*-------------------- tableLayoutPanel4 --------------------*/
             this->tableLayoutPanel4->ColumnCount = 1;
@@ -149,7 +144,6 @@ namespace Projet_POO
             this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
             this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 55));
             this->tableLayoutPanel4->Size = Drawing::Size(378, 708);
-            this->tableLayoutPanel4->TabIndex = 0;
 
             /*-------------------- tableLayoutPanel5 --------------------*/
             this->tableLayoutPanel5->ColumnCount = 1;
@@ -174,7 +168,6 @@ namespace Projet_POO
             this->tableLayoutPanel5->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 40));
             this->tableLayoutPanel5->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 36));
             this->tableLayoutPanel5->Size = Drawing::Size(372, 320);
-            this->tableLayoutPanel5->TabIndex = 0;
 
             /*-------------------- tableLayoutPanel6 --------------------*/
             this->tableLayoutPanel6->ColumnCount = 1;
@@ -203,7 +196,6 @@ namespace Projet_POO
             this->tableLayoutPanel6->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 61));
             this->tableLayoutPanel6->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 62));
             this->tableLayoutPanel6->Size = Drawing::Size(263, 708);
-            this->tableLayoutPanel6->TabIndex = 1;
 
             /*-------------------- tableLayoutPanel7 --------------------*/
             this->tableLayoutPanel7->ColumnCount = 2;
@@ -216,16 +208,7 @@ namespace Projet_POO
             this->tableLayoutPanel7->RowCount = 1;
             this->tableLayoutPanel7->RowStyles->Add((gcnew RowStyle(SizeType::Percent, 50)));
             this->tableLayoutPanel7->Size = Drawing::Size(372, 50);
-            this->tableLayoutPanel7->TabIndex = 1;
-
-            /*-------------------- dataGridViewProductList --------------------*/
-            this->dataGridViewProductList->ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-            this->dataGridViewProductList->Location = Point(3, 3);
-            this->dataGridViewProductList->Name = L"dataGridViewProductList";
-            this->dataGridViewProductList->Size = Drawing::Size(372, 320);
-            this->dataGridViewProductList->TabIndex = 2;
-
+            
             /*-------------------- labelTitle --------------------*/
             this->labelTitle->Anchor = AnchorStyles::None;
             this->labelTitle->AutoSize = true;
@@ -233,7 +216,6 @@ namespace Projet_POO
             this->labelTitle->Location = Point(233, 29);
             this->labelTitle->Name = L"labelTitle";
             this->labelTitle->Size = Drawing::Size(193, 39);
-            this->labelTitle->TabIndex = 2;
             this->labelTitle->Text = L"Commande";
 
             /*-------------------- labelBirthDate --------------------*/
@@ -244,7 +226,6 @@ namespace Projet_POO
             this->labelBirthDate->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelBirthDate->Name = L"labelBirthDate";
             this->labelBirthDate->Size = Drawing::Size(174, 25);
-            this->labelBirthDate->TabIndex = 4;
             this->labelBirthDate->Text = L"Date de naissance";
 
             /*-------------------- labelLastName --------------------*/
@@ -255,7 +236,6 @@ namespace Projet_POO
             this->labelLastName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelLastName->Name = L"labelLastName";
             this->labelLastName->Size = Drawing::Size(53, 25);
-            this->labelLastName->TabIndex = 0;
             this->labelLastName->Text = L"Nom";
 
             /*-------------------- labelFirstName --------------------*/
@@ -266,7 +246,6 @@ namespace Projet_POO
             this->labelFirstName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelFirstName->Name = L"labelFirstName";
             this->labelFirstName->Size = Drawing::Size(80, 25);
-            this->labelFirstName->TabIndex = 2;
             this->labelFirstName->Text = L"Prenom";
 
             /*-------------------- labelBillingAddress --------------------*/
@@ -277,7 +256,6 @@ namespace Projet_POO
             this->labelBillingAddress->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelBillingAddress->Name = L"labelBillingAddress";
             this->labelBillingAddress->Size = Drawing::Size(207, 25);
-            this->labelBillingAddress->TabIndex = 3;
             this->labelBillingAddress->Text = L"Adresse de facturation";
 
             /*-------------------- labelDeliveryAddress --------------------*/
@@ -288,7 +266,6 @@ namespace Projet_POO
             this->labelDeliveryAddress->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelDeliveryAddress->Name = L"labelDeliveryAddress";
             this->labelDeliveryAddress->Size = Drawing::Size(188, 25);
-            this->labelDeliveryAddress->TabIndex = 1;
             this->labelDeliveryAddress->Text = L"Adresse de livraison";
 
             /*-------------------- labelProductName --------------------*/
@@ -299,7 +276,6 @@ namespace Projet_POO
             this->labelProductName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelProductName->Name = L"labelProductName";
             this->labelProductName->Size = Drawing::Size(73, 25);
-            this->labelProductName->TabIndex = 0;
             this->labelProductName->Text = L"Produit";
 
             /*-------------------- labelType --------------------*/
@@ -310,7 +286,6 @@ namespace Projet_POO
             this->labelType->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelType->Name = L"labelType";
             this->labelType->Size = Drawing::Size(70, 25);
-            this->labelType->TabIndex = 2;
             this->labelType->Text = L"Nature";
 
             /*-------------------- labelColour --------------------*/
@@ -321,7 +296,6 @@ namespace Projet_POO
             this->labelColour->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelColour->Name = L"labelColour";
             this->labelColour->Size = Drawing::Size(81, 25);
-            this->labelColour->TabIndex = 1;
             this->labelColour->Text = L"Couleur";
 
             /*-------------------- labelQuantity --------------------*/
@@ -332,8 +306,15 @@ namespace Projet_POO
             this->labelQuantity->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelQuantity->Name = L"labelQuantity";
             this->labelQuantity->Size = Drawing::Size(86, 25);
-            this->labelQuantity->TabIndex = 3;
             this->labelQuantity->Text = L"Quantite";
+
+            //TODO: finish TabIndex
+            /*-------------------- dataGridViewProductList --------------------*/
+            this->dataGridViewProductList->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+            this->dataGridViewProductList->Location = Point(3, 3);
+            this->dataGridViewProductList->Name = L"dataGridViewProductList";
+            this->dataGridViewProductList->Size = Drawing::Size(372, 320);
+            this->dataGridViewProductList->TabIndex = 2;
 
             /*-------------------- textBoxBirthDate --------------------*/
             this->textBoxBirthDate->Anchor = AnchorStyles::Left;

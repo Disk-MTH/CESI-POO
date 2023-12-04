@@ -52,7 +52,6 @@ namespace Projet_POO
 				this->tableLayout1->RowCount = 1;
 				this->tableLayout1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayout1->Size = Drawing::Size(160, 37);
-				this->tableLayout1->TabIndex = 0;
 
 				/* -------------------- labelLoading --------------------*/
 				this->labelLoading->Anchor = AnchorStyles::None;
@@ -61,7 +60,6 @@ namespace Projet_POO
 				this->labelLoading->Location = Point(12, 6);
 				this->labelLoading->Name = L"labelLoading";
 				this->labelLoading->Size = Drawing::Size(135, 25);
-				this->labelLoading->TabIndex = 0;
 				this->labelLoading->Text = text;
 
 				/* -------------------- LoadingScreen --------------------*/

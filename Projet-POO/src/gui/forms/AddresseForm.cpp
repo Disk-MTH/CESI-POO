@@ -22,7 +22,7 @@ void AddresseForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 	city = this->comboBoxCity->Text;
 	String^ addressTypeId = this->checkBoxDelivery->Checked && this->checkBoxDelivery->Checked ? "3" : this->checkBoxDelivery->Checked ? "2" : this->checkBoxBilling->Checked ? "1" : "";
 
-	if (App::isEmpty ("Libelle", street) || App::isEmpty ("Code postal", zipCode) || App::isEmpty ("Ville", city) || App::isEmpty ("Type", addressTypeId))
+	if (App::isEmpty("Libelle", street) || App::isEmpty("Code postal", zipCode) || App::isEmpty("Ville", city) || App::isEmpty("Type", addressTypeId))
 	{
 		return;
 	}
@@ -48,4 +48,3 @@ void AddresseForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 		App::app->toastMessage(this, "Erreur lors de l'enregistrement de l'adresse", Color::Red, 3000);
 	}
 }
-

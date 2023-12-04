@@ -20,6 +20,7 @@ namespace Projet_POO
         TableLayoutPanel^ tableLayoutPanel2;
         TableLayoutPanel^ tableLayoutPanel3;
         TableLayoutPanel^ tableLayoutPanel4;
+        
         Label^ labelTitle;
         Label^ labelType;
         Label^ labelQuantity;
@@ -54,6 +55,7 @@ namespace Projet_POO
             this->tableLayoutPanel2 = gcnew TableLayoutPanel();
             this->tableLayoutPanel3 = gcnew TableLayoutPanel();
             this->tableLayoutPanel4 = gcnew TableLayoutPanel();
+            
             this->labelTitle = gcnew Label();
             this->labelType = gcnew Label();
             this->labelQuantity = gcnew Label();
@@ -62,14 +64,18 @@ namespace Projet_POO
             this->labelColour = gcnew Label();
             this->labelVAT = gcnew Label();
             this->labelRestockThreshold = gcnew Label();
+            
             this->dataGridViewTieredPrice = gcnew DataGridView();
+            
             this->textBoxRestockThreshold = gcnew TextBox();
             this->textBoxVAT = gcnew TextBox();
             this->textBoxQuantity = gcnew TextBox();
             this->textBoxBuyPrice = gcnew TextBox();
             this->textBoxName = gcnew TextBox();
+            
             this->comboBoxType = gcnew ComboBox();
             this->comboBoxColour = gcnew ComboBox();
+            
             this->buttonAdd = gcnew Button();
             this->buttonDelete = gcnew Button();
             this->buttonEdit = gcnew Button();
@@ -94,7 +100,6 @@ namespace Projet_POO
             this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 104));
             this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 104));
             this->tableLayoutPanel1->Size = Drawing::Size(657, 928);
-            this->tableLayoutPanel1->TabIndex = 0;
 
             /*-------------------- tableLayoutPanel2 --------------------*/
             this->tableLayoutPanel2->ColumnCount = 3;
@@ -125,7 +130,6 @@ namespace Projet_POO
             this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 52));
             this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 40));
             this->tableLayoutPanel2->Size = Drawing::Size(651, 306);
-            this->tableLayoutPanel2->TabIndex = 1;
 
             /*-------------------- tableLayoutPanel3 --------------------*/
             this->tableLayoutPanel3->ColumnCount = 3;
@@ -140,7 +144,6 @@ namespace Projet_POO
             this->tableLayoutPanel3->RowCount = 1;
             this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
             this->tableLayoutPanel3->Size = Drawing::Size(651, 98);
-            this->tableLayoutPanel3->TabIndex = 3;
 
             /*-------------------- tableLayoutPanel4 --------------------*/
             this->tableLayoutPanel4->ColumnCount = 3;
@@ -155,7 +158,6 @@ namespace Projet_POO
             this->tableLayoutPanel4->RowCount = 1;
             this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
             this->tableLayoutPanel4->Size = Drawing::Size(651, 99);
-            this->tableLayoutPanel4->TabIndex = 4;
 
             /*-------------------- labelTitle --------------------*/
             this->labelTitle->Anchor = AnchorStyles::None;
@@ -164,7 +166,6 @@ namespace Projet_POO
             this->labelTitle->Location = Point(252, 34);
             this->labelTitle->Name = L"labelTitle";
             this->labelTitle->Size = Drawing::Size(153, 48);
-            this->labelTitle->TabIndex = 0;
             this->labelTitle->Text = L"Produit";
 
             /*-------------------- labelType --------------------*/
@@ -175,7 +176,6 @@ namespace Projet_POO
             this->labelType->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelType->Name = L"labelType";
             this->labelType->Size = Drawing::Size(88, 29);
-            this->labelType->TabIndex = 6;
             this->labelType->Text = L"Nature";
 
             /*-------------------- labelQuantity --------------------*/
@@ -186,7 +186,6 @@ namespace Projet_POO
             this->labelQuantity->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelQuantity->Name = L"labelQuantity";
             this->labelQuantity->Size = Drawing::Size(108, 29);
-            this->labelQuantity->TabIndex = 2;
             this->labelQuantity->Text = L"Quantit�";
 
             /*-------------------- labelBuyPrice --------------------*/
@@ -197,7 +196,6 @@ namespace Projet_POO
             this->labelBuyPrice->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelBuyPrice->Name = L"labelBuyPrice";
             this->labelBuyPrice->Size = Drawing::Size(144, 29);
-            this->labelBuyPrice->TabIndex = 1;
             this->labelBuyPrice->Text = L"Prix d\'achat";
 
             /*-------------------- labelName --------------------*/
@@ -208,7 +206,6 @@ namespace Projet_POO
             this->labelName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelName->Name = L"labelName";
             this->labelName->Size = Drawing::Size(67, 29);
-            this->labelName->TabIndex = 0;
             this->labelName->Text = L"Nom";
 
             /*-------------------- labelColour --------------------*/
@@ -219,18 +216,16 @@ namespace Projet_POO
             this->labelColour->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelColour->Name = L"labelColour";
             this->labelColour->Size = Drawing::Size(101, 29);
-            this->labelColour->TabIndex = 3;
             this->labelColour->Text = L"Couleur";
 
-            /*-------------------- labelVAT --------------------*/
+            /*-------------------- labelVat --------------------*/
             this->labelVAT->Anchor = AnchorStyles::Left;
             this->labelVAT->AutoSize = true;
             this->labelVAT->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->labelVAT->Location = Point(197, 113);
             this->labelVAT->Margin = Windows::Forms::Padding(10, 0, 3, 0);
-            this->labelVAT->Name = L"labelVAT";
+            this->labelVAT->Name = L"labelVat";
             this->labelVAT->Size = Drawing::Size(159, 29);
-            this->labelVAT->TabIndex = 4;
             this->labelVAT->Text = L"Taux de TVA";
 
             /*-------------------- labelRestockThreshold --------------------*/
@@ -241,9 +236,9 @@ namespace Projet_POO
             this->labelRestockThreshold->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelRestockThreshold->Name = L"labelRestockThreshold";
             this->labelRestockThreshold->Size = Drawing::Size(105, 29);
-            this->labelRestockThreshold->TabIndex = 5;
             this->labelRestockThreshold->Text = L"Restock";
 
+            //TODO finish TabIndex
             /*-------------------- dataGridViewTieredPrice --------------------*/
             this->dataGridViewTieredPrice->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
             this->dataGridViewTieredPrice->Location = Point(15, 444);
