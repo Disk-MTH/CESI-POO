@@ -89,6 +89,10 @@ WHERE p.deleted = 0
 /* ------------------------- Orders -------------------------*/
 
 /* Query to fill OrdersPage */
+
+/* have the sum of ohp.price only count prices when validated is true in the table *payment* */
+
+
 SELECT o.id_order,
        o.reference,
        c.last_name,
@@ -99,7 +103,7 @@ SELECT o.id_order,
        CONCAT(b.street, ', ', b.zip_code, ', ', b.city)              AS billing_address,
        CONCAT(d.street, ', ', d.zip_code, ', ', d.city)              AS delivery_address,
        SUM(ohp.price)                                                AS total_amount,
-       (SELECT SUM(amount) FROM payment WHERE id_order = o.id_order) AS payed_amount,
+       (SELECT SUM(amount) FROM payment WHERE id_order = o.id_order AND validated = 1) AS payed_amount,
        CONVERT(VARCHAR(10), IIF((SELECT SUM(amount) FROM payment WHERE id_order = o.id_order) = SUM(ohp.price),
                                 (SELECT MAX(payment_date) FROM payment WHERE id_order = o.id_order), NULL),
                             103)                                     AS payment_date,

@@ -7,7 +7,7 @@ void PaymentsForm::reloadPaymentsGridView()
 {
 	this->dataGridViewPaymentsDetails->Rows->Clear();
 
-	DataSet^ orders = App::app->db->query("SELECT id_order, CONVERT(VARCHAR(10), payment_date, 103) AS payment_date,  payment_mean,  amount, validated FROM payment WHERE id_order = " + this->orderId + "ORDER BY payment_date DESC;");
+	DataSet^ orders = App::app->db->query("SELECT id_order, CONVERT(VARCHAR(10), payment_date, 103) AS payment_date,  payment_mean,  amount, validated FROM payment WHERE id_order = " + this->orderId + " ORDER BY payment_date DESC;");
 	for (int i = 0; i < orders->Tables[0]->Rows->Count; i++)
 	{
 		this->dataGridViewPaymentsDetails->Rows->Add(orders->Tables[0]->Rows[i]->ItemArray);

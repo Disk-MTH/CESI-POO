@@ -208,6 +208,7 @@ namespace Projet_POO
 				this->buttonCancel->TabIndex = 5;
 				this->buttonCancel->Text = L"Annuler";
 				this->buttonCancel->UseVisualStyleBackColor = true;
+				this->buttonCancel->Click += gcnew EventHandler(this, &PaymentForm::buttonCancel_Click);
 
 				/*-------------------- buttonValidate --------------------*/
 				this->buttonValidate->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -219,6 +220,7 @@ namespace Projet_POO
 				this->buttonValidate->TabIndex = 6;
 				this->buttonValidate->Text = L"Valider";
 				this->buttonValidate->UseVisualStyleBackColor = true;
+				this->buttonValidate->Click += gcnew EventHandler(this, &PaymentForm::buttonValidate_Click);
 
 				/*-------------------- PaymentForm --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
