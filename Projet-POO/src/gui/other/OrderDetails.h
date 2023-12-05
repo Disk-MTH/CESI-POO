@@ -213,7 +213,7 @@ namespace Projet_POO
 				this->labelTotalPrice->Location = Point(110, 298);
 				this->labelTotalPrice->Name = L"labelTotalPrice";
 				this->labelTotalPrice->Size = Drawing::Size(173, 31);
-				this->labelTotalPrice->Text = L"Prix TTC : " + totalAmount;
+				this->labelTotalPrice->Text = L"Prix TTC : " + totalAmount + "$";
 
 				/*-------------------- labelTfPrice --------------------*/
 				this->labelTfPrice->Anchor = AnchorStyles::None;
@@ -222,7 +222,7 @@ namespace Projet_POO
 				this->labelTfPrice->Location = Point(69, 4);
 				this->labelTfPrice->Name = L"labelTfPrice";
 				this->labelTfPrice->Size = Drawing::Size(115, 25);
-				this->labelTfPrice->Text = L"Prix HT : " + tfAmount;
+				this->labelTfPrice->Text = L"Prix HT : " + tfAmount + "$";
 
 				/*-------------------- labelVatPrice --------------------*/
 				this->labelVatPrice->Anchor = AnchorStyles::None;
@@ -231,7 +231,7 @@ namespace Projet_POO
 				this->labelVatPrice->Location = Point(81, 38);
 				this->labelVatPrice->Name = L"labelVatPrice";
 				this->labelVatPrice->Size = Drawing::Size(91, 25);
-				this->labelVatPrice->Text = L"TVA : " + vatAmount;
+				this->labelVatPrice->Text = L"TVA : " + vatAmount + "$";
 
 				/*-------------------- dataGridViewTieredPrices --------------------*/
 				this->dataGridViewTieredPrices->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
@@ -239,6 +239,17 @@ namespace Projet_POO
 				this->dataGridViewTieredPrices->Name = L"dataGridViewTieredPrices";
 				this->dataGridViewTieredPrices->Size = Drawing::Size(254, 271);
 				this->dataGridViewTieredPrices->TabIndex = 0;
+				this->dataGridViewTieredPrices->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->dataGridViewTieredPrices->ReadOnly = true;
+				this->dataGridViewTieredPrices->AllowUserToResizeRows = false;
+				this->dataGridViewTieredPrices->AllowUserToAddRows = false;
+				this->dataGridViewTieredPrices->RowHeadersVisible = false;
+				this->dataGridViewTieredPrices->AllowUserToDeleteRows = false;
+				this->dataGridViewTieredPrices->MultiSelect = false;
+				this->dataGridViewTieredPrices->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+				this->dataGridViewTieredPrices->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
+				this->dataGridViewTieredPrices->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+				this->dataGridViewTieredPrices->ColumnHeadersHeight = 40;
 
 				auto type = gcnew DataGridViewTextBoxColumn();
 				type->Name = L"Nature";
@@ -263,9 +274,7 @@ namespace Projet_POO
 				auto price = gcnew DataGridViewTextBoxColumn();
 				price->Name = L"Pric TTC";
 				this->dataGridViewTieredPrices->Columns->Add(price);
-
 				
-
 				/*-------------------- OrderDetails --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
 				this->AutoScaleDimensions = SizeF(6, 13);

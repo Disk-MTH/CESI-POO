@@ -135,5 +135,6 @@ SELECT p.type,
 FROM product p
          INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
 WHERE p.deleted = 0
-  AND ohp.id_order = 2;
+  AND ohp.id_order = 2
+ORDER BY ohp.quantity DESC;
 
