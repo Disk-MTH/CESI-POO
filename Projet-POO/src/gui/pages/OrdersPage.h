@@ -172,7 +172,7 @@ namespace Projet_POO
 				this->dataGridViewOrders->Columns->Add(payedAmount);
 
 				auto paymentDate = gcnew DataGridViewTextBoxColumn();
-				paymentDate->Name = "Date de paiement";
+				paymentDate->Name = "Date de payement";
 				this->dataGridViewOrders->Columns->Add(paymentDate);
 
 				auto vatAmount = gcnew DataGridViewTextBoxColumn();

@@ -27,8 +27,8 @@ namespace Projet_POO
 
 			TextBox^ textBoxAmount;
 			TextBox^ textBoxDate;
-			CheckBox^ checkBoxValidPayment;
-			ComboBox^ comboBox1;
+			CheckBox^ checkBoxValided;
+			ComboBox^ comboBoxType;
 
 			Button^ buttonCancel;
 			Button^ buttonValidate;
@@ -47,10 +47,10 @@ namespace Projet_POO
 				this->textBoxAmount = gcnew TextBox();
 				this->textBoxDate = gcnew TextBox();
 				this->buttonValidate = gcnew Button();
-				this->comboBox1 = gcnew ComboBox();
+				this->comboBoxType = gcnew ComboBox();
 
 				this->buttonCancel = gcnew Button();
-				this->checkBoxValidPayment = gcnew CheckBox();
+				this->checkBoxValided = gcnew CheckBox();
 
 				/*-------------------- tableLayoutPanel1 --------------------*/
 				this->tableLayoutPanel1->ColumnCount = 1;
@@ -65,7 +65,6 @@ namespace Projet_POO
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 84.81676F));
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 58));
 				this->tableLayoutPanel1->Size = Drawing::Size(370, 437);
-				this->tableLayoutPanel1->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel2 --------------------*/
 				this->tableLayoutPanel2->ColumnCount = 1;
@@ -75,8 +74,8 @@ namespace Projet_POO
 				this->tableLayoutPanel2->Controls->Add(this->labelType, 0, 2);
 				this->tableLayoutPanel2->Controls->Add(this->textBoxAmount, 0, 1);
 				this->tableLayoutPanel2->Controls->Add(this->textBoxDate, 0, 5);
-				this->tableLayoutPanel2->Controls->Add(this->comboBox1, 0, 3);
-				this->tableLayoutPanel2->Controls->Add(this->checkBoxValidPayment, 0, 6);
+				this->tableLayoutPanel2->Controls->Add(this->comboBoxType, 0, 3);
+				this->tableLayoutPanel2->Controls->Add(this->checkBoxValided, 0, 6);
 				this->tableLayoutPanel2->Location = Point(3, 60);
 				this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 				this->tableLayoutPanel2->RowCount = 7;
@@ -88,7 +87,6 @@ namespace Projet_POO
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 45));
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 38));
 				this->tableLayoutPanel2->Size = Drawing::Size(654, 315);
-				this->tableLayoutPanel2->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel3 --------------------*/
 				this->tableLayoutPanel3->ColumnCount = 2;
@@ -101,7 +99,6 @@ namespace Projet_POO
 				this->tableLayoutPanel3->RowCount = 1;
 				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel3->Size = Drawing::Size(654, 53);
-				this->tableLayoutPanel3->TabIndex = 2;
 
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
@@ -110,7 +107,6 @@ namespace Projet_POO
 				this->labelTitle->Location = Point(245, 9);
 				this->labelTitle->Name = L"labelTitle";
 				this->labelTitle->Size = Drawing::Size(170, 39);
-				this->labelTitle->TabIndex = 1;
 				this->labelTitle->Text = L"Payement";
 
 				/*-------------------- labelAmount --------------------*/
@@ -121,7 +117,6 @@ namespace Projet_POO
 				this->labelAmount->Margin = Windows::Forms::Padding(7, 0, 7, 0);
 				this->labelAmount->Name = L"labelAmount";
 				this->labelAmount->Size = Drawing::Size(187, 25);
-				this->labelAmount->TabIndex = 0;
 				this->labelAmount->Text = L"Valeur du payement";
 
 				/*-------------------- labelDate --------------------*/
@@ -132,7 +127,6 @@ namespace Projet_POO
 				this->labelDate->Margin = Windows::Forms::Padding(7, 0, 7, 0);
 				this->labelDate->Name = L"labelDate";
 				this->labelDate->Size = Drawing::Size(171, 25);
-				this->labelDate->TabIndex = 2;
 				this->labelDate->Text = L"Date du payement";
 
 				/*-------------------- labelType --------------------*/
@@ -143,17 +137,16 @@ namespace Projet_POO
 				this->labelType->Margin = Windows::Forms::Padding(7, 0, 7, 0);
 				this->labelType->Name = L"labelType";
 				this->labelType->Size = Drawing::Size(175, 25);
-				this->labelType->TabIndex = 1;
 				this->labelType->Text = L"Type de payement";
 
 				/*-------------------- textBoxAmount --------------------*/
-				this->textBoxAmount->Anchor = AnchorStyles::Left; //TODO
+				this->textBoxAmount->Anchor = AnchorStyles::Left;
 				this->textBoxAmount->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->textBoxAmount->Location = Point(10, 44);
 				this->textBoxAmount->Margin = Windows::Forms::Padding(9, 3, 0, 3);
 				this->textBoxAmount->Name = L"textBoxAmount";
 				this->textBoxAmount->Size = Drawing::Size(339, 30);
-				this->textBoxAmount->TabIndex = 3;
+				this->textBoxAmount->TabIndex = 0;
 
 				/*-------------------- textBoxDate --------------------*/
 				this->textBoxDate->Anchor = AnchorStyles::Left;
@@ -162,29 +155,29 @@ namespace Projet_POO
 				this->textBoxDate->Margin = Windows::Forms::Padding(9, 3, 0, 3);
 				this->textBoxDate->Name = L"textBoxDate";
 				this->textBoxDate->Size = Drawing::Size(339, 30);
-				this->textBoxDate->TabIndex = 4;
+				this->textBoxDate->TabIndex = 3;
 
-				/*-------------------- comboBox1 --------------------*/
-				this->comboBox1->Anchor = AnchorStyles::Left;
-				this->comboBox1->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->comboBox1->FormattingEnabled = true;
-				this->comboBox1->Location = Point(10, 138);
-				this->comboBox1->Margin = Windows::Forms::Padding(9, 3, 0, 3);
-				this->comboBox1->Name = L"comboBox1";
-				this->comboBox1->Size = Drawing::Size(339, 33);
-				this->comboBox1->TabIndex = 5;
+				/*-------------------- comboBoxType --------------------*/
+				this->comboBoxType->Anchor = AnchorStyles::Left;
+				this->comboBoxType->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->comboBoxType->FormattingEnabled = true;
+				this->comboBoxType->Location = Point(10, 138);
+				this->comboBoxType->Margin = Windows::Forms::Padding(9, 3, 0, 3);
+				this->comboBoxType->Name = L"comboBoxType";
+				this->comboBoxType->Size = Drawing::Size(339, 33);
+				this->comboBoxType->TabIndex = 2;
 
-				/*-------------------- checkBoxValidPayment --------------------*/
-				this->checkBoxValidPayment->Anchor = AnchorStyles::Left;
-				this->checkBoxValidPayment->AutoSize = true;
-				this->checkBoxValidPayment->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->checkBoxValidPayment->Location = Point(10, 281);
-				this->checkBoxValidPayment->Margin = Windows::Forms::Padding(9, 3, 0, 3);
-				this->checkBoxValidPayment->Name = L"checkBoxValidPayment";
-				this->checkBoxValidPayment->Size = Drawing::Size(128, 29);
-				this->checkBoxValidPayment->TabIndex = 6;
-				this->checkBoxValidPayment->Text = L"checkBox1";
-				this->checkBoxValidPayment->UseVisualStyleBackColor = true;
+				/*-------------------- checkBoxValided --------------------*/
+				this->checkBoxValided->Anchor = AnchorStyles::Left;
+				this->checkBoxValided->AutoSize = true;
+				this->checkBoxValided->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->checkBoxValided->Location = Point(10, 281);
+				this->checkBoxValided->Margin = Windows::Forms::Padding(9, 3, 0, 3);
+				this->checkBoxValided->Name = L"checkBoxValided";
+				this->checkBoxValided->Size = Drawing::Size(128, 29);
+				this->checkBoxValided->TabIndex = 4;
+				this->checkBoxValided->Text = L"Payement recu";
+				this->checkBoxValided->UseVisualStyleBackColor = true;
 
 				/*-------------------- buttonCancel --------------------*/
 				this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -193,7 +186,7 @@ namespace Projet_POO
 				this->buttonCancel->Margin = Windows::Forms::Padding(7);
 				this->buttonCancel->Name = L"buttonCancel";
 				this->buttonCancel->Size = Drawing::Size(109, 39);
-				this->buttonCancel->TabIndex = 0;
+				this->buttonCancel->TabIndex = 5;
 				this->buttonCancel->Text = L"Annuler";
 				this->buttonCancel->UseVisualStyleBackColor = true;
 
@@ -204,7 +197,7 @@ namespace Projet_POO
 				this->buttonValidate->Margin = Windows::Forms::Padding(7);
 				this->buttonValidate->Name = L"buttonValidate";
 				this->buttonValidate->Size = Drawing::Size(109, 39);
-				this->buttonValidate->TabIndex = 1;
+				this->buttonValidate->TabIndex = 6;
 				this->buttonValidate->Text = L"Valider";
 				this->buttonValidate->UseVisualStyleBackColor = true;
 
