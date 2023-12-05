@@ -10,13 +10,18 @@ namespace Projet_POO
 	public ref class PaymentsForm : public Form
 	{
 		public:
-			PaymentsForm()
+			PaymentsForm(String^ orderId, String^ reference)
 			{
+				this->orderId = orderId;
+				this->reference = reference;
 				initialize();
 				reloadPaymentsGridView();
 			}
 
 		private:
+			String^ orderId;
+			String^ reference;
+		
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 		
@@ -76,7 +81,7 @@ namespace Projet_POO
 				this->labelTitle->Location = Point(101, 12);
 				this->labelTitle->Name = L"labelTitle";
 				this->labelTitle->Size = Drawing::Size(457, 39);
-				this->labelTitle->Text = L"Details des payements : REF";
+				this->labelTitle->Text = L"Details des payements : " + this->reference;
 				
 				/*-------------------- dataGridViewPaymentsDetails --------------------*/
 				this->dataGridViewPaymentsDetails->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
@@ -84,6 +89,42 @@ namespace Projet_POO
 				this->dataGridViewPaymentsDetails->Name = L"dataGridViewPaymentsDetails";
 				this->dataGridViewPaymentsDetails->Size = Drawing::Size(653, 298);
 				this->dataGridViewPaymentsDetails->TabIndex = 0;
+				this->dataGridViewPaymentsDetails->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->dataGridViewPaymentsDetails->ReadOnly = true;
+				this->dataGridViewPaymentsDetails->AllowUserToResizeRows = false;
+				this->dataGridViewPaymentsDetails->AllowUserToAddRows = false;
+				this->dataGridViewPaymentsDetails->RowHeadersVisible = false;
+				this->dataGridViewPaymentsDetails->AllowUserToDeleteRows = false;
+				this->dataGridViewPaymentsDetails->MultiSelect = false;
+				this->dataGridViewPaymentsDetails->ColumnHeadersDefaultCellStyle->WrapMode = DataGridViewTriState::False;
+				this->dataGridViewPaymentsDetails->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->dataGridViewPaymentsDetails->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+				this->dataGridViewPaymentsDetails->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+				this->dataGridViewPaymentsDetails->ColumnHeadersHeight = 40;
+
+				auto orderId = gcnew DataGridViewTextBoxColumn();
+				orderId->Visible = false;
+				this->dataGridViewPaymentsDetails->Columns->Add(orderId);
+				
+				auto paymentDate = gcnew DataGridViewTextBoxColumn();
+				paymentDate->Name = L"Date du versement";
+				this->dataGridViewPaymentsDetails->Columns->Add(paymentDate);
+
+				auto paymentMean = gcnew DataGridViewTextBoxColumn();
+				paymentMean->Name = L"Moyen de payement";
+				this->dataGridViewPaymentsDetails->Columns->Add(paymentMean);
+
+				auto amount = gcnew DataGridViewTextBoxColumn();
+				amount->Name = L"Montant du versement";
+				this->dataGridViewPaymentsDetails->Columns->Add(amount);
+
+				auto validated = gcnew DataGridViewTextBoxColumn();
+				validated->Name = L"Payement valide";
+				this->dataGridViewPaymentsDetails->Columns->Add(validated);
+
+				auto paymentId = gcnew DataGridViewTextBoxColumn();
+				paymentId->Visible = false;
+				this->dataGridViewPaymentsDetails->Columns->Add(paymentId);
 
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -95,6 +136,7 @@ namespace Projet_POO
 				this->buttonAdd->TabIndex = 1;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
+				this->buttonAdd->Click += gcnew EventHandler(this, &PaymentsForm::buttonAdd_Click);
 
 				/*-------------------- buttonEdit --------------------*/
 				this->buttonEdit->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -106,6 +148,7 @@ namespace Projet_POO
 				this->buttonEdit->TabIndex = 2;
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
+				this->buttonEdit->Click += gcnew EventHandler(this, &PaymentsForm::buttonEdit_Click);
 
 				/*-------------------- buttonDelete --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -117,6 +160,7 @@ namespace Projet_POO
 				this->buttonDelete->TabIndex = 3;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
+				this->buttonDelete->Click += gcnew EventHandler(this, &PaymentsForm::buttonDelete_Click);
 
 				/*-------------------- PaymentsForm --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
@@ -134,5 +178,6 @@ namespace Projet_POO
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
 			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
+			Void openPaymentForm(String^ paymentId, String^ paymentDate, String^ paymentMean, String^ amount, String^ validated);
 	};
 }

@@ -138,3 +138,13 @@ WHERE p.deleted = 0
   AND ohp.id_order = 2
 ORDER BY ohp.quantity DESC;
 
+/* Query to fill PaymentsForm */
+SELECT id_order,
+       CONVERT(VARCHAR(10), payment_date, 103) AS payment_date,
+       payment_mean,
+       amount,
+       validated
+FROM payment
+WHERE id_order = 2
+ORDER BY payment_date;
+

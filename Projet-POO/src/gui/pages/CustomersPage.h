@@ -112,7 +112,6 @@ namespace Projet_POO
 				this->dataGridViewCustomers->ColumnHeadersHeight = 40;
 
 				auto idCustomer = gcnew DataGridViewTextBoxColumn();
-				idCustomer->Name = L"id_customer";
 				idCustomer->Visible = false;
 				this->dataGridViewCustomers->Columns->Add(idCustomer);
 
@@ -120,6 +119,7 @@ namespace Projet_POO
 				lastName->Name = L"Nom";
 				lastName->Resizable = DataGridViewTriState::False;
 				this->dataGridViewCustomers->Columns->Add(lastName);
+				
 				auto firstName = gcnew DataGridViewTextBoxColumn();
 				firstName->Name = L"Prenom";
 				firstName->Resizable = DataGridViewTriState::False;

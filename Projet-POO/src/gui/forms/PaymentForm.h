@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../App.h"
+
 using namespace System;
 using namespace Windows::Forms;
 using namespace Drawing;
@@ -10,12 +12,25 @@ namespace Projet_POO
 	public ref class PaymentForm : public Form
 	{
 		public:
-			PaymentForm()
+			PaymentForm(String^ paymentId, String^ paymentDate, String^ paymentMean, String^ amount, String^ validated, String^ orderId)
 			{
+				this->paymentId = paymentId;
+				this->paymentDate = paymentDate;
+				this->paymentMean = paymentMean;
+				this->amount = amount;
+				this->validated = validated;
+				this->orderId = orderId;
 				initialize();
 			}
 
 		private:
+			String^ paymentId;
+			String^ paymentDate;
+			String^ paymentMean;
+			String^ amount;
+			String^ validated;
+			String^ orderId;
+		
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 			TableLayoutPanel^ tableLayoutPanel3;
@@ -147,6 +162,7 @@ namespace Projet_POO
 				this->textBoxAmount->Name = L"textBoxAmount";
 				this->textBoxAmount->Size = Drawing::Size(339, 30);
 				this->textBoxAmount->TabIndex = 0;
+				this->textBoxAmount->Text = this->amount;
 
 				/*-------------------- textBoxDate --------------------*/
 				this->textBoxDate->Anchor = AnchorStyles::Left;
@@ -156,6 +172,7 @@ namespace Projet_POO
 				this->textBoxDate->Name = L"textBoxDate";
 				this->textBoxDate->Size = Drawing::Size(339, 30);
 				this->textBoxDate->TabIndex = 3;
+				this->textBoxDate->Text = this->paymentDate;
 
 				/*-------------------- comboBoxType --------------------*/
 				this->comboBoxType->Anchor = AnchorStyles::Left;
@@ -166,6 +183,7 @@ namespace Projet_POO
 				this->comboBoxType->Name = L"comboBoxType";
 				this->comboBoxType->Size = Drawing::Size(339, 33);
 				this->comboBoxType->TabIndex = 2;
+				this->comboBoxType->Text = this->paymentMean;
 
 				/*-------------------- checkBoxValided --------------------*/
 				this->checkBoxValided->Anchor = AnchorStyles::Left;
@@ -178,6 +196,7 @@ namespace Projet_POO
 				this->checkBoxValided->TabIndex = 4;
 				this->checkBoxValided->Text = L"Payement recu";
 				this->checkBoxValided->UseVisualStyleBackColor = true;
+				this->checkBoxValided->Checked = this->validated == "True" ? true : false;
 
 				/*-------------------- buttonCancel --------------------*/
 				this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;

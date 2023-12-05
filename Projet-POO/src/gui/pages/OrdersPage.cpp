@@ -1,7 +1,7 @@
 #include "OrdersPage.h"
 #include "../../App.h"
 #include "../forms/OrderForm.h"
-#include "../forms/PaymentForm.h"
+#include "../forms/PaymentsForm.h"
 #include "../other/OrderDetails.h"
 
 void OrdersPage::reloadOrdersGridView()
@@ -50,9 +50,12 @@ void OrdersPage::buttonPayments_Click(Object^ sender, EventArgs^ e)
 		App::app->toastMessage(this, "Veuillez selectionner une commande", Color::Red, 2000);
 		return;
 	}
-	
-	auto orderDetails = gcnew PaymentForm();
-	orderDetails->ShowDialog();
+
+	auto paymentsForm = gcnew PaymentsForm(
+		this->dataGridViewOrders->CurrentRow->Cells[0]->Value->ToString(),
+		this->dataGridViewOrders->CurrentRow->Cells[1]->Value->ToString()
+	);
+	paymentsForm->ShowDialog();
 }
 
 void OrdersPage::buttonOrderDetails_Click(Object^ sender, EventArgs^ e)
@@ -63,7 +66,7 @@ void OrdersPage::buttonOrderDetails_Click(Object^ sender, EventArgs^ e)
 		App::app->toastMessage(this, "Veuillez selectionner une commande", Color::Red, 2000);
 		return;
 	}
-	
+
 	auto orderDetails = gcnew OrderDetails(
 		this->dataGridViewOrders->CurrentRow->Cells[0]->Value->ToString(),
 		this->dataGridViewOrders->CurrentRow->Cells[1]->Value->ToString(),
