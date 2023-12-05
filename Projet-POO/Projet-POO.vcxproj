@@ -121,10 +121,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\Database.cpp" />
     <ClCompile Include="src\gui\forms\AddresseForm.cpp" />
     <ClCompile Include="src\gui\forms\CustomerForm.cpp" />
+    <ClCompile Include="src\gui\forms\ProductForm.cpp" />
     <ClCompile Include="src\gui\other\ProductDetails.cpp" />
     <ClCompile Include="src\gui\pages\CatalogPage.cpp" />
     <ClCompile Include="src\gui\pages\CustomersPage.cpp" />
@@ -134,6 +136,9 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\Database.h" />
     <ClInclude Include="src\gui\forms\AddresseForm.h" />

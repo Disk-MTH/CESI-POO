@@ -138,5 +138,7 @@ GROUP BY o.id_order,
          d.city;
 
 
-
-SELECT o.id_order, o.reference, o.issue_date, o.expected_delivery_date, c.last_name, c.first_name, c.birthdate, CONCAT(b.street, ', ', b.zip_code, ', ', b.city) AS billing_address, CONCAT(d.street, ', ', d.zip_code, ', ', d.city) AS delivery_address, SUM(ohp.price) AS total_amount, (SELECT SUM(amount) FROM payment WHERE id_order = o.id_order) AS payment_amount, IIF((SELECT SUM(amount) FROM payment WHERE id_order = o.id_order) = SUM(ohp.price), (SELECT MAX(payment_date) FROM payment WHERE id_order = o.id_order), NULL) AS payment_date FROM [order] o INNER JOIN customer c ON o.id_customer = c.id_customer INNER JOIN address b ON o.id_billing_address = b.id_address INNER JOIN address d ON o.id_delivery_address = d.id_address INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order WHERE o.deleted = 0 GROUP BY o.id_order, o.reference, o.issue_date, o.expected_delivery_date, c.last_name, c.first_name, c.birthdate, b.street, b.zip_code, b.city, d.street, d.zip_code, d.city;
+SELECT minimal_quantity, tf_price 
+FROM tiered_price
+WHERE deleted = 0 AND id_product = 1
+ORDER BY minimal_quantity;

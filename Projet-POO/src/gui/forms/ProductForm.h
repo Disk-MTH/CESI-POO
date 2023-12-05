@@ -12,10 +12,27 @@ namespace Projet_POO
     public:
         ProductForm()
         {
+            this->productId = productId;
+            this->RestockThreshold = RestockThreshold;
+            this->VAT = VAT;
+            this->Quantity = Quantity;
+            this->BuyPrice = BuyPrice;
+            this->Name = Name;
+            this->mode = productId == "" ? "0" : "1"; //0 = add, 1 = edit
+            
             initialize();
+            reloadGridViewTieredPrice();
         }
 
     private:
+        String^ productId;
+        String^ RestockThreshold;
+        String^ VAT;
+        String^ Quantity;
+        String^ BuyPrice;
+        String^ Name;
+        String^ mode;
+        
         TableLayoutPanel^ tableLayoutPanel1;
         TableLayoutPanel^ tableLayoutPanel2;
         TableLayoutPanel^ tableLayoutPanel3;
@@ -249,6 +266,14 @@ namespace Projet_POO
             this->dataGridViewTieredPrice->Size = Drawing::Size(627, 260);
             this->dataGridViewTieredPrice->TabIndex = 2;
 
+            auto minimal_quantity = gcnew DataGridViewTextBoxColumn();
+            minimal_quantity->Name = L"quantité";
+            this->dataGridViewTieredPrice->Columns->Add(minimal_quantity);
+
+            auto tf_price = gcnew DataGridViewTextBoxColumn();
+            tf_price->Name = L"prix";
+            this->dataGridViewTieredPrice->Columns->Add(tf_price);
+
             /*-------------------- textBoxRestockThreshold --------------------*/
             this->textBoxRestockThreshold->Anchor = AnchorStyles::Left;
             this->textBoxRestockThreshold->Location = Point(475, 172);
@@ -384,5 +409,14 @@ namespace Projet_POO
             this->Name = L"ProductForm";
             this->Text = L"ProductForm";
         }
+        int^ createProduct();
+        Void buttonDelete_Click(Object^ sender, EventArgs^ e);
+        Void reloadGridViewTieredPrice();
+        Void buttonAdd_Click(Object^ sender, EventArgs^ e);
+        Void buttonEdit_Click(Object^ sender, EventArgs^ e);
+        Void openTieredPriceForm(String^ a, String^ b, String^ c, String^ d, String^ e);
+        Void buttonCancel_Click(Object^ sender, EventArgs^ e);
+        Void buttonValidate_Click(Object^ sender, EventArgs^ e);
+
     };
 }
