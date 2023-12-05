@@ -114,10 +114,66 @@ namespace Projet_POO
 				this->dataGridViewOrders->Name = L"dataGridViewOrders";
 				this->dataGridViewOrders->Size = Drawing::Size(941, 354);
 				this->dataGridViewOrders->TabIndex = 0;
+				this->dataGridViewOrders->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->dataGridViewOrders->ReadOnly = true;
+				this->dataGridViewOrders->AllowUserToResizeRows = false;
+				this->dataGridViewOrders->AllowUserToAddRows = false;
+				this->dataGridViewOrders->RowHeadersVisible = false;
+				this->dataGridViewOrders->AllowUserToDeleteRows = false;
+				this->dataGridViewOrders->MultiSelect = false;
+				this->dataGridViewOrders->ColumnHeadersDefaultCellStyle->WrapMode = DataGridViewTriState::False;
+				this->dataGridViewOrders->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->dataGridViewOrders->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+				this->dataGridViewOrders->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+				this->dataGridViewOrders->ColumnHeadersHeight = 40;
 
 				auto idOrder = gcnew DataGridViewTextBoxColumn();
 				idOrder->Visible = false;
 				this->dataGridViewOrders->Columns->Add(idOrder);
+
+				auto reference = gcnew DataGridViewTextBoxColumn();
+				reference->Name = "Reference";
+				this->dataGridViewOrders->Columns->Add(reference);
+
+				auto lastName = gcnew DataGridViewTextBoxColumn();
+				lastName->Name = "Nom";
+				this->dataGridViewOrders->Columns->Add(lastName);
+
+				auto firstName = gcnew DataGridViewTextBoxColumn();
+				firstName->Name = "Prenom";
+				this->dataGridViewOrders->Columns->Add(firstName);
+
+				auto birthdate = gcnew DataGridViewTextBoxColumn();
+				birthdate->Visible = false;
+				this->dataGridViewOrders->Columns->Add(birthdate);
+				
+				auto issueDate = gcnew DataGridViewTextBoxColumn();
+				issueDate->Name = "Date d'emission";
+				this->dataGridViewOrders->Columns->Add(issueDate);
+
+				auto expectedDeliveryDate = gcnew DataGridViewTextBoxColumn();
+				expectedDeliveryDate->Name = "Date de livraison prevue";
+				this->dataGridViewOrders->Columns->Add(expectedDeliveryDate);
+
+				auto billingAddress = gcnew DataGridViewTextBoxColumn();
+				billingAddress->Visible = false;
+				this->dataGridViewOrders->Columns->Add(billingAddress);
+
+				auto deliveryAddress = gcnew DataGridViewTextBoxColumn();
+				deliveryAddress->Visible = false;
+				this->dataGridViewOrders->Columns->Add(deliveryAddress);
+				
+				auto totalAmount = gcnew DataGridViewTextBoxColumn();
+				totalAmount->Name = "Montant total";
+				this->dataGridViewOrders->Columns->Add(totalAmount);
+				
+				auto payedAmount = gcnew DataGridViewTextBoxColumn();
+				payedAmount->Name = "Montant paye";
+				this->dataGridViewOrders->Columns->Add(payedAmount);
+
+				auto paymentDate = gcnew DataGridViewTextBoxColumn();
+				paymentDate->Name = "Date de paiement";
+				this->dataGridViewOrders->Columns->Add(paymentDate);
 
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -143,7 +199,7 @@ namespace Projet_POO
 				this->buttonPayments->Text = L"Paiements";
 				this->buttonPayments->UseVisualStyleBackColor = true;
 				this->buttonPayments->Click += gcnew EventHandler(this, &OrdersPage::buttonPayments_Click);
-				
+
 				/*-------------------- buttonOrderDetails --------------------*/
 				this->buttonOrderDetails->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
 				this->buttonOrderDetails->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
