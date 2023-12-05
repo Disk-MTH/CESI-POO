@@ -93,16 +93,18 @@ SELECT o.id_order,
        o.reference,
        c.last_name,
        c.first_name,
-       CONVERT(VARCHAR(10), c.birthdate, 103)                                                                    AS birthdate,
-       CONVERT(VARCHAR(10), o.issue_date, 103)                                                                   AS issue_date,
-       CONVERT(VARCHAR(10), o.expected_delivery_date, 103)                                                       AS expected_delivery_date,
-       CONCAT(b.street, ', ', b.zip_code, ', ', b.city)                                                          AS billing_address,
-       CONCAT(d.street, ', ', d.zip_code, ', ', d.city)                                                          AS delivery_address,
-       SUM(ohp.price)                                                                                            AS total_amount,
-       (SELECT SUM(amount) FROM payment WHERE id_order = o.id_order)                                             AS payments_amount,
+       CONVERT(VARCHAR(10), c.birthdate, 103)                        AS birthdate,
+       CONVERT(VARCHAR(10), o.issue_date, 103)                       AS issue_date,
+       CONVERT(VARCHAR(10), o.expected_delivery_date, 103)           AS expected_delivery_date,
+       CONCAT(b.street, ', ', b.zip_code, ', ', b.city)              AS billing_address,
+       CONCAT(d.street, ', ', d.zip_code, ', ', d.city)              AS delivery_address,
+       SUM(ohp.price)                                                AS total_amount,
+       (SELECT SUM(amount) FROM payment WHERE id_order = o.id_order) AS payed_amount,
        CONVERT(VARCHAR(10), IIF((SELECT SUM(amount) FROM payment WHERE id_order = o.id_order) = SUM(ohp.price),
                                 (SELECT MAX(payment_date) FROM payment WHERE id_order = o.id_order), NULL),
-                            103)                                                                                 AS payment_date
+                            103)                                     AS payment_date,
+       SUM(ohp.vat_price)                                            AS vat_amount,
+       SUM(ohp.tf_price)                                             AS tf_amount
 FROM [order] o
          INNER JOIN customer c ON o.id_customer = c.id_customer
          INNER JOIN address b ON o.id_billing_address = b.id_address
@@ -123,4 +125,15 @@ GROUP BY o.id_order,
          d.zip_code,
          d.city;
 
-/* Query to fill OrderDetailsPage */
+/* Query to fill OrderDetails */
+SELECT p.type,
+       p.name,
+       p.colour,
+       ohp.quantity,
+       ohp.tf_price,
+       ohp.price
+FROM product p
+         INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
+WHERE p.deleted = 0
+  AND ohp.id_order = 2;
+

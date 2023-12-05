@@ -10,7 +10,7 @@ namespace Projet_POO
 	public ref class OrderDetails : public Form
 	{
 		public:
-			OrderDetails(String^ orderId, String^ reference, String^ customer, String^ birthdate, String^ billingAddress, String^ deliveryAddress, String^ issueDate, String^ expectedDeliveryDate)
+			OrderDetails(String^ orderId, String^ reference, String^ customer, String^ birthdate, String^ billingAddress, String^ deliveryAddress, String^ issueDate, String^ expectedDeliveryDate, String^ totalAmount, String^ vatAmount, String^ tfAmount)
 			{
 				this->orderId = orderId;
 				this->reference = reference;
@@ -20,7 +20,11 @@ namespace Projet_POO
 				this->deliveryAddress = deliveryAddress;
 				this->issueDate = issueDate;
 				this->expectedDeliveryDate = expectedDeliveryDate;
+				this->totalAmount = totalAmount;
+				this->vatAmount = vatAmount;
+				this->tfAmount = tfAmount;
 				initialize();
+				reloadProductsGridView();
 			}
 
 		private:
@@ -32,7 +36,10 @@ namespace Projet_POO
 			String^ deliveryAddress;
 			String^ issueDate;
 			String^ expectedDeliveryDate;
-		
+			String^ totalAmount;
+			String^ vatAmount;
+			String^ tfAmount;
+
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 			TableLayoutPanel^ tableLayoutPanel3;
@@ -206,7 +213,7 @@ namespace Projet_POO
 				this->labelTotalPrice->Location = Point(110, 298);
 				this->labelTotalPrice->Name = L"labelTotalPrice";
 				this->labelTotalPrice->Size = Drawing::Size(173, 31);
-				this->labelTotalPrice->Text = L"Prix TTC : aa";
+				this->labelTotalPrice->Text = L"Prix TTC : " + totalAmount;
 
 				/*-------------------- labelTfPrice --------------------*/
 				this->labelTfPrice->Anchor = AnchorStyles::None;
@@ -215,7 +222,7 @@ namespace Projet_POO
 				this->labelTfPrice->Location = Point(69, 4);
 				this->labelTfPrice->Name = L"labelTfPrice";
 				this->labelTfPrice->Size = Drawing::Size(115, 25);
-				this->labelTfPrice->Text = L"Prix HT : aa";
+				this->labelTfPrice->Text = L"Prix HT : " + tfAmount;
 
 				/*-------------------- labelVatPrice --------------------*/
 				this->labelVatPrice->Anchor = AnchorStyles::None;
@@ -224,7 +231,7 @@ namespace Projet_POO
 				this->labelVatPrice->Location = Point(81, 38);
 				this->labelVatPrice->Name = L"labelVatPrice";
 				this->labelVatPrice->Size = Drawing::Size(91, 25);
-				this->labelVatPrice->Text = L"TVA : aa";
+				this->labelVatPrice->Text = L"TVA : " + vatAmount;
 
 				/*-------------------- dataGridViewTieredPrices --------------------*/
 				this->dataGridViewTieredPrices->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
@@ -232,6 +239,32 @@ namespace Projet_POO
 				this->dataGridViewTieredPrices->Name = L"dataGridViewTieredPrices";
 				this->dataGridViewTieredPrices->Size = Drawing::Size(254, 271);
 				this->dataGridViewTieredPrices->TabIndex = 0;
+
+				auto type = gcnew DataGridViewTextBoxColumn();
+				type->Name = L"Nature";
+				this->dataGridViewTieredPrices->Columns->Add(type);
+
+				auto name = gcnew DataGridViewTextBoxColumn();
+				name->Name = L"Nom";
+				this->dataGridViewTieredPrices->Columns->Add(name);
+
+				auto colour = gcnew DataGridViewTextBoxColumn();
+				colour->Name = L"Couleur";
+				this->dataGridViewTieredPrices->Columns->Add(colour);
+
+				auto Quantity = gcnew DataGridViewTextBoxColumn();
+				Quantity->Name = L"Quantite";
+				this->dataGridViewTieredPrices->Columns->Add(Quantity);
+
+				auto tfPrice = gcnew DataGridViewTextBoxColumn();
+				tfPrice->Name = L"Prix HT";
+				this->dataGridViewTieredPrices->Columns->Add(tfPrice);
+
+				auto price = gcnew DataGridViewTextBoxColumn();
+				price->Name = L"Pric TTC";
+				this->dataGridViewTieredPrices->Columns->Add(price);
+
+				
 
 				/*-------------------- OrderDetails --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
@@ -245,5 +278,6 @@ namespace Projet_POO
 				this->Text = L"OrderDetails";
 			}
 
+			Void reloadProductsGridView();
 	};
 }

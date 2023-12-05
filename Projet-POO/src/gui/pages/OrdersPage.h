@@ -175,6 +175,14 @@ namespace Projet_POO
 				paymentDate->Name = "Date de paiement";
 				this->dataGridViewOrders->Columns->Add(paymentDate);
 
+				auto vatAmount = gcnew DataGridViewTextBoxColumn();
+				vatAmount->Visible = false;
+				this->dataGridViewOrders->Columns->Add(vatAmount);
+
+				auto tfAmount = gcnew DataGridViewTextBoxColumn();
+				tfAmount->Visible = false;
+				this->dataGridViewOrders->Columns->Add(tfAmount);
+
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 				this->checkBoxDeleted->AutoSize = true;
