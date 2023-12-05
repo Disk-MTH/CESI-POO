@@ -1,6 +1,7 @@
 #include "OrdersPage.h"
 #include "../../App.h"
 #include "../forms/OrderForm.h"
+#include "../forms/PaymentForm.h"
 #include "../other/OrderDetails.h"
 
 void OrdersPage::reloadOrdersGridView()
@@ -43,11 +44,26 @@ void OrdersPage::checkBoxDeleted_Click(Object^ sender, EventArgs^ e)
 
 void OrdersPage::buttonPayments_Click(Object^ sender, EventArgs^ e)
 {
-	App::app->toastMessage(this, "Fonctionnalite non implementee: Paiements", Color::Red, 2000);
+	if (this->dataGridViewOrders->SelectedRows->Count == 0)
+	{
+		App::app->logger->warn("Can't show payments details: no order selected");
+		App::app->toastMessage(this, "Veuillez selectionner une commande", Color::Red, 2000);
+		return;
+	}
+	
+	auto orderDetails = gcnew PaymentForm();
+	orderDetails->ShowDialog();
 }
 
 void OrdersPage::buttonOrderDetails_Click(Object^ sender, EventArgs^ e)
 {
+	if (this->dataGridViewOrders->SelectedRows->Count == 0)
+	{
+		App::app->logger->warn("Can't show details: no order selected");
+		App::app->toastMessage(this, "Veuillez selectionner une commande", Color::Red, 2000);
+		return;
+	}
+	
 	auto orderDetails = gcnew OrderDetails(
 		this->dataGridViewOrders->CurrentRow->Cells[0]->Value->ToString(),
 		this->dataGridViewOrders->CurrentRow->Cells[1]->Value->ToString(),

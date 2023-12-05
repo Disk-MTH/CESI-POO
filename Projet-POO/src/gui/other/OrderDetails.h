@@ -80,20 +80,20 @@ namespace Projet_POO
 
 				/*-------------------- tableLayoutPanel1 --------------------*/
 				this->tableLayoutPanel1->ColumnCount = 1;
-				this->tableLayoutPanel1->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Percent, 50)));
+				this->tableLayoutPanel1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel1->Controls->Add(this->labelTitle, 0, 0);
 				this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 1);
 				this->tableLayoutPanel1->Location = Point(12, 12);
 				this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 				this->tableLayoutPanel1->RowCount = 2;
-				this->tableLayoutPanel1->RowStyles->Add((gcnew RowStyle(SizeType::Percent, 18.30664F)));
-				this->tableLayoutPanel1->RowStyles->Add((gcnew RowStyle(SizeType::Percent, 81.69337F)));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 18.30664F));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 81.69337F));
 				this->tableLayoutPanel1->Size = Drawing::Size(660, 437);
 
 				/*-------------------- tableLayoutPanel2 --------------------*/
 				this->tableLayoutPanel2->ColumnCount = 2;
-				this->tableLayoutPanel2->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Percent, 60.24465F)));
-				this->tableLayoutPanel2->ColumnStyles->Add((gcnew ColumnStyle(SizeType::Percent, 39.75535F)));
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 60.24465F));
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 39.75535F));
 				this->tableLayoutPanel2->Controls->Add(this->dataGridViewTieredPrices, 1, 0);
 				this->tableLayoutPanel2->Controls->Add(this->tableLayoutPanel3, 0, 0);
 				this->tableLayoutPanel2->Controls->Add(this->labelTotalPrice, 0, 1);
@@ -101,8 +101,8 @@ namespace Projet_POO
 				this->tableLayoutPanel2->Location = Point(3, 83);
 				this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 				this->tableLayoutPanel2->RowCount = 2;
-				this->tableLayoutPanel2->RowStyles->Add((gcnew RowStyle(SizeType::Percent, 79.19075F)));
-				this->tableLayoutPanel2->RowStyles->Add((gcnew RowStyle(SizeType::Percent, 20.80925F)));
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 79.19075F));
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 20.80925F));
 				this->tableLayoutPanel2->Size = Drawing::Size(654, 351);
 
 				/*-------------------- tableLayoutPanel3 --------------------*/
