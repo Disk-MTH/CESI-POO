@@ -69,10 +69,10 @@ namespace Projet_POO
             this->textBoxStreet = gcnew TextBox();
             this->textBoxZipCode = gcnew TextBox();
             this->comboBoxCity = gcnew ComboBox();
-
+            
             this->checkBoxDelivery = gcnew CheckBox();
             this->checkBoxBilling = gcnew CheckBox();
-
+                    
             this->buttonCancel = gcnew Button();
             this->buttonValidate = gcnew Button();
 

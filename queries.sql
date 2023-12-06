@@ -176,12 +176,11 @@ SELECT p.id_product,
        p.name,
        p.colour,
        ohp.quantity,
-       ohp.price,
-       ohp.id_orderHasProduct
+       ohp.price
 FROM product p
          INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product
 WHERE id_order = 1;
-
+/* Query to update an order */
 UPDATE [order]
 SET reference              = 'magi23bea12',
     issue_date             = '06/12/2023',
@@ -191,12 +190,6 @@ SET reference              = 'magi23bea12',
     id_delivery_address    = '3'
 WHERE id_order = 12;
 
-/*get the price of the product, with table tired_price unsing :
-tired_price.tf_price, tired_price.minimal_quantity
-product.id_product, product.name, product.type, product.colour, product.vat_rate*:
-
- */
-
 SELECT TOP 1 tp.tf_price,
              ROUND(p.vat_rate / 100 * tp.tf_price, 3)       AS vat_price,
              ROUND(tp.tf_price * (1 + p.vat_rate / 100), 3) AS price
@@ -205,7 +198,6 @@ FROM product p
 WHERE tp.deleted = 0
   AND tp.minimal_quantity >= 5
   AND p.id_product = 1;
-
 
 SELECT TOP 1 tp.tf_price,
              ROUND(p.vat_rate / 100 * tp.tf_price, 3)       AS vat_price,
@@ -230,3 +222,124 @@ WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '%'
                      WHERE id_customer =
                            (SELECT id_customer FROM customer WHERE last_name = 'Gillet' AND first_name = 'Mathieu')
                        AND (id_address_type = 1 OR id_address_type = 3));
+
+SELECT p.id_product, p.type, p.name, p.colour, ohp.quantity, ohp.price
+FROM product p
+         INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product
+WHERE id_order = 1;
+
+
+/* Query to calculate the average order total price */
+
+SELECT total_amount AS average_order_total_price
+FROM (SELECT ROUND(SUM(ohp.price), 3) / COUNT(o.id_order) AS total_amount
+      FROM [order] o
+               INNER JOIN customer c ON o.id_customer = c.id_customer
+               INNER JOIN address b ON o.id_billing_address = b.id_address
+               INNER JOIN address d ON o.id_delivery_address = d.id_address
+               INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
+      WHERE o.deleted = 0) AS total_amount;
+
+/* Query to calculate the turnover for a given month */
+
+SELECT ROUND((SUM(ohp.price) - SUM(p.buy_price)), 3) AS turnover
+FROM [order] o
+         INNER JOIN customer c ON o.id_customer = c.id_customer
+         INNER JOIN address b ON o.id_billing_address = b.id_address
+         INNER JOIN address d ON o.id_delivery_address = d.id_address
+         INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
+         INNER JOIN product p ON ohp.id_product = p.id_product
+WHERE o.deleted = 0
+  AND MONTH(o.issue_date) = 2
+  AND YEAR(o.issue_date) = 2014;
+
+/* Query to find all products where the quantity is below the restocking threshold */
+
+SELECT p.id_product,
+       p.reference,
+       p.type,
+       p.name,
+       p.colour,
+       p.buy_price,
+       p.vat_rate,
+       p.quantity,
+       p.provisioning_threshold
+FROM product p
+WHERE p.deleted = 0
+  AND p.quantity < p.provisioning_threshold;
+
+/* Calculate sum of purchases costs for a given customer */
+
+SELECT ROUND(SUM(ohp.price), 3) AS sum_of_purchases_costs
+FROM [order] o
+         INNER JOIN customer c ON o.id_customer = c.id_customer
+         INNER JOIN address b ON o.id_billing_address = b.id_address
+         INNER JOIN address d ON o.id_delivery_address = d.id_address
+         INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
+WHERE o.deleted = 0
+  AND c.id_customer = 1;
+
+/* Query to find the 10 most sold products */
+
+SELECT TOP 10 p.id_product,
+              p.reference,
+              p.type,
+              p.name,
+              p.colour,
+              p.buy_price,
+              p.vat_rate,
+              p.quantity,
+              p.provisioning_threshold
+FROM product p
+            INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
+GROUP BY p.id_product,
+            p.reference,
+            p.type,
+            p.name,
+            p.colour,
+            p.buy_price,
+            p.vat_rate,
+            p.quantity,
+            p.provisioning_threshold
+ORDER BY SUM(ohp.quantity) DESC;
+
+/* Query to find the 10 least sold products */
+
+SELECT TOP 10 p.id_product,
+              p.reference,
+              p.type,
+              p.name,
+              p.colour,
+              p.buy_price,
+              p.vat_rate,
+              p.quantity,
+              p.provisioning_threshold
+FROM product p
+            INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
+GROUP BY p.id_product,
+            p.reference,
+            p.type,
+            p.name,
+            p.colour,
+            p.buy_price,
+            p.vat_rate,
+            p.quantity,
+            p.provisioning_threshold
+ORDER BY SUM(ohp.quantity) ASC;
+    
+/* Query to find the total buy price value of the current stock */
+
+SELECT SUM(p.buy_price * p.quantity) AS total_buy_price_value_of_current_stock
+FROM product p
+WHERE p.deleted = 0;
+
+/* Query to find the turnover of the current stock */
+
+SELECT (SUM(tp.tf_price * (1+(p.vat_rate)/100) * p.quantity) - SUM(p.buy_price * p.quantity)) AS turnover_of_current_stock
+FROM product p
+         INNER JOIN tiered_price tp ON p.id_product = tp.id_product
+WHERE p.deleted = 0 AND tp.minimal_quantity = 1;
+
+
+
+
