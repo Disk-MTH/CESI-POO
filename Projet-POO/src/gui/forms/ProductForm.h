@@ -10,7 +10,7 @@ namespace Projet_POO
     public ref class ProductForm : public Form
     {
     public:
-        ProductForm()
+        ProductForm(String^ productId, String^ RestockThreshold, String^ VAT, String^ Quantity, String^ BuyPrice, String^ Name, String^ type, String^ Colour )
         {
             this->productId = productId;
             this->RestockThreshold = RestockThreshold;
@@ -18,6 +18,8 @@ namespace Projet_POO
             this->Quantity = Quantity;
             this->BuyPrice = BuyPrice;
             this->Name = Name;
+            this->type = type;
+            this->Colour = Colour;
             this->mode = productId == "" ? "0" : "1"; //0 = add, 1 = edit
             
             initialize();
@@ -31,6 +33,8 @@ namespace Projet_POO
         String^ Quantity;
         String^ BuyPrice;
         String^ Name;
+        String^ type;
+        String^ Colour;
         String^ mode;
         
         TableLayoutPanel^ tableLayoutPanel1;
@@ -259,20 +263,36 @@ namespace Projet_POO
             /*-------------------- dataGridViewTieredPrice --------------------*/
             this->dataGridViewTieredPrice->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
             this->dataGridViewTieredPrice->Location = Point(15, 444);
-            this->dataGridViewTieredPrice->Margin = Windows::Forms::Padding(15);
             this->dataGridViewTieredPrice->Name = L"dataGridViewTieredPrice";
             this->dataGridViewTieredPrice->RowHeadersWidth = 51;
             this->dataGridViewTieredPrice->RowTemplate->Height = 24;
             this->dataGridViewTieredPrice->Size = Drawing::Size(627, 260);
             this->dataGridViewTieredPrice->TabIndex = 2;
+            this->dataGridViewTieredPrice->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+            this->dataGridViewTieredPrice->ReadOnly = true;
+            this->dataGridViewTieredPrice->AllowUserToResizeRows = false;
+            this->dataGridViewTieredPrice->AllowUserToAddRows = false;
+            this->dataGridViewTieredPrice->RowHeadersVisible = false;
+            this->dataGridViewTieredPrice->MultiSelect = false;
+            this->dataGridViewTieredPrice->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->dataGridViewTieredPrice->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+            this->dataGridViewTieredPrice->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::DisableResizing;
+            this->dataGridViewTieredPrice->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+            this->dataGridViewTieredPrice->ColumnHeadersHeight = 40;
 
-            auto minimal_quantity = gcnew DataGridViewTextBoxColumn();
-            minimal_quantity->Name = L"quantité";
-            this->dataGridViewTieredPrice->Columns->Add(minimal_quantity);
+            auto minimalQuantity = gcnew DataGridViewTextBoxColumn();
+            minimalQuantity->Name = L"Quantite";
+            minimalQuantity->Resizable = DataGridViewTriState::False;
+            this->dataGridViewTieredPrice->Columns->Add(minimalQuantity);
 
-            auto tf_price = gcnew DataGridViewTextBoxColumn();
-            tf_price->Name = L"prix";
-            this->dataGridViewTieredPrice->Columns->Add(tf_price);
+            auto tfPrice = gcnew DataGridViewTextBoxColumn();
+            tfPrice->Name = L"Prix";
+            tfPrice->Resizable = DataGridViewTriState::False;
+            this->dataGridViewTieredPrice->Columns->Add(tfPrice);
+
+            auto tieredPriceId = gcnew DataGridViewTextBoxColumn();
+            tieredPriceId->Visible = false;
+            this->dataGridViewTieredPrice->Columns->Add(tieredPriceId);
 
             /*-------------------- textBoxRestockThreshold --------------------*/
             this->textBoxRestockThreshold->Anchor = AnchorStyles::Left;
@@ -281,6 +301,7 @@ namespace Projet_POO
             this->textBoxRestockThreshold->Name = L"textBoxRestockThreshold";
             this->textBoxRestockThreshold->Size = Drawing::Size(166, 22);
             this->textBoxRestockThreshold->TabIndex = 12;
+            this->textBoxRestockThreshold->Text = this->RestockThreshold;
 
             /*-------------------- textBoxVAT --------------------*/
             this->textBoxVAT->Anchor = AnchorStyles::Left;
@@ -289,7 +310,8 @@ namespace Projet_POO
             this->textBoxVAT->Name = L"textBoxVAT";
             this->textBoxVAT->Size = Drawing::Size(258, 22);
             this->textBoxVAT->TabIndex = 11;
-
+            this->textBoxVAT->Text = this->VAT;
+            
             /*-------------------- textBoxQuantity --------------------*/
             this->textBoxQuantity->Anchor = AnchorStyles::Left;
             this->textBoxQuantity->Location = Point(475, 64);
@@ -297,6 +319,7 @@ namespace Projet_POO
             this->textBoxQuantity->Name = L"textBoxQuantity";
             this->textBoxQuantity->Size = Drawing::Size(166, 22);
             this->textBoxQuantity->TabIndex = 9;
+            this->textBoxQuantity->Text = this->Quantity;
 
             /*-------------------- textBoxBuyPrice --------------------*/
             this->textBoxBuyPrice->Anchor = AnchorStyles::Left;
@@ -305,6 +328,7 @@ namespace Projet_POO
             this->textBoxBuyPrice->Name = L"textBoxBuyPrice";
             this->textBoxBuyPrice->Size = Drawing::Size(258, 22);
             this->textBoxBuyPrice->TabIndex = 8;
+            this->textBoxBuyPrice->Text = this->BuyPrice;
 
             /*-------------------- textBoxName --------------------*/
             this->textBoxName->Anchor = AnchorStyles::Left;
@@ -313,6 +337,7 @@ namespace Projet_POO
             this->textBoxName->Name = L"textBoxName";
             this->textBoxName->Size = Drawing::Size(167, 22);
             this->textBoxName->TabIndex = 7;
+            this->textBoxName->Text = this->Name;
 
             /*-------------------- comboBoxType --------------------*/
             this->comboBoxType->Anchor = AnchorStyles::Left;
@@ -322,6 +347,7 @@ namespace Projet_POO
             this->comboBoxType->Name = L"comboBoxType";
             this->comboBoxType->Size = Drawing::Size(167, 24);
             this->comboBoxType->TabIndex = 13;
+            this->comboBoxType->Text = this->type;
 
             /*-------------------- comboBoxColour --------------------*/
             this->comboBoxColour->Anchor = AnchorStyles::Left;
@@ -331,6 +357,7 @@ namespace Projet_POO
             this->comboBoxColour->Name = L"comboBoxColour";
             this->comboBoxColour->Size = Drawing::Size(167, 24);
             this->comboBoxColour->TabIndex = 14;
+            this->comboBoxColour->Text = this->Colour;
 
             /*-------------------- buttonAdd --------------------*/
             this->buttonAdd->Anchor = AnchorStyles::Top | AnchorStyles::Right;
@@ -342,6 +369,7 @@ namespace Projet_POO
             this->buttonAdd->TabIndex = 0;
             this->buttonAdd->Text = L"Ajouter";
             this->buttonAdd->UseVisualStyleBackColor = true;
+            this->buttonAdd->Click += gcnew EventHandler(this, &ProductForm::buttonAdd_Click);
 
             /*-------------------- buttonDelete --------------------*/
             this->buttonDelete->Anchor = AnchorStyles::Top | AnchorStyles::Right;
@@ -353,6 +381,7 @@ namespace Projet_POO
             this->buttonDelete->TabIndex = 2;
             this->buttonDelete->Text = L"Supprimer";
             this->buttonDelete->UseVisualStyleBackColor = true;
+            this->buttonDelete->Click += gcnew EventHandler(this, &ProductForm::buttonDelete_Click);
 
             /*-------------------- buttonEdit --------------------*/
             this->buttonEdit->Anchor = AnchorStyles::Top | AnchorStyles::Right;
@@ -364,6 +393,7 @@ namespace Projet_POO
             this->buttonEdit->TabIndex = 1;
             this->buttonEdit->Text = L"Modifier";
             this->buttonEdit->UseVisualStyleBackColor = true;
+            this->buttonEdit->Click += gcnew EventHandler(this, &ProductForm::buttonEdit_Click);
 
             /*-------------------- buttonCancel --------------------*/
             this->buttonCancel->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -386,6 +416,8 @@ namespace Projet_POO
             this->buttonValidate->TabIndex = 2;
             this->buttonValidate->Text = L"Valider";
             this->buttonValidate->UseVisualStyleBackColor = true;
+            this->buttonValidate->Click += gcnew EventHandler(this, &ProductForm::buttonValidate_Click);
+
 
             /*-------------------- buttonApply --------------------*/
             this->buttonApply->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -409,14 +441,14 @@ namespace Projet_POO
             this->Name = L"ProductForm";
             this->Text = L"ProductForm";
         }
+        
         int^ createProduct();
         Void buttonDelete_Click(Object^ sender, EventArgs^ e);
         Void reloadGridViewTieredPrice();
         Void buttonAdd_Click(Object^ sender, EventArgs^ e);
         Void buttonEdit_Click(Object^ sender, EventArgs^ e);
-        Void openTieredPriceForm(String^ a, String^ b, String^ c, String^ d, String^ e);
+        Void openTieredPriceForm(String^ tieredpriceId, String^ quantity, String^ tfprice);
         Void buttonCancel_Click(Object^ sender, EventArgs^ e);
         Void buttonValidate_Click(Object^ sender, EventArgs^ e);
-
     };
 }
