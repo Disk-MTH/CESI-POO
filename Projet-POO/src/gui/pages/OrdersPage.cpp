@@ -18,22 +18,12 @@ void OrdersPage::reloadOrdersGridView()
 	}
 }
 
-void OrdersPage::openOrderForm(String^ orderId, String^ lastName, String^ firstName, String^ birthdate, String^ billingAddress, String^ deliveryAddress)
+void OrdersPage::openOrderForm(String^ orderId, String^ lastName, String^ firstName, String^ birthdate, String^ billingAddress, String^ deliveryAddress, String^ deliveryDate)
 {
-	/*if (createCustomer()->Equals(1))
-	{
-		auto addAddressForm = gcnew AddresseForm(addressId, address, zipCode, city, type, this->customerId);
-		if (addAddressForm->ShowDialog() == Windows::Forms::DialogResult::OK)
-		{
-			App::app->App::toastMessage(this, "Addresses enregistrees", Color::Green, 3000);
-			reloadAddressesGridView();
-		}
-	}*/
-
-	auto orderForm = gcnew OrderForm(orderId, lastName, firstName, birthdate, billingAddress, deliveryAddress);
+	auto orderForm = gcnew OrderForm(orderId, lastName, firstName, birthdate, billingAddress, deliveryAddress, deliveryDate);
 	if (orderForm->ShowDialog() == Windows::Forms::DialogResult::OK)
 	{
-		App::app->App::toastMessage(this, "Addresses enregistrees", Color::Green, 3000);
+		App::app->App::toastMessage(this, "Commande enregistree", Color::Green, 3000);
 		reloadOrdersGridView();
 	}
 }
@@ -88,7 +78,7 @@ void OrdersPage::buttonOrderDetails_Click(Object^ sender, EventArgs^ e)
 
 void OrdersPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
-	openOrderForm("", "", "", "", "", "");
+	openOrderForm("", "", "", "", "", "", "");
 }
 
 void OrdersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
@@ -106,7 +96,8 @@ void OrdersPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
 		this->dataGridViewOrders->CurrentRow->Cells[3]->Value->ToString(),
 		this->dataGridViewOrders->CurrentRow->Cells[4]->Value->ToString(),
 		this->dataGridViewOrders->CurrentRow->Cells[7]->Value->ToString(),
-		this->dataGridViewOrders->CurrentRow->Cells[8]->Value->ToString()
+		this->dataGridViewOrders->CurrentRow->Cells[8]->Value->ToString(),
+		this->dataGridViewOrders->CurrentRow->Cells[6]->Value->ToString()
 	);
 }
 

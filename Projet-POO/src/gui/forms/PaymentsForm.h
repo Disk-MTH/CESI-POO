@@ -130,12 +130,12 @@ namespace Projet_POO
 				validated->Name = L"Payement valide";
 				this->dataGridViewPaymentsDetails->Columns->Add(validated);
 
-				/*-------------------- buttonAdd --------------------*/
+				/*-------------------- buttonDelete --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonAdd->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonAdd->Location = Point(320, 22);
 				this->buttonAdd->Margin = Windows::Forms::Padding(7);
-				this->buttonAdd->Name = L"buttonAdd";
+				this->buttonAdd->Name = L"buttonDelete";
 				this->buttonAdd->Size = Drawing::Size(92, 33);
 				this->buttonAdd->TabIndex = 1;
 				this->buttonAdd->Text = L"Ajouter";
@@ -154,12 +154,12 @@ namespace Projet_POO
 				this->buttonEdit->UseVisualStyleBackColor = true;
 				this->buttonEdit->Click += gcnew EventHandler(this, &PaymentsForm::buttonEdit_Click);
 
-				/*-------------------- buttonDelete --------------------*/
+				/*-------------------- buttonAdd --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonDelete->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonDelete->Location = Point(532, 22);
 				this->buttonDelete->Margin = Windows::Forms::Padding(7);
-				this->buttonDelete->Name = L"buttonDelete";
+				this->buttonDelete->Name = L"buttonAdd";
 				this->buttonDelete->Size = Drawing::Size(114, 33);
 				this->buttonDelete->TabIndex = 3;
 				this->buttonDelete->Text = L"Supprimer";

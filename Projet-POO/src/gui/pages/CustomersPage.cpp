@@ -65,6 +65,7 @@ void CustomersPage::buttonDelete_Click(Object^ sender, EventArgs^ e)
 		App::app->toastMessage(this, "Veuillez selectionner un client", Color::Red, 2000);
 		return;
 	}
+	
 	try
 	{
 		App::app->db->execute("UPDATE customer SET deleted = 1 WHERE id_customer = " + this->dataGridViewCustomers->CurrentRow->Cells[0]->Value->ToString() + ";");
@@ -75,7 +76,7 @@ void CustomersPage::buttonDelete_Click(Object^ sender, EventArgs^ e)
 	catch (Exception^ exception)
 	{
 		App::app->logger->error("Error while deleting customer: \"" + this->dataGridViewCustomers->CurrentRow->Cells[1]->Value->ToString() + "\", \"" + this->dataGridViewCustomers->CurrentRow->Cells[2]->Value->ToString() + "\", \"" + this->dataGridViewCustomers->CurrentRow->Cells[3]->Value->ToString() + "\"");
-		App::app->logger->error(exception->Message);
+		App::app->logger->error(exception);
 		App::app->toastMessage(this, "Erreur lors de la suppression du client", Color::Red, 3000);
 	}
 }

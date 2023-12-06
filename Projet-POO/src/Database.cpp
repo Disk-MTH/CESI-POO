@@ -16,7 +16,7 @@ void Database::connect(Object^ connectionString)
     {
         connected = false;
         App::app->logger->error("Database connection failed");
-        App::app->logger->error(exception->ToString());
+        App::app->logger->error(exception);
     }
 }
 
@@ -32,7 +32,7 @@ void Database::disconnect()
     {
         connected = false;
         App::app->logger->error("Database disconnection failed");
-        App::app->logger->error(exception->ToString());
+        App::app->logger->error(exception);
     }
 }
 

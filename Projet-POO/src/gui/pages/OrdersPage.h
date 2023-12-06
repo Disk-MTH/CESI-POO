@@ -220,12 +220,12 @@ namespace Projet_POO
 				this->buttonOrderDetails->UseVisualStyleBackColor = true;
 				this->buttonOrderDetails->Click += gcnew EventHandler(this, &OrdersPage::buttonOrderDetails_Click);
 
-				/*-------------------- buttonAdd --------------------*/
+				/*-------------------- buttonDelete --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonAdd->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonAdd->Location = Point(595, 106);
 				this->buttonAdd->Margin = Windows::Forms::Padding(5, 6, 5, 6);
-				this->buttonAdd->Name = L"buttonAdd";
+				this->buttonAdd->Name = L"buttonDelete";
 				this->buttonAdd->Size = Drawing::Size(107, 38);
 				this->buttonAdd->TabIndex = 3;
 				this->buttonAdd->Text = L"Ajouter";
@@ -244,12 +244,12 @@ namespace Projet_POO
 				this->buttonEdit->UseVisualStyleBackColor = true;
 				this->buttonEdit->Click += gcnew EventHandler(this, &OrdersPage::buttonEdit_Click);
 
-				/*-------------------- buttonDelete --------------------*/
+				/*-------------------- buttonAdd --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonDelete->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonDelete->Location = Point(829, 106);
 				this->buttonDelete->Margin = Windows::Forms::Padding(5, 6, 5, 6);
-				this->buttonDelete->Name = L"buttonDelete";
+				this->buttonDelete->Name = L"buttonAdd";
 				this->buttonDelete->Size = Drawing::Size(125, 38);
 				this->buttonDelete->TabIndex = 5;
 				this->buttonDelete->Text = L"Supprimer";
@@ -269,7 +269,7 @@ namespace Projet_POO
 			}
 
 			Void reloadOrdersGridView();
-			Void openOrderForm(String^ orderId, String^ lastName, String^ firstName, String^ birthdate, String^ billingAddress, String^ deliveryAddress);
+			Void openOrderForm(String^ orderId, String^ lastName, String^ firstName, String^ birthdate, String^ billingAddress, String^ deliveryAddress, String^ deliveryDate);
 			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
 			Void buttonPayments_Click(Object^ sender, EventArgs^ e);
 			Void buttonOrderDetails_Click(Object^ sender, EventArgs^ e);

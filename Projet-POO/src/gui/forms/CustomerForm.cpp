@@ -41,13 +41,13 @@ int^ CustomerForm::createCustomer()
 			App::app->db->execute("UPDATE customer SET last_name = '" + lastName + "', first_name = '" + firstName + "', birthdate = '" + birthdate + "' WHERE id_customer = " + customerId);
 		}
 
-		App::app->logger->log("Customer edited: \"" + lastName + "\", \"" + firstName + "\", \"" + birthdate + "\"");
+		App::app->logger->log("Customer saved: \"" + lastName + "\", \"" + firstName + "\", \"" + birthdate + "\"");
 		return 1;
 	}
 	catch (Exception^ exception)
 	{
 		App::app->logger->error("Error while editing customer: \"" + lastName + "\", \"" + firstName + "\", \"" + birthdate + "\"");
-		App::app->logger->error(exception->Message);
+		App::app->logger->error(exception);
 		App::app->toastMessage(this, "Erreur lors de la modifications du client", Color::Red, 3000);
 	}
 	return 0;

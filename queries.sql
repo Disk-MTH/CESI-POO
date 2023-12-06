@@ -181,4 +181,42 @@ FROM product p
          INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product
 WHERE id_order = 1;
 
-SELECT p.id_product, p.type, p.name, p.colour, ohp.quantity, ohp.price FROM product p INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product WHERE id_order = 1;
+/*get the price of the product, with table tired_price unsing :
+tired_price.tf_price, tired_price.minimal_quantity
+product.id_product, product.name, product.type, product.colour, product.vat_rate*:
+
+ */
+
+SELECT TOP 1 tp.tf_price,
+             ROUND(p.vat_rate / 100 * tp.tf_price, 3)       AS vat_price,
+             ROUND(tp.tf_price * (1 + p.vat_rate / 100), 3) AS price
+FROM product p
+         INNER JOIN tiered_price tp ON p.id_product = tp.id_product
+WHERE tp.deleted = 0
+  AND tp.minimal_quantity >= 5
+  AND p.id_product = 1;
+
+
+SELECT TOP 1 tp.tf_price,
+             ROUND(p.vat_rate / 100 * tp.tf_price, 3)       AS vat_price,
+             ROUND(tp.tf_price * (1 + p.vat_rate / 100), 3) AS price
+FROM product p
+         INNER JOIN tiered_price tp ON p.id_product = tp.id_product
+WHERE tp.deleted = 0
+  AND tp.minimal_quantity <= 20
+  AND p.id_product = 1
+ORDER BY tp.minimal_quantity DESC;
+
+SELECT p.id_product, p.type, p.name, p.colour, ohp.quantity, ohp.price
+FROM product p
+         INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product
+WHERE id_order = 1;
+
+SELECT CONCAT(street, ', ', zip_code, ', ', city) AS billing_address
+FROM address
+WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '%'
+  AND id_address IN (SELECT id_address
+                     FROM customerHasAddress
+                     WHERE id_customer =
+                           (SELECT id_customer FROM customer WHERE last_name = 'Gillet' AND first_name = 'Mathieu')
+                       AND (id_address_type = 1 OR id_address_type = 3));
