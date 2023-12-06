@@ -154,14 +154,18 @@ WHERE id_order = 2
 ORDER BY payment_date;
 
 /* Query to update a payment */
-
 UPDATE payment
 SET payment_date = '2010-10-10',
     payment_mean = 'CB',
     amount       = '5',
     validated    = 'True'
-WHERE id_order = 38
-  AND id_payment = 2;
+WHERE id_payment = 2;
 
+/* Query to insert a payment */
 INSERT INTO payment (id_order, payment_date, payment_mean, amount, validated)
-VALUES ('', '2001-12-31', 'CB', '1', 'True');
+VALUES (2, '2010-10-10', 'CB', '5', 'True');
+
+/* Query to delete a payment */
+DELETE
+FROM payment
+WHERE id_payment = 2;

@@ -10,7 +10,7 @@ namespace Projet_POO
 	public ref class PaymentForm : public Form
 	{
 		public:
-			PaymentForm(String^ paymentId, String^ orderId, String^ date, String^ mean, String^ amount, String^ validated)
+			PaymentForm(String^ paymentId, String^ orderId, String^ date, String^ mean, String^ amount, String^ validated, String^ totalAmount, String^ payedAmount)
 			{
 				this->paymentId = paymentId;
 				this->orderId = orderId;
@@ -18,6 +18,8 @@ namespace Projet_POO
 				this->paymentMean = mean;
 				this->amount = amount;
 				this->validated = validated;
+				this->totalAmount = totalAmount;
+				this->payedAmount = payedAmount;
 				this->mode = paymentId == "" ? "0" : "1"; //0 = add, 1 = edit
 				
 				initialize();
@@ -30,6 +32,8 @@ namespace Projet_POO
 			String^ paymentMean;
 			String^ amount;
 			String^ validated;
+			String^ totalAmount;
+			String^ payedAmount;
 			String^ mode;
 
 			TableLayoutPanel^ tableLayoutPanel1;

@@ -10,12 +10,12 @@ namespace Projet_POO
 	public ref class PaymentsForm : public Form
 	{
 		public:
-			PaymentsForm(String^ orderId, String^ reference, String^ payed)
+			PaymentsForm(String^ orderId, String^ reference, String^ totalAmount)
 			{
 				this->orderId = orderId;
 				this->reference = reference;
-				this->payed = payed;
-				
+				this->totalAmount = totalAmount;
+
 				initialize();
 				reloadPaymentsGridView();
 			}
@@ -23,13 +23,14 @@ namespace Projet_POO
 		private:
 			String^ orderId;
 			String^ reference;
-			String^ payed;
-		
+			String^ totalAmount;
+			String^ payedAmount;
+
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
-		
+
 			Label^ labelTitle;
-		
+
 			DataGridView^ dataGridViewPaymentsDetails;
 
 			Button^ buttonAdd;
@@ -40,11 +41,11 @@ namespace Projet_POO
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel2 = gcnew TableLayoutPanel();
-				
+
 				this->labelTitle = gcnew Label();
-				
+
 				this->dataGridViewPaymentsDetails = gcnew DataGridView();
-				
+
 				this->buttonAdd = gcnew Button();
 				this->buttonEdit = gcnew Button();
 				this->buttonDelete = gcnew Button();
@@ -85,7 +86,7 @@ namespace Projet_POO
 				this->labelTitle->Name = L"labelTitle";
 				this->labelTitle->Size = Drawing::Size(457, 39);
 				this->labelTitle->Text = L"Details des payements : " + this->reference;
-				
+
 				/*-------------------- dataGridViewPaymentsDetails --------------------*/
 				this->dataGridViewPaymentsDetails->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 				this->dataGridViewPaymentsDetails->Location = Point(3, 67);
@@ -112,7 +113,7 @@ namespace Projet_POO
 				auto orderId = gcnew DataGridViewTextBoxColumn();
 				orderId->Visible = false;
 				this->dataGridViewPaymentsDetails->Columns->Add(orderId);
-				
+
 				auto paymentDate = gcnew DataGridViewTextBoxColumn();
 				paymentDate->Name = L"Date du versement";
 				this->dataGridViewPaymentsDetails->Columns->Add(paymentDate);
@@ -128,7 +129,7 @@ namespace Projet_POO
 				auto validated = gcnew DataGridViewTextBoxColumn();
 				validated->Name = L"Payement valide";
 				this->dataGridViewPaymentsDetails->Columns->Add(validated);
-				
+
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonAdd->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -178,7 +179,7 @@ namespace Projet_POO
 			}
 
 			Void reloadPaymentsGridView();
-			Void openPaymentForm(String^ paymentId, String^ orderId, String^ paymentDate, String^ paymentMean, String^ amount, String^ validated);
+			Void openPaymentForm(String^ paymentId, String^ orderId, String^ mean, String^ date, String^ amount, String^ validated);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
 			Void buttonDelete_Click(Object^ sender, EventArgs^ e);

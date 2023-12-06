@@ -24,7 +24,7 @@ void PaymentForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 
 void PaymentForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 {
-	amount = this->textBoxAmount->Text;
+	amount = this->textBoxAmount->Text->Replace(",", ".");
 	paymentMean = this->comboBoxType->Text;
 	paymentDate = this->textBoxDate->Text;
 	validated = this->checkBoxValided->Checked ? "True" : "False";
@@ -35,7 +35,13 @@ void PaymentForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 	}
 
 	paymentDate = App::isValidDate("Date", paymentDate);
-	amount = amount->Replace(",", ".");
+
+	if (Convert::ToDouble(payedAmount) + Convert::ToDouble(amount) > Convert::ToDouble(totalAmount))
+	{
+		App::app->logger->warn("Can't save: payment amount is greater than order amount");
+		App::app->toastMessage(this, "Le montant du versement ne peut pas etre superieur au montant de la commande", Color::Red, 3000);
+		return;
+	}
 
 	try
 	{

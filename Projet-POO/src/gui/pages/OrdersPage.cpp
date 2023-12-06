@@ -54,7 +54,7 @@ void OrdersPage::buttonPayments_Click(Object^ sender, EventArgs^ e)
 	auto paymentsForm = gcnew PaymentsForm(
 		this->dataGridViewOrders->CurrentRow->Cells[0]->Value->ToString(),
 		this->dataGridViewOrders->CurrentRow->Cells[1]->Value->ToString(),
-		this->dataGridViewOrders->CurrentRow->Cells[11]->Value->ToString() != "" ? "1" : "0"
+		this->dataGridViewOrders->CurrentRow->Cells[9]->Value->ToString()
 	);
 	paymentsForm->ShowDialog();
 	reloadOrdersGridView();
