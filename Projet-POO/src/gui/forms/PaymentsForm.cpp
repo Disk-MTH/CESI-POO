@@ -32,13 +32,6 @@ void PaymentsForm::openPaymentForm(String^ paymentId, String^ orderId, String^ m
 
 void PaymentsForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
-	if (this->dataGridViewPaymentsDetails->SelectedRows->Count == 0)
-	{
-		App::app->logger->warn("Can't add: no payment selected");
-		App::app->toastMessage(this, "Veuillez selectionner un payement", Color::Red, 2000);
-		return;
-	}
-	
 	if (Convert::ToDouble(payedAmount) >= Convert::ToDouble(this->totalAmount))
 	{
 		App::app->logger->warn("Can't add: order is already payed");
@@ -48,7 +41,7 @@ void PaymentsForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 	{
 		openPaymentForm(
 			"",
-			this->dataGridViewPaymentsDetails->CurrentRow->Cells[1]->Value->ToString(),
+			orderId,
 			"",
 			"",
 			"",

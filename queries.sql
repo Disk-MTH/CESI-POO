@@ -176,10 +176,20 @@ SELECT p.id_product,
        p.name,
        p.colour,
        ohp.quantity,
-       ohp.price
+       ohp.price,
+       ohp.id_orderHasProduct
 FROM product p
          INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product
 WHERE id_order = 1;
+
+UPDATE [order]
+SET reference              = 'magi23bea12',
+    issue_date             = '06/12/2023',
+    expected_delivery_date = '2023-12-12',
+    id_customer            = '1',
+    id_billing_address     = '1',
+    id_delivery_address    = '3'
+WHERE id_order = 12;
 
 /*get the price of the product, with table tired_price unsing :
 tired_price.tf_price, tired_price.minimal_quantity

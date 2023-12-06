@@ -50,8 +50,8 @@ namespace Projet_POO
         Label^ labelBillingAddress;
         Label^ labelDeliveryAddress;
         Label^ labelDeliveryDate;
-        Label^ labelProductName;
         Label^ labelType;
+        Label^ labelProductName;
         Label^ labelColour;
         Label^ labelQuantity;
 
@@ -63,8 +63,8 @@ namespace Projet_POO
         ComboBox^ comboBoxBillingAddress;
         ComboBox^ comboBoxDeliveryAddress;
         TextBox^ textBoxDeliveryDate;
-        ComboBox^ comboBoxProductName;
         ComboBox^ comboBoxType;
+        ComboBox^ comboBoxProductName;
         ComboBox^ comboBoxColour;
         TextBox^ textBoxQuantity;
 
@@ -90,8 +90,8 @@ namespace Projet_POO
             this->labelBillingAddress = gcnew Label();
             this->labelDeliveryAddress = gcnew Label();
             this->labelDeliveryDate = gcnew Label();
-            this->labelProductName = gcnew Label();
             this->labelType = gcnew Label();
+            this->labelProductName = gcnew Label();
             this->labelColour = gcnew Label();
             this->labelQuantity = gcnew Label();
 
@@ -103,8 +103,8 @@ namespace Projet_POO
             this->comboBoxBillingAddress = gcnew ComboBox();
             this->comboBoxDeliveryAddress = gcnew ComboBox();
             this->textBoxDeliveryDate = gcnew TextBox();
-            this->comboBoxProductName = gcnew ComboBox();
             this->comboBoxType = gcnew ComboBox();
+            this->comboBoxProductName = gcnew ComboBox();
             this->comboBoxColour = gcnew ComboBox();
             this->textBoxQuantity = gcnew TextBox();
 
@@ -170,12 +170,12 @@ namespace Projet_POO
             this->tableLayoutPanel5->ColumnCount = 1;
             this->tableLayoutPanel5->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
             this->tableLayoutPanel5->Controls->Add(this->comboBoxColour, 0, 5);
-            this->tableLayoutPanel5->Controls->Add(this->comboBoxType, 0, 3);
-            this->tableLayoutPanel5->Controls->Add(this->labelType, 0, 2);
-            this->tableLayoutPanel5->Controls->Add(this->labelProductName, 0, 0);
+            this->tableLayoutPanel5->Controls->Add(this->comboBoxType, 0, 1);
+            this->tableLayoutPanel5->Controls->Add(this->labelType, 0, 0);
+            this->tableLayoutPanel5->Controls->Add(this->labelProductName, 0, 2);
             this->tableLayoutPanel5->Controls->Add(this->labelColour, 0, 4);
             this->tableLayoutPanel5->Controls->Add(this->labelQuantity, 0, 6);
-            this->tableLayoutPanel5->Controls->Add(this->comboBoxProductName, 0, 1);
+            this->tableLayoutPanel5->Controls->Add(this->comboBoxProductName, 0, 3);
             this->tableLayoutPanel5->Controls->Add(this->textBoxQuantity, 0, 7);
             this->tableLayoutPanel5->Location = Point(3, 329);
             this->tableLayoutPanel5->Name = L"tableLayoutPanel5";
@@ -300,26 +300,26 @@ namespace Projet_POO
             this->labelDeliveryDate->Name = L"labelDeliveryDate";
             this->labelDeliveryDate->Size = Drawing::Size(174, 25);
             this->labelDeliveryDate->Text = L"Date de livraison";
+            
+            /*-------------------- labelType --------------------*/
+            this->labelType->Anchor = AnchorStyles::Left;
+            this->labelType->AutoSize = true;
+            this->labelType->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->labelType->Location = Point(10, 6);
+            this->labelType->Margin = Windows::Forms::Padding(10, 0, 3, 0);
+            this->labelType->Name = L"labelType";
+            this->labelType->Size = Drawing::Size(70, 25);
+            this->labelType->Text = L"Nature";
 
             /*-------------------- labelProductName --------------------*/
             this->labelProductName->Anchor = AnchorStyles::Left;
             this->labelProductName->AutoSize = true;
             this->labelProductName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-            this->labelProductName->Location = Point(10, 6);
+            this->labelProductName->Location = Point(10, 88);
             this->labelProductName->Margin = Windows::Forms::Padding(10, 0, 3, 0);
             this->labelProductName->Name = L"labelProductName";
-            this->labelProductName->Size = Drawing::Size(73, 25);
+            this->labelProductName->Size = Drawing::Size(70, 25);
             this->labelProductName->Text = L"Produit";
-
-            /*-------------------- labelType --------------------*/
-            this->labelType->Anchor = AnchorStyles::Left;
-            this->labelType->AutoSize = true;
-            this->labelType->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-            this->labelType->Location = Point(10, 88);
-            this->labelType->Margin = Windows::Forms::Padding(10, 0, 3, 0);
-            this->labelType->Name = L"labelType";
-            this->labelType->Size = Drawing::Size(70, 25);
-            this->labelType->Text = L"Nature";
 
             /*-------------------- labelColour --------------------*/
             this->labelColour->Anchor = AnchorStyles::Left;
@@ -346,7 +346,7 @@ namespace Projet_POO
             this->dataGridViewProducts->Location = Point(3, 3);
             this->dataGridViewProducts->Name = L"dataGridViewProducts";
             this->dataGridViewProducts->Size = Drawing::Size(372, 320);
-            this->dataGridViewProducts->TabIndex = 5;
+            this->dataGridViewProducts->TabIndex = 6;
             this->dataGridViewProducts->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
             this->dataGridViewProducts->ReadOnly = true;
             this->dataGridViewProducts->AllowUserToResizeRows = false;
@@ -363,7 +363,7 @@ namespace Projet_POO
             auto idProduct = gcnew DataGridViewTextBoxColumn();
             idProduct->Visible = false;
             this->dataGridViewProducts->Columns->Add(idProduct);
-
+            
             auto type = gcnew DataGridViewTextBoxColumn();
             type->Name = "Nature";
             this->dataGridViewProducts->Columns->Add(type);
@@ -383,6 +383,10 @@ namespace Projet_POO
             auto price = gcnew DataGridViewTextBoxColumn();
             price->Name = "Prix";
             this->dataGridViewProducts->Columns->Add(price);
+            
+            auto idOrderHasProduct = gcnew DataGridViewTextBoxColumn();
+            idOrderHasProduct->Visible = false;
+            this->dataGridViewProducts->Columns->Add(idOrderHasProduct);
 
             /*-------------------- comboBoxLastName --------------------*/
             this->comboBoxLastName->Anchor = AnchorStyles::Left;
@@ -429,7 +433,7 @@ namespace Projet_POO
             this->comboBoxBillingAddress->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->comboBoxBillingAddress->Name = L"comboBoxBillingAddress";
             this->comboBoxBillingAddress->Size = Drawing::Size(243, 33);
-            this->comboBoxBillingAddress->TabIndex = 4;
+            this->comboBoxBillingAddress->TabIndex = 3;
             this->comboBoxBillingAddress->Text = billingAddress;
             this->comboBoxBillingAddress->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxUser_keyPress);
             
@@ -441,7 +445,7 @@ namespace Projet_POO
             this->comboBoxDeliveryAddress->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->comboBoxDeliveryAddress->Name = L"comboBoxDeliveryAddress";
             this->comboBoxDeliveryAddress->Size = Drawing::Size(243, 33);
-            this->comboBoxDeliveryAddress->TabIndex = 3;
+            this->comboBoxDeliveryAddress->TabIndex = 4;
             this->comboBoxDeliveryAddress->Text = deliveryAddress;
             this->comboBoxDeliveryAddress->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxUser_keyPress);
             
@@ -452,30 +456,30 @@ namespace Projet_POO
             this->textBoxDeliveryDate->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->textBoxDeliveryDate->Name = L"textBoxDeliveryDate";
             this->textBoxDeliveryDate->Size = Drawing::Size(243, 26);
-            this->textBoxDeliveryDate->TabIndex = 10;
+            this->textBoxDeliveryDate->TabIndex = 5;
             this->textBoxDeliveryDate->Text = deliveryDate;
-            this->textBoxDeliveryDate->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxUser_keyPress);
-            this->textBoxDeliveryDate->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::textBoxDeliveryDate_KeyPress);
 
-            /*-------------------- comboBoxProductName --------------------*/
-            this->comboBoxProductName->Anchor = AnchorStyles::Left;
-            this->comboBoxProductName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
-            this->comboBoxProductName->FormattingEnabled = true;
-            this->comboBoxProductName->Location = Point(10, 47);
-            this->comboBoxProductName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
-            this->comboBoxProductName->Name = L"comboBoxProductName";
-            this->comboBoxProductName->Size = Drawing::Size(352, 24);
-            this->comboBoxProductName->TabIndex = 6;
-            
             /*-------------------- comboBoxType --------------------*/
             this->comboBoxType->Anchor = AnchorStyles::Left;
             this->comboBoxType->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
             this->comboBoxType->FormattingEnabled = true;
-            this->comboBoxType->Location = Point(10, 128);
+            this->comboBoxType->Location = Point(10, 47);
             this->comboBoxType->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->comboBoxType->Name = L"comboBoxType";
             this->comboBoxType->Size = Drawing::Size(352, 24);
-            this->comboBoxType->TabIndex = 7;
+            this->comboBoxType->TabIndex = 8;
+            this->comboBoxType->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxProduct_keyPress);
+            
+            /*-------------------- comboBoxProductName --------------------*/
+            this->comboBoxProductName->Anchor = AnchorStyles::Left;
+            this->comboBoxProductName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+            this->comboBoxProductName->FormattingEnabled = true;
+            this->comboBoxProductName->Location = Point(10, 128);
+            this->comboBoxProductName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
+            this->comboBoxProductName->Name = L"comboBoxProductName";
+            this->comboBoxProductName->Size = Drawing::Size(352, 24);
+            this->comboBoxProductName->TabIndex = 7;
+            this->comboBoxProductName->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxProduct_keyPress);
 
             /*-------------------- comboBoxColour --------------------*/
             this->comboBoxColour->Anchor = AnchorStyles::Left;
@@ -485,7 +489,8 @@ namespace Projet_POO
             this->comboBoxColour->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->comboBoxColour->Name = L"comboBoxColour";
             this->comboBoxColour->Size = Drawing::Size(352, 24);
-            this->comboBoxColour->TabIndex = 8;
+            this->comboBoxColour->TabIndex = 9;
+            this->comboBoxColour->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxProduct_keyPress);
 
             /*-------------------- textBoxQuantity --------------------*/
             this->textBoxQuantity->Anchor = AnchorStyles::Left;
@@ -494,7 +499,7 @@ namespace Projet_POO
             this->textBoxQuantity->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->textBoxQuantity->Name = L"textBoxQuantity";
             this->textBoxQuantity->Size = Drawing::Size(352, 23);
-            this->textBoxQuantity->TabIndex = 9;
+            this->textBoxQuantity->TabIndex = 10;
 
             /*-------------------- buttonAdd --------------------*/
             this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -503,7 +508,7 @@ namespace Projet_POO
             this->buttonAdd->Margin = Windows::Forms::Padding(7);
             this->buttonAdd->Name = L"buttonDelete";
             this->buttonAdd->Size = Drawing::Size(112, 36);
-            this->buttonAdd->TabIndex = 100;
+            this->buttonAdd->TabIndex = 11;
             this->buttonAdd->Text = L"Ajouter";
             this->buttonAdd->UseVisualStyleBackColor = true;
             this->buttonAdd->Click += gcnew EventHandler(this, &OrderForm::buttonAdd_Click);
@@ -515,7 +520,7 @@ namespace Projet_POO
             this->buttonDelete->Margin = Windows::Forms::Padding(7);
             this->buttonDelete->Name = L"buttonAdd";
             this->buttonDelete->Size = Drawing::Size(113, 36);
-            this->buttonDelete->TabIndex = 11;
+            this->buttonDelete->TabIndex = 12;
             this->buttonDelete->Text = L"Supprimer";
             this->buttonDelete->UseVisualStyleBackColor = true;
             this->buttonDelete->Click += gcnew EventHandler(this, &OrderForm::buttonDelete_Click);
@@ -527,7 +532,7 @@ namespace Projet_POO
             this->buttonCancel->Margin = Windows::Forms::Padding(7);
             this->buttonCancel->Name = L"buttonCancel";
             this->buttonCancel->Size = Drawing::Size(112, 33);
-            this->buttonCancel->TabIndex = 12;
+            this->buttonCancel->TabIndex = 13;
             this->buttonCancel->Text = L"Annuler";
             this->buttonCancel->UseVisualStyleBackColor = true;
             this->buttonCancel->Click += gcnew EventHandler(this, &OrderForm::buttonCancel_Click);
@@ -539,7 +544,7 @@ namespace Projet_POO
             this->buttonValidate->Margin = Windows::Forms::Padding(7);
             this->buttonValidate->Name = L"buttonValidate";
             this->buttonValidate->Size = Drawing::Size(112, 33);
-            this->buttonValidate->TabIndex = 13;
+            this->buttonValidate->TabIndex = 14;
             this->buttonValidate->Text = L"Valider";
             this->buttonValidate->UseVisualStyleBackColor = true;
             this->buttonValidate->Click += gcnew EventHandler(this, &OrderForm::buttonValidate_Click);
@@ -559,8 +564,9 @@ namespace Projet_POO
 
         Void reloadProductsGridView();
         int^ createOrder();
-        Void retreiveCustomerSuggestion(ComboBox^ comboBox, String^ query);
+        Void retreiveSuggestion(ComboBox^ comboBox, String^ query);
         Void comboBoxUser_keyPress(Object^ sender, KeyPressEventArgs^ e);
+        Void comboBoxProduct_keyPress(Object^ sender, KeyPressEventArgs^ e);
         Void comboBoxBirthdate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
         Void textBoxDeliveryDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
         Void buttonAdd_Click(Object^ sender, EventArgs^ e);

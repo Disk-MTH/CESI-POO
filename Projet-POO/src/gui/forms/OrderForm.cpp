@@ -7,7 +7,7 @@ void OrderForm::reloadProductsGridView()
 	{
 		this->dataGridViewProducts->Rows->Clear();
 
-		DataSet^ orders = App::app->db->query("SELECT p.id_product, p.type, p.name, p.colour, ohp.quantity, ohp.price FROM product p INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product WHERE id_order = " + orderId + ";");
+		DataSet^ orders = App::app->db->query("SELECT p.id_product, p.type, p.name, p.colour, ohp.quantity, ohp.price, ohp.id_orderHasProduct FROM product p INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product WHERE id_order = " + orderId + ";");
 
 		for (int i = 0; i < orders->Tables[0]->Rows->Count; i++)
 		{
@@ -24,7 +24,8 @@ int^ OrderForm::createOrder()
 	billingAddress = this->comboBoxBillingAddress->Text;
 	deliveryAddress = this->comboBoxDeliveryAddress->Text;
 	deliveryDate = this->textBoxDeliveryDate->Text;
-	String^ reference = "test";
+
+	String^ reference = (firstName->Substring(0, 2) + lastName->Substring(0, 2) + DateTime::Now.ToString("yy") + deliveryAddress->Split(',')[2]->Substring(1, 3) + orderId)->ToLower();
 	String^ issueDate = DateTime::Now.ToString("dd/MM/yyyy");
 
 	if (App::isEmpty("Nom", lastName) || App::isEmpty("Prenom", firstName) || App::isValidDate("Date de naissance", birthdate) == "" || App::isEmpty("Adresse de facturation", billingAddress) || App::isEmpty("Adresse de livraison", deliveryAddress) || App::isValidDate("Date de livraison", deliveryDate) == "")
@@ -34,14 +35,14 @@ int^ OrderForm::createOrder()
 
 	birthdate = App::isValidDate("Date de naissance", birthdate);
 	deliveryDate = App::isValidDate("Date de livraison", deliveryDate);
-	
+
 	String^ customerId;
 	try
 	{
 		DataSet^ customer = App::app->db->query("SELECT id_customer FROM customer WHERE last_name = '" + lastName + "' AND first_name = '" + firstName + "' AND birthdate = '" + birthdate + "';");
 		customerId = customer->Tables[0]->Rows[0]->ItemArray[0]->ToString();
 	}
-	catch (Exception ^ exception)
+	catch (Exception^ exception)
 	{
 		App::app->logger->error("Error retrieving customer id: \"" + lastName + "\", \"" + firstName + "\", \"" + birthdate + "\"");
 		App::app->logger->error(exception);
@@ -55,7 +56,7 @@ int^ OrderForm::createOrder()
 		DataSet^ address = App::app->db->query("SELECT id_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) = '" + billingAddress + "';");
 		billingAddressId = address->Tables[0]->Rows[0]->ItemArray[0]->ToString();
 	}
-	catch (Exception ^ exception)
+	catch (Exception^ exception)
 	{
 		App::app->logger->error("Error retrieving billing address id: \"" + billingAddress + "\"");
 		App::app->logger->error(exception);
@@ -69,7 +70,7 @@ int^ OrderForm::createOrder()
 		DataSet^ address = App::app->db->query("SELECT id_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) = '" + deliveryAddress + "';");
 		deliveryAddressId = address->Tables[0]->Rows[0]->ItemArray[0]->ToString();
 	}
-	catch (Exception ^ exception)
+	catch (Exception^ exception)
 	{
 		App::app->logger->error("Error retrieving delivery address id: \"" + deliveryAddress + "\"");
 		App::app->logger->error(exception);
@@ -81,18 +82,20 @@ int^ OrderForm::createOrder()
 	{
 		if (orderId == "")
 		{
-			App::app->db->execute("INSERT INTO [order] (reference, issue_date, expected_delivery_date, id_customer, id_billing_address, id_delivery_address) VALUES ('" + reference + "', '" + issueDate + "', '" + deliveryDate + "', '" + customerId + "', '" + billingAddressId + "', '" + deliveryAddressId + "');");
+			orderId = App::app->db->insert("INSERT INTO [order] (reference, issue_date, expected_delivery_date, id_customer, id_billing_address, id_delivery_address) VALUES ('" + reference + "', '" + issueDate + "', '" + deliveryDate + "', '" + customerId + "', '" + billingAddressId + "', '" + deliveryAddressId + "');");
+			reference = reference + orderId;
+			App::app->db->execute("UPDATE [order] SET reference = '" + reference + "' WHERE id_order = " + orderId + ";");
 		}
 		else
 		{
 			App::app->db->execute("UPDATE [order] SET reference = '" + reference + "', issue_date = '" + issueDate + "', expected_delivery_date = '" + deliveryDate + "', id_customer = '" + customerId + "', id_billing_address = '" + billingAddressId + "', id_delivery_address = '" + deliveryAddressId + "' WHERE id_order = " + orderId + ";");
 		}
-		
+
 		App::app->logger->log("Order saved: \"" + reference + "\", \"" + issueDate + "\", \"" + deliveryDate + "\", \"" + customerId + "\", \"" + billingAddressId + "\", \"" + deliveryAddressId + "\"");
 		reloadProductsGridView();
 		return 1;
 	}
-	catch (Exception ^ exception)
+	catch (Exception^ exception)
 	{
 		App::app->logger->error("Error while creating order: \"" + reference + "\", \"" + issueDate + "\", \"" + deliveryDate + "\", \"" + customerId + "\", \"" + billingAddressId + "\", \"" + deliveryAddressId + "\"");
 		App::app->logger->error(exception);
@@ -101,7 +104,7 @@ int^ OrderForm::createOrder()
 	return 0;
 }
 
-void OrderForm::retreiveCustomerSuggestion(ComboBox^ comboBox, String^ query)
+void OrderForm::retreiveSuggestion(ComboBox^ comboBox, String^ query)
 {
 	DataSet^ lastNames = App::app->db->query(query->Replace("{data}", comboBox->Text));
 	comboBox->Items->Clear();
@@ -114,11 +117,18 @@ void OrderForm::retreiveCustomerSuggestion(ComboBox^ comboBox, String^ query)
 
 void OrderForm::comboBoxUser_keyPress(Object^ sender, KeyPressEventArgs^ e)
 {
-	retreiveCustomerSuggestion(this->comboBoxFirstName, "SELECT first_name FROM customer WHERE first_name LIKE '{data}%' AND last_name LIKE '" + this->comboBoxLastName->Text + "%';");
-	retreiveCustomerSuggestion(this->comboBoxLastName, "SELECT last_name FROM customer WHERE last_name LIKE '{data}%' AND first_name LIKE '" + this->comboBoxFirstName->Text + "%';");
-	retreiveCustomerSuggestion(this->comboBoxBirthdate, "SELECT CONVERT(VARCHAR(10), birthdate, 103) AS birthdate FROM customer WHERE CONVERT(VARCHAR(10), birthdate, 103) LIKE '{data}%' AND last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "';");
-	retreiveCustomerSuggestion(this->comboBoxBillingAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS billing_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 1 OR id_address_type = 3);");
-	retreiveCustomerSuggestion(this->comboBoxDeliveryAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS delivery_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 2 OR id_address_type = 3);");
+	retreiveSuggestion(this->comboBoxFirstName, "SELECT first_name FROM customer WHERE first_name LIKE '{data}%' AND last_name LIKE '" + this->comboBoxLastName->Text + "%';");
+	retreiveSuggestion(this->comboBoxLastName, "SELECT last_name FROM customer WHERE last_name LIKE '{data}%' AND first_name LIKE '" + this->comboBoxFirstName->Text + "%';");
+	retreiveSuggestion(this->comboBoxBirthdate, "SELECT CONVERT(VARCHAR(10), birthdate, 103) AS birthdate FROM customer WHERE CONVERT(VARCHAR(10), birthdate, 103) LIKE '{data}%' AND last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "';");
+	retreiveSuggestion(this->comboBoxBillingAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS billing_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 1 OR id_address_type = 3);");
+	retreiveSuggestion(this->comboBoxDeliveryAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS delivery_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 2 OR id_address_type = 3);");
+}
+
+void OrderForm::comboBoxProduct_keyPress(Object^ sender, KeyPressEventArgs^ e)
+{
+	retreiveSuggestion(this->comboBoxType, "SELECT DISTINCT type FROM product WHERE type LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%';");
+	retreiveSuggestion(this->comboBoxProductName, "SELECT DISTINCT name FROM product WHERE name LIKE '{data}%' AND type LIKE '" + this->comboBoxType->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%';");
+	retreiveSuggestion(this->comboBoxColour, "SELECT DISTINCT colour FROM product WHERE colour LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND type LIKE '" + this->comboBoxType->Text + "%';");
 }
 
 void OrderForm::comboBoxBirthdate_KeyPress(Object^ sender, KeyPressEventArgs^ e)
@@ -152,12 +162,27 @@ void OrderForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 			DataSet^ product = App::app->db->query("SELECT id_product FROM product WHERE name = '" + name + "' AND type = '" + type + "' AND colour = '" + colour + "';");
 			productId = product->Tables[0]->Rows[0]->ItemArray[0]->ToString();
 		}
-		catch (Exception ^ exception)
+		catch (Exception^ exception)
 		{
 			App::app->logger->error("Error retrieving product id: \"" + name + "\", \"" + type + "\", \"" + colour + "\"");
 			App::app->logger->error(exception);
 			App::app->toastMessage(this, "Le produit n'existe pas", Color::Red, 3000);
 			return;
+		}
+
+		String^ orderHasProductId = "";
+		try
+		{
+			DataSet^ oldOrderHasProduct = App::app->db->query("SELECT id_orderHasProduct, quantity FROM orderHasProduct WHERE id_order = " + orderId + " AND id_product = " + productId + ";");
+
+			if (oldOrderHasProduct->Tables[0]->Rows->Count > 0)
+			{
+				orderHasProductId = oldOrderHasProduct->Tables[0]->Rows[0]->ItemArray[0]->ToString();
+				quantity = (Convert::ToDouble(quantity) + Convert::ToDouble(oldOrderHasProduct->Tables[0]->Rows[0]->ItemArray[1]->ToString())).ToString();
+			}
+		}
+		catch (Exception^ exception)
+		{
 		}
 
 		String^ tfPriceUnit;
@@ -171,7 +196,7 @@ void OrderForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 			vatPriceUnit = product->Tables[0]->Rows[0]->ItemArray[1]->ToString();
 			priceUnit = product->Tables[0]->Rows[0]->ItemArray[2]->ToString();
 		}
-		catch (Exception ^ exception)
+		catch (Exception^ exception)
 		{
 			App::app->logger->error("Error retrieving product price: \"" + productId + "\", \"" + quantity + "\"");
 			App::app->logger->error(exception);
@@ -183,18 +208,37 @@ void OrderForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 		String^ vatPrice = (Convert::ToDouble(vatPriceUnit) * Convert::ToDouble(quantity)).ToString()->Replace(",", ".");
 		String^ price = (Convert::ToDouble(priceUnit) * Convert::ToDouble(quantity)).ToString()->Replace(",", ".");
 		
-		try
+		if (orderHasProductId == "")
 		{
-			App::app->db->insert("INSERT INTO orderHasProduct (id_order, id_product, quantity, price, vat_price, tf_price) VALUES ('" + orderId + "', '" + productId + "', '" + quantity + "', '" + price + "', '" + vatPrice + "', '" + tfPrice + "');");
-			App::app->logger->log("Product saved: \"" + productId + "\", \"" + quantity + "\", \"" + price + "\", \"" + vatPrice + "\", \"" + tfPrice + "\" and asociated to order id: \"" + orderId + "\"");
-			App::app->toastMessage(this, "Produit enregistre", Color::Green, 2000);
-			reloadProductsGridView();
+			try
+			{
+				App::app->db->execute("INSERT INTO orderHasProduct (id_order, id_product, quantity, price, tf_price, vat_price) VALUES (" + orderId + ", " + productId + ", " + quantity + ", " + price + ", " + tfPrice + ", " + vatPrice + ");");
+				App::app->logger->log("Product added: \"" + productId + "\", \"" + name + "\", \"" + type + "\", \"" + colour + "\", \"" + quantity + "\", \"" + tfPrice + "\", \"" + vatPrice + "\", \"" + price + "\"");
+				App::app->toastMessage(this, "Produit ajoute", Color::Green, 2000);
+				reloadProductsGridView();
+			}
+			catch (Exception^ exception)
+			{
+				App::app->logger->error("Error while adding product: \"" + productId + "\", \"" + name + "\", \"" + type + "\", \"" + colour + "\", \"" + quantity + "\", \"" + tfPrice + "\", \"" + vatPrice + "\", \"" + price + "\"");
+				App::app->logger->error(exception);
+				App::app->toastMessage(this, "Erreur lors de l'ajout du produit", Color::Red, 3000);
+			}
 		}
-		catch (Exception ^ exception)
+		else
 		{
-			App::app->logger->error("Error while saving product: \"" + productId + "\", \"" + quantity + "\", \"" + price + "\", \"" + vatPrice + "\", \"" + tfPrice + "\"");
-			App::app->logger->error(exception);
-			App::app->toastMessage(this, "Erreur lors de l'enregistrement du produit", Color::Red, 3000);
+			try
+			{
+				App::app->db->execute("UPDATE orderHasProduct SET quantity = " + quantity + ", price = " + price + ", tf_price = " + tfPrice + ", vat_price = " + vatPrice + " WHERE id_orderHasProduct = " + orderHasProductId + ";");
+				App::app->logger->log("Product updated: \"" + productId + "\", \"" + name + "\", \"" + type + "\", \"" + colour + "\", \"" + quantity + "\", \"" + tfPrice + "\", \"" + vatPrice + "\", \"" + price + "\"");
+				App::app->toastMessage(this, "Produit mis a jour", Color::Green, 2000);
+				reloadProductsGridView();
+			}
+			catch (Exception^ exception)
+			{
+				App::app->logger->error("Error while updating product: \"" + productId + "\", \"" + name + "\", \"" + type + "\", \"" + colour + "\", \"" + quantity + "\", \"" + tfPrice + "\", \"" + vatPrice + "\", \"" + price + "\"");
+				App::app->logger->error(exception);
+				App::app->toastMessage(this, "Erreur lors de la mise a jour du produit", Color::Red, 3000);
+			}
 		}
 	}
 }
@@ -210,12 +254,12 @@ void OrderForm::buttonDelete_Click(Object^ sender, EventArgs^ e)
 
 	try
 	{
-		App::app->db->execute("DELETE FROM orderHasProduct WHERE id_order = " + orderId + " AND id_product = " + this->dataGridViewProducts->CurrentRow->Cells[0]->Value->ToString() + ";");
+		App::app->db->execute("DELETE FROM orderHasProduct WHERE id_order = " + orderId + " AND id_product = " + this->dataGridViewProducts->CurrentRow->Cells[0]->Value->ToString() + "AND id_orderHasProduct = " + this->dataGridViewProducts->CurrentRow->Cells[6]->Value->ToString() + ";");
 		App::app->logger->log("Product deleted: \"" + this->dataGridViewProducts->CurrentRow->Cells[0]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[1]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[2]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[3]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[4]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[5]->Value->ToString() + "\"");
 		App::app->toastMessage(this, "Produit supprime", Color::Green, 2000);
 		reloadProductsGridView();
 	}
-	catch (Exception ^ exception)
+	catch (Exception^ exception)
 	{
 		App::app->logger->error("Error while deleting product: \"" + this->dataGridViewProducts->CurrentRow->Cells[0]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[1]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[2]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[3]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[4]->Value->ToString() + "\", \"" + this->dataGridViewProducts->CurrentRow->Cells[5]->Value->ToString() + "\"");
 		App::app->logger->error(exception);
@@ -234,14 +278,14 @@ void OrderForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 			App::app->logger->log("Order deleted: \"" + orderId + "\"");
 			App::app->toastMessage(this, "Commande supprimee", Color::Green, 2000);
 		}
-		catch (Exception ^ exception)
+		catch (Exception^ exception)
 		{
 			App::app->logger->error("Error while deleting order: \"" + orderId + "\"");
 			App::app->logger->error(exception);
 			App::app->toastMessage(this, "Erreur lors de la suppression de la commande", Color::Red, 3000);
 		}
 	}
-	
+
 	this->Close();
 }
 
