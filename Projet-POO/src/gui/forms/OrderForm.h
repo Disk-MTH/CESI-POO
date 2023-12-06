@@ -23,6 +23,7 @@ namespace Projet_POO
             
             initialize();
             reloadProductsGridView();
+            comboBoxUser_keyPress(nullptr, nullptr);
         }
 
     private:

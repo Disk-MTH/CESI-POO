@@ -1,6 +1,7 @@
 #include "CustomersPage.h"
 #include "../../App.h"
 #include "../forms/CustomerForm.h"
+#include "../forms/OrderForm.h"
 
 void CustomersPage::reloadCustomersGridView()
 {
@@ -32,7 +33,26 @@ void CustomersPage::checkBoxDeleted_Click(Object^ sender, EventArgs^ e)
 
 void CustomersPage::buttonCreateOrder_Click(Object^ sender, EventArgs^ e)
 {
-	App::app->toastMessage(this, "Fonctionnalite non implementee: Creer une commande", Color::Red, 2000);
+	if (this->dataGridViewCustomers->SelectedRows->Count == 0)
+	{
+		App::app->logger->warn("Can't create order: no customer selected");
+		App::app->toastMessage(this, "Veuillez selectionner un client", Color::Red, 2000);
+		return;
+	}
+	
+	auto orderForm = gcnew OrderForm(
+		"",
+		this->dataGridViewCustomers->CurrentRow->Cells[1]->Value->ToString(),
+		this->dataGridViewCustomers->CurrentRow->Cells[2]->Value->ToString(),
+		this->dataGridViewCustomers->CurrentRow->Cells[3]->Value->ToString(),
+		"",
+		"",
+		""
+	);
+	if (orderForm->ShowDialog() == Windows::Forms::DialogResult::OK)
+	{
+		App::app->App::toastMessage(this, "Commande enregistree", Color::Green, 3000);
+	}
 }
 
 void CustomersPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
