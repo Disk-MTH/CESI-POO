@@ -10,10 +10,12 @@ namespace Projet_POO
 	public ref class PaymentsForm : public Form
 	{
 		public:
-			PaymentsForm(String^ orderId, String^ reference)
+			PaymentsForm(String^ orderId, String^ reference, String^ payed)
 			{
 				this->orderId = orderId;
 				this->reference = reference;
+				this->payed = payed;
+				
 				initialize();
 				reloadPaymentsGridView();
 			}
@@ -21,6 +23,7 @@ namespace Projet_POO
 		private:
 			String^ orderId;
 			String^ reference;
+			String^ payed;
 		
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
@@ -102,6 +105,10 @@ namespace Projet_POO
 				this->dataGridViewPaymentsDetails->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
 				this->dataGridViewPaymentsDetails->ColumnHeadersHeight = 40;
 
+				auto paymentId = gcnew DataGridViewTextBoxColumn();
+				paymentId->Visible = false;
+				this->dataGridViewPaymentsDetails->Columns->Add(paymentId);
+
 				auto orderId = gcnew DataGridViewTextBoxColumn();
 				orderId->Visible = false;
 				this->dataGridViewPaymentsDetails->Columns->Add(orderId);
@@ -121,11 +128,7 @@ namespace Projet_POO
 				auto validated = gcnew DataGridViewTextBoxColumn();
 				validated->Name = L"Payement valide";
 				this->dataGridViewPaymentsDetails->Columns->Add(validated);
-
-				auto paymentId = gcnew DataGridViewTextBoxColumn();
-				paymentId->Visible = false;
-				this->dataGridViewPaymentsDetails->Columns->Add(paymentId);
-
+				
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonAdd->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -175,9 +178,9 @@ namespace Projet_POO
 			}
 
 			Void reloadPaymentsGridView();
+			Void openPaymentForm(String^ paymentId, String^ orderId, String^ paymentDate, String^ paymentMean, String^ amount, String^ validated);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
 			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
-			Void openPaymentForm(String^ paymentId, String^ paymentDate, String^ paymentMean, String^ amount, String^ validated);
 	};
 }

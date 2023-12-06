@@ -32,7 +32,7 @@ namespace Projet_POO
 				}
 				return false;
 			}
-		
+
 			static String^ isValidDate(String^ name, String^ data)
 			{
 				DateTime date;
@@ -44,12 +44,12 @@ namespace Projet_POO
 				}
 				return date.ToString("yyyy-mm-dd");
 			}
-		
+
 		private:
 			App()
 			{
 			}
-		
+
 			void toastMessageThread(Object^ args);
 	};
 }

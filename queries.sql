@@ -80,7 +80,7 @@ FROM product;
 /* Query to fill TieredPrices */
 SELECT minimal_quantity,
        tf_price,
-       ROUND(tf_price * (1 + vat_rate / 100), 2) AS price
+       ROUND(tf_price * (1 + vat_rate / 100), 3) AS price
 FROM tiered_price
          INNER JOIN product p ON tiered_price.id_product = p.id_product
 WHERE p.deleted = 0
@@ -97,18 +97,18 @@ SELECT o.id_order,
        o.reference,
        c.last_name,
        c.first_name,
-       CONVERT(VARCHAR(10), c.birthdate, 103)                        AS birthdate,
-       CONVERT(VARCHAR(10), o.issue_date, 103)                       AS issue_date,
-       CONVERT(VARCHAR(10), o.expected_delivery_date, 103)           AS expected_delivery_date,
-       CONCAT(b.street, ', ', b.zip_code, ', ', b.city)              AS billing_address,
-       CONCAT(d.street, ', ', d.zip_code, ', ', d.city)              AS delivery_address,
-       SUM(ohp.price)                                                AS total_amount,
-       (SELECT SUM(amount) FROM payment WHERE id_order = o.id_order AND validated = 1) AS payed_amount,
+       CONVERT(VARCHAR(10), c.birthdate, 103)                                                    AS birthdate,
+       CONVERT(VARCHAR(10), o.issue_date, 103)                                                   AS issue_date,
+       CONVERT(VARCHAR(10), o.expected_delivery_date, 103)                                       AS expected_delivery_date,
+       CONCAT(b.street, ', ', b.zip_code, ', ', b.city)                                          AS billing_address,
+       CONCAT(d.street, ', ', d.zip_code, ', ', d.city)                                          AS delivery_address,
+       ROUND(SUM(ohp.price), 3)                                                                  AS total_amount,
+       ROUND((SELECT SUM(amount) FROM payment WHERE id_order = o.id_order AND validated = 1), 3) AS payed_amount,
        CONVERT(VARCHAR(10), IIF((SELECT SUM(amount) FROM payment WHERE id_order = o.id_order) = SUM(ohp.price),
                                 (SELECT MAX(payment_date) FROM payment WHERE id_order = o.id_order), NULL),
-                            103)                                     AS payment_date,
-       SUM(ohp.vat_price)                                            AS vat_amount,
-       SUM(ohp.tf_price)                                             AS tf_amount
+                            103)                                                                 AS payment_date,
+       SUM(ohp.vat_price)                                                                        AS vat_amount,
+       SUM(ohp.tf_price)                                                                         AS tf_amount
 FROM [order] o
          INNER JOIN customer c ON o.id_customer = c.id_customer
          INNER JOIN address b ON o.id_billing_address = b.id_address
@@ -143,7 +143,8 @@ WHERE p.deleted = 0
 ORDER BY ohp.quantity DESC;
 
 /* Query to fill PaymentsForm */
-SELECT id_order,
+SELECT id_payment,
+       id_order,
        CONVERT(VARCHAR(10), payment_date, 103) AS payment_date,
        payment_mean,
        amount,
@@ -152,3 +153,15 @@ FROM payment
 WHERE id_order = 2
 ORDER BY payment_date;
 
+/* Query to update a payment */
+
+UPDATE payment
+SET payment_date = '2010-10-10',
+    payment_mean = 'CB',
+    amount       = '5',
+    validated    = 'True'
+WHERE id_order = 38
+  AND id_payment = 2;
+
+INSERT INTO payment (id_order, payment_date, payment_mean, amount, validated)
+VALUES ('', '2001-12-31', 'CB', '1', 'True');

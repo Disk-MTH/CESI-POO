@@ -1,6 +1,22 @@
 #include "PaymentForm.h"
 #include "../../App.h"
 
+void PaymentForm::textBoxAmount_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+{
+	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2E && e->KeyChar != 0x2C)
+	{
+		e->Handled = true;
+	}
+}
+
+void PaymentForm::textBoxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+{
+	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2F && e->KeyChar != 0x2D)
+	{
+		e->Handled = true;
+	}
+}
+
 void PaymentForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 {
 	this->Close();
@@ -13,21 +29,26 @@ void PaymentForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 	paymentDate = this->textBoxDate->Text;
 	validated = this->checkBoxValided->Checked ? "True" : "False";
 
-	if (App::isEmpty("Montant", amount) || App::isEmpty("Moyen de paiement", paymentMean) || App::isEmpty("Date", paymentDate))
+	if (App::isEmpty("Montant", amount) || App::isEmpty("Moyen de paiement", paymentMean) || App::isValidDate("Date", paymentDate) == "")
 	{
 		return;
 	}
 
-	try //TODO : FIX EDITING CAUSING A DUPLICATE
+	paymentDate = App::isValidDate("Date", paymentDate);
+	amount = amount->Replace(",", ".");
+
+	try
 	{
-		if (paymentId != "")
+		if (mode == "0")
 		{
-			App::app->db->execute("DELETE FROM payment WHERE id_payment = " + paymentId + ";");
+			App::app->db->insert("INSERT INTO payment (id_order, payment_date, payment_mean, amount, validated) VALUES ('" + orderId + "', '" + paymentDate + "', '" + paymentMean + "', '" + amount + "', '" + validated + "');");
 		}
-
-		auto paymentId = App::app->db->insert("INSERT INTO payment (payment_date, payment_mean, amount, validated, id_order) VALUES ('" + paymentDate + "', '" + paymentMean + "', '" + amount + "', '" + validated + "', '" + this->orderId + "');");
-
-		App::app->logger->log("Payment saved: \"" + amount + "\", \"" + paymentMean + "\", \"" + paymentDate + "\", \"" + validated + "\" and asociated to order id: \"" + this->orderId + "\"");
+		else
+		{
+			App::app->db->execute("UPDATE payment SET payment_date = '" + paymentDate + "', payment_mean = '" + paymentMean + "', amount = '" + amount + "', validated = '" + validated + "' WHERE id_payment = " + paymentId +" ;");
+		}
+		
+		App::app->logger->log("Payment saved: \"" + amount + "\", \"" + paymentMean + "\", \"" + paymentDate + "\", \"" + validated + "\" and asociated to order id: \"" + orderId + "\"");
 		this->DialogResult = Windows::Forms::DialogResult::OK;
 		this->Close();
 	}

@@ -269,7 +269,6 @@ namespace Projet_POO
 			}
 
 			Void reloadOrdersGridView();
-			Void openOrderDetailsForm();
 			Void openOrderForm();
 			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
 			Void buttonPayments_Click(Object^ sender, EventArgs^ e);

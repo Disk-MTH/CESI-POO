@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../../App.h"
-
 using namespace System;
 using namespace Windows::Forms;
 using namespace Drawing;
@@ -12,25 +10,28 @@ namespace Projet_POO
 	public ref class PaymentForm : public Form
 	{
 		public:
-			PaymentForm(String^ paymentId, String^ paymentDate, String^ paymentMean, String^ amount, String^ validated, String^ orderId)
+			PaymentForm(String^ paymentId, String^ orderId, String^ date, String^ mean, String^ amount, String^ validated)
 			{
 				this->paymentId = paymentId;
-				this->paymentDate = paymentDate;
-				this->paymentMean = paymentMean;
+				this->orderId = orderId;
+				this->paymentDate = date;
+				this->paymentMean = mean;
 				this->amount = amount;
 				this->validated = validated;
-				this->orderId = orderId;
+				this->mode = paymentId == "" ? "0" : "1"; //0 = add, 1 = edit
+				
 				initialize();
 			}
 
 		private:
 			String^ paymentId;
+			String^ orderId;
 			String^ paymentDate;
 			String^ paymentMean;
 			String^ amount;
 			String^ validated;
-			String^ orderId;
-		
+			String^ mode;
+
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 			TableLayoutPanel^ tableLayoutPanel3;
@@ -163,6 +164,7 @@ namespace Projet_POO
 				this->textBoxAmount->Size = Drawing::Size(339, 30);
 				this->textBoxAmount->TabIndex = 0;
 				this->textBoxAmount->Text = this->amount;
+				this->textBoxAmount->KeyPress += gcnew KeyPressEventHandler(this, &PaymentForm::textBoxAmount_KeyPress);
 
 				/*-------------------- textBoxDate --------------------*/
 				this->textBoxDate->Anchor = AnchorStyles::Left;
@@ -173,6 +175,7 @@ namespace Projet_POO
 				this->textBoxDate->Size = Drawing::Size(339, 30);
 				this->textBoxDate->TabIndex = 3;
 				this->textBoxDate->Text = this->paymentDate;
+				this->textBoxDate->KeyPress += gcnew KeyPressEventHandler(this, &PaymentForm::textBoxDate_KeyPress);
 
 				/*-------------------- comboBoxType --------------------*/
 				this->comboBoxType->Anchor = AnchorStyles::Left;
@@ -234,6 +237,8 @@ namespace Projet_POO
 				this->Text = L"PaymentForm";
 			}
 
+			Void textBoxAmount_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void textBoxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
 			Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 			Void buttonValidate_Click(Object^ sender, EventArgs^ e);
 	};
