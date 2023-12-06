@@ -169,3 +169,16 @@ VALUES (2, '2010-10-10', 'CB', '5', 'True');
 DELETE
 FROM payment
 WHERE id_payment = 2;
+
+/* Query to fill OrderForm */
+SELECT p.id_product,
+       p.type,
+       p.name,
+       p.colour,
+       ohp.quantity,
+       ohp.price
+FROM product p
+         INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product
+WHERE id_order = 1;
+
+SELECT p.id_product, p.type, p.name, p.colour, ohp.quantity, ohp.price FROM product p INNER JOIN dbo.orderHasProduct ohp on p.id_product = ohp.id_product WHERE id_order = 1;

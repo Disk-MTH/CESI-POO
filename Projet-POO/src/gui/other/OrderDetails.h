@@ -166,23 +166,23 @@ namespace Projet_POO
 				this->labelBirthdate->Size = Drawing::Size(368, 20);
 				this->labelBirthdate->Text = L"Date de naissance : " + birthdate;
 
-				/*-------------------- labelBillingAddress --------------------*/
+				/*-------------------- labelDeliveryAddress --------------------*/
 				this->labelBillingAddress->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->labelBillingAddress->AutoSize = true;
 				this->labelBillingAddress->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
 				this->labelBillingAddress->Location = Point(10, 106);
 				this->labelBillingAddress->Margin = Windows::Forms::Padding(10, 0, 10, 0);
-				this->labelBillingAddress->Name = L"labelBillingAddress";
+				this->labelBillingAddress->Name = L"labelDeliveryAddress";
 				this->labelBillingAddress->Size = Drawing::Size(368, 20);
 				this->labelBillingAddress->Text = L"Adr facturation : " + billingAddress;
 
-				/*-------------------- labelDeliveryAddress --------------------*/
+				/*-------------------- labelBillingAddress --------------------*/
 				this->labelDeliveryAddress->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->labelDeliveryAddress->AutoSize = true;
 				this->labelDeliveryAddress->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
 				this->labelDeliveryAddress->Location = Point(10, 149);
 				this->labelDeliveryAddress->Margin = Windows::Forms::Padding(10, 0, 10, 0);
-				this->labelDeliveryAddress->Name = L"labelDeliveryAddress";
+				this->labelDeliveryAddress->Name = L"labelBillingAddress";
 				this->labelDeliveryAddress->Size = Drawing::Size(368, 20);
 				this->labelDeliveryAddress->Text = L"Adr livraison : " + deliveryAddress;
 

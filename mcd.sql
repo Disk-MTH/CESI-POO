@@ -95,7 +95,6 @@ CREATE TABLE payment
     payment_mean VARCHAR(50)        NOT NULL,
     amount       REAL               NOT NULL,
     validated    BIT                NOT NULL DEFAULT 0,
-    deleted      BIT                NOT NULL DEFAULT 0,
     id_order     INT                NOT NULL,
     PRIMARY KEY (id_payment),
     FOREIGN KEY (id_order) REFERENCES [order] (id_order)

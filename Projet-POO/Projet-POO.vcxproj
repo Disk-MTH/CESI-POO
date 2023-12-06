@@ -125,6 +125,7 @@
     <ClCompile Include="src\Database.cpp" />
     <ClCompile Include="src\gui\forms\AddresseForm.cpp" />
     <ClCompile Include="src\gui\forms\CustomerForm.cpp" />
+    <ClCompile Include="src\gui\forms\OrderForm.cpp" />
     <ClCompile Include="src\gui\forms\PaymentsForm.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>

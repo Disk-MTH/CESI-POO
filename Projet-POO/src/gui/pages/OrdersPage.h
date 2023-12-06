@@ -269,7 +269,7 @@ namespace Projet_POO
 			}
 
 			Void reloadOrdersGridView();
-			Void openOrderForm();
+			Void openOrderForm(String^ orderId, String^ lastName, String^ firstName, String^ birthdate, String^ billingAddress, String^ deliveryAddress);
 			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
 			Void buttonPayments_Click(Object^ sender, EventArgs^ e);
 			Void buttonOrderDetails_Click(Object^ sender, EventArgs^ e);
