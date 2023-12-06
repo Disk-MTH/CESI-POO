@@ -42,13 +42,12 @@ namespace Projet_POO
         Label^ labelAdressType;
 
         TextBox^ textBoxStreet;
-        TextBox^ textBoxZipCode;
+        ComboBox^ comboBoxZipCode;
+        ComboBox^ comboBoxCity;
 
         CheckBox^ checkBoxDelivery;
         CheckBox^ checkBoxBilling;
-
-        ComboBox^ comboBoxCity;
-
+        
         Button^ buttonCancel;
         Button^ buttonValidate;
 
@@ -67,7 +66,7 @@ namespace Projet_POO
             this->labelAdressType = gcnew Label();
             
             this->textBoxStreet = gcnew TextBox();
-            this->textBoxZipCode = gcnew TextBox();
+            this->comboBoxZipCode = gcnew ComboBox();
             this->comboBoxCity = gcnew ComboBox();
             
             this->checkBoxDelivery = gcnew CheckBox();
@@ -102,7 +101,7 @@ namespace Projet_POO
             this->tableLayoutPanel2->Controls->Add(this->labelZipCode, 1, 0);
             this->tableLayoutPanel2->Controls->Add(this->labelWording, 0, 0);
             this->tableLayoutPanel2->Controls->Add(this->textBoxStreet, 0, 1);
-            this->tableLayoutPanel2->Controls->Add(this->textBoxZipCode, 1, 1);
+            this->tableLayoutPanel2->Controls->Add(this->comboBoxZipCode, 1, 1);
             this->tableLayoutPanel2->Controls->Add(this->comboBoxCity, 2, 1);
             this->tableLayoutPanel2->Location = Point(2, 81);
             this->tableLayoutPanel2->Margin = Windows::Forms::Padding(2);
@@ -180,7 +179,6 @@ namespace Projet_POO
             this->labelZipCode->Name = L"labelZipCode";
             this->labelZipCode->Size = Drawing::Size(117, 25);
             this->labelZipCode->Text = L"Code postal";
-            this->textBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::textBoxZipCode_KeyPress);
 
             /*-------------------- labelCity --------------------*/
             this->labelCity->Anchor = AnchorStyles::Left;
@@ -211,14 +209,17 @@ namespace Projet_POO
             this->textBoxStreet->TabIndex = 0;
             this->textBoxStreet->Text = this->street;
 
-            /*-------------------- textBoxZipCode --------------------*/
-            this->textBoxZipCode->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-            this->textBoxZipCode->Location = Point(292, 58);
-            this->textBoxZipCode->Margin = Windows::Forms::Padding(8);
-            this->textBoxZipCode->Name = L"textBoxZipCode";
-            this->textBoxZipCode->Size = Drawing::Size(112, 30);
-            this->textBoxZipCode->TabIndex = 1;
-            this->textBoxZipCode->Text = this->zipCode;
+            /*-------------------- comboBoxZipCode --------------------*/
+            this->comboBoxZipCode->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+            this->comboBoxZipCode->FormattingEnabled = true;
+            this->comboBoxZipCode->Location = Point(292, 58);
+            this->comboBoxZipCode->Margin = Windows::Forms::Padding(8);
+            this->comboBoxZipCode->Name = L"comboBoxZipCode";
+            this->comboBoxZipCode->Size = Drawing::Size(112, 30);
+            this->comboBoxZipCode->TabIndex = 1;
+            this->comboBoxZipCode->Text = this->zipCode;
+            this->comboBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::comboBox_KeyPress);
+            this->comboBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::textBoxZipCode_KeyPress);
 
             /*-------------------- comboBoxCity --------------------*/
             this->comboBoxCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -229,6 +230,7 @@ namespace Projet_POO
             this->comboBoxCity->Size = Drawing::Size(229, 33);
             this->comboBoxCity->TabIndex = 2;
             this->comboBoxCity->Text = this->city;
+            this->comboBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::comboBox_KeyPress);
             
             /*-------------------- checkBoxDelivery --------------------*/
             this->checkBoxDelivery->Anchor = AnchorStyles::Left;
@@ -293,6 +295,8 @@ namespace Projet_POO
             this->Text = L"AddresseForm";
         }
 
+        Void retreiveSuggestion(ComboBox^ comboBox, String^ query);
+        Void comboBox_KeyPress(Object^ sender, KeyPressEventArgs^ e);
         Void textBoxZipCode_KeyPress(Object^ sender, KeyPressEventArgs^ e);
         Void buttonCancel_Click(Object^ sender, EventArgs^ e);
         Void buttonValidate_Click(Object^ sender, EventArgs^ e);
