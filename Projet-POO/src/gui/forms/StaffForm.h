@@ -10,12 +10,32 @@ namespace Projet_POO
 	public ref class StaffForm : public Form
 	{
 		public:
-			StaffForm()
+			StaffForm(String^ staffId, String^ LastName, String^ FirstName, String^ Birthdate)
 			{
+				this->staffId = staffId;
+				this->LastName = LastName;
+				this->FirstName = FirstName;
+				this->Birthdate = Birthdate;
+				this->Wording = Wording;
+				this->BossLastName = BossLastName;
+				this->BossFirstName = BossFirstName;
+				this->ZipCode = ZipCode;
+				this->City = City;
+				
 				initialize();
 			}
 
 		private:
+			String^ staffId;
+			String^ LastName;
+			String^ FirstName;
+			String^ Birthdate;
+			String^ Wording;
+			String^ BossLastName;
+			String^ BossFirstName;
+			String^ ZipCode;
+			String^ City;
+		
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 			TableLayoutPanel^ tableLayoutPanel3;
@@ -244,6 +264,7 @@ namespace Projet_POO
 				this->textBoxLastName->Name = L"textBoxLastName";
 				this->textBoxLastName->Size = Drawing::Size(307, 26);
 				this->textBoxLastName->TabIndex = 5;
+				this->textBoxLastName->Text = this->LastName;
 
 				/*-------------------- textBoxFirstName --------------------*/
 				this->textBoxFirstName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
@@ -253,6 +274,7 @@ namespace Projet_POO
 				this->textBoxFirstName->Name = L"textBoxFirstName";
 				this->textBoxFirstName->Size = Drawing::Size(307, 26);
 				this->textBoxFirstName->TabIndex = 6;
+				this->textBoxFirstName->Text = this->FirstName;
 
 				/*-------------------- textBoxBirthdate --------------------*/
 				this->textBoxBirthdate->Anchor = AnchorStyles::Left | AnchorStyles::Right;
@@ -262,6 +284,7 @@ namespace Projet_POO
 				this->textBoxBirthdate->Name = L"textBoxBirthdate";
 				this->textBoxBirthdate->Size = Drawing::Size(307, 26);
 				this->textBoxBirthdate->TabIndex = 7;
+				this->textBoxBirthdate->Text = this->Birthdate;
 
 				/*-------------------- textBoxWording --------------------*/
 				this->textBoxWording->Anchor = AnchorStyles::Left | AnchorStyles::Right;
@@ -271,6 +294,7 @@ namespace Projet_POO
 				this->textBoxWording->Name = L"textBoxWording";
 				this->textBoxWording->Size = Drawing::Size(248, 26);
 				this->textBoxWording->TabIndex = 8;
+				this->textBoxWording->Text = this->Wording;
 
 				/*-------------------- comboBoxBossLastName --------------------*/
 				this->comboBoxBossLastName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
@@ -281,6 +305,7 @@ namespace Projet_POO
 				this->comboBoxBossLastName->Name = L"comboBoxBossLastName";
 				this->comboBoxBossLastName->Size = Drawing::Size(307, 24);
 				this->comboBoxBossLastName->TabIndex = 8;
+				this->comboBoxBossLastName->Text = this->BossLastName;
 
 				/*-------------------- comboBoxBossFirstName --------------------*/
 				this->comboBoxBossFirstName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
@@ -291,6 +316,7 @@ namespace Projet_POO
 				this->comboBoxBossFirstName->Name = L"comboBoxBossFirstName";
 				this->comboBoxBossFirstName->Size = Drawing::Size(307, 24);
 				this->comboBoxBossFirstName->TabIndex = 9;
+				this->comboBoxBossFirstName->Text = this->BossFirstName;
 
 				/*-------------------- comboBoxZipCode --------------------*/
 				this->comboBoxZipCode->Anchor = AnchorStyles::Left | AnchorStyles::Right;
@@ -301,6 +327,7 @@ namespace Projet_POO
 				this->comboBoxZipCode->Name = L"comboBoxZipCode";
 				this->comboBoxZipCode->Size = Drawing::Size(164, 24);
 				this->comboBoxZipCode->TabIndex = 10;
+				this->comboBoxZipCode->Text = this->ZipCode;
 
 				/*-------------------- comboBoxCity --------------------*/
 				this->comboBoxCity->Anchor = AnchorStyles::Left | AnchorStyles::Right;
@@ -311,6 +338,8 @@ namespace Projet_POO
 				this->comboBoxCity->Name = L"comboBoxCity";
 				this->comboBoxCity->Size = Drawing::Size(182, 24);
 				this->comboBoxCity->TabIndex = 11;
+				this->comboBoxCity->Text = this->City;
+
 
 				/*-------------------- buttonCancel --------------------*/
 				this->buttonCancel->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -322,6 +351,7 @@ namespace Projet_POO
 				this->buttonCancel->TabIndex = 1;
 				this->buttonCancel->Text = L"Annuler";
 				this->buttonCancel->UseVisualStyleBackColor = true;
+				this->buttonCancel->Click += gcnew EventHandler(this, &StaffForm::buttonCancel_Click);
 				
 				/*-------------------- buttonValidate --------------------*/
 				this->buttonValidate->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -333,6 +363,7 @@ namespace Projet_POO
 				this->buttonValidate->TabIndex = 2;
 				this->buttonValidate->Text = L"Valider";
 				this->buttonValidate->UseVisualStyleBackColor = true;
+				this->buttonValidate->Click += gcnew EventHandler(this, &StaffForm::buttonValidate_Click);
 
 				/*-------------------- StaffForm --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
@@ -345,5 +376,7 @@ namespace Projet_POO
 				this->Name = L"StaffForm";
 				this->Text = L"StaffForm";
 			}
+			Void buttonValidate_Click(Object^ sender, EventArgs^ e);
+			Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 	};
 }
