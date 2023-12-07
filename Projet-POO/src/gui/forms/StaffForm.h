@@ -19,7 +19,8 @@ namespace Projet_POO
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 			TableLayoutPanel^ tableLayoutPanel3;
-		
+			TableLayoutPanel^ tableLayoutPanel4;
+
 			Label^ labelTitle;
 			Label^ labelLastName;
 			Label^ labelFirstName;
@@ -29,7 +30,7 @@ namespace Projet_POO
 			Label^ labelWording;
 			Label^ labelZipCode;
 			Label^ labelCity;
-		
+
 			TextBox^ textBoxLastName;
 			TextBox^ textBoxFirstName;
 			TextBox^ textBoxBirthdate;
@@ -39,12 +40,16 @@ namespace Projet_POO
 			ComboBox^ comboBoxZipCode;
 			ComboBox^ comboBoxCity;
 
+			Button^ buttonCancel;
+			Button^ buttonValidate;
+
 			void initialize()
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel2 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel3 = gcnew TableLayoutPanel();
-				
+				this->tableLayoutPanel4 = gcnew TableLayoutPanel();
+
 				this->labelTitle = gcnew Label();
 				this->labelLastName = gcnew Label();
 				this->labelFirstName = gcnew Label();
@@ -63,25 +68,29 @@ namespace Projet_POO
 				this->textBoxWording = gcnew TextBox();
 				this->comboBoxZipCode = gcnew ComboBox();
 				this->comboBoxCity = gcnew ComboBox();
-	
+
+				this->buttonCancel = gcnew Button();
+				this->buttonValidate = gcnew Button();
+
 				/*-------------------- tableLayoutPanel1 --------------------*/
 				this->tableLayoutPanel1->ColumnCount = 1;
 				this->tableLayoutPanel1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel1->Controls->Add(this->labelTitle, 0, 0);
 				this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 1);
 				this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel3, 0, 2);
+				this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel4, 0, 3);
 				this->tableLayoutPanel1->Location = Point(12, 12);
 				this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-				this->tableLayoutPanel1->RowCount = 3;
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 21.96796F));
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 78.03204F));
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 81));
-				this->tableLayoutPanel1->Size = Drawing::Size(660, 437);
+				this->tableLayoutPanel1->RowCount = 4;
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 15));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 55));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 65));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 80));
+				this->tableLayoutPanel1->Size = Drawing::Size(660, 560);
 				this->tableLayoutPanel1->TabIndex = 0;
 
 				/*-------------------- tableLayoutPanel2 --------------------*/
 				this->tableLayoutPanel2->ColumnCount = 2;
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel2->Controls->Add(this->comboBoxBossFirstName, 1, 3);
 				this->tableLayoutPanel2->Controls->Add(this->labelBossLastName, 1, 0);
@@ -96,15 +105,15 @@ namespace Projet_POO
 				this->tableLayoutPanel2->Location = Point(3, 81);
 				this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 				this->tableLayoutPanel2->RowCount = 6;
-				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 48.88889F));
-				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 51.11111F));
 				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 45));
-				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 46));
-				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 47));
-				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 42));
-				this->tableLayoutPanel2->Size = Drawing::Size(654, 271);
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 45));
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 45));
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 45));
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 45));
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 45));
+				this->tableLayoutPanel2->Size = Drawing::Size(654, 300);
 				this->tableLayoutPanel2->TabIndex = 1;
-				
+
 				/*-------------------- tableLayoutPanel3 --------------------*/
 				this->tableLayoutPanel3->ColumnCount = 3;
 				this->tableLayoutPanel3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 59.27505F));
@@ -123,7 +132,20 @@ namespace Projet_POO
 				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 				this->tableLayoutPanel3->Size = Drawing::Size(654, 76);
 				this->tableLayoutPanel3->TabIndex = 2;
-			
+
+				/*-------------------- tableLayoutPanel4 --------------------*/
+				this->tableLayoutPanel4->ColumnCount = 3;
+				this->tableLayoutPanel4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 33));
+				this->tableLayoutPanel4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 34));
+				this->tableLayoutPanel4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 33));
+				this->tableLayoutPanel4->Controls->Add(this->buttonCancel, 0, 0);
+				this->tableLayoutPanel4->Controls->Add(this->buttonValidate, 2, 0);
+				this->tableLayoutPanel4->Location = Point(3, 358);
+				this->tableLayoutPanel4->Name = L"tableLayoutPanel4";
+				this->tableLayoutPanel4->RowCount = 1;
+				this->tableLayoutPanel4->Size = Drawing::Size(654, 50);
+				this->tableLayoutPanel4->TabIndex = 2;
+
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
 				this->labelTitle->AutoSize = true;
@@ -133,7 +155,7 @@ namespace Projet_POO
 				this->labelTitle->Size = Drawing::Size(171, 39);
 				this->labelTitle->TabIndex = 0;
 				this->labelTitle->Text = L"Personnel";
-				
+
 				/*-------------------- labelLastName --------------------*/
 				this->labelLastName->Anchor = AnchorStyles::None;
 				this->labelLastName->AutoSize = true;
@@ -143,7 +165,7 @@ namespace Projet_POO
 				this->labelLastName->Size = Drawing::Size(53, 25);
 				this->labelLastName->TabIndex = 0;
 				this->labelLastName->Text = L"Nom";
-				
+
 				/*-------------------- labelFirstName --------------------*/
 				this->labelFirstName->Anchor = AnchorStyles::None;
 				this->labelFirstName->AutoSize = true;
@@ -153,7 +175,7 @@ namespace Projet_POO
 				this->labelFirstName->Size = Drawing::Size(80, 25);
 				this->labelFirstName->TabIndex = 1;
 				this->labelFirstName->Text = L"Prenom";
-				
+
 				/*-------------------- labelBirthdate --------------------*/
 				this->labelBirthdate->Anchor = AnchorStyles::None;
 				this->labelBirthdate->AutoSize = true;
@@ -163,7 +185,7 @@ namespace Projet_POO
 				this->labelBirthdate->Size = Drawing::Size(174, 25);
 				this->labelBirthdate->TabIndex = 2;
 				this->labelBirthdate->Text = L"Date de naissance";
-				
+
 				/*-------------------- labelBossLastName --------------------*/
 				this->labelBossLastName->Anchor = AnchorStyles::None;
 				this->labelBossLastName->AutoSize = true;
@@ -173,7 +195,7 @@ namespace Projet_POO
 				this->labelBossLastName->Size = Drawing::Size(139, 25);
 				this->labelBossLastName->TabIndex = 3;
 				this->labelBossLastName->Text = L"Nom superieur";
-				
+
 				/*-------------------- labelBossFirstName --------------------*/
 				this->labelBossFirstName->Anchor = AnchorStyles::None;
 				this->labelBossFirstName->AutoSize = true;
@@ -183,7 +205,7 @@ namespace Projet_POO
 				this->labelBossFirstName->Size = Drawing::Size(166, 25);
 				this->labelBossFirstName->TabIndex = 4;
 				this->labelBossFirstName->Text = L"Prenom superieur";
-				
+
 				/*-------------------- labelWording --------------------*/
 				this->labelWording->Anchor = AnchorStyles::None;
 				this->labelWording->AutoSize = true;
@@ -193,7 +215,7 @@ namespace Projet_POO
 				this->labelWording->Size = Drawing::Size(68, 25);
 				this->labelWording->TabIndex = 5;
 				this->labelWording->Text = L"Libelle";
-				
+
 				/*-------------------- labelZipCode --------------------*/
 				this->labelZipCode->Anchor = AnchorStyles::None;
 				this->labelZipCode->AutoSize = true;
@@ -203,7 +225,7 @@ namespace Projet_POO
 				this->labelZipCode->Size = Drawing::Size(117, 25);
 				this->labelZipCode->TabIndex = 6;
 				this->labelZipCode->Text = L"Code postal";
-				
+
 				/*-------------------- labelCity --------------------*/
 				this->labelCity->Anchor = AnchorStyles::None;
 				this->labelCity->AutoSize = true;
@@ -213,7 +235,7 @@ namespace Projet_POO
 				this->labelCity->Size = Drawing::Size(49, 25);
 				this->labelCity->TabIndex = 7;
 				this->labelCity->Text = L"Ville";
-				
+
 				/*-------------------- textBoxLastName --------------------*/
 				this->textBoxLastName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->textBoxLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
@@ -222,7 +244,7 @@ namespace Projet_POO
 				this->textBoxLastName->Name = L"textBoxLastName";
 				this->textBoxLastName->Size = Drawing::Size(307, 26);
 				this->textBoxLastName->TabIndex = 5;
-				
+
 				/*-------------------- textBoxFirstName --------------------*/
 				this->textBoxFirstName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->textBoxFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
@@ -231,7 +253,7 @@ namespace Projet_POO
 				this->textBoxFirstName->Name = L"textBoxFirstName";
 				this->textBoxFirstName->Size = Drawing::Size(307, 26);
 				this->textBoxFirstName->TabIndex = 6;
-				
+
 				/*-------------------- textBoxBirthdate --------------------*/
 				this->textBoxBirthdate->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->textBoxBirthdate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
@@ -240,7 +262,7 @@ namespace Projet_POO
 				this->textBoxBirthdate->Name = L"textBoxBirthdate";
 				this->textBoxBirthdate->Size = Drawing::Size(307, 26);
 				this->textBoxBirthdate->TabIndex = 7;
-				
+
 				/*-------------------- textBoxWording --------------------*/
 				this->textBoxWording->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->textBoxWording->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
@@ -249,7 +271,7 @@ namespace Projet_POO
 				this->textBoxWording->Name = L"textBoxWording";
 				this->textBoxWording->Size = Drawing::Size(248, 26);
 				this->textBoxWording->TabIndex = 8;
-				
+
 				/*-------------------- comboBoxBossLastName --------------------*/
 				this->comboBoxBossLastName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->comboBoxBossLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
@@ -259,7 +281,7 @@ namespace Projet_POO
 				this->comboBoxBossLastName->Name = L"comboBoxBossLastName";
 				this->comboBoxBossLastName->Size = Drawing::Size(307, 24);
 				this->comboBoxBossLastName->TabIndex = 8;
-				
+
 				/*-------------------- comboBoxBossFirstName --------------------*/
 				this->comboBoxBossFirstName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->comboBoxBossFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
@@ -269,7 +291,7 @@ namespace Projet_POO
 				this->comboBoxBossFirstName->Name = L"comboBoxBossFirstName";
 				this->comboBoxBossFirstName->Size = Drawing::Size(307, 24);
 				this->comboBoxBossFirstName->TabIndex = 9;
-				
+
 				/*-------------------- comboBoxZipCode --------------------*/
 				this->comboBoxZipCode->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->comboBoxZipCode->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
@@ -279,7 +301,7 @@ namespace Projet_POO
 				this->comboBoxZipCode->Name = L"comboBoxZipCode";
 				this->comboBoxZipCode->Size = Drawing::Size(164, 24);
 				this->comboBoxZipCode->TabIndex = 10;
-				
+
 				/*-------------------- comboBoxCity --------------------*/
 				this->comboBoxCity->Anchor = AnchorStyles::Left | AnchorStyles::Right;
 				this->comboBoxCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
@@ -289,12 +311,34 @@ namespace Projet_POO
 				this->comboBoxCity->Name = L"comboBoxCity";
 				this->comboBoxCity->Size = Drawing::Size(182, 24);
 				this->comboBoxCity->TabIndex = 11;
+
+				/*-------------------- buttonCancel --------------------*/
+				this->buttonCancel->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
+				this->buttonCancel->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->buttonCancel->Location = Point(12, 12);
+				this->buttonCancel->Margin = Windows::Forms::Padding(3, 15, 3, 3);
+				this->buttonCancel->Name = L"buttonCancel";
+				this->buttonCancel->Size = Drawing::Size(75, 30);
+				this->buttonCancel->TabIndex = 1;
+				this->buttonCancel->Text = L"Annuler";
+				this->buttonCancel->UseVisualStyleBackColor = true;
 				
+				/*-------------------- buttonValidate --------------------*/
+				this->buttonValidate->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
+				this->buttonValidate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->buttonValidate->Location = Point(597, 12);
+				this->buttonValidate->Margin = Windows::Forms::Padding(3, 15, 3, 3);
+				this->buttonValidate->Name = L"buttonValidate";
+				this->buttonValidate->Size = Drawing::Size(75, 30);
+				this->buttonValidate->TabIndex = 2;
+				this->buttonValidate->Text = L"Valider";
+				this->buttonValidate->UseVisualStyleBackColor = true;
+
 				/*-------------------- StaffForm --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
 				this->AutoScaleDimensions = SizeF(6, 13);
-				this->AutoScaleMode =Windows::Forms::AutoScaleMode::Font;
-				this->ClientSize = Drawing::Size(684, 461);
+				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
+				this->ClientSize = Drawing::Size(684, 560);
 				this->Controls->Add(this->tableLayoutPanel1);
 				this->MaximizeBox = false;
 				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;

@@ -5,6 +5,7 @@
 #include "CatalogPage.h"
 #include "StaffPage.h"
 #include "../forms/OrderForm.h"
+#include "../forms/StaffForm.h"
 #include "../other/OrderDetails.h"
 
 Void HomePage::buttonCustomers_Click(Object^ sender, EventArgs^ e)
@@ -33,7 +34,11 @@ Void HomePage::buttonCatalog_Click(Object^ sender, EventArgs^ e)
 
 Void HomePage::buttonStats_Click(Object^ sender, EventArgs^ e)
 {
-	App::app->toastMessage(this, "Fonctionnalite non implementee: Statistiques", Color::Red, 2000);
+	this->Hide();
+	auto catalogPage = gcnew StaffForm();
+	catalogPage->ShowDialog();
+	this->Show();
+	//App::app->toastMessage(this, "Fonctionnalite non implementee: Statistiques", Color::Red, 2000);
 }
 
 Void HomePage::buttonOrders_Click(Object^ sender, EventArgs^ e)
