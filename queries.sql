@@ -308,3 +308,13 @@ FROM product p
          INNER JOIN tiered_price tp ON p.id_product = tp.id_product
 WHERE p.deleted = 0
   AND tp.minimal_quantity = 1;
+
+/**/
+
+SELECT id_staff, first_name, last_name, CONVERT(VARCHAR, hire_date, 103) AS hire_date, deleted, id_staff_boss, id_address FROM staff;
+
+SELECT id_staff FROM staff;
+
+
+
+INSERT INTO staff (id_staff, first_name, last_name, hire_date, id_staff_boss, id_address) VALUES ('', 'byh', 'h '), '01/05/2004', 'byhy';;SELECT @@IDENTITY

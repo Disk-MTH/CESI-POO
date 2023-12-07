@@ -13,6 +13,7 @@ namespace Projet_POO
 			StaffPage()
 			{
 				initialize();
+				reloadStaffGridView();
 			}
 
 		private:
@@ -93,6 +94,49 @@ namespace Projet_POO
 				this->dataGridViewStaff->Name = L"dataGridViewStaff";
 				this->dataGridViewStaff->Size = Drawing::Size(941, 354);
 				this->dataGridViewStaff->TabIndex = 0;
+				this->dataGridViewStaff->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->dataGridViewStaff->ReadOnly = true;
+				this->dataGridViewStaff->AllowUserToResizeRows = false;
+				this->dataGridViewStaff->AllowUserToAddRows = false;
+				this->dataGridViewStaff->RowHeadersVisible = false;
+				this->dataGridViewStaff->AllowUserToDeleteRows = false;
+				this->dataGridViewStaff->MultiSelect = false;
+				this->dataGridViewStaff->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->dataGridViewStaff->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+				this->dataGridViewStaff->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+				this->dataGridViewStaff->ColumnHeadersHeight = 40;
+
+				auto idStaff = gcnew DataGridViewTextBoxColumn();
+				idStaff->Visible = false;
+				this->dataGridViewStaff->Columns->Add(idStaff);
+
+				auto firstName = gcnew DataGridViewTextBoxColumn();
+				firstName->Name = L"Prenom";
+				firstName->Resizable = DataGridViewTriState::False;
+				this->dataGridViewStaff->Columns->Add(firstName);
+
+				auto lastName = gcnew DataGridViewTextBoxColumn();
+				lastName->Name = L"Nom";
+				lastName->Resizable = DataGridViewTriState::False;
+				this->dataGridViewStaff->Columns->Add(lastName);
+
+				auto hireDate = gcnew DataGridViewTextBoxColumn();
+				hireDate->Name = L"Date d'embauche";
+				hireDate->Resizable = DataGridViewTriState::False;
+				this->dataGridViewStaff->Columns->Add(hireDate);
+
+				auto deleted = gcnew DataGridViewTextBoxColumn();
+				deleted->Visible = false;
+				this->dataGridViewStaff->Columns->Add(deleted);
+
+				auto idStaffBoss = gcnew DataGridViewTextBoxColumn();
+				idStaffBoss->Visible = false;
+				this->dataGridViewStaff->Columns->Add(idStaffBoss);
+
+				auto idAddress = gcnew DataGridViewTextBoxColumn();
+				idAddress->Visible = false;
+				this->dataGridViewStaff->Columns->Add(idAddress);
+				
 				
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -105,8 +149,9 @@ namespace Projet_POO
 				this->checkBoxDeleted->TabIndex = 1;
 				this->checkBoxDeleted->Text = L"Montrer le personnel\nsupprime";
 				this->checkBoxDeleted->UseVisualStyleBackColor = true;
+				this->checkBoxDeleted->Click += gcnew EventHandler(this, &StaffPage::checkBoxDeleted_Click);
 
-				/*-------------------- buttonDelete --------------------*/
+				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonAdd->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonAdd->Location = Point(595, 106);
@@ -116,6 +161,7 @@ namespace Projet_POO
 				this->buttonAdd->TabIndex = 2;
 				this->buttonAdd->Text = L"Ajouter";
 				this->buttonAdd->UseVisualStyleBackColor = true;
+				this->buttonAdd->Click += gcnew EventHandler(this, &StaffPage::buttonAdd_Click);
 
 				/*-------------------- buttonEdit --------------------*/
 				this->buttonEdit->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
@@ -127,8 +173,9 @@ namespace Projet_POO
 				this->buttonEdit->TabIndex = 3;
 				this->buttonEdit->Text = L"Modifier";
 				this->buttonEdit->UseVisualStyleBackColor = true;
+				this->buttonEdit->Click += gcnew EventHandler(this, &StaffPage::buttonEdit_Click);
 
-				/*-------------------- buttonAdd --------------------*/
+				/*-------------------- buttonDelete --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonDelete->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonDelete->Location = Point(829, 106);
@@ -138,6 +185,7 @@ namespace Projet_POO
 				this->buttonDelete->TabIndex = 4;
 				this->buttonDelete->Text = L"Supprimer";
 				this->buttonDelete->UseVisualStyleBackColor = true;
+				this->buttonDelete->Click += gcnew EventHandler(this, &StaffPage::buttonDelete_Click);
 				
 				/*-------------------- StaffPage --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
@@ -151,5 +199,12 @@ namespace Projet_POO
 				this->Name = L"StaffPage";
 				this->Text = L"StaffPage";
 			}
+
+			Void reloadStaffGridView();
+			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
+			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
+			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
+			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
+			Void openStaffForm(String^ id_staff, String^ first_name, String^ last_name, String^ hire_date);
 	};
 }
