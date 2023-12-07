@@ -17,7 +17,7 @@ void ProductForm::reloadGridViewTieredPrice()
     }
 }
 
-void ProductForm::retreiveSuggestion(ComboBox^ comboBox, String^ query)
+void ProductForm::retrieveSuggestion(ComboBox^ comboBox, String^ query)
 {
     DataSet^ lastNames = App::app->db->query(query->Replace("{data}", comboBox->Text));
     comboBox->Items->Clear();
@@ -78,6 +78,22 @@ void ProductForm::openTieredPriceForm(String^ tieredpriceId, String^ quantity, S
             App::app->App::toastMessage(this, "Seuil de réapprovisionnement enregistrees", Color::Green, 3000);
             reloadGridViewTieredPrice();
         }
+    }
+}
+
+void ProductForm::boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+{
+    if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+    {
+        e->Handled = true;
+    }
+}
+
+void ProductForm::boxFloat_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+{
+    if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2C && e->KeyChar != 0x2E)
+    {
+        e->Handled = true;
     }
 }
 

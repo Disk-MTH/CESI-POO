@@ -252,9 +252,7 @@ namespace Projet_POO
             this->labelColour->Name = L"labelColour";
             this->labelColour->Size = Drawing::Size(101, 29);
             this->labelColour->Text = L"Couleur";
-
-
-            //TODO finish TabIndex
+            
             /*-------------------- dataGridViewTieredPrice --------------------*/
             this->dataGridViewTieredPrice->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
             this->dataGridViewTieredPrice->Location = Point(15, 444);
@@ -262,7 +260,7 @@ namespace Projet_POO
             this->dataGridViewTieredPrice->RowHeadersWidth = 51;
             this->dataGridViewTieredPrice->RowTemplate->Height = 24;
             this->dataGridViewTieredPrice->Size = Drawing::Size(627, 260);
-            this->dataGridViewTieredPrice->TabIndex = 2;
+            this->dataGridViewTieredPrice->TabIndex = 7;
             this->dataGridViewTieredPrice->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
             this->dataGridViewTieredPrice->ReadOnly = true;
             this->dataGridViewTieredPrice->AllowUserToResizeRows = false;
@@ -296,7 +294,7 @@ namespace Projet_POO
             this->textBoxName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->textBoxName->Name = L"textBoxName";
             this->textBoxName->Size = Drawing::Size(167, 22);
-            this->textBoxName->TabIndex = 7;
+            this->textBoxName->TabIndex = 0;
             this->textBoxName->Text = this->name;
             
             /*-------------------- textBoxBuyPrice --------------------*/
@@ -306,8 +304,9 @@ namespace Projet_POO
             this->textBoxBuyPrice->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->textBoxBuyPrice->Name = L"textBoxBuyPrice";
             this->textBoxBuyPrice->Size = Drawing::Size(258, 22);
-            this->textBoxBuyPrice->TabIndex = 8;
+            this->textBoxBuyPrice->TabIndex = 1;
             this->textBoxBuyPrice->Text = this->buyPrice;
+            this->textBoxBuyPrice->KeyPress += gcnew KeyPressEventHandler(this, &ProductForm::boxFloat_KeyPress);
 
             /*-------------------- textBoxQuantity --------------------*/
             this->textBoxQuantity->Anchor = AnchorStyles::Top | AnchorStyles::Left;
@@ -316,20 +315,21 @@ namespace Projet_POO
             this->textBoxQuantity->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->textBoxQuantity->Name = L"textBoxQuantity";
             this->textBoxQuantity->Size = Drawing::Size(166, 22);
-            this->textBoxQuantity->TabIndex = 9;
+            this->textBoxQuantity->TabIndex = 2;
             this->textBoxQuantity->Text = this->quantity;
+            this->textBoxQuantity->KeyPress += gcnew KeyPressEventHandler(this, &ProductForm::boxInt_KeyPress);
 
             /*-------------------- comboBoxType --------------------*/
             this->comboBoxType->Anchor = AnchorStyles::Top | AnchorStyles::Left;
-            this->comboBoxType->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+            this->comboBoxType->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->comboBoxType->FormattingEnabled = true;
             this->comboBoxType->Location = Point(10, 171);
             this->comboBoxType->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->comboBoxType->Name = L"comboBoxType";
             this->comboBoxType->Size = Drawing::Size(167, 24);
-            this->comboBoxType->TabIndex = 13;
+            this->comboBoxType->TabIndex = 3;
             this->comboBoxType->Text = this->type;
-            retreiveSuggestion(this->comboBoxType, "SELECT DISTINCT type FROM product");
+            retrieveSuggestion(this->comboBoxType, "SELECT DISTINCT type FROM product");
 
             /*-------------------- textBoxVat --------------------*/
             this->textBoxVat->Anchor = AnchorStyles::Top | AnchorStyles::Left;
@@ -338,8 +338,9 @@ namespace Projet_POO
             this->textBoxVat->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->textBoxVat->Name = L"textBoxVat";
             this->textBoxVat->Size = Drawing::Size(258, 22);
-            this->textBoxVat->TabIndex = 11;
+            this->textBoxVat->TabIndex = 4;
             this->textBoxVat->Text = this->vat;
+            this->textBoxVat->KeyPress += gcnew KeyPressEventHandler(this, &ProductForm::boxFloat_KeyPress);
 
             /*-------------------- textBoxRestockThreshold --------------------*/
             this->textBoxRestockThreshold->Anchor = AnchorStyles::Top | AnchorStyles::Left;
@@ -348,20 +349,21 @@ namespace Projet_POO
             this->textBoxRestockThreshold->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->textBoxRestockThreshold->Name = L"textBoxRestockThreshold";
             this->textBoxRestockThreshold->Size = Drawing::Size(166, 22);
-            this->textBoxRestockThreshold->TabIndex = 12;
+            this->textBoxRestockThreshold->TabIndex = 5;
             this->textBoxRestockThreshold->Text = this->restockThreshold;
+            this->textBoxRestockThreshold->KeyPress += gcnew KeyPressEventHandler(this, &ProductForm::boxInt_KeyPress);
 
             /*-------------------- comboBoxColour --------------------*/
             this->comboBoxColour->Anchor = AnchorStyles::Top | AnchorStyles::Left;
-            this->comboBoxColour->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+            this->comboBoxColour->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
             this->comboBoxColour->FormattingEnabled = true;
             this->comboBoxColour->Location = Point(10, 273);
             this->comboBoxColour->Margin = Windows::Forms::Padding(10, 3, 10, 3);
             this->comboBoxColour->Name = L"comboBoxColour";
             this->comboBoxColour->Size = Drawing::Size(167, 24);
-            this->comboBoxColour->TabIndex = 14;
+            this->comboBoxColour->TabIndex = 6;
             this->comboBoxColour->Text = this->colour;
-            retreiveSuggestion(this->comboBoxColour, "SELECT DISTINCT colour FROM product");
+            retrieveSuggestion(this->comboBoxColour, "SELECT DISTINCT colour FROM product");
 
             /*-------------------- buttonAdd --------------------*/
             this->buttonAdd->Anchor = AnchorStyles::Top | AnchorStyles::Right;
@@ -370,7 +372,7 @@ namespace Projet_POO
             this->buttonAdd->Margin = Windows::Forms::Padding(7);
             this->buttonAdd->Name = L"buttonAdd";
             this->buttonAdd->Size = Drawing::Size(113, 39);
-            this->buttonAdd->TabIndex = 0;
+            this->buttonAdd->TabIndex = 8;
             this->buttonAdd->Text = L"Ajouter";
             this->buttonAdd->UseVisualStyleBackColor = true;
             this->buttonAdd->Click += gcnew EventHandler(this, &ProductForm::buttonAdd_Click);
@@ -382,7 +384,7 @@ namespace Projet_POO
             this->buttonEdit->Margin = Windows::Forms::Padding(7);
             this->buttonEdit->Name = L"buttonEdit";
             this->buttonEdit->Size = Drawing::Size(111, 39);
-            this->buttonEdit->TabIndex = 1;
+            this->buttonEdit->TabIndex = 9;
             this->buttonEdit->Text = L"Modifier";
             this->buttonEdit->UseVisualStyleBackColor = true;
             this->buttonEdit->Click += gcnew EventHandler(this, &ProductForm::buttonEdit_Click);
@@ -394,7 +396,7 @@ namespace Projet_POO
             this->buttonDelete->Margin = Windows::Forms::Padding(7);
             this->buttonDelete->Name = L"buttonDelete";
             this->buttonDelete->Size = Drawing::Size(140, 39);
-            this->buttonDelete->TabIndex = 2;
+            this->buttonDelete->TabIndex = 10;
             this->buttonDelete->Text = L"Supprimer";
             this->buttonDelete->UseVisualStyleBackColor = true;
             this->buttonDelete->Click += gcnew EventHandler(this, &ProductForm::buttonDelete_Click);
@@ -406,7 +408,7 @@ namespace Projet_POO
             this->buttonCancel->Margin = Windows::Forms::Padding(15);
             this->buttonCancel->Name = L"buttonCancel";
             this->buttonCancel->Size = Drawing::Size(190, 69);
-            this->buttonCancel->TabIndex = 0;
+            this->buttonCancel->TabIndex = 11;
             this->buttonCancel->Text = L"Annuler";
             this->buttonCancel->UseVisualStyleBackColor = true;
             this->buttonCancel->Click += gcnew EventHandler(this, &ProductForm::buttonCancel_Click);
@@ -418,7 +420,7 @@ namespace Projet_POO
             this->buttonValidate->Margin = Windows::Forms::Padding(15);
             this->buttonValidate->Name = L"buttonValidate";
             this->buttonValidate->Size = Drawing::Size(169, 69);
-            this->buttonValidate->TabIndex = 2;
+            this->buttonValidate->TabIndex = 12;
             this->buttonValidate->Text = L"Valider";
             this->buttonValidate->UseVisualStyleBackColor = true;
             this->buttonValidate->Click += gcnew EventHandler(this, &ProductForm::buttonValidate_Click);
@@ -437,8 +439,10 @@ namespace Projet_POO
 
         Void reloadGridViewTieredPrice();
         int^ createProduct();
-        Void retreiveSuggestion(ComboBox^ comboBox, String^ query);
+        Void retrieveSuggestion(ComboBox^ comboBox, String^ query);
         Void openTieredPriceForm(String^ tieredpriceId, String^ quantity, String^ tfprice);
+        Void boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+        Void boxFloat_KeyPress(Object^ sender, KeyPressEventArgs^ e);
         Void buttonAdd_Click(Object^ sender, EventArgs^ e);
         Void buttonEdit_Click(Object^ sender, EventArgs^ e);
         Void buttonDelete_Click(Object^ sender, EventArgs^ e);

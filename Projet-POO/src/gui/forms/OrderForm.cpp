@@ -103,7 +103,7 @@ int^ OrderForm::createOrder()
 	return 0;
 }
 
-void OrderForm::retreiveSuggestion(ComboBox^ comboBox, String^ query)
+void OrderForm::retrieveSuggestion(ComboBox^ comboBox, String^ query)
 {
 	DataSet^ lastNames = App::app->db->query(query->Replace("{data}", comboBox->Text));
 	comboBox->Items->Clear();
@@ -121,31 +121,31 @@ void OrderForm::orderForm_Load(Object^ sender, EventArgs^ e)
 
 void OrderForm::comboBoxUser_keyPress(Object^ sender, KeyPressEventArgs^ e)
 {
-	retreiveSuggestion(this->comboBoxFirstName, "SELECT first_name FROM customer WHERE first_name LIKE '{data}%' AND last_name LIKE '" + this->comboBoxLastName->Text + "%' AND deleted = 0;");
-	retreiveSuggestion(this->comboBoxLastName, "SELECT last_name FROM customer WHERE last_name LIKE '{data}%' AND first_name LIKE '" + this->comboBoxFirstName->Text + "%' AND deleted = 0;");
-	retreiveSuggestion(this->comboBoxBirthdate, "SELECT CONVERT(VARCHAR(10), birthdate, 103) AS birthdate FROM customer WHERE CONVERT(VARCHAR(10), birthdate, 103) LIKE '{data}%' AND last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "' AND deleted = 0;");
-	retreiveSuggestion(this->comboBoxBillingAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS billing_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 1 OR id_address_type = 3) AND deleted = 0;");
-	retreiveSuggestion(this->comboBoxDeliveryAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS delivery_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 2 OR id_address_type = 3) AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxFirstName, "SELECT first_name FROM customer WHERE first_name LIKE '{data}%' AND last_name LIKE '" + this->comboBoxLastName->Text + "%' AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxLastName, "SELECT last_name FROM customer WHERE last_name LIKE '{data}%' AND first_name LIKE '" + this->comboBoxFirstName->Text + "%' AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxBirthdate, "SELECT CONVERT(VARCHAR(10), birthdate, 103) AS birthdate FROM customer WHERE CONVERT(VARCHAR(10), birthdate, 103) LIKE '{data}%' AND last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "' AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxBillingAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS billing_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 1 OR id_address_type = 3) AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxDeliveryAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS delivery_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 2 OR id_address_type = 3) AND deleted = 0;");
 }
 
 void OrderForm::comboBoxProduct_keyPress(Object^ sender, KeyPressEventArgs^ e)
 {
-	retreiveSuggestion(this->comboBoxType, "SELECT DISTINCT type FROM product WHERE type LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%';");
-	retreiveSuggestion(this->comboBoxProductName, "SELECT DISTINCT name FROM product WHERE name LIKE '{data}%' AND type LIKE '" + this->comboBoxType->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%';");
-	retreiveSuggestion(this->comboBoxColour, "SELECT DISTINCT colour FROM product WHERE colour LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND type LIKE '" + this->comboBoxType->Text + "%';");
+	retrieveSuggestion(this->comboBoxType, "SELECT DISTINCT type FROM product WHERE type LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%';");
+	retrieveSuggestion(this->comboBoxProductName, "SELECT DISTINCT name FROM product WHERE name LIKE '{data}%' AND type LIKE '" + this->comboBoxType->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%';");
+	retrieveSuggestion(this->comboBoxColour, "SELECT DISTINCT colour FROM product WHERE colour LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND type LIKE '" + this->comboBoxType->Text + "%';");
 }
 
-void OrderForm::comboBoxBirthdate_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+void OrderForm::boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e)
 {
-	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2F && e->KeyChar != 0x2D)
+	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
 	{
 		e->Handled = true;
 	}
 }
 
-void OrderForm::textBoxDeliveryDate_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+void OrderForm::boxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e)
 {
-	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2F && e->KeyChar != 0x2D)
+	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2F)
 	{
 		e->Handled = true;
 	}

@@ -39,7 +39,7 @@ namespace Projet_POO
 				if (isEmpty(name, data) || !DateTime::TryParseExact(data, "dd/mm/yyyy", nullptr, Globalization::DateTimeStyles::None, date))
 				{
 					app->logger->warn("Invalid date \"" + name + "\": wrong format (\"" + data + "\")");
-					MessageBox::Show("       La date est invalide !\n\"dd/mm/yyyy\" ou \"dd-mm-yyyy\"", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					MessageBox::Show("La date est invalide !\n\"dd/mm/yyyy\"", "Erreur", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return "";
 				}
 				return date.ToString("yyyy-mm-dd");

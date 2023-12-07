@@ -21,7 +21,7 @@ namespace Projet_POO
 				this->totalAmount = totalAmount;
 				this->payedAmount = payedAmount;
 				this->mode = paymentId == "" ? "0" : "1"; //0 = add, 1 = edit
-				
+
 				initialize();
 			}
 
@@ -168,7 +168,7 @@ namespace Projet_POO
 				this->textBoxAmount->Size = Drawing::Size(339, 30);
 				this->textBoxAmount->TabIndex = 0;
 				this->textBoxAmount->Text = this->amount;
-				this->textBoxAmount->KeyPress += gcnew KeyPressEventHandler(this, &PaymentForm::textBoxAmount_KeyPress);
+				this->textBoxAmount->KeyPress += gcnew KeyPressEventHandler(this, &PaymentForm::boxFloat_KeyPress);
 
 				/*-------------------- textBoxDate --------------------*/
 				this->textBoxDate->Anchor = AnchorStyles::Left;
@@ -179,7 +179,7 @@ namespace Projet_POO
 				this->textBoxDate->Size = Drawing::Size(339, 30);
 				this->textBoxDate->TabIndex = 3;
 				this->textBoxDate->Text = this->paymentDate;
-				this->textBoxDate->KeyPress += gcnew KeyPressEventHandler(this, &PaymentForm::textBoxDate_KeyPress);
+				this->textBoxDate->KeyPress += gcnew KeyPressEventHandler(this, &PaymentForm::boxDate_KeyPress);
 
 				/*-------------------- comboBoxType --------------------*/
 				this->comboBoxType->Anchor = AnchorStyles::Left;
@@ -191,6 +191,7 @@ namespace Projet_POO
 				this->comboBoxType->Size = Drawing::Size(339, 33);
 				this->comboBoxType->TabIndex = 2;
 				this->comboBoxType->Text = this->paymentMean;
+				retrieveSuggestion(this->comboBoxType, "SELECT DISTINCT payment_mean FROM payment WHERE payment_mean LIKE '{data}%';");
 
 				/*-------------------- checkBoxValided --------------------*/
 				this->checkBoxValided->Anchor = AnchorStyles::Left;
@@ -241,8 +242,9 @@ namespace Projet_POO
 				this->Text = L"PaymentForm";
 			}
 
-			Void textBoxAmount_KeyPress(Object^ sender, KeyPressEventArgs^ e);
-			Void textBoxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void retrieveSuggestion(ComboBox^ comboBox, String^ query);
+			Void boxFloat_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void boxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
 			Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 			Void buttonValidate_Click(Object^ sender, EventArgs^ e);
 	};

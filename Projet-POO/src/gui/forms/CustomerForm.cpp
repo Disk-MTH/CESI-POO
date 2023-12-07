@@ -66,6 +66,14 @@ void CustomerForm::openAddressesForm(String^ addressId, String^ address, String^
 	}
 }
 
+void CustomerForm::boxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+{
+	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2F)
+	{
+		e->Handled = true;
+	}
+}
+
 void CustomerForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
 	openAddressesForm("", "", "", "", "");

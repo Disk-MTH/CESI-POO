@@ -72,7 +72,6 @@ namespace Projet_POO {
 			this->tableLayoutPanel1->RowStyles->Add((gcnew RowStyle(SizeType::Absolute, 48)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew RowStyle(SizeType::Absolute, 69)));
 			this->tableLayoutPanel1->Size = Drawing::Size(321, 289);
-			this->tableLayoutPanel1->TabIndex = 0;
 			
 			/*-------------------- tableLayoutPanel2 --------------------*/
 			this->tableLayoutPanel2->ColumnCount = 2;
@@ -85,62 +84,62 @@ namespace Projet_POO {
 			this->tableLayoutPanel2->RowCount = 1;
 			this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
 			this->tableLayoutPanel2->Size = Drawing::Size(315, 64);
-			this->tableLayoutPanel2->TabIndex = 0;
 
 			/*-------------------- labelTitle --------------------*/
 			this->labelTitle->Anchor = AnchorStyles::None;
 			this->labelTitle->AutoSize = true;
-			this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20.25F, FontStyle::Regular, GraphicsUnit::Point,static_cast<Byte>(0));
+			this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 25);
 			this->labelTitle->Location = Point(117, 7);
 			this->labelTitle->Name = L"labelTitle";
 			this->labelTitle->Size = Drawing::Size(86, 31);
-			this->labelTitle->TabIndex = 1;
-			this->labelTitle->Text = L"labelTitle";
+			this->labelTitle->Text = L"Prix par palier";
 
 			/*-------------------- labelQuantity --------------------*/
 			this->labelQuantity->Anchor = AnchorStyles::Left;
 			this->labelQuantity->AutoSize = true;
-			this->labelQuantity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15, FontStyle::Regular, GraphicsUnit::Point,static_cast<Byte>(0));
+			this->labelQuantity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 			this->labelQuantity->Location = Point(3, 54);
 			this->labelQuantity->Name = L"labelQuantity";
 			this->labelQuantity->Size = Drawing::Size(97, 25);
-			this->labelQuantity->TabIndex = 2;
-			this->labelQuantity->Text = L"Quantit� :";
+			this->labelQuantity->Text = L"Quantite :";
 
 			/*-------------------- labelTfPrice --------------------*/
 			this->labelTfPrice->Anchor = AnchorStyles::Left;
 			this->labelTfPrice->AutoSize = true;
-			this->labelTfPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15.25F);
+			this->labelTfPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 			this->labelTfPrice->Location = Point(3, 137);
 			this->labelTfPrice->Name = L"labelTfPrice";
 			this->labelTfPrice->Size = Drawing::Size(156, 25);
-			this->labelTfPrice->TabIndex = 3;
 			this->labelTfPrice->Text = L"Prix hors taxe :";
 
 			/*-------------------- textBoxQuantity --------------------*/
 			this->textBoxQuantity->Anchor = AnchorStyles::Left;
+			this->textBoxQuantity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 			this->textBoxQuantity->Location = Point(3, 98);
 			this->textBoxQuantity->Name = L"textBoxQuantity";
 			this->textBoxQuantity->Size = Drawing::Size(216, 20);
-			this->textBoxQuantity->TabIndex = 4;
+			this->textBoxQuantity->TabIndex = 0;
 			this->textBoxQuantity->Text = this->quantity;
+			this->textBoxQuantity->KeyPress += gcnew KeyPressEventHandler(this, &TieredPriceForm::boxInt_KeyPress);
 			
 			/*-------------------- textBoxTfPrice --------------------*/
 			this->textBoxTfPrice->Anchor = AnchorStyles::Left;
+			this->textBoxTfPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 			this->textBoxTfPrice->Location = Point(3, 185);
 			this->textBoxTfPrice->Name = L"textBoxTfPrice";
 			this->textBoxTfPrice->Size = Drawing::Size(216, 20);
-			this->textBoxTfPrice->TabIndex = 5;
+			this->textBoxTfPrice->TabIndex = 1;
 			this->textBoxTfPrice->Text = this->tfprice;
+			this->textBoxTfPrice->KeyPress += gcnew KeyPressEventHandler(this, &TieredPriceForm::boxFloat_KeyPress);
 
 			/*-------------------- buttonValidate --------------------*/
 			this->buttonValidate->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 			this->buttonValidate->AutoSize = true;
-			this->buttonValidate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15.25F);
+			this->buttonValidate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 			this->buttonValidate->Location = Point(223, 26);
 			this->buttonValidate->Name = L"buttonValidate";
 			this->buttonValidate->Size = Drawing::Size(89, 35);
-			this->buttonValidate->TabIndex = 0;
+			this->buttonValidate->TabIndex = 2;
 			this->buttonValidate->Text = L"Valider";
 			this->buttonValidate->UseVisualStyleBackColor = true;
 			this->buttonValidate->Click += gcnew EventHandler(this, &TieredPriceForm::buttonValidate_Click);
@@ -149,23 +148,29 @@ namespace Projet_POO {
 			/*-------------------- buttonCancel --------------------*/
 			this->buttonCancel->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
 			this->buttonCancel->AutoSize = true;
-			this->buttonCancel->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15.25F);
+			this->buttonCancel->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 			this->buttonCancel->Location = Point(3, 21);
 			this->buttonCancel->Name = L"buttonCancel";
 			this->buttonCancel->Size = Drawing::Size(96, 40);
-			this->buttonCancel->TabIndex = 1;
+			this->buttonCancel->TabIndex = 3;
 			this->buttonCancel->Text = L"Annuler";
 			this->buttonCancel->UseVisualStyleBackColor = true;
 			this->buttonCancel->Click += gcnew EventHandler(this, &TieredPriceForm::buttonCancel_Click);
 			
 			/*-------------------- TieredPriceForm --------------------*/
+			this->StartPosition = FormStartPosition::CenterScreen;
 			this->AutoScaleDimensions = SizeF(6, 13);
 			this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = Drawing::Size(345, 313);
 			this->Controls->Add(this->tableLayoutPanel1);
+			this->MaximizeBox = false;
+			this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"TieredPriceForm";
 			this->Text = L"TieredPriceForm";
 		}
+
+		Void boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+		Void boxFloat_KeyPress(Object^ sender, KeyPressEventArgs^ e);
 		Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 		Void buttonValidate_Click(Object^ sender, EventArgs^ e);
 	};

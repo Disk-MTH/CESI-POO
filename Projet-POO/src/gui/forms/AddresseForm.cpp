@@ -2,7 +2,7 @@
 
 #include "../../App.h"
 
-void AddresseForm::retreiveSuggestion(ComboBox^ comboBox, String^ query)
+void AddresseForm::retrieveSuggestion(ComboBox^ comboBox, String^ query)
 {
 	DataSet^ lastNames = App::app->db->query(query->Replace("{data}", comboBox->Text));
 	comboBox->Items->Clear();
@@ -15,11 +15,11 @@ void AddresseForm::retreiveSuggestion(ComboBox^ comboBox, String^ query)
 
 void AddresseForm::comboBox_KeyPress(Object^ sender, KeyPressEventArgs^ e)
 {
-	retreiveSuggestion(this->comboBoxZipCode, "SELECT DISTINCT zip_code FROM address WHERE zip_code LIKE '{data}%' AND deleted = 0;");
-	retreiveSuggestion(this->comboBoxCity, "SELECT DISTINCT city FROM address WHERE zip_code = '" + this->comboBoxZipCode->Text + "' AND city LIKE '{data}%' AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxZipCode, "SELECT DISTINCT zip_code FROM address WHERE zip_code LIKE '{data}%' AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxCity, "SELECT DISTINCT city FROM address WHERE zip_code = '" + this->comboBoxZipCode->Text + "' AND city LIKE '{data}%' AND deleted = 0;");
 }
 
-void AddresseForm::textBoxZipCode_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+void AddresseForm::boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e)
 {
 	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
 	{

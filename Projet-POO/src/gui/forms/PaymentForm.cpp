@@ -1,7 +1,18 @@
 #include "PaymentForm.h"
 #include "../../App.h"
 
-void PaymentForm::textBoxAmount_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+void PaymentForm::retrieveSuggestion(ComboBox^ comboBox, String^ query)
+{
+	DataSet^ lastNames = App::app->db->query(query->Replace("{data}", comboBox->Text));
+	comboBox->Items->Clear();
+	for (int i = 0; i < lastNames->Tables[0]->Rows->Count; i++)
+	{
+		comboBox->Items->Add(lastNames->Tables[0]->Rows[i]->ItemArray[0]->ToString());
+	}
+	comboBox->SelectionStart = comboBox->Text->Length;
+}
+
+void PaymentForm::boxFloat_KeyPress(Object^ sender, KeyPressEventArgs^ e)
 {
 	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2E && e->KeyChar != 0x2C)
 	{
@@ -9,9 +20,9 @@ void PaymentForm::textBoxAmount_KeyPress(Object^ sender, KeyPressEventArgs^ e)
 	}
 }
 
-void PaymentForm::textBoxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+void PaymentForm::boxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e)
 {
-	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2F && e->KeyChar != 0x2D)
+	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08 && e->KeyChar != 0x2F)
 	{
 		e->Handled = true;
 	}
@@ -24,7 +35,7 @@ void PaymentForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 
 void PaymentForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 {
-	amount = this->textBoxAmount->Text->Replace(",", ".");
+	amount = this->textBoxAmount->Text->Replace(".", ",");
 	paymentMean = this->comboBoxType->Text;
 	paymentDate = this->textBoxDate->Text;
 	validated = this->checkBoxValided->Checked ? "True" : "False";
@@ -43,6 +54,8 @@ void PaymentForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 		return;
 	}
 
+	amount = amount->Replace(",", ".");
+	
 	try
 	{
 		if (mode == "0")
@@ -51,9 +64,9 @@ void PaymentForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 		}
 		else
 		{
-			App::app->db->execute("UPDATE payment SET payment_date = '" + paymentDate + "', payment_mean = '" + paymentMean + "', amount = '" + amount + "', validated = '" + validated + "' WHERE id_payment = " + paymentId +" ;");
+			App::app->db->execute("UPDATE payment SET payment_date = '" + paymentDate + "', payment_mean = '" + paymentMean + "', amount = '" + amount + "', validated = '" + validated + "' WHERE id_payment = " + paymentId + " ;");
 		}
-		
+
 		App::app->logger->log("Payment saved: \"" + amount + "\", \"" + paymentMean + "\", \"" + paymentDate + "\", \"" + validated + "\" and asociated to order id: \"" + orderId + "\"");
 		this->DialogResult = Windows::Forms::DialogResult::OK;
 		this->Close();
@@ -64,5 +77,5 @@ void PaymentForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 		App::app->logger->error(exception);
 		App::app->toastMessage(this, "Erreur lors de l'enregistrement du versement", Color::Red, 3000);
 	}
-	
+
 }

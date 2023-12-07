@@ -219,7 +219,7 @@ namespace Projet_POO
             this->comboBoxZipCode->TabIndex = 1;
             this->comboBoxZipCode->Text = this->zipCode;
             this->comboBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::comboBox_KeyPress);
-            this->comboBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::textBoxZipCode_KeyPress);
+            this->comboBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &AddresseForm::boxInt_KeyPress);
 
             /*-------------------- comboBoxCity --------------------*/
             this->comboBoxCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -295,9 +295,9 @@ namespace Projet_POO
             this->Text = L"AddresseForm";
         }
 
-        Void retreiveSuggestion(ComboBox^ comboBox, String^ query);
+        Void retrieveSuggestion(ComboBox^ comboBox, String^ query);
         Void comboBox_KeyPress(Object^ sender, KeyPressEventArgs^ e);
-        Void textBoxZipCode_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+        Void boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e);
         Void buttonCancel_Click(Object^ sender, EventArgs^ e);
         Void buttonValidate_Click(Object^ sender, EventArgs^ e);
     };

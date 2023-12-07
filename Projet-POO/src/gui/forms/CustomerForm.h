@@ -275,6 +275,7 @@ namespace Projet_POO
 				this->textBoxBirthdate->Size = Drawing::Size(255, 30);
 				this->textBoxBirthdate->TabIndex = 2;
 				this->textBoxBirthdate->Text = this->birthdate;
+				this->textBoxBirthdate->KeyPress += gcnew KeyPressEventHandler(this, &CustomerForm::boxDate_KeyPress);
 
 				/*-------------------- buttonAdd --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -352,6 +353,7 @@ namespace Projet_POO
 			Void reloadAddressesGridView();
 			int^ createCustomer();
 			Void openAddressesForm(String^ addressId, String^ address, String^ zipCode, String^ city, String^ type);
+			Void boxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
 			Void buttonDelete_Click(Object^ sender, EventArgs^ e);

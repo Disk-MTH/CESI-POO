@@ -424,7 +424,7 @@ namespace Projet_POO
             this->comboBoxBirthdate->TabIndex = 2;
             this->comboBoxBirthdate->Text = birthdate;
             this->comboBoxBirthdate->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxUser_keyPress);
-            this->comboBoxBirthdate->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxBirthdate_KeyPress);
+            this->comboBoxBirthdate->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::boxDate_KeyPress);
 
             /*-------------------- comboBoxBillingAddress --------------------*/
             this->comboBoxBillingAddress->Anchor = AnchorStyles::Left;
@@ -449,6 +449,7 @@ namespace Projet_POO
             this->comboBoxDeliveryAddress->TabIndex = 4;
             this->comboBoxDeliveryAddress->Text = deliveryAddress;
             this->comboBoxDeliveryAddress->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::comboBoxUser_keyPress);
+            this->comboBoxDeliveryAddress->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::boxDate_KeyPress);
             
             /*-------------------- textBoxDeliveryDate --------------------*/
             this->textBoxDeliveryDate->Anchor = AnchorStyles::Left;
@@ -501,6 +502,7 @@ namespace Projet_POO
             this->textBoxQuantity->Name = L"textBoxQuantity";
             this->textBoxQuantity->Size = Drawing::Size(352, 23);
             this->textBoxQuantity->TabIndex = 10;
+            this->textBoxQuantity->KeyPress += gcnew KeyPressEventHandler(this, &OrderForm::boxInt_KeyPress);
 
             /*-------------------- buttonAdd --------------------*/
             this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -565,12 +567,12 @@ namespace Projet_POO
 
         Void reloadProductsGridView();
         int^ createOrder();
-        Void retreiveSuggestion(ComboBox^ comboBox, String^ query);
+        Void retrieveSuggestion(ComboBox^ comboBox, String^ query);
         Void orderForm_Load(Object^ sender, EventArgs^ e);
         Void comboBoxUser_keyPress(Object^ sender, KeyPressEventArgs^ e);
         Void comboBoxProduct_keyPress(Object^ sender, KeyPressEventArgs^ e);
-        Void comboBoxBirthdate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
-        Void textBoxDeliveryDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+        Void boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+        Void boxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
         Void buttonAdd_Click(Object^ sender, EventArgs^ e);
         Void buttonDelete_Click(Object^ sender, EventArgs^ e);
         Void buttonCancel_Click(Object^ sender, EventArgs^ e);
