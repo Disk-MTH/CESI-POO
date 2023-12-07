@@ -405,6 +405,7 @@ namespace Projet_POO
             this->buttonCancel->TabIndex = 0;
             this->buttonCancel->Text = L"Annuler";
             this->buttonCancel->UseVisualStyleBackColor = true;
+            this->buttonCancel->Click += gcnew EventHandler(this, &ProductForm::buttonCancel_Click);
 
             /*-------------------- buttonValidate --------------------*/
             this->buttonValidate->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -441,13 +442,13 @@ namespace Projet_POO
             this->Name = L"ProductForm";
             this->Text = L"ProductForm";
         }
-        
-        int^ createProduct();
-        Void buttonDelete_Click(Object^ sender, EventArgs^ e);
+
         Void reloadGridViewTieredPrice();
+        int^ createProduct();
+        Void openTieredPriceForm(String^ tieredpriceId, String^ quantity, String^ tfprice);
         Void buttonAdd_Click(Object^ sender, EventArgs^ e);
         Void buttonEdit_Click(Object^ sender, EventArgs^ e);
-        Void openTieredPriceForm(String^ tieredpriceId, String^ quantity, String^ tfprice);
+        Void buttonDelete_Click(Object^ sender, EventArgs^ e);
         Void buttonCancel_Click(Object^ sender, EventArgs^ e);
         Void buttonValidate_Click(Object^ sender, EventArgs^ e);
     };

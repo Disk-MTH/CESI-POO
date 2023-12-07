@@ -7,11 +7,21 @@ void CatalogPage::reloadCatalogGridView()
 {
 	this->dataGridViewCatalog->Rows->Clear();
 
-	DataSet^ customers = App::app->db->query("SELECT id_product, deleted, reference, type, name, colour, buy_price, vat_rate, quantity, provisioning_threshold FROM product WHERE deleted = 0;");
+	DataSet^ customers = App::app->db->query("SELECT id_product, deleted, reference, type, name, colour, buy_price, vat_rate, quantity, provisioning_threshold FROM product"+ (this->checkBoxDeleted->Checked ? ";" : " WHERE deleted = 0;"));
 	
 	for (int i = 0; i < customers->Tables[0]->Rows->Count; i++)
 	{
 		this->dataGridViewCatalog->Rows->Add(customers->Tables[0]->Rows[i]->ItemArray);
+	}
+}
+
+void CatalogPage::openProductForm(String^ productId, String^ RestockThreshold, String^ VAT, String^ Quantity, String^ BuyPrice, String^ Name, String^ type, String^ Colour)
+{
+	auto addProductForm = gcnew ProductForm("","","","","","","","");
+	if (addProductForm->ShowDialog() == Windows::Forms::DialogResult::OK)
+	{
+		App::app->App::toastMessage(this, "Modifications enregistrees", Color::Green, 3000);
+		reloadCatalogGridView();
 	}
 }
 
@@ -40,12 +50,7 @@ void CatalogPage::buttonProductDetails_Click(Object^ sender, EventArgs^ e)
 
 void CatalogPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
-	auto addProductForm = gcnew ProductForm("","","","","","","","");
-	if (addProductForm->ShowDialog() == Windows::Forms::DialogResult::OK)
-	{
-		App::app->App::toastMessage(this, "Modifications enregistrees", Color::Green, 3000);
-		reloadCatalogGridView();
-	}
+	openProductForm("","","","","","","","");
 }
 
 void CatalogPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
@@ -97,4 +102,9 @@ void CatalogPage::buttonDelete_Click(Object^ sender, EventArgs^ e)
 		App::app->logger->error(exception);
 		App::app->toastMessage(this, "Erreur lors de la suppression du produit", Color::Red, 3000);
 	}
+}
+
+void CatalogPage::checkBoxDeleted_Click(Object^ sender, EventArgs^ e)
+{
+	reloadCatalogGridView();
 }

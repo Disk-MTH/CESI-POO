@@ -142,3 +142,5 @@ SELECT minimal_quantity, tf_price
 FROM tiered_price
 WHERE deleted = 0 AND id_product = 1
 ORDER BY minimal_quantity;
+
+DELETE FROM product WHERE id_product = 2002;

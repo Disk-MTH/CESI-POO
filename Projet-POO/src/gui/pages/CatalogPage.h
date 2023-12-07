@@ -164,8 +164,8 @@ namespace Projet_POO
 				this->checkBoxDeleted->TabIndex = 1;
 				this->checkBoxDeleted->Text = L"Afficher les produits\nsupprimes";
 				this->checkBoxDeleted->UseVisualStyleBackColor = true;
-				//this->checkBoxDeleted->Click += gcnew EventHandler(this, &CustomersPage::checkBoxDeleted_Click);
-
+				this->checkBoxDeleted->Click += gcnew EventHandler(this, &CatalogPage::checkBoxDeleted_Click);
+				
 				/*-------------------- buttonProductDetails --------------------*/
 				this->buttonProductDetails->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
 				this->buttonProductDetails->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
@@ -227,6 +227,8 @@ namespace Projet_POO
 			}
 
 			Void reloadCatalogGridView();
+			Void openProductForm(String^ productId, String^ RestockThreshold, String^ VAT, String^ Quantity, String^ BuyPrice, String^ Name, String^ type, String^ Colour);
+			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
 			Void buttonProductDetails_Click(Object^ sender, EventArgs^ e);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);

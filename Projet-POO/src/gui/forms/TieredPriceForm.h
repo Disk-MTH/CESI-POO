@@ -156,15 +156,15 @@ namespace Projet_POO {
 			this->buttonCancel->TabIndex = 1;
 			this->buttonCancel->Text = L"Annuler";
 			this->buttonCancel->UseVisualStyleBackColor = true;
-			this->buttonValidate->Click += gcnew EventHandler(this, &TieredPriceForm::buttonCancel_Click);
+			this->buttonCancel->Click += gcnew EventHandler(this, &TieredPriceForm::buttonCancel_Click);
 			
 			/*-------------------- TieredPriceForm --------------------*/
 			this->AutoScaleDimensions = SizeF(6, 13);
 			this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = Drawing::Size(345, 313);
 			this->Controls->Add(this->tableLayoutPanel1);
-			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Name = L"TieredPriceForm";
+			this->Text = L"TieredPriceForm";
 		}
 		Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 		Void buttonValidate_Click(Object^ sender, EventArgs^ e);
