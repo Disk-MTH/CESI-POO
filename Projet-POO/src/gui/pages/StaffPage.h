@@ -101,6 +101,7 @@ namespace Projet_POO
 				this->dataGridViewStaff->RowHeadersVisible = false;
 				this->dataGridViewStaff->AllowUserToDeleteRows = false;
 				this->dataGridViewStaff->MultiSelect = false;
+				this->dataGridViewStaff->ColumnHeadersDefaultCellStyle->WrapMode = DataGridViewTriState::False;
 				this->dataGridViewStaff->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->dataGridViewStaff->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
 				this->dataGridViewStaff->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
@@ -109,34 +110,43 @@ namespace Projet_POO
 				auto idStaff = gcnew DataGridViewTextBoxColumn();
 				idStaff->Visible = false;
 				this->dataGridViewStaff->Columns->Add(idStaff);
-
-				auto firstName = gcnew DataGridViewTextBoxColumn();
-				firstName->Name = L"Prenom";
-				firstName->Resizable = DataGridViewTriState::False;
-				this->dataGridViewStaff->Columns->Add(firstName);
-
+				
 				auto lastName = gcnew DataGridViewTextBoxColumn();
 				lastName->Name = L"Nom";
 				lastName->Resizable = DataGridViewTriState::False;
 				this->dataGridViewStaff->Columns->Add(lastName);
+				
+				auto firstName = gcnew DataGridViewTextBoxColumn();
+				firstName->Name = L"Prenom";
+				firstName->Resizable = DataGridViewTriState::False;
+				this->dataGridViewStaff->Columns->Add(firstName);
 
 				auto hireDate = gcnew DataGridViewTextBoxColumn();
 				hireDate->Name = L"Date d'embauche";
 				hireDate->Resizable = DataGridViewTriState::False;
 				this->dataGridViewStaff->Columns->Add(hireDate);
 
-				auto deleted = gcnew DataGridViewTextBoxColumn();
-				deleted->Visible = false;
-				this->dataGridViewStaff->Columns->Add(deleted);
+				auto street = gcnew DataGridViewTextBoxColumn();
+				street->Visible = false;
+				this->dataGridViewStaff->Columns->Add(street);
 
-				auto idStaffBoss = gcnew DataGridViewTextBoxColumn();
-				idStaffBoss->Visible = false;
-				this->dataGridViewStaff->Columns->Add(idStaffBoss);
-
-				auto idAddress = gcnew DataGridViewTextBoxColumn();
-				idAddress->Visible = false;
-				this->dataGridViewStaff->Columns->Add(idAddress);
+				auto zipCode = gcnew DataGridViewTextBoxColumn();
+				zipCode->Visible = false;
+				this->dataGridViewStaff->Columns->Add(zipCode);
 				
+				auto city = gcnew DataGridViewTextBoxColumn();
+				city->Visible = false;
+				this->dataGridViewStaff->Columns->Add(city);
+
+				auto bossFirstName = gcnew DataGridViewTextBoxColumn();
+				bossFirstName->Name = L"Prenom superieur";
+				bossFirstName->Resizable = DataGridViewTriState::False;
+				this->dataGridViewStaff->Columns->Add(bossFirstName);
+
+				auto bossLastName = gcnew DataGridViewTextBoxColumn();
+				bossLastName->Name = L"Nom superieur";
+				bossLastName->Resizable = DataGridViewTriState::False;
+				this->dataGridViewStaff->Columns->Add(bossLastName);
 				
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -201,10 +211,10 @@ namespace Projet_POO
 			}
 
 			Void reloadStaffGridView();
+			Void openStaffForm(String^ idStaff, String^ lastName, String^ firstName, String^ hireDate, String^ wording, String^ zipCode, String^ city, String^ bossLastName, String^ bossFirstName);
 			Void buttonDelete_Click(Object^ sender, EventArgs^ e);
 			Void buttonEdit_Click(Object^ sender, EventArgs^ e);
 			Void buttonAdd_Click(Object^ sender, EventArgs^ e);
 			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
-			Void openStaffForm(String^ id_staff, String^ first_name, String^ last_name, String^ hire_date);
 	};
 }

@@ -295,14 +295,19 @@ WHERE p.deleted = 0;
 /* Query to find the turnover of the current stock */
 /* order of parameters : margin, vat rate, sale, possible losses */
 
-SELECT ROUND((SUM(p.buy_price * (1 + (50/100.0)) * (1 + (20/100.0)) * (1 - (4/100.0)) * (1 - (10/100.0)) * p.quantity) -
-              SUM(p.buy_price * p.quantity)), 3) AS turnover_of_current_stock
-FROM product p
-         INNER JOIN tiered_price tp ON p.id_product = tp.id_product
-WHERE p.deleted = 0
-  AND tp.minimal_quantity = 1;
+SELECT s.id_staff,
+       s.last_name,
+       s.first_name,
 
+       CONVERT(VARCHAR(10), s.hire_date, 103),
+       a.street,
+       a.zip_code,
+       a.city,
+       b.last_name,
+       b.first_name
+FROM staff s
+         INNER JOIN address a on a.id_address = s.id_address
+         LEFT JOIN staff b on b.id_staff = s.id_staff_boss
+WHERE s.deleted = 0;
 
-SELECT ROUND((SUM(p.buy_price * (1 + (50/100.0)) * (1 + (20/100.0)) * (1 - (4/100.0)) * (1 - (10/100.0)) * p.quantity) - SUM(p.buy_price * p.quantity)), 3) AS turnover_of_current_stock FROM product p INNER JOIN tiered_price tp ON p.id_product = tp.id_product WHERE p.deleted = 0 AND tp.minimal_quantity = 1;
-
-
+UPDATE staff SET last_name = 'Retest', first_name = 'Test', hire_date = '2023-12-07', id_staff_boss = , id_address = 1 WHERE id_staff = 2;;SELECT @@IDENTITY

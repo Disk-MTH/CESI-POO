@@ -10,32 +10,32 @@ namespace Projet_POO
 	public ref class StaffForm : public Form
 	{
 		public:
-			StaffForm(String^ staffId, String^ LastName, String^ FirstName, String^ Birthdate)
+			StaffForm(String^ staffId, String^ lastName, String^ firstName, String^ hireDate, String^ wording, String^ zipCode, String^ city, String^ bossLastName, String^ bossFirstName)
 			{
 				this->staffId = staffId;
-				this->LastName = LastName;
-				this->FirstName = FirstName;
-				this->Birthdate = Birthdate;
-				this->Wording = Wording;
-				this->BossLastName = BossLastName;
-				this->BossFirstName = BossFirstName;
-				this->ZipCode = ZipCode;
-				this->City = City;
-				
+				this->lastName = lastName;
+				this->firstName = firstName;
+				this->hireDate = hireDate;
+				this->wording = wording;
+				this->zipCode = zipCode;
+				this->city = city;
+				this->bossLastName = bossLastName;
+				this->bossFirstName = bossFirstName;
+
 				initialize();
 			}
 
 		private:
 			String^ staffId;
-			String^ LastName;
-			String^ FirstName;
-			String^ Birthdate;
-			String^ Wording;
-			String^ BossLastName;
-			String^ BossFirstName;
-			String^ ZipCode;
-			String^ City;
-		
+			String^ lastName;
+			String^ firstName;
+			String^ hireDate;
+			String^ wording;
+			String^ zipCode;
+			String^ city;
+			String^ bossLastName;
+			String^ bossFirstName;
+
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 			TableLayoutPanel^ tableLayoutPanel3;
@@ -44,7 +44,7 @@ namespace Projet_POO
 			Label^ labelTitle;
 			Label^ labelLastName;
 			Label^ labelFirstName;
-			Label^ labelBirthdate;
+			Label^ labelHireDate;
 			Label^ labelBossLastName;
 			Label^ labelBossFirstName;
 			Label^ labelWording;
@@ -53,7 +53,7 @@ namespace Projet_POO
 
 			TextBox^ textBoxLastName;
 			TextBox^ textBoxFirstName;
-			TextBox^ textBoxBirthdate;
+			TextBox^ textBoxHireDate;
 			ComboBox^ comboBoxBossLastName;
 			ComboBox^ comboBoxBossFirstName;
 			TextBox^ textBoxWording;
@@ -73,7 +73,7 @@ namespace Projet_POO
 				this->labelTitle = gcnew Label();
 				this->labelLastName = gcnew Label();
 				this->labelFirstName = gcnew Label();
-				this->labelBirthdate = gcnew Label();
+				this->labelHireDate = gcnew Label();
 				this->labelBossLastName = gcnew Label();
 				this->labelBossFirstName = gcnew Label();
 				this->labelWording = gcnew Label();
@@ -82,7 +82,7 @@ namespace Projet_POO
 
 				this->textBoxLastName = gcnew TextBox();
 				this->textBoxFirstName = gcnew TextBox();
-				this->textBoxBirthdate = gcnew TextBox();
+				this->textBoxHireDate = gcnew TextBox();
 				this->comboBoxBossLastName = gcnew ComboBox();
 				this->comboBoxBossFirstName = gcnew ComboBox();
 				this->textBoxWording = gcnew TextBox();
@@ -104,7 +104,7 @@ namespace Projet_POO
 				this->tableLayoutPanel1->RowCount = 4;
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 15));
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 55));
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 65));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 100));
 				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 80));
 				this->tableLayoutPanel1->Size = Drawing::Size(660, 560);
 				this->tableLayoutPanel1->TabIndex = 0;
@@ -116,11 +116,11 @@ namespace Projet_POO
 				this->tableLayoutPanel2->Controls->Add(this->labelBossLastName, 1, 0);
 				this->tableLayoutPanel2->Controls->Add(this->labelLastName, 0, 0);
 				this->tableLayoutPanel2->Controls->Add(this->labelFirstName, 0, 2);
-				this->tableLayoutPanel2->Controls->Add(this->labelBirthdate, 0, 4);
+				this->tableLayoutPanel2->Controls->Add(this->labelHireDate, 0, 4);
 				this->tableLayoutPanel2->Controls->Add(this->labelBossFirstName, 1, 2);
 				this->tableLayoutPanel2->Controls->Add(this->textBoxLastName, 0, 1);
 				this->tableLayoutPanel2->Controls->Add(this->textBoxFirstName, 0, 3);
-				this->tableLayoutPanel2->Controls->Add(this->textBoxBirthdate, 0, 5);
+				this->tableLayoutPanel2->Controls->Add(this->textBoxHireDate, 0, 5);
 				this->tableLayoutPanel2->Controls->Add(this->comboBoxBossLastName, 1, 1);
 				this->tableLayoutPanel2->Location = Point(3, 81);
 				this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
@@ -196,15 +196,15 @@ namespace Projet_POO
 				this->labelFirstName->TabIndex = 1;
 				this->labelFirstName->Text = L"Prenom";
 
-				/*-------------------- labelBirthdate --------------------*/
-				this->labelBirthdate->Anchor = AnchorStyles::None;
-				this->labelBirthdate->AutoSize = true;
-				this->labelBirthdate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelBirthdate->Location = Point(76, 192);
-				this->labelBirthdate->Name = L"labelBirthdate";
-				this->labelBirthdate->Size = Drawing::Size(174, 25);
-				this->labelBirthdate->TabIndex = 2;
-				this->labelBirthdate->Text = L"Date de naissance";
+				/*-------------------- labelHireDate --------------------*/
+				this->labelHireDate->Anchor = AnchorStyles::None;
+				this->labelHireDate->AutoSize = true;
+				this->labelHireDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->labelHireDate->Location = Point(76, 192);
+				this->labelHireDate->Name = L"labelHireDate";
+				this->labelHireDate->Size = Drawing::Size(174, 25);
+				this->labelHireDate->TabIndex = 2;
+				this->labelHireDate->Text = L"Date d'embauche";
 
 				/*-------------------- labelBossLastName --------------------*/
 				this->labelBossLastName->Anchor = AnchorStyles::None;
@@ -258,88 +258,93 @@ namespace Projet_POO
 
 				/*-------------------- textBoxLastName --------------------*/
 				this->textBoxLastName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
-				this->textBoxLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
+				this->textBoxLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->textBoxLastName->Location = Point(10, 54);
 				this->textBoxLastName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->textBoxLastName->Name = L"textBoxLastName";
 				this->textBoxLastName->Size = Drawing::Size(307, 26);
 				this->textBoxLastName->TabIndex = 5;
-				this->textBoxLastName->Text = this->LastName;
+				this->textBoxLastName->Text = this->lastName;
 
 				/*-------------------- textBoxFirstName --------------------*/
 				this->textBoxFirstName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
-				this->textBoxFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
+				this->textBoxFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->textBoxFirstName->Location = Point(10, 145);
 				this->textBoxFirstName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->textBoxFirstName->Name = L"textBoxFirstName";
 				this->textBoxFirstName->Size = Drawing::Size(307, 26);
 				this->textBoxFirstName->TabIndex = 6;
-				this->textBoxFirstName->Text = this->FirstName;
+				this->textBoxFirstName->Text = this->firstName;
 
-				/*-------------------- textBoxBirthdate --------------------*/
-				this->textBoxBirthdate->Anchor = AnchorStyles::Left | AnchorStyles::Right;
-				this->textBoxBirthdate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
-				this->textBoxBirthdate->Location = Point(10, 236);
-				this->textBoxBirthdate->Margin = Windows::Forms::Padding(10, 3, 10, 3);
-				this->textBoxBirthdate->Name = L"textBoxBirthdate";
-				this->textBoxBirthdate->Size = Drawing::Size(307, 26);
-				this->textBoxBirthdate->TabIndex = 7;
-				this->textBoxBirthdate->Text = this->Birthdate;
-
-				/*-------------------- textBoxWording --------------------*/
-				this->textBoxWording->Anchor = AnchorStyles::Left | AnchorStyles::Right;
-				this->textBoxWording->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
-				this->textBoxWording->Location = Point(10, 44);
-				this->textBoxWording->Margin = Windows::Forms::Padding(10, 3, 10, 3);
-				this->textBoxWording->Name = L"textBoxWording";
-				this->textBoxWording->Size = Drawing::Size(248, 26);
-				this->textBoxWording->TabIndex = 8;
-				this->textBoxWording->Text = this->Wording;
+				/*-------------------- textBoxHireDate --------------------*/
+				this->textBoxHireDate->Anchor = AnchorStyles::Left | AnchorStyles::Right;
+				this->textBoxHireDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->textBoxHireDate->Location = Point(10, 236);
+				this->textBoxHireDate->Margin = Windows::Forms::Padding(10, 3, 10, 3);
+				this->textBoxHireDate->Name = L"textBoxHireDate";
+				this->textBoxHireDate->Size = Drawing::Size(307, 26);
+				this->textBoxHireDate->TabIndex = 7;
+				this->textBoxHireDate->Text = this->hireDate;
+				this->textBoxHireDate->KeyPress += gcnew KeyPressEventHandler(this, &StaffForm::boxDate_KeyPress);
 
 				/*-------------------- comboBoxBossLastName --------------------*/
 				this->comboBoxBossLastName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
-				this->comboBoxBossLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
+				this->comboBoxBossLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->comboBoxBossLastName->FormattingEnabled = true;
 				this->comboBoxBossLastName->Location = Point(337, 56);
 				this->comboBoxBossLastName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->comboBoxBossLastName->Name = L"comboBoxBossLastName";
 				this->comboBoxBossLastName->Size = Drawing::Size(307, 24);
 				this->comboBoxBossLastName->TabIndex = 8;
-				this->comboBoxBossLastName->Text = this->BossLastName;
+				this->comboBoxBossLastName->Text = this->bossLastName;
+				this->comboBoxBossLastName->KeyPress += gcnew KeyPressEventHandler(this, &StaffForm::comboBoxUser_keyPress);
 
 				/*-------------------- comboBoxBossFirstName --------------------*/
 				this->comboBoxBossFirstName->Anchor = AnchorStyles::Left | AnchorStyles::Right;
-				this->comboBoxBossFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
+				this->comboBoxBossFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->comboBoxBossFirstName->FormattingEnabled = true;
 				this->comboBoxBossFirstName->Location = Point(337, 147);
 				this->comboBoxBossFirstName->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->comboBoxBossFirstName->Name = L"comboBoxBossFirstName";
 				this->comboBoxBossFirstName->Size = Drawing::Size(307, 24);
 				this->comboBoxBossFirstName->TabIndex = 9;
-				this->comboBoxBossFirstName->Text = this->BossFirstName;
+				this->comboBoxBossFirstName->Text = this->bossFirstName;
+				this->comboBoxBossFirstName->KeyPress += gcnew KeyPressEventHandler(this, &StaffForm::comboBoxUser_keyPress);
 
+				/*-------------------- textBoxWording --------------------*/
+				this->textBoxWording->Anchor = AnchorStyles::Left | AnchorStyles::Right;
+				this->textBoxWording->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->textBoxWording->Location = Point(10, 44);
+				this->textBoxWording->Margin = Windows::Forms::Padding(10, 3, 10, 3);
+				this->textBoxWording->Name = L"textBoxWording";
+				this->textBoxWording->Size = Drawing::Size(248, 26);
+				this->textBoxWording->TabIndex = 8;
+				this->textBoxWording->Text = this->wording;
+				
 				/*-------------------- comboBoxZipCode --------------------*/
 				this->comboBoxZipCode->Anchor = AnchorStyles::Left | AnchorStyles::Right;
-				this->comboBoxZipCode->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
+				this->comboBoxZipCode->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->comboBoxZipCode->FormattingEnabled = true;
 				this->comboBoxZipCode->Location = Point(278, 46);
 				this->comboBoxZipCode->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->comboBoxZipCode->Name = L"comboBoxZipCode";
 				this->comboBoxZipCode->Size = Drawing::Size(164, 24);
 				this->comboBoxZipCode->TabIndex = 10;
-				this->comboBoxZipCode->Text = this->ZipCode;
+				this->comboBoxZipCode->Text = this->zipCode;
+				this->comboBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &StaffForm::comboBoxAddress_keyPress);
+				this->comboBoxZipCode->KeyPress += gcnew KeyPressEventHandler(this, &StaffForm::boxInt_KeyPress);
 
 				/*-------------------- comboBoxCity --------------------*/
 				this->comboBoxCity->Anchor = AnchorStyles::Left | AnchorStyles::Right;
-				this->comboBoxCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
+				this->comboBoxCity->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->comboBoxCity->FormattingEnabled = true;
 				this->comboBoxCity->Location = Point(462, 46);
 				this->comboBoxCity->Margin = Windows::Forms::Padding(10, 3, 10, 3);
 				this->comboBoxCity->Name = L"comboBoxCity";
 				this->comboBoxCity->Size = Drawing::Size(182, 24);
 				this->comboBoxCity->TabIndex = 11;
-				this->comboBoxCity->Text = this->City;
-
+				this->comboBoxCity->Text = this->city;
+				this->comboBoxCity->KeyPress += gcnew KeyPressEventHandler(this, &StaffForm::comboBoxAddress_keyPress);
 
 				/*-------------------- buttonCancel --------------------*/
 				this->buttonCancel->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -352,7 +357,7 @@ namespace Projet_POO
 				this->buttonCancel->Text = L"Annuler";
 				this->buttonCancel->UseVisualStyleBackColor = true;
 				this->buttonCancel->Click += gcnew EventHandler(this, &StaffForm::buttonCancel_Click);
-				
+
 				/*-------------------- buttonValidate --------------------*/
 				this->buttonValidate->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
 				this->buttonValidate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -376,6 +381,12 @@ namespace Projet_POO
 				this->Name = L"StaffForm";
 				this->Text = L"StaffForm";
 			}
+
+			Void retrieveSuggestion(ComboBox^ comboBox, String^ query);
+			Void comboBoxUser_keyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void comboBoxAddress_keyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void boxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
 			Void buttonValidate_Click(Object^ sender, EventArgs^ e);
 			Void buttonCancel_Click(Object^ sender, EventArgs^ e);
 	};

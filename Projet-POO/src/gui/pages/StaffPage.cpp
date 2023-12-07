@@ -6,18 +6,18 @@ void StaffPage::reloadStaffGridView()
 {
     this->dataGridViewStaff->Rows->Clear();
 
-    DataSet^ Staff = App::app->db->query(
-        "SELECT id_staff, first_name, last_name, CONVERT(VARCHAR, hire_date, 103) AS hire_date, deleted, id_staff_boss, id_address FROM staff" + (this->checkBoxDeleted->Checked ? ";" : " WHERE deleted = 0;"));
+    DataSet^ staff = App::app->db->query(
+        "SELECT s.id_staff, s.last_name, s.first_name, CONVERT(VARCHAR(10), s.hire_date, 103), a.street, a.zip_code, a.city, b.last_name, b.first_name FROM staff s INNER JOIN address a on a.id_address = s.id_address LEFT JOIN staff b on b.id_staff = s.id_staff_boss" + (this->checkBoxDeleted->Checked ? ";" : " WHERE s.deleted = 0;"));
 
-    for (int i = 0; i < Staff->Tables[0]->Rows->Count; i++)
+    for (int i = 0; i < staff->Tables[0]->Rows->Count; i++)
     {
-        this->dataGridViewStaff->Rows->Add(Staff->Tables[0]->Rows[i]->ItemArray);
+        this->dataGridViewStaff->Rows->Add(staff->Tables[0]->Rows[i]->ItemArray);
     }
 }
 
-void StaffPage::openStaffForm(String^ idStaff, String^ firstName, String^ lastName, String^ hireDate)
+void StaffPage::openStaffForm(String^ idStaff, String^ lastName, String^ firstName, String^ hireDate, String^ wording, String^ zipCode, String^ city, String^ bossLastName, String^ bossFirstName)
 {
-    auto addStaffForm = gcnew StaffForm(idStaff, lastName, firstName, hireDate);
+    auto addStaffForm = gcnew StaffForm(idStaff, lastName, firstName, hireDate, wording, zipCode, city, bossLastName, bossFirstName);
     if (addStaffForm->ShowDialog() == Windows::Forms::DialogResult::OK)
     {
         App::app->App::toastMessage(this, "Modifications enregistrees", Color::Green, 3000);
@@ -32,7 +32,7 @@ void StaffPage::checkBoxDeleted_Click(Object^ sender, EventArgs^ e)
 
 void StaffPage::buttonAdd_Click(Object^ sender, EventArgs^ e)
 {
-    openStaffForm("", "", "", "");
+    openStaffForm("", "", "", "", "", "", "", "", "");
 }
 
 void StaffPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
@@ -48,7 +48,12 @@ void StaffPage::buttonEdit_Click(Object^ sender, EventArgs^ e)
         this->dataGridViewStaff->CurrentRow->Cells[0]->Value->ToString(),
         this->dataGridViewStaff->CurrentRow->Cells[1]->Value->ToString(),
         this->dataGridViewStaff->CurrentRow->Cells[2]->Value->ToString(),
-        this->dataGridViewStaff->CurrentRow->Cells[3]->Value->ToString()
+        this->dataGridViewStaff->CurrentRow->Cells[3]->Value->ToString(),
+        this->dataGridViewStaff->CurrentRow->Cells[4]->Value->ToString(),
+        this->dataGridViewStaff->CurrentRow->Cells[5]->Value->ToString(),
+        this->dataGridViewStaff->CurrentRow->Cells[6]->Value->ToString(),
+        this->dataGridViewStaff->CurrentRow->Cells[7]->Value->ToString(),
+        this->dataGridViewStaff->CurrentRow->Cells[8]->Value->ToString()
     );
 }
 
