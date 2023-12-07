@@ -95,7 +95,6 @@ CREATE TABLE payment
     payment_mean VARCHAR(50)        NOT NULL,
     amount       REAL               NOT NULL,
     validated    BIT                NOT NULL DEFAULT 0,
-    deleted      BIT                NOT NULL DEFAULT 0,
     id_order     INT                NOT NULL,
     PRIMARY KEY (id_payment),
     FOREIGN KEY (id_order) REFERENCES [order] (id_order)
@@ -116,13 +115,14 @@ GO;
 
 CREATE TABLE orderHasProduct
 (
-    id_product INT,
-    id_order   INT,
-    quantity   INT,
-    tf_price   REAL NOT NULL,
-    vat_price  REAL NOT NULL,
-    price      REAL NOT NULL,
-    PRIMARY KEY (id_product, id_order),
+    id_order_has_product INT IDENTITY (1,1) NOT NULL,
+    id_product           INT,
+    id_order             INT,
+    quantity             INT,
+    tf_price             REAL               NOT NULL,
+    vat_price            REAL               NOT NULL,
+    price                REAL               NOT NULL,
+    PRIMARY KEY (id_order_has_product, id_product, id_order),
     FOREIGN KEY (id_product) REFERENCES product (id_product),
     FOREIGN KEY (id_order) REFERENCES [order] (id_order)
 );

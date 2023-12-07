@@ -114,10 +114,74 @@ namespace Projet_POO
 				this->dataGridViewOrders->Name = L"dataGridViewOrders";
 				this->dataGridViewOrders->Size = Drawing::Size(941, 354);
 				this->dataGridViewOrders->TabIndex = 0;
+				this->dataGridViewOrders->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->dataGridViewOrders->ReadOnly = true;
+				this->dataGridViewOrders->AllowUserToResizeRows = false;
+				this->dataGridViewOrders->AllowUserToAddRows = false;
+				this->dataGridViewOrders->RowHeadersVisible = false;
+				this->dataGridViewOrders->AllowUserToDeleteRows = false;
+				this->dataGridViewOrders->MultiSelect = false;
+				this->dataGridViewOrders->ColumnHeadersDefaultCellStyle->WrapMode = DataGridViewTriState::False;
+				this->dataGridViewOrders->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->dataGridViewOrders->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+				this->dataGridViewOrders->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+				this->dataGridViewOrders->ColumnHeadersHeight = 40;
 
 				auto idOrder = gcnew DataGridViewTextBoxColumn();
 				idOrder->Visible = false;
 				this->dataGridViewOrders->Columns->Add(idOrder);
+
+				auto reference = gcnew DataGridViewTextBoxColumn();
+				reference->Name = "Reference";
+				this->dataGridViewOrders->Columns->Add(reference);
+
+				auto lastName = gcnew DataGridViewTextBoxColumn();
+				lastName->Name = "Nom";
+				this->dataGridViewOrders->Columns->Add(lastName);
+
+				auto firstName = gcnew DataGridViewTextBoxColumn();
+				firstName->Name = "Prenom";
+				this->dataGridViewOrders->Columns->Add(firstName);
+
+				auto birthdate = gcnew DataGridViewTextBoxColumn();
+				birthdate->Visible = false;
+				this->dataGridViewOrders->Columns->Add(birthdate);
+				
+				auto issueDate = gcnew DataGridViewTextBoxColumn();
+				issueDate->Name = "Date d'emission";
+				this->dataGridViewOrders->Columns->Add(issueDate);
+
+				auto expectedDeliveryDate = gcnew DataGridViewTextBoxColumn();
+				expectedDeliveryDate->Name = "Date de livraison prevue";
+				this->dataGridViewOrders->Columns->Add(expectedDeliveryDate);
+
+				auto billingAddress = gcnew DataGridViewTextBoxColumn();
+				billingAddress->Visible = false;
+				this->dataGridViewOrders->Columns->Add(billingAddress);
+
+				auto deliveryAddress = gcnew DataGridViewTextBoxColumn();
+				deliveryAddress->Visible = false;
+				this->dataGridViewOrders->Columns->Add(deliveryAddress);
+				
+				auto totalAmount = gcnew DataGridViewTextBoxColumn();
+				totalAmount->Name = "Montant total";
+				this->dataGridViewOrders->Columns->Add(totalAmount);
+				
+				auto payedAmount = gcnew DataGridViewTextBoxColumn();
+				payedAmount->Name = "Montant paye";
+				this->dataGridViewOrders->Columns->Add(payedAmount);
+
+				auto paymentDate = gcnew DataGridViewTextBoxColumn();
+				paymentDate->Name = "Date de payement";
+				this->dataGridViewOrders->Columns->Add(paymentDate);
+
+				auto vatAmount = gcnew DataGridViewTextBoxColumn();
+				vatAmount->Visible = false;
+				this->dataGridViewOrders->Columns->Add(vatAmount);
+
+				auto tfAmount = gcnew DataGridViewTextBoxColumn();
+				tfAmount->Visible = false;
+				this->dataGridViewOrders->Columns->Add(tfAmount);
 
 				/*-------------------- checkBoxDeleted --------------------*/
 				this->checkBoxDeleted->Anchor = AnchorStyles::Bottom | AnchorStyles::Left;
@@ -143,7 +207,7 @@ namespace Projet_POO
 				this->buttonPayments->Text = L"Paiements";
 				this->buttonPayments->UseVisualStyleBackColor = true;
 				this->buttonPayments->Click += gcnew EventHandler(this, &OrdersPage::buttonPayments_Click);
-				
+
 				/*-------------------- buttonOrderDetails --------------------*/
 				this->buttonOrderDetails->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
 				this->buttonOrderDetails->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
@@ -156,12 +220,12 @@ namespace Projet_POO
 				this->buttonOrderDetails->UseVisualStyleBackColor = true;
 				this->buttonOrderDetails->Click += gcnew EventHandler(this, &OrdersPage::buttonOrderDetails_Click);
 
-				/*-------------------- buttonAdd --------------------*/
+				/*-------------------- buttonDelete --------------------*/
 				this->buttonAdd->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonAdd->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonAdd->Location = Point(595, 106);
 				this->buttonAdd->Margin = Windows::Forms::Padding(5, 6, 5, 6);
-				this->buttonAdd->Name = L"buttonAdd";
+				this->buttonAdd->Name = L"buttonDelete";
 				this->buttonAdd->Size = Drawing::Size(107, 38);
 				this->buttonAdd->TabIndex = 3;
 				this->buttonAdd->Text = L"Ajouter";
@@ -180,12 +244,12 @@ namespace Projet_POO
 				this->buttonEdit->UseVisualStyleBackColor = true;
 				this->buttonEdit->Click += gcnew EventHandler(this, &OrdersPage::buttonEdit_Click);
 
-				/*-------------------- buttonDelete --------------------*/
+				/*-------------------- buttonAdd --------------------*/
 				this->buttonDelete->Anchor = AnchorStyles::Bottom | AnchorStyles::Right;
 				this->buttonDelete->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->buttonDelete->Location = Point(829, 106);
 				this->buttonDelete->Margin = Windows::Forms::Padding(5, 6, 5, 6);
-				this->buttonDelete->Name = L"buttonDelete";
+				this->buttonDelete->Name = L"buttonAdd";
 				this->buttonDelete->Size = Drawing::Size(125, 38);
 				this->buttonDelete->TabIndex = 5;
 				this->buttonDelete->Text = L"Supprimer";
@@ -205,8 +269,7 @@ namespace Projet_POO
 			}
 
 			Void reloadOrdersGridView();
-			Void openOrderDetailsForm();
-			Void openOrderForm();
+			Void openOrderForm(String^ orderId, String^ lastName, String^ firstName, String^ birthdate, String^ billingAddress, String^ deliveryAddress, String^ deliveryDate);
 			Void checkBoxDeleted_Click(Object^ sender, EventArgs^ e);
 			Void buttonPayments_Click(Object^ sender, EventArgs^ e);
 			Void buttonOrderDetails_Click(Object^ sender, EventArgs^ e);

@@ -2,6 +2,23 @@
 
 #include "../../App.h"
 
+void AddresseForm::retreiveSuggestion(ComboBox^ comboBox, String^ query)
+{
+	DataSet^ lastNames = App::app->db->query(query->Replace("{data}", comboBox->Text));
+	comboBox->Items->Clear();
+	for (int i = 0; i < lastNames->Tables[0]->Rows->Count; i++)
+	{
+		comboBox->Items->Add(lastNames->Tables[0]->Rows[i]->ItemArray[0]->ToString());
+	}
+	comboBox->SelectionStart = comboBox->Text->Length;
+}
+
+void AddresseForm::comboBox_KeyPress(Object^ sender, KeyPressEventArgs^ e)
+{
+	retreiveSuggestion(this->comboBoxZipCode, "SELECT DISTINCT zip_code FROM address WHERE zip_code LIKE '{data}%' AND deleted = 0;");
+	retreiveSuggestion(this->comboBoxCity, "SELECT DISTINCT city FROM address WHERE zip_code = '" + this->comboBoxZipCode->Text + "' AND city LIKE '{data}%' AND deleted = 0;");
+}
+
 void AddresseForm::textBoxZipCode_KeyPress(Object^ sender, KeyPressEventArgs^ e)
 {
 	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
@@ -18,7 +35,7 @@ void AddresseForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
 void AddresseForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 {
 	street = this->textBoxStreet->Text;
-	zipCode = this->textBoxZipCode->Text;
+	zipCode = this->comboBoxZipCode->Text;
 	city = this->comboBoxCity->Text;
 	String^ addressTypeId = this->checkBoxDelivery->Checked && this->checkBoxDelivery->Checked ? "3" : this->checkBoxDelivery->Checked ? "2" : this->checkBoxBilling->Checked ? "1" : "";
 

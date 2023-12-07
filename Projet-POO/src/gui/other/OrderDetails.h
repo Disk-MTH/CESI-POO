@@ -10,332 +10,283 @@ namespace Projet_POO
 	public ref class OrderDetails : public Form
 	{
 		public:
-			OrderDetails()
+			OrderDetails(String^ orderId, String^ reference, String^ customer, String^ birthdate, String^ billingAddress, String^ deliveryAddress, String^ issueDate, String^ expectedDeliveryDate, String^ totalAmount, String^ vatAmount, String^ tfAmount)
 			{
-				InitializeComponent();
+				this->orderId = orderId;
+				this->reference = reference;
+				this->customer = customer;
+				this->birthdate = birthdate;
+				this->billingAddress = billingAddress;
+				this->deliveryAddress = deliveryAddress;
+				this->issueDate = issueDate;
+				this->expectedDeliveryDate = expectedDeliveryDate;
+				this->totalAmount = totalAmount;
+				this->vatAmount = vatAmount;
+				this->tfAmount = tfAmount;
+				initialize();
+				reloadProductsGridView();
 			}
 
 		private:
+			String^ orderId;
+			String^ reference;
+			String^ customer;
+			String^ birthdate;
+			String^ billingAddress;
+			String^ deliveryAddress;
+			String^ issueDate;
+			String^ expectedDeliveryDate;
+			String^ totalAmount;
+			String^ vatAmount;
+			String^ tfAmount;
+
 			TableLayoutPanel^ tableLayoutPanel1;
 			TableLayoutPanel^ tableLayoutPanel2;
 			TableLayoutPanel^ tableLayoutPanel3;
 			TableLayoutPanel^ tableLayoutPanel4;
 
-			DataGridView^ dataGridViewProducts;
-
 			Label^ labelTitle;
-
-			Label^ labelValueDelivery;
-			Label^ labelValueBilling;
-			Label^ labelValueBirthDate;
-			Label^ labelValueFirstName;
-			Label^ labelValueLastName;
-			Label^ labelValueTFTotalPrice;
-			Label^ labelValueVAT;
-			Label^ labelValueTotalPrice;
-
-			Label^ labelDelivery;
-			Label^ labelBilling;
-			Label^ labelBirthDate;
-			Label^ labelFirstName;
-			Label^ labelLastName;
-			Label^ labelVAT;
-			Label^ labelTFTotalPrice;
+			Label^ labelCustomer;
+			Label^ labelBirthdate;
+			Label^ labelBillingAddress;
+			Label^ labelDeliveryAddress;
+			Label^ labelIssueDate;
+			Label^ labelExpectedDeliveryDate;
 			Label^ labelTotalPrice;
+			Label^ labelTfPrice;
+			Label^ labelVatPrice;
 
+			DataGridView^ dataGridViewTieredPrices;
 
-			void InitializeComponent()
+			void initialize()
 			{
 				this->tableLayoutPanel1 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel2 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel3 = gcnew TableLayoutPanel();
 				this->tableLayoutPanel4 = gcnew TableLayoutPanel();
-
-				this->dataGridViewProducts = gcnew DataGridView();
-
+				
 				this->labelTitle = gcnew Label();
-
-				this->labelValueDelivery = gcnew Label();
-				this->labelValueBilling = gcnew Label();
-				this->labelValueBirthDate = gcnew Label();
-				this->labelValueFirstName = gcnew Label();
-				this->labelValueLastName = gcnew Label();
-				this->labelValueTFTotalPrice = gcnew Label();
-				this->labelValueVAT = gcnew Label();
-				this->labelValueTotalPrice = gcnew Label();
-
-				this->labelDelivery = gcnew Label();
-				this->labelBilling = gcnew Label();
-				this->labelBirthDate = gcnew Label();
-				this->labelFirstName = gcnew Label();
-				this->labelLastName = gcnew Label();
-				this->labelTFTotalPrice = gcnew Label();
-				this->labelVAT = gcnew Label();
+				this->labelCustomer = gcnew Label();
+				this->labelBirthdate = gcnew Label();
+				this->labelBillingAddress = gcnew Label();
+				this->labelDeliveryAddress = gcnew Label();
+				this->labelIssueDate = gcnew Label();
+				this->labelExpectedDeliveryDate = gcnew Label();
 				this->labelTotalPrice = gcnew Label();
+				this->labelTfPrice = gcnew Label();
+				this->labelVatPrice = gcnew Label();
+
+				this->dataGridViewTieredPrices = gcnew DataGridView();
 
 				/*-------------------- tableLayoutPanel1 --------------------*/
 				this->tableLayoutPanel1->ColumnCount = 1;
 				this->tableLayoutPanel1->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
-				this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 2);
-				this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel3, 0, 1);
 				this->tableLayoutPanel1->Controls->Add(this->labelTitle, 0, 0);
-				this->tableLayoutPanel1->Location = Point(10, 11);
-				this->tableLayoutPanel1->Margin = Windows::Forms::Padding(2, 2, 2, 2);
+				this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 1);
+				this->tableLayoutPanel1->Location = Point(12, 12);
 				this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-				this->tableLayoutPanel1->RowCount = 3;
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 20.33333F));
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 79.66666F));
-				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 82));
-				this->tableLayoutPanel1->Size = Drawing::Size(663, 439);
+				this->tableLayoutPanel1->RowCount = 2;
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 18.30664F));
+				this->tableLayoutPanel1->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 81.69337F));
+				this->tableLayoutPanel1->Size = Drawing::Size(660, 437);
 
 				/*-------------------- tableLayoutPanel2 --------------------*/
-				this->tableLayoutPanel2->ColumnCount = 4;
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 130));
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 150));
-				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 105));
-				this->tableLayoutPanel2->Controls->Add(this->labelValueVAT, 3, 0);
-				this->tableLayoutPanel2->Controls->Add(this->labelVAT, 2, 0);
-				this->tableLayoutPanel2->Controls->Add(this->labelTFTotalPrice, 0, 0);
-				this->tableLayoutPanel2->Controls->Add(this->labelTotalPrice, 2, 1);
-				this->tableLayoutPanel2->Controls->Add(this->labelValueTFTotalPrice, 1, 0);
-				this->tableLayoutPanel2->Controls->Add(this->labelValueTotalPrice, 3, 1);
-				this->tableLayoutPanel2->Location = Point(2, 358);
-				this->tableLayoutPanel2->Margin = Windows::Forms::Padding(2, 2, 2, 2);
+				this->tableLayoutPanel2->ColumnCount = 2;
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 60.24465F));
+				this->tableLayoutPanel2->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 39.75535F));
+				this->tableLayoutPanel2->Controls->Add(this->dataGridViewTieredPrices, 1, 0);
+				this->tableLayoutPanel2->Controls->Add(this->tableLayoutPanel3, 0, 0);
+				this->tableLayoutPanel2->Controls->Add(this->labelTotalPrice, 0, 1);
+				this->tableLayoutPanel2->Controls->Add(this->tableLayoutPanel4, 1, 1);
+				this->tableLayoutPanel2->Location = Point(3, 83);
 				this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 				this->tableLayoutPanel2->RowCount = 2;
-				this->tableLayoutPanel2->RowStyles->Add((gcnew RowStyle(SizeType::Percent, 50)));
-				this->tableLayoutPanel2->RowStyles->Add((gcnew RowStyle(SizeType::Percent, 50)));
-				this->tableLayoutPanel2->Size = Drawing::Size(659, 78);
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 79.19075F));
+				this->tableLayoutPanel2->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 20.80925F));
+				this->tableLayoutPanel2->Size = Drawing::Size(654, 351);
 
 				/*-------------------- tableLayoutPanel3 --------------------*/
-				this->tableLayoutPanel3->ColumnCount = 2;
-				this->tableLayoutPanel3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 52.50379F));
-				this->tableLayoutPanel3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 47.49621F));
-				this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel4, 0, 0);
-				this->tableLayoutPanel3->Controls->Add(this->dataGridViewProducts, 1, 0);
-				this->tableLayoutPanel3->Location = Point(2, 74);
-				this->tableLayoutPanel3->Margin = Windows::Forms::Padding(2, 2, 2, 2);
+				this->tableLayoutPanel3->ColumnCount = 1;
+				this->tableLayoutPanel3->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+				this->tableLayoutPanel3->Controls->Add(this->labelExpectedDeliveryDate, 0, 5);
+				this->tableLayoutPanel3->Controls->Add(this->labelIssueDate, 0, 4);
+				this->tableLayoutPanel3->Controls->Add(this->labelDeliveryAddress, 0, 3);
+				this->tableLayoutPanel3->Controls->Add(this->labelBillingAddress, 0, 2);
+				this->tableLayoutPanel3->Controls->Add(this->labelBirthdate, 0, 1);
+				this->tableLayoutPanel3->Controls->Add(this->labelCustomer, 0, 0);
+				this->tableLayoutPanel3->Location = Point(3, 3);
 				this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
-				this->tableLayoutPanel3->RowCount = 1;
+				this->tableLayoutPanel3->RowCount = 6;
 				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
-				this->tableLayoutPanel3->Size = Drawing::Size(659, 280);
+				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 43));
+				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 42));
+				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 45));
+				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 46));
+				this->tableLayoutPanel3->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 43));
+				this->tableLayoutPanel3->Size = Drawing::Size(388, 271);
 
 				/*-------------------- tableLayoutPanel4 --------------------*/
-				this->tableLayoutPanel4->ColumnCount = 2;
-				this->tableLayoutPanel4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 37.7193F));
-				this->tableLayoutPanel4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 62.2807F));
-				this->tableLayoutPanel4->Controls->Add(this->labelValueDelivery, 1, 4);
-				this->tableLayoutPanel4->Controls->Add(this->labelValueBilling, 1, 3);
-				this->tableLayoutPanel4->Controls->Add(this->labelValueBirthDate, 1, 2);
-				this->tableLayoutPanel4->Controls->Add(this->labelValueFirstName, 1, 1);
-				this->tableLayoutPanel4->Controls->Add(this->labelBirthDate, 0, 2);
-				this->tableLayoutPanel4->Controls->Add(this->labelFirstName, 0, 1);
-				this->tableLayoutPanel4->Controls->Add(this->labelLastName, 0, 0);
-				this->tableLayoutPanel4->Controls->Add(this->labelBilling, 0, 3);
-				this->tableLayoutPanel4->Controls->Add(this->labelDelivery, 0, 4);
-				this->tableLayoutPanel4->Controls->Add(this->labelValueLastName, 1, 0);
-				this->tableLayoutPanel4->Location = Point(2, 2);
-				this->tableLayoutPanel4->Margin = Windows::Forms::Padding(2, 2, 2, 2);
+				this->tableLayoutPanel4->ColumnCount = 1;
+				this->tableLayoutPanel4->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 50));
+				this->tableLayoutPanel4->Controls->Add(this->labelVatPrice, 0, 1);
+				this->tableLayoutPanel4->Controls->Add(this->labelTfPrice, 0, 0);
+				this->tableLayoutPanel4->Location = Point(397, 280);
 				this->tableLayoutPanel4->Name = L"tableLayoutPanel4";
-				this->tableLayoutPanel4->RowCount = 5;
-				this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 45.71429F));
-				this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 54.28571F));
-				this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 55));
-				this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 56));
-				this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 59));
-				this->tableLayoutPanel4->Size = Drawing::Size(342, 276);
-
-				/*-------------------- dataGridViewProducts --------------------*/
-				this->dataGridViewProducts->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-				this->dataGridViewProducts->Location = Point(348, 2);
-				this->dataGridViewProducts->Margin = Windows::Forms::Padding(2, 2, 2, 2);
-				this->dataGridViewProducts->Name = L"dataGridViewProducts";
-				this->dataGridViewProducts->RowHeadersWidth = 51;
-				this->dataGridViewProducts->RowTemplate->Height = 24;
-				this->dataGridViewProducts->Size = Drawing::Size(309, 276);
+				this->tableLayoutPanel4->RowCount = 2;
+				this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
+				this->tableLayoutPanel4->RowStyles->Add(gcnew RowStyle(SizeType::Percent, 50));
+				this->tableLayoutPanel4->Size = Drawing::Size(254, 68);
 
 				/*-------------------- labelTitle --------------------*/
 				this->labelTitle->Anchor = AnchorStyles::None;
 				this->labelTitle->AutoSize = true;
-				this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
-				this->labelTitle->Location = Point(137, 20);
-				this->labelTitle->Margin = Windows::Forms::Padding(2, 0, 2, 0);
+				this->labelTitle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 25);
+				this->labelTitle->Location = Point(111, 20);
 				this->labelTitle->Name = L"labelTitle";
-				this->labelTitle->Size = Drawing::Size(388, 31);
-				this->labelTitle->Text = L"Details de la commande + REF";
+				this->labelTitle->Size = Drawing::Size(438, 39);
+				this->labelTitle->Text = L"Details de la commande: " + reference;
 
-				/*-------------------- labelValueDelivery --------------------*/
-				this->labelValueDelivery->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->labelValueDelivery->AutoSize = true;
-				this->labelValueDelivery->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelValueDelivery->Location = Point(131, 216);
-				this->labelValueDelivery->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelValueDelivery->Name = L"labelValueDelivery";
-				this->labelValueDelivery->Size = Drawing::Size(209, 60);
-				this->labelValueDelivery->TextAlign = ContentAlignment::MiddleLeft;
+				/*-------------------- labelCustomer --------------------*/
+				this->labelCustomer->Anchor = AnchorStyles::Left | AnchorStyles::Right;
+				this->labelCustomer->AutoSize = true;
+				this->labelCustomer->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
+				this->labelCustomer->Location = Point(10, 16);
+				this->labelCustomer->Margin = Windows::Forms::Padding(10, 0, 10, 0);
+				this->labelCustomer->Name = L"labelCustomer";
+				this->labelCustomer->Size = Drawing::Size(368, 20);
+				this->labelCustomer->Text = L"Client : " + customer;
 
-				/*-------------------- labelValueBilling --------------------*/
-				this->labelValueBilling->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->labelValueBilling->AutoSize = true;
-				this->labelValueBilling->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelValueBilling->Location = Point(131, 160);
-				this->labelValueBilling->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelValueBilling->Name = L"labelValueBilling";
-				this->labelValueBilling->Size = Drawing::Size(209, 56);
-				this->labelValueBilling->TextAlign = ContentAlignment::MiddleLeft;
+				/*-------------------- labelBirthdate --------------------*/
+				this->labelBirthdate->Anchor = AnchorStyles::Left | AnchorStyles::Right;
+				this->labelBirthdate->AutoSize = true;
+				this->labelBirthdate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
+				this->labelBirthdate->Location = Point(10, 63);
+				this->labelBirthdate->Margin = Windows::Forms::Padding(10, 0, 10, 0);
+				this->labelBirthdate->Name = L"labelBirthdate";
+				this->labelBirthdate->Size = Drawing::Size(368, 20);
+				this->labelBirthdate->Text = L"Date de naissance : " + birthdate;
 
-				/*-------------------- labelValueBirthDate --------------------*/
-				this->labelValueBirthDate->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->labelValueBirthDate->AutoSize = true;
-				this->labelValueBirthDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelValueBirthDate->Location = Point(131, 105);
-				this->labelValueBirthDate->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelValueBirthDate->Name = L"labelValueBirthDate";
-				this->labelValueBirthDate->Size = Drawing::Size(209, 55);
-				this->labelValueBirthDate->TextAlign = ContentAlignment::MiddleLeft;
+				/*-------------------- labelDeliveryAddress --------------------*/
+				this->labelBillingAddress->Anchor = AnchorStyles::Left | AnchorStyles::Right;
+				this->labelBillingAddress->AutoSize = true;
+				this->labelBillingAddress->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
+				this->labelBillingAddress->Location = Point(10, 106);
+				this->labelBillingAddress->Margin = Windows::Forms::Padding(10, 0, 10, 0);
+				this->labelBillingAddress->Name = L"labelDeliveryAddress";
+				this->labelBillingAddress->Size = Drawing::Size(368, 20);
+				this->labelBillingAddress->Text = L"Adr facturation : " + billingAddress;
 
-				/*-------------------- labelValueFirstName --------------------*/
-				this->labelValueFirstName->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->labelValueFirstName->AutoSize = true;
-				this->labelValueFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelValueFirstName->Location = Point(131, 48);
-				this->labelValueFirstName->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelValueFirstName->Name = L"labelValueFirstName";
-				this->labelValueFirstName->Size = Drawing::Size(209, 57);
-				this->labelValueFirstName->TextAlign = ContentAlignment::MiddleLeft;
+				/*-------------------- labelBillingAddress --------------------*/
+				this->labelDeliveryAddress->Anchor = AnchorStyles::Left | AnchorStyles::Right;
+				this->labelDeliveryAddress->AutoSize = true;
+				this->labelDeliveryAddress->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
+				this->labelDeliveryAddress->Location = Point(10, 149);
+				this->labelDeliveryAddress->Margin = Windows::Forms::Padding(10, 0, 10, 0);
+				this->labelDeliveryAddress->Name = L"labelBillingAddress";
+				this->labelDeliveryAddress->Size = Drawing::Size(368, 20);
+				this->labelDeliveryAddress->Text = L"Adr livraison : " + deliveryAddress;
 
-				/*-------------------- labelValueLastName --------------------*/
-				this->labelValueLastName->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->labelValueLastName->AutoSize = true;
-				this->labelValueLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelValueLastName->Location = Point(131, 0);
-				this->labelValueLastName->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelValueLastName->Name = L"labelValueLastName";
-				this->labelValueLastName->Size = Drawing::Size(209, 48);
-				this->labelValueLastName->TextAlign = ContentAlignment::MiddleLeft;
+				/*-------------------- labelIssueDate --------------------*/
+				this->labelIssueDate->Anchor = AnchorStyles::Left | AnchorStyles::Right;
+				this->labelIssueDate->AutoSize = true;
+				this->labelIssueDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
+				this->labelIssueDate->Location = Point(10, 195);
+				this->labelIssueDate->Margin = Windows::Forms::Padding(10, 0, 10, 0);
+				this->labelIssueDate->Name = L"labelIssueDate";
+				this->labelIssueDate->Size = Drawing::Size(368, 20);
+				this->labelIssueDate->Text = L"Date d\'emission : " + issueDate;
 
-				/*-------------------- labelValueTFTotalPrice --------------------*/
-				this->labelValueTFTotalPrice->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->labelValueTFTotalPrice->AutoSize = true;
-				this->labelValueTFTotalPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelValueTFTotalPrice->Location = Point(276, 0);
-				this->labelValueTFTotalPrice->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelValueTFTotalPrice->Name = L"labelValueTFTotalPrice";
-				this->labelValueTFTotalPrice->Size = Drawing::Size(126, 39);
-				this->labelValueTFTotalPrice->TextAlign = ContentAlignment::MiddleLeft;
-
-				/*-------------------- labelValueVAT --------------------*/
-				this->labelValueVAT->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->labelValueVAT->AutoSize = true;
-				this->labelValueVAT->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelValueVAT->Location = Point(556, 0);
-				this->labelValueVAT->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelValueVAT->Name = L"labelValueVAT";
-				this->labelValueVAT->Size = Drawing::Size(101, 39);
-				this->labelValueVAT->TextAlign = ContentAlignment::MiddleLeft;
-
-				/*-------------------- labelValueTotalPrice --------------------*/
-				this->labelValueTotalPrice->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
-				this->labelValueTotalPrice->AutoSize = true;
-				this->labelValueTotalPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelValueTotalPrice->Location = Point(556, 39);
-				this->labelValueTotalPrice->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelValueTotalPrice->Name = L"labelValueTotalPrice";
-				this->labelValueTotalPrice->Size = Drawing::Size(101, 39);
-				this->labelValueTotalPrice->TextAlign = ContentAlignment::MiddleLeft;
-
-				/*-------------------- labelDelivery --------------------*/
-				this->labelDelivery->Anchor = AnchorStyles::Left;
-				this->labelDelivery->AutoSize = true;
-				this->labelDelivery->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelDelivery->Location = Point(8, 233);
-				this->labelDelivery->Margin = Windows::Forms::Padding(8, 0, 8, 0);
-				this->labelDelivery->Name = L"labelDelivery";
-				this->labelDelivery->Size = Drawing::Size(90, 25);
-				this->labelDelivery->Text = L"Livraison";
-
-				/*-------------------- labelBilling --------------------*/
-				this->labelBilling->Anchor = AnchorStyles::Left;
-				this->labelBilling->AutoSize = true;
-				this->labelBilling->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelBilling->Location = Point(8, 175);
-				this->labelBilling->Margin = Windows::Forms::Padding(8, 0, 8, 0);
-				this->labelBilling->Name = L"labelBilling";
-				this->labelBilling->Size = Drawing::Size(109, 25);
-				this->labelBilling->Text = L"Facturation";
-
-				/*-------------------- labelBirthDate --------------------*/
-				this->labelBirthDate->Anchor = AnchorStyles::Left;
-				this->labelBirthDate->AutoSize = true;
-				this->labelBirthDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelBirthDate->Location = Point(8, 120);
-				this->labelBirthDate->Margin = Windows::Forms::Padding(8, 0, 8, 0);
-				this->labelBirthDate->Name = L"labelBirthDate";
-				this->labelBirthDate->Size = Drawing::Size(104, 25);
-				this->labelBirthDate->Text = L"Naissance";
-
-				/*-------------------- labelFirstName --------------------*/
-				this->labelFirstName->Anchor = AnchorStyles::Left;
-				this->labelFirstName->AutoSize = true;
-				this->labelFirstName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelFirstName->Location = Point(8, 64);
-				this->labelFirstName->Margin = Windows::Forms::Padding(8, 0, 8, 0);
-				this->labelFirstName->Name = L"labelFirstName";
-				this->labelFirstName->Size = Drawing::Size(80, 25);
-				this->labelFirstName->Text = L"Prenom";
-
-				/*-------------------- labelLastName --------------------*/
-				this->labelLastName->Anchor = AnchorStyles::Left;
-				this->labelLastName->AutoSize = true;
-				this->labelLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelLastName->Location = Point(8, 11);
-				this->labelLastName->Margin = Windows::Forms::Padding(8, 0, 8, 0);
-				this->labelLastName->Name = L"labelLastName";
-				this->labelLastName->Size = Drawing::Size(53, 25);
-				this->labelLastName->Text = L"Nom";
-
-				/*-------------------- labelTFTotalPrice --------------------*/
-				this->labelTFTotalPrice->Anchor = AnchorStyles::Right;
-				this->labelTFTotalPrice->AutoSize = true;
-				this->labelTFTotalPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelTFTotalPrice->Location = Point(184, 7);
-				this->labelTFTotalPrice->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelTFTotalPrice->Name = L"labelTFTotalPrice";
-				this->labelTFTotalPrice->Size = Drawing::Size(88, 25);
-				this->labelTFTotalPrice->Text = L"Total HT";
-
-				/*-------------------- labelVAT --------------------*/
-				this->labelVAT->Anchor = AnchorStyles::Right;
-				this->labelVAT->AutoSize = true;
-				this->labelVAT->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelVAT->Location = Point(499, 7);
-				this->labelVAT->Margin = Windows::Forms::Padding(2, 0, 2, 0);
-				this->labelVAT->Name = L"labelVAT";
-				this->labelVAT->Size = Drawing::Size(53, 25);
-				this->labelVAT->Text = L"TVA";
+				/*-------------------- labelExpectedDeliveryDate --------------------*/
+				this->labelExpectedDeliveryDate->Anchor = AnchorStyles::Left | AnchorStyles::Right;
+				this->labelExpectedDeliveryDate->AutoSize = true;
+				this->labelExpectedDeliveryDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5F);
+				this->labelExpectedDeliveryDate->Location = Point(10, 239);
+				this->labelExpectedDeliveryDate->Margin = Windows::Forms::Padding(10, 0, 10, 0);
+				this->labelExpectedDeliveryDate->Name = L"labelExpectedDeliveryDate";
+				this->labelExpectedDeliveryDate->Size = Drawing::Size(368, 20);
+				this->labelExpectedDeliveryDate->Text = L"Date de livraison estimee : " + expectedDeliveryDate;
 
 				/*-------------------- labelTotalPrice --------------------*/
-				this->labelTotalPrice->Anchor = AnchorStyles::Right;
+				this->labelTotalPrice->Anchor = AnchorStyles::None;
 				this->labelTotalPrice->AutoSize = true;
-				this->labelTotalPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->labelTotalPrice->Location = Point(450, 46);
-				this->labelTotalPrice->Margin = Windows::Forms::Padding(2, 0, 2, 0);
+				this->labelTotalPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 20);
+				this->labelTotalPrice->Location = Point(110, 298);
 				this->labelTotalPrice->Name = L"labelTotalPrice";
-				this->labelTotalPrice->Size = Drawing::Size(102, 25);
-				this->labelTotalPrice->Text = L"Total TTC";
+				this->labelTotalPrice->Size = Drawing::Size(173, 31);
+				this->labelTotalPrice->Text = L"Prix TTC : " + totalAmount + "$";
 
+				/*-------------------- labelTfPrice --------------------*/
+				this->labelTfPrice->Anchor = AnchorStyles::None;
+				this->labelTfPrice->AutoSize = true;
+				this->labelTfPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->labelTfPrice->Location = Point(69, 4);
+				this->labelTfPrice->Name = L"labelTfPrice";
+				this->labelTfPrice->Size = Drawing::Size(115, 25);
+				this->labelTfPrice->Text = L"Prix HT : " + tfAmount + "$";
+
+				/*-------------------- labelVatPrice --------------------*/
+				this->labelVatPrice->Anchor = AnchorStyles::None;
+				this->labelVatPrice->AutoSize = true;
+				this->labelVatPrice->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->labelVatPrice->Location = Point(81, 38);
+				this->labelVatPrice->Name = L"labelVatPrice";
+				this->labelVatPrice->Size = Drawing::Size(91, 25);
+				this->labelVatPrice->Text = L"TVA : " + vatAmount + "$";
+
+				/*-------------------- dataGridViewTieredPrices --------------------*/
+				this->dataGridViewTieredPrices->ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+				this->dataGridViewTieredPrices->Location = Point(397, 3);
+				this->dataGridViewTieredPrices->Name = L"dataGridViewTieredPrices";
+				this->dataGridViewTieredPrices->Size = Drawing::Size(254, 271);
+				this->dataGridViewTieredPrices->TabIndex = 0;
+				this->dataGridViewTieredPrices->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
+				this->dataGridViewTieredPrices->ReadOnly = true;
+				this->dataGridViewTieredPrices->AllowUserToResizeRows = false;
+				this->dataGridViewTieredPrices->AllowUserToAddRows = false;
+				this->dataGridViewTieredPrices->RowHeadersVisible = false;
+				this->dataGridViewTieredPrices->AllowUserToDeleteRows = false;
+				this->dataGridViewTieredPrices->MultiSelect = false;
+				this->dataGridViewTieredPrices->ColumnHeadersDefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 12.5);
+				this->dataGridViewTieredPrices->DefaultCellStyle->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 10);
+				this->dataGridViewTieredPrices->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
+				this->dataGridViewTieredPrices->ColumnHeadersHeight = 40;
+
+				auto type = gcnew DataGridViewTextBoxColumn();
+				type->Name = L"Nature";
+				this->dataGridViewTieredPrices->Columns->Add(type);
+
+				auto name = gcnew DataGridViewTextBoxColumn();
+				name->Name = L"Nom";
+				this->dataGridViewTieredPrices->Columns->Add(name);
+
+				auto colour = gcnew DataGridViewTextBoxColumn();
+				colour->Name = L"Couleur";
+				this->dataGridViewTieredPrices->Columns->Add(colour);
+
+				auto Quantity = gcnew DataGridViewTextBoxColumn();
+				Quantity->Name = L"Quantite";
+				this->dataGridViewTieredPrices->Columns->Add(Quantity);
+
+				auto tfPrice = gcnew DataGridViewTextBoxColumn();
+				tfPrice->Name = L"Prix HT";
+				this->dataGridViewTieredPrices->Columns->Add(tfPrice);
+
+				auto price = gcnew DataGridViewTextBoxColumn();
+				price->Name = L"Pric TTC";
+				this->dataGridViewTieredPrices->Columns->Add(price);
+				
 				/*-------------------- OrderDetails --------------------*/
 				this->StartPosition = FormStartPosition::CenterScreen;
 				this->AutoScaleDimensions = SizeF(6, 13);
 				this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
 				this->ClientSize = Drawing::Size(684, 461);
 				this->Controls->Add(this->tableLayoutPanel1);
-				this->Margin = Windows::Forms::Padding(2, 2, 2, 2);
 				this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
 				this->MaximizeBox = false;
 				this->Name = L"OrderDetails";
 				this->Text = L"OrderDetails";
 			}
+
+			Void reloadProductsGridView();
 	};
 }
