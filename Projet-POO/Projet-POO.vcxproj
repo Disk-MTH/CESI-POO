@@ -126,10 +126,17 @@
     <ClCompile Include="src\gui\forms\AddresseForm.cpp" />
     <ClCompile Include="src\gui\forms\CustomerForm.cpp" />
     <ClCompile Include="src\gui\other\ProductDetails.cpp" />
+    <ClCompile Include="src\gui\other\OrderDetails.cpp" />
     <ClCompile Include="src\gui\pages\CatalogPage.cpp" />
     <ClCompile Include="src\gui\pages\CustomersPage.cpp" />
     <ClCompile Include="src\gui\pages\HomePage.cpp" />
     <ClCompile Include="src\gui\pages\OrdersPage.cpp" />
+    <ClCompile Include="src\gui\forms\OrderForm.cpp" />
+    <ClCompile Include="src\gui\forms\PaymentForm.cpp" />
+    <ClCompile Include="src\gui\forms\PaymentsForm.cpp" />
+    <ClCompile Include="src\gui\forms\ProductForm.cpp" />
+    <ClCompile Include="src\gui\forms\StaffForm.cpp" />
+    <ClCompile Include="src\gui\forms\TieredPriceForm.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
