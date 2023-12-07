@@ -17,6 +17,17 @@ void ProductForm::reloadGridViewTieredPrice()
     }
 }
 
+void ProductForm::retreiveSuggestion(ComboBox^ comboBox, String^ query)
+{
+    DataSet^ lastNames = App::app->db->query(query->Replace("{data}", comboBox->Text));
+    comboBox->Items->Clear();
+    for (int i = 0; i < lastNames->Tables[0]->Rows->Count; i++)
+    {
+        comboBox->Items->Add(lastNames->Tables[0]->Rows[i]->ItemArray[0]->ToString());
+    }
+    comboBox->SelectionStart = comboBox->Text->Length;
+}
+
 int^ ProductForm::createProduct()
 {
     name = this->textBoxName->Text;

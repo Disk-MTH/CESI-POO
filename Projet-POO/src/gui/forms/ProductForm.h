@@ -329,6 +329,7 @@ namespace Projet_POO
             this->comboBoxType->Size = Drawing::Size(167, 24);
             this->comboBoxType->TabIndex = 13;
             this->comboBoxType->Text = this->type;
+            retreiveSuggestion(this->comboBoxType, "SELECT DISTINCT type FROM product");
 
             /*-------------------- textBoxVat --------------------*/
             this->textBoxVat->Anchor = AnchorStyles::Top | AnchorStyles::Left;
@@ -360,6 +361,7 @@ namespace Projet_POO
             this->comboBoxColour->Size = Drawing::Size(167, 24);
             this->comboBoxColour->TabIndex = 14;
             this->comboBoxColour->Text = this->colour;
+            retreiveSuggestion(this->comboBoxColour, "SELECT DISTINCT colour FROM product");
 
             /*-------------------- buttonAdd --------------------*/
             this->buttonAdd->Anchor = AnchorStyles::Top | AnchorStyles::Right;
@@ -435,6 +437,7 @@ namespace Projet_POO
 
         Void reloadGridViewTieredPrice();
         int^ createProduct();
+        Void retreiveSuggestion(ComboBox^ comboBox, String^ query);
         Void openTieredPriceForm(String^ tieredpriceId, String^ quantity, String^ tfprice);
         Void buttonAdd_Click(Object^ sender, EventArgs^ e);
         Void buttonEdit_Click(Object^ sender, EventArgs^ e);
