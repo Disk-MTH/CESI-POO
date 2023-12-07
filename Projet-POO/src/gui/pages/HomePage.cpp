@@ -4,6 +4,7 @@
 #include "OrdersPage.h"
 #include "CatalogPage.h"
 #include "StaffPage.h"
+#include "StatsPage.h"
 #include "../forms/OrderForm.h"
 #include "../other/OrderDetails.h"
 
@@ -33,7 +34,10 @@ Void HomePage::buttonCatalog_Click(Object^ sender, EventArgs^ e)
 
 Void HomePage::buttonStats_Click(Object^ sender, EventArgs^ e)
 {
-	App::app->toastMessage(this, "Fonctionnalite non implementee: Statistiques", Color::Red, 2000);
+	this->Hide();
+	auto catalogPage = gcnew StatsPage();
+	catalogPage->ShowDialog();
+	this->Show();
 }
 
 Void HomePage::buttonOrders_Click(Object^ sender, EventArgs^ e)
