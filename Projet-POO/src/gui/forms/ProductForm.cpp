@@ -19,18 +19,15 @@ void ProductForm::reloadGridViewTieredPrice()
 
 int^ ProductForm::createProduct()
 {
-    Name = this->textBoxName->Text;
-    BuyPrice = this->textBoxBuyPrice->Text->Replace(",", ".");
-    Quantity = this->textBoxQuantity->Text;
-    RestockThreshold = this->textBoxRestockThreshold->Text;
-    VAT = this->textBoxVAT->Text->Replace(",",".");
+    name = this->textBoxName->Text;
+    buyPrice = this->textBoxBuyPrice->Text->Replace(",", ".");
+    quantity = this->textBoxQuantity->Text;
+    restockThreshold = this->textBoxRestockThreshold->Text;
+    vat = this->textBoxVat->Text->Replace(",",".");
     type = this->comboBoxType->Text;
-    Colour = this->comboBoxColour->Text;
+    colour = this->comboBoxColour->Text;
     
-    //price = price->Replace(",", ".");
-
-
-    if (App::isEmpty("Nom", Name) || App::isEmpty("Prix d'achat", BuyPrice) || App::isEmpty("Quantité", Quantity) || App::isEmpty("Seuil de réapprovisionnement", RestockThreshold) || App::isEmpty("TVA", VAT) || App::isEmpty("Nature", type) || App::isEmpty("Couleur", Colour))
+    if (App::isEmpty("Nom", name) || App::isEmpty("Prix d'achat", buyPrice) || App::isEmpty("Quantité", quantity) || App::isEmpty("Seuil de réapprovisionnement", restockThreshold) || App::isEmpty("TVA", vat) || App::isEmpty("Nature", type) || App::isEmpty("Couleur", colour))
     {
         return 0;
     }
@@ -40,20 +37,20 @@ int^ ProductForm::createProduct()
         if (productId == "")
         {
             App::app->logger->warn("warn1");
-            productId = App::app->db->insert("INSERT INTO product (name, buy_price, quantity, provisioning_threshold, vat_rate, type, colour, reference) VALUES ('" + Name + "', '" + BuyPrice + "', '" + Quantity + "','" + RestockThreshold + "','" + VAT + "','" + type + "','" + Colour + "','" + "testRef" + "')");
+            productId = App::app->db->insert("INSERT INTO product (name, buy_price, quantity, provisioning_threshold, vat_rate, type, colour, reference) VALUES ('" + name + "', '" + buyPrice + "', '" + quantity + "','" + restockThreshold + "','" + vat + "','" + type + "','" + colour + "','" + "testRef" + "')");
         }
         else
         {
             App::app->logger->warn("warn2");
-            App::app->db->execute("UPDATE product SET name = '" + Name + "', buy_price = '" + BuyPrice + "', quantity = '" + Quantity + "', provisioning_threshold = '" + RestockThreshold + "', vat_rate = '" + VAT + "', type = '" + type + "', colour = '" + Colour + "'  WHERE id_product = " + productId);
+            App::app->db->execute("UPDATE product SET name = '" + name + "', buy_price = '" + buyPrice + "', quantity = '" + quantity + "', provisioning_threshold = '" + restockThreshold + "', vat_rate = '" + vat + "', type = '" + type + "', colour = '" + colour + "'  WHERE id_product = " + productId);
         }
 
-        App::app->logger->log("Product edited: \"" + Name + "\", \"" + BuyPrice + "\", \"" + Quantity + "\", \"" + RestockThreshold + "\", \"" + VAT + "\"");
+        App::app->logger->log("Product edited: \"" + name + "\", \"" + buyPrice + "\", \"" + quantity + "\", \"" + restockThreshold + "\", \"" + vat + "\"");
         return 1;
     }
     catch (Exception^ exception)
     {
-        App::app->logger->error("Error while editing Product: \"" + Name + "\", \"" + BuyPrice + "\", \"" + Quantity + "\", \"" + RestockThreshold + "\", \"" + VAT + "\"");
+        App::app->logger->error("Error while editing Product: \"" + name + "\", \"" + buyPrice + "\", \"" + quantity + "\", \"" + restockThreshold + "\", \"" + vat + "\"");
         App::app->logger->error(exception->Message);
         App::app->toastMessage(this, "Erreur lors de la modifications du client", Color::Red, 3000);
     }
@@ -80,7 +77,6 @@ void ProductForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 
 void ProductForm::buttonEdit_Click(Object^ sender, EventArgs^ e)
 {
-    App::app->logger->warn("#######################");
     if (this->dataGridViewTieredPrice->SelectedRows->Count == 0)
     {
         App::app->logger->warn("Can't edit: no tiered price selected");
@@ -135,7 +131,9 @@ void ProductForm::buttonCancel_Click(Object^ sender, EventArgs^ e)
         }
         catch (Exception^ exception)
         {
+            App::app->logger->error("Error while deleting product: \"" + this->dataGridViewTieredPrice->CurrentRow->Cells[1]->Value->ToString() + "\", \"" + this->dataGridViewTieredPrice->CurrentRow->Cells[2]->Value->ToString() + "\"");
             App::app->logger->error(exception);
+            App::app->toastMessage(this, "Erreur lors de la suppression du produit", Color::Red, 3000);
         }
     }
 	
@@ -150,9 +148,3 @@ void ProductForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
         this->Close();
     }
 }
-
-
-
-
-
-

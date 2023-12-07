@@ -551,21 +551,22 @@ namespace Projet_POO
             this->buttonValidate->Click += gcnew EventHandler(this, &OrderForm::buttonValidate_Click);
 
             /*-------------------- OrderForm --------------------*/
-            this->StartPosition = FormStartPosition::Manual;
+            this->StartPosition = FormStartPosition::CenterScreen;
             this->AutoScaleDimensions = SizeF(6, 13);
             this->AutoScaleMode = Windows::Forms::AutoScaleMode::Font;
             this->ClientSize = Drawing::Size(684, 890);
-            this->Location = Point(Screen::PrimaryScreen->Bounds.Width / 2 - this->Width / 2, Screen::PrimaryScreen->Bounds.Height / 2 - this->Height / 2 - 50);
             this->Controls->Add(this->tableLayoutPanel1);
             this->FormBorderStyle = Windows::Forms::FormBorderStyle::FixedSingle;
             this->MaximizeBox = false;
             this->Name = L"OrderForm";
             this->Text = L"OrderForm";
+            this->Load += gcnew EventHandler(this, &OrderForm::orderForm_Load);
         }
 
         Void reloadProductsGridView();
         int^ createOrder();
         Void retreiveSuggestion(ComboBox^ comboBox, String^ query);
+        Void orderForm_Load(Object^ sender, EventArgs^ e);
         Void comboBoxUser_keyPress(Object^ sender, KeyPressEventArgs^ e);
         Void comboBoxProduct_keyPress(Object^ sender, KeyPressEventArgs^ e);
         Void comboBoxBirthdate_KeyPress(Object^ sender, KeyPressEventArgs^ e);

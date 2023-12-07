@@ -24,10 +24,7 @@ int^ OrderForm::createOrder()
 	billingAddress = this->comboBoxBillingAddress->Text;
 	deliveryAddress = this->comboBoxDeliveryAddress->Text;
 	deliveryDate = this->textBoxDeliveryDate->Text;
-
-	String^ reference = (firstName->Substring(0, 2) + lastName->Substring(0, 2) + DateTime::Now.ToString("yy") + deliveryAddress->Split(',')[2]->Substring(1, 3) + orderId)->ToLower();
-	String^ issueDate = DateTime::Now.ToString("dd/MM/yyyy");
-
+	
 	if (App::isEmpty("Nom", lastName) || App::isEmpty("Prenom", firstName) || App::isValidDate("Date de naissance", birthdate) == "" || App::isEmpty("Adresse de facturation", billingAddress) || App::isEmpty("Adresse de livraison", deliveryAddress) || App::isValidDate("Date de livraison", deliveryDate) == "")
 	{
 		return 0;
@@ -35,7 +32,9 @@ int^ OrderForm::createOrder()
 
 	birthdate = App::isValidDate("Date de naissance", birthdate);
 	deliveryDate = App::isValidDate("Date de livraison", deliveryDate);
-
+	String^ reference = (firstName->Substring(0, 2) + lastName->Substring(0, 2) + DateTime::Now.ToString("yy") + deliveryAddress->Split(',')[2]->Substring(1, 3) + orderId)->ToLower();
+	String^ issueDate = DateTime::Now.ToString("dd/MM/yyyy");
+	
 	String^ customerId;
 	try
 	{
@@ -113,6 +112,11 @@ void OrderForm::retreiveSuggestion(ComboBox^ comboBox, String^ query)
 		comboBox->Items->Add(lastNames->Tables[0]->Rows[i]->ItemArray[0]->ToString());
 	}
 	comboBox->SelectionStart = comboBox->Text->Length;
+}
+
+void OrderForm::orderForm_Load(Object^ sender, EventArgs^ e)
+{
+	this->Location = Point(this->Location.X, this->Location.Y - 15);
 }
 
 void OrderForm::comboBoxUser_keyPress(Object^ sender, KeyPressEventArgs^ e)
