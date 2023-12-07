@@ -236,56 +236,56 @@ FROM [order] o
          INNER JOIN address d ON o.id_delivery_address = d.id_address
          INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
 WHERE o.deleted = 0
-  AND c.id_customer = 1;
+  AND c.last_name = 'Gillet'
+  AND c.first_name = 'Mathieu'
+  AND c.birthdate = '2023-12-27';
 
 /* Query to find the 10 most sold products */
 
-SELECT TOP 10 p.id_product,
-              p.reference,
+SELECT TOP 10 p.reference,
               p.type,
               p.name,
               p.colour,
               p.buy_price,
               p.vat_rate,
               p.quantity,
-              p.provisioning_threshold
+              p.provisioning_threshold,
+              SUM(ohp.quantity) AS quantity_sold
 FROM product p
-            INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
-GROUP BY p.id_product,
-            p.reference,
-            p.type,
-            p.name,
-            p.colour,
-            p.buy_price,
-            p.vat_rate,
-            p.quantity,
-            p.provisioning_threshold
+         INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
+GROUP BY p.reference,
+         p.type,
+         p.name,
+         p.colour,
+         p.buy_price,
+         p.vat_rate,
+         p.quantity,
+         p.provisioning_threshold
 ORDER BY SUM(ohp.quantity) DESC;
 
 /* Query to find the 10 least sold products */
 
-SELECT TOP 10 p.id_product,
-              p.reference,
+SELECT TOP 10 p.reference,
               p.type,
               p.name,
               p.colour,
               p.buy_price,
               p.vat_rate,
               p.quantity,
-              p.provisioning_threshold
+              p.provisioning_threshold,
+              SUM(ohp.quantity) AS quantity_sold
 FROM product p
-            INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
-GROUP BY p.id_product,
-            p.reference,
-            p.type,
-            p.name,
-            p.colour,
-            p.buy_price,
-            p.vat_rate,
-            p.quantity,
-            p.provisioning_threshold
+         INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
+GROUP BY p.reference,
+         p.type,
+         p.name,
+         p.colour,
+         p.buy_price,
+         p.vat_rate,
+         p.quantity,
+         p.provisioning_threshold
 ORDER BY SUM(ohp.quantity) ASC;
-    
+
 /* Query to find the total buy price value of the current stock */
 
 SELECT SUM(p.buy_price * p.quantity) AS total_buy_price_value_of_current_stock
@@ -293,11 +293,15 @@ FROM product p
 WHERE p.deleted = 0;
 
 /* Query to find the turnover of the current stock */
+/* order of parameters : margin, vat rate, sale, possible losses */
 
-SELECT (SUM(tp.tf_price * (1+(p.vat_rate)/100) * p.quantity) - SUM(p.buy_price * p.quantity)) AS turnover_of_current_stock
+SELECT ROUND((SUM(p.buy_price * (1+ 0.5) * (1 + 0.2) * (1 - 0.04) * (1 - 0.10) * p.quantity) -
+              SUM(p.buy_price * p.quantity)), 3) AS turnover_of_current_stock
 FROM product p
          INNER JOIN tiered_price tp ON p.id_product = tp.id_product
-WHERE p.deleted = 0 AND tp.minimal_quantity = 1;
+WHERE p.deleted = 0
+  AND tp.minimal_quantity = 1;
+
 
 
 
