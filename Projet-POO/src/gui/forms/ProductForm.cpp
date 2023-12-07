@@ -42,13 +42,14 @@ int^ ProductForm::createProduct()
     {
         return 0;
     }
-	
+    
     try
     {
         if (productId == "")
         {
-            App::app->logger->warn("warn1");
-            productId = App::app->db->insert("INSERT INTO product (name, buy_price, quantity, provisioning_threshold, vat_rate, type, colour, reference) VALUES ('" + name + "', '" + buyPrice + "', '" + quantity + "','" + restockThreshold + "','" + vat + "','" + type + "','" + colour + "','" + "testRef" + "')");
+            auto rand = gcnew Random();
+            String^ reference = (type->Substring(0, 1) + name->Substring(0, 1) + colour->Substring(0, 1))->ToLower() + rand->Next();
+            productId = App::app->db->insert("INSERT INTO product (name, buy_price, quantity, provisioning_threshold, vat_rate, type, colour, reference) VALUES ('" + name + "', '" + buyPrice + "', '" + quantity + "','" + restockThreshold + "','" + vat + "','" + type + "','" + colour + "','" + reference + "')");
         }
         else
         {
@@ -131,7 +132,7 @@ void ProductForm::buttonDelete_Click(Object^ sender, EventArgs^ e)
     {
         App::app->db->execute("UPDATE tiered_price SET deleted = 1 WHERE id_tiered_price = " + this->dataGridViewTieredPrice->CurrentRow->Cells[2]->Value->ToString() + ";");
         App::app->logger->log("tiered price deleted: \"" + this->dataGridViewTieredPrice->CurrentRow->Cells[1]->Value->ToString() + "\", \"" + this->dataGridViewTieredPrice->CurrentRow->Cells[2]->Value->ToString() + "\"");
-        App::app->toastMessage(this, "Adresse supprimee", Color::Green, 2000);
+        App::app->toastMessage(this, "Produit supprime", Color::Green, 2000);
         reloadGridViewTieredPrice();
     }
     catch (Exception^ exception)
