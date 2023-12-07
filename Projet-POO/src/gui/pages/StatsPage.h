@@ -17,6 +17,8 @@ namespace Projet_POO
 				reloadLeastSoldGridView();
 				reloadMostSoldGridView();
 				reloadUnderThresholdGridView();
+				reloadAverageCart();
+				reloadStockValue();
 			}
 
 		private:
@@ -695,7 +697,7 @@ namespace Projet_POO
 				this->comboBoxLastName->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
 				this->comboBoxLastName->FormattingEnabled = true;
 				this->comboBoxLastName->Location = Point(17, 3);
-				this->comboBoxLastName->Margin = Windows::Forms::Padding(3, 3, 3, 13);
+				this->comboBoxLastName->Margin = Windows::Forms::Padding(3, 3, 3, 3);
 				this->comboBoxLastName->Name = L"comboBoxLastName";
 				this->comboBoxLastName->Size = Drawing::Size(172, 33);
 				this->comboBoxLastName->TabIndex = 0;
@@ -773,6 +775,7 @@ namespace Projet_POO
 				this->buttonValue->TabIndex = 15;
 				this->buttonValue->Text = L"Calcul valeur";
 				this->buttonValue->UseVisualStyleBackColor = true;
+				this->buttonValue->Click += gcnew EventHandler(this, &StatsPage::buttonValue_Click);
 				
 				/*-------------------- buttonCustomer --------------------*/
 				this->buttonCustomer->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -784,6 +787,7 @@ namespace Projet_POO
 				this->buttonCustomer->TabIndex = 0;
 				this->buttonCustomer->Text = L"Calcul du total";
 				this->buttonCustomer->UseVisualStyleBackColor = true;
+				this->buttonCustomer->Click += gcnew EventHandler(this, &StatsPage::buttonCustomer_Click);
 				
 				/*-------------------- buttonTurnover --------------------*/
 				this->buttonTurnover->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
@@ -795,6 +799,7 @@ namespace Projet_POO
 				this->buttonTurnover->TabIndex = 17;
 				this->buttonTurnover->Text = L"Calcul CA";
 				this->buttonTurnover->UseVisualStyleBackColor = true;
+				this->buttonTurnover->Click += gcnew EventHandler(this, &StatsPage::buttonTurnover_Click);
 
 				/*-------------------- StatsPage --------------------*/
 				this->AutoScaleDimensions = Drawing::SizeF(6, 13);
@@ -809,7 +814,11 @@ namespace Projet_POO
 			Void reloadMostSoldGridView();
 			Void reloadLeastSoldGridView();
 			Void reloadUnderThresholdGridView();
-
+			Void buttonTurnover_Click(Object^ sender, EventArgs^ e);
+			Void buttonCustomer_Click(Object^ sender, EventArgs^ e);
+			Void buttonValue_Click(Object^ sender, EventArgs^ e);
+			Void reloadAverageCart();
+			Void reloadStockValue();
 
 	};
 }

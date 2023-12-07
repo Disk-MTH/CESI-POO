@@ -295,7 +295,7 @@ WHERE p.deleted = 0;
 /* Query to find the turnover of the current stock */
 /* order of parameters : margin, vat rate, sale, possible losses */
 
-SELECT ROUND((SUM(p.buy_price * (1+ 0.5) * (1 + 0.2) * (1 - 0.04) * (1 - 0.10) * p.quantity) -
+SELECT ROUND((SUM(p.buy_price * (1 + (50/100.0)) * (1 + (20/100.0)) * (1 - (4/100.0)) * (1 - (10/100.0)) * p.quantity) -
               SUM(p.buy_price * p.quantity)), 3) AS turnover_of_current_stock
 FROM product p
          INNER JOIN tiered_price tp ON p.id_product = tp.id_product
@@ -303,6 +303,6 @@ WHERE p.deleted = 0
   AND tp.minimal_quantity = 1;
 
 
-
+SELECT ROUND((SUM(p.buy_price * (1 + (50/100.0)) * (1 + (20/100.0)) * (1 - (4/100.0)) * (1 - (10/100.0)) * p.quantity) - SUM(p.buy_price * p.quantity)), 3) AS turnover_of_current_stock FROM product p INNER JOIN tiered_price tp ON p.id_product = tp.id_product WHERE p.deleted = 0 AND tp.minimal_quantity = 1;
 
 
