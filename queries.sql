@@ -298,7 +298,6 @@ WHERE p.deleted = 0;
 SELECT s.id_staff,
        s.last_name,
        s.first_name,
-
        CONVERT(VARCHAR(10), s.hire_date, 103),
        a.street,
        a.zip_code,
@@ -309,5 +308,3 @@ FROM staff s
          INNER JOIN address a on a.id_address = s.id_address
          LEFT JOIN staff b on b.id_staff = s.id_staff_boss
 WHERE s.deleted = 0;
-
-UPDATE staff SET last_name = 'Retest', first_name = 'Test', hire_date = '2023-12-07', id_staff_boss = , id_address = 1 WHERE id_staff = 2;;SELECT @@IDENTITY

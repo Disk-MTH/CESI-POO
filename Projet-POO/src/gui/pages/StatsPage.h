@@ -63,11 +63,11 @@ namespace Projet_POO
 
 			ComboBox^ comboBoxLastName;
 			ComboBox^ comboBoxFirstName;
-			ComboBox^ comboBoxBirthDate;
-			TextBox^ textBoxVat;
-			TextBox^ textBoxMargin;
-			TextBox^ textBoxReduction;
-			TextBox^ textBoxLosses;
+			ComboBox^ comboBoxBirthdate;
+			ComboBox^ comboBoxVat;
+			ComboBox^ comboBoxMargin;
+			ComboBox^ comboBoxReduction;
+			ComboBox^ comboBoxLosses;
 			TextBox^ textBoxMonth;
 			TextBox^ textBoxYear;
 
@@ -119,11 +119,11 @@ namespace Projet_POO
 
 				this->comboBoxLastName = gcnew ComboBox();
 				this->comboBoxFirstName = gcnew ComboBox();
-				this->comboBoxBirthDate = gcnew ComboBox();
-				this->textBoxVat = gcnew TextBox();
-				this->textBoxMargin = gcnew TextBox();
-				this->textBoxReduction = gcnew TextBox();
-				this->textBoxLosses = gcnew TextBox();
+				this->comboBoxBirthdate = gcnew ComboBox();
+				this->comboBoxVat = gcnew ComboBox();
+				this->comboBoxMargin = gcnew ComboBox();
+				this->comboBoxReduction = gcnew ComboBox();
+				this->comboBoxLosses = gcnew ComboBox();
 				this->textBoxMonth = gcnew TextBox();
 				this->textBoxYear = gcnew TextBox();
 
@@ -228,7 +228,7 @@ namespace Projet_POO
 				this->tableLayoutPanel7->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 52.9563F));
 				this->tableLayoutPanel7->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 47.0437F));
 				this->tableLayoutPanel7->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Absolute, 163));
-				this->tableLayoutPanel7->Controls->Add(this->comboBoxBirthDate, 2, 0);
+				this->tableLayoutPanel7->Controls->Add(this->comboBoxBirthdate, 2, 0);
 				this->tableLayoutPanel7->Controls->Add(this->comboBoxLastName, 0, 0);
 				this->tableLayoutPanel7->Controls->Add(this->comboBoxFirstName, 1, 0);
 				this->tableLayoutPanel7->Location = Point(3, 150);
@@ -271,9 +271,9 @@ namespace Projet_POO
 				this->tableLayoutPanel10->ColumnCount = 2;
 				this->tableLayoutPanel10->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 44.03183F));
 				this->tableLayoutPanel10->ColumnStyles->Add(gcnew ColumnStyle(SizeType::Percent, 55.96817F));
-				this->tableLayoutPanel10->Controls->Add(this->textBoxLosses, 1, 3);
-				this->tableLayoutPanel10->Controls->Add(this->textBoxReduction, 1, 2);
-				this->tableLayoutPanel10->Controls->Add(this->textBoxMargin, 1, 1);
+				this->tableLayoutPanel10->Controls->Add(this->comboBoxLosses, 1, 3);
+				this->tableLayoutPanel10->Controls->Add(this->comboBoxReduction, 1, 2);
+				this->tableLayoutPanel10->Controls->Add(this->comboBoxMargin, 1, 1);
 				this->tableLayoutPanel10->Controls->Add(this->labelValueStock, 1, 4);
 				this->tableLayoutPanel10->Controls->Add(this->labelVat, 0, 0);
 				this->tableLayoutPanel10->Controls->Add(this->labelReduction, 0, 2);
@@ -281,7 +281,7 @@ namespace Projet_POO
 				this->tableLayoutPanel10->Controls->Add(this->labelLosses, 0, 3);
 				this->tableLayoutPanel10->Controls->Add(this->labelStock, 0, 4);
 				this->tableLayoutPanel10->Controls->Add(this->labelCalculatedValue, 1, 5);
-				this->tableLayoutPanel10->Controls->Add(this->textBoxVat, 1, 0);
+				this->tableLayoutPanel10->Controls->Add(this->comboBoxVat, 1, 0);
 				this->tableLayoutPanel10->Controls->Add(this->buttonValue, 0, 5);
 				this->tableLayoutPanel10->Location = Point(3, 48);
 				this->tableLayoutPanel10->Name = L"tableLayoutPanel10";
@@ -694,6 +694,7 @@ namespace Projet_POO
 				this->comboBoxLastName->Name = L"comboBoxLastName";
 				this->comboBoxLastName->Size = Drawing::Size(172, 33);
 				this->comboBoxLastName->TabIndex = 0;
+				this->comboBoxLastName->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::comboBox_keyPress);
 
 				/*-------------------- comboBoxFirstName --------------------*/
 				this->comboBoxFirstName->Anchor = AnchorStyles::None;
@@ -703,51 +704,70 @@ namespace Projet_POO
 				this->comboBoxFirstName->Name = L"comboBoxFirstName";
 				this->comboBoxFirstName->Size = Drawing::Size(167, 33);
 				this->comboBoxFirstName->TabIndex = 1;
+				this->comboBoxFirstName->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::comboBox_keyPress);
 
-				/*-------------------- comboBoxBirthDate --------------------*/
-				this->comboBoxBirthDate->Anchor = AnchorStyles::None;
-				this->comboBoxBirthDate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->comboBoxBirthDate->FormattingEnabled = true;
-				this->comboBoxBirthDate->Location = Point(401, 8);
-				this->comboBoxBirthDate->Name = L"comboBoxBirthDate";
-				this->comboBoxBirthDate->Size = Drawing::Size(139, 33);
-				this->comboBoxBirthDate->TabIndex = 2;
+				/*-------------------- comboBoxBirthdate --------------------*/
+				this->comboBoxBirthdate->Anchor = AnchorStyles::None;
+				this->comboBoxBirthdate->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->comboBoxBirthdate->FormattingEnabled = true;
+				this->comboBoxBirthdate->Location = Point(401, 8);
+				this->comboBoxBirthdate->Name = L"comboBoxBirthdate";
+				this->comboBoxBirthdate->Size = Drawing::Size(139, 33);
+				this->comboBoxBirthdate->TabIndex = 2;
+				this->comboBoxBirthdate->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::comboBox_keyPress);
+				this->comboBoxBirthdate->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::boxDate_KeyPress);
 
-				/*-------------------- textBoxVat --------------------*/
-				this->textBoxVat->Anchor = AnchorStyles::Left;
-				this->textBoxVat->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->textBoxVat->Location = Point(176, 9);
-				this->textBoxVat->Margin = Windows::Forms::Padding(10, 3, 10, 3);
-				this->textBoxVat->Name = L"textBoxVat";
-				this->textBoxVat->Size = Drawing::Size(191, 30);
-				this->textBoxVat->TabIndex = 7;
+				/*-------------------- comboBoxVat --------------------*/
+				this->comboBoxVat->Anchor = AnchorStyles::Left;
+				this->comboBoxVat->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->comboBoxVat->Location = Point(176, 9);
+				this->comboBoxVat->Margin = Windows::Forms::Padding(10, 3, 10, 3);
+				this->comboBoxVat->Name = L"comboBoxVat";
+				this->comboBoxVat->Size = Drawing::Size(191, 30);
+				this->comboBoxVat->TabIndex = 7;
+				this->comboBoxVat->Items->Add("5");
+				this->comboBoxVat->Items->Add("10");
+				this->comboBoxVat->Items->Add("20");
+				this->comboBoxVat->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::boxFloat_KeyPress);
 
-				/*-------------------- textBoxMargin --------------------*/
-				this->textBoxMargin->Anchor = AnchorStyles::Left;
-				this->textBoxMargin->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->textBoxMargin->Location = Point(176, 58);
-				this->textBoxMargin->Margin = Windows::Forms::Padding(10, 3, 10, 3);
-				this->textBoxMargin->Name = L"textBoxMargin";
-				this->textBoxMargin->Size = Drawing::Size(191, 30);
-				this->textBoxMargin->TabIndex = 8;
+				/*-------------------- comboBoxMargin --------------------*/
+				this->comboBoxMargin->Anchor = AnchorStyles::Left;
+				this->comboBoxMargin->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->comboBoxMargin->Location = Point(176, 58);
+				this->comboBoxMargin->Margin = Windows::Forms::Padding(10, 3, 10, 3);
+				this->comboBoxMargin->Name = L"comboBoxMargin";
+				this->comboBoxMargin->Size = Drawing::Size(191, 30);
+				this->comboBoxMargin->TabIndex = 8;
+				this->comboBoxMargin->Items->Add("5");
+				this->comboBoxMargin->Items->Add("10");
+				this->comboBoxMargin->Items->Add("15");
+				this->comboBoxMargin->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::boxFloat_KeyPress);
+				
+				/*-------------------- comboBoxReduction --------------------*/
+				this->comboBoxReduction->Anchor = AnchorStyles::Left;
+				this->comboBoxReduction->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->comboBoxReduction->Location = Point(176, 108);
+				this->comboBoxReduction->Margin = Windows::Forms::Padding(10, 3, 10, 3);
+				this->comboBoxReduction->Name = L"comboBoxReduction";
+				this->comboBoxReduction->Size = Drawing::Size(191, 30);
+				this->comboBoxReduction->TabIndex = 9;
+				this->comboBoxMargin->TabIndex = 8;
+				this->comboBoxReduction->Items->Add("5");
+				this->comboBoxReduction->Items->Add("6");
+				this->comboBoxReduction->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::boxFloat_KeyPress);
 
-				/*-------------------- textBoxReduction --------------------*/
-				this->textBoxReduction->Anchor = AnchorStyles::Left;
-				this->textBoxReduction->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->textBoxReduction->Location = Point(176, 108);
-				this->textBoxReduction->Margin = Windows::Forms::Padding(10, 3, 10, 3);
-				this->textBoxReduction->Name = L"textBoxReduction";
-				this->textBoxReduction->Size = Drawing::Size(191, 30);
-				this->textBoxReduction->TabIndex = 9;
-
-				/*-------------------- textBoxLosses --------------------*/
-				this->textBoxLosses->Anchor = AnchorStyles::Left;
-				this->textBoxLosses->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
-				this->textBoxLosses->Location = Point(176, 159);
-				this->textBoxLosses->Margin = Windows::Forms::Padding(10, 3, 10, 3);
-				this->textBoxLosses->Name = L"textBoxLosses";
-				this->textBoxLosses->Size = Drawing::Size(191, 30);
-				this->textBoxLosses->TabIndex = 10;
+				/*-------------------- comboBoxLosses --------------------*/
+				this->comboBoxLosses->Anchor = AnchorStyles::Left;
+				this->comboBoxLosses->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
+				this->comboBoxLosses->Location = Point(176, 159);
+				this->comboBoxLosses->Margin = Windows::Forms::Padding(10, 3, 10, 3);
+				this->comboBoxLosses->Name = L"comboBoxLosses";
+				this->comboBoxLosses->Size = Drawing::Size(191, 30);
+				this->comboBoxLosses->TabIndex = 10;
+				this->comboBoxLosses->Items->Add("2");
+				this->comboBoxLosses->Items->Add("3");
+				this->comboBoxLosses->Items->Add("5");
+				this->comboBoxLosses->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::boxFloat_KeyPress);
 				
 				/*-------------------- textBoxMonth --------------------*/
 				this->textBoxMonth->Anchor = AnchorStyles::Left;
@@ -757,7 +777,8 @@ namespace Projet_POO
 				this->textBoxMonth->Name = L"textBoxMonth";
 				this->textBoxMonth->Size = Drawing::Size(191, 30);
 				this->textBoxMonth->TabIndex = 12;
-
+				this->textBoxMonth->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::boxInt_KeyPress);
+				
 				/*-------------------- textBoxYear --------------------*/
 				this->textBoxYear->Anchor = AnchorStyles::Left;
 				this->textBoxYear->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -766,7 +787,8 @@ namespace Projet_POO
 				this->textBoxYear->Name = L"textBoxYear";
 				this->textBoxYear->Size = Drawing::Size(191, 30);
 				this->textBoxYear->TabIndex = 13;
-
+				this->textBoxYear->KeyPress += gcnew KeyPressEventHandler(this, &StatsPage::boxInt_KeyPress);
+				
 				/*-------------------- buttonCustomer --------------------*/
 				this->buttonCustomer->Anchor = AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right;
 				this->buttonCustomer->Font = gcnew Drawing::Font(L"Microsoft Sans Serif", 15);
@@ -818,6 +840,11 @@ namespace Projet_POO
 			Void reloadMostSoldGridView();
 			Void reloadLeastSoldGridView();
 			Void reloadUnderThresholdGridView();
+			Void retrieveSuggestion(ComboBox^ comboBox, String^ query);
+			Void comboBox_keyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void boxFloat_KeyPress(Object^ sender, KeyPressEventArgs^ e);
+			Void boxDate_KeyPress(Object^ sender, KeyPressEventArgs^ e);
 			Void buttonTurnover_Click(Object^ sender, EventArgs^ e);
 			Void buttonCustomer_Click(Object^ sender, EventArgs^ e);
 			Void buttonValue_Click(Object^ sender, EventArgs^ e);
