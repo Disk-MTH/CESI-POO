@@ -1,4 +1,5 @@
-USE [database];
+USE
+    [database];
 GO;
 
 /* ------------------------- Customer -------------------------*/
@@ -44,7 +45,8 @@ SELECT a.id_address,
        at.type
 FROM address a
          INNER JOIN customerHasAddress cha ON a.id_address = cha.id_address
-         INNER JOIN address_type at ON cha.id_address_type = at.id_address_type
+         INNER JOIN address_type at
+                    ON cha.id_address_type = at.id_address_type
 WHERE a.deleted = 0
   AND cha.id_customer = 1;
 
@@ -109,8 +111,10 @@ SELECT o.id_order,
                             103)                                                                 AS payment_date,
        SUM(ohp.vat_price)                                                                        AS vat_amount,
        SUM(ohp.tf_price)                                                                         AS tf_amount
-FROM [order] o
-         INNER JOIN customer c ON o.id_customer = c.id_customer
+FROM [
+order] o
+         INNER JOIN customer c
+                    ON o.id_customer = c.id_customer
          INNER JOIN address b ON o.id_billing_address = b.id_address
          INNER JOIN address d ON o.id_delivery_address = d.id_address
          INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
@@ -192,8 +196,10 @@ WHERE id_order = 1;
 
 SELECT total_amount AS average_order_total_price
 FROM (SELECT ROUND(SUM(ohp.price), 3) / COUNT(o.id_order) AS total_amount
-      FROM [order] o
-               INNER JOIN customer c ON o.id_customer = c.id_customer
+      FROM [
+      order] o
+               INNER JOIN customer c
+                          ON o.id_customer = c.id_customer
                INNER JOIN address b ON o.id_billing_address = b.id_address
                INNER JOIN address d ON o.id_delivery_address = d.id_address
                INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
@@ -202,8 +208,10 @@ FROM (SELECT ROUND(SUM(ohp.price), 3) / COUNT(o.id_order) AS total_amount
 /* Query to calculate the turnover for a given month */
 
 SELECT ROUND((SUM(ohp.price) - SUM(p.buy_price)), 3) AS turnover
-FROM [order] o
-         INNER JOIN customer c ON o.id_customer = c.id_customer
+FROM [
+order] o
+         INNER JOIN customer c
+                    ON o.id_customer = c.id_customer
          INNER JOIN address b ON o.id_billing_address = b.id_address
          INNER JOIN address d ON o.id_delivery_address = d.id_address
          INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
@@ -230,8 +238,10 @@ WHERE p.deleted = 0
 /* Calculate sum of purchases costs for a given customer */
 
 SELECT ROUND(SUM(ohp.price), 3) AS sum_of_purchases_costs
-FROM [order] o
-         INNER JOIN customer c ON o.id_customer = c.id_customer
+FROM [
+order] o
+         INNER JOIN customer c
+                    ON o.id_customer = c.id_customer
          INNER JOIN address b ON o.id_billing_address = b.id_address
          INNER JOIN address d ON o.id_delivery_address = d.id_address
          INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
@@ -308,3 +318,16 @@ FROM staff s
          INNER JOIN address a on a.id_address = s.id_address
          LEFT JOIN staff b on b.id_staff = s.id_staff_boss
 WHERE s.deleted = 0;
+
+SELECT TOP 1 CONVERT(VARCHAR(10), issue_date, 103) AS first_order_date
+FROM [order]
+         INNER JOIN customer c ON [order].id_customer = c.id_customer
+WHERE c.last_name = 'Gillet'
+  AND c.first_name = 'Mathieu';
+
+SELECT p.type, p.name, p.colour, ohp.quantity, ohp.tf_price, + ohp.price
+FROM product p
+         INNER JOIN orderHasProduct ohp ON p.id_product = ohp.id_product
+WHERE p.deleted = 0
+  AND ohp.id_order = 1007
+ORDER BY ohp.quantity DESC;

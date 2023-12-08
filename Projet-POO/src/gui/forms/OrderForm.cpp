@@ -32,9 +32,9 @@ int^ OrderForm::createOrder()
 
 	birthdate = App::isValidDate("Date de naissance", birthdate);
 	deliveryDate = App::isValidDate("Date de livraison", deliveryDate);
-	String^ reference = (firstName->Substring(0, 2) + lastName->Substring(0, 2) + DateTime::Now.ToString("yy") + deliveryAddress->Split(',')[2]->Substring(1, 3) + orderId)->ToLower();
-	String^ issueDate = DateTime::Now.ToString("dd/MM/yyyy");
-	
+	String^ issueDate = App::isValidDate("Date d'emission", DateTime::Now.ToString("dd/MM/yyyy"));
+	String^ reference = (firstName->Substring(0, 2) + lastName->Substring(0, 2) + issueDate->Substring(0, 2) + deliveryAddress->Split(',')[2]->Substring(1, 3) + orderId)->ToLower();
+
 	String^ customerId;
 	try
 	{
@@ -211,6 +211,27 @@ void OrderForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 		String^ tfPrice = (Convert::ToDouble(tfPriceUnit) * Convert::ToDouble(quantity)).ToString()->Replace(",", ".");
 		String^ vatPrice = (Convert::ToDouble(vatPriceUnit) * Convert::ToDouble(quantity)).ToString()->Replace(",", ".");
 		String^ price = (Convert::ToDouble(priceUnit) * Convert::ToDouble(quantity)).ToString()->Replace(",", ".");
+
+		/*String^ date = App::isValidDate("Date d'emission", DateTime::Now.ToString());
+		auto dateSplit = date->Split('/');
+		
+		DataSet^ customerBirthdate = App::app->db->query("SELECT CONVERT(VARCHAR(10), birthdate, 103) AS birthdate FROM customer WHERE last_name = '" + lastName + "' AND first_name = '" + firstName + "';");
+		auto birthdateSplit = customerBirthdate->Tables[0]->Rows[0]->ItemArray[0]->ToString()->Split('/');
+		if (dateSplit[0] == birthdateSplit[0] && dateSplit[1] == birthdateSplit[1] && dateSplit[2] != birthdateSplit[2])
+		{
+			tfPrice = (Convert::ToDouble(tfPrice->Replace(".", ",")) * 0.8).ToString()->Replace(",", ".");
+			vatPrice = (Convert::ToDouble(vatPrice->Replace(".", ",")) * 0.8).ToString()->Replace(",", ".");
+			price = (Convert::ToDouble(price->Replace(".", ",")) * 0.8).ToString()->Replace(",", ".");
+		}
+
+		DataSet^ customerFirstOrder = App::app->db->query("SELECT TOP 1 CONVERT(VARCHAR(10), issue_date, 103) AS first_order_date FROM [order] INNER JOIN customer c ON [order].id_customer = c.id_customer WHERE c.last_name = '" + lastName + "' AND c.first_name = '" + firstName + "';");
+		auto firstOrderSplit = customerFirstOrder->Tables[0]->Rows[0]->ItemArray[0]->ToString()->Split('/');
+		if (dateSplit[0] == firstOrderSplit[0] && dateSplit[1] == firstOrderSplit[1] && dateSplit[2] == firstOrderSplit[2])
+		{
+			tfPrice = (Convert::ToDouble(tfPrice->Replace(".", ",")) * 0.95).ToString()->Replace(",", ".");
+			vatPrice = (Convert::ToDouble(vatPrice->Replace(".", ",")) * 0.95).ToString()->Replace(",", ".");
+			price = (Convert::ToDouble(price->Replace(".", ",")) * 0.95).ToString()->Replace(",", ".");
+		}*/
 		
 		if (orderHasProductId == "")
 		{
