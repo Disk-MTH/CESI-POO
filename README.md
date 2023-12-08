@@ -18,7 +18,7 @@ The objective of the project is to create a software for a company that manages 
 
 ### License
 
-All the files in this repository are completely free of rights (see the [license](https://github.com/Disk-MTH/CESI-3W/blob/master/LICENSE)) so you can grab the code and do whatever you want with them (just respect the [license](https://github.com/Disk-MTH/CESI-3W/blob/master/LICENSE)).
+All the files in this repository are completely free of rights (see the [license](https://github.com/Disk-MTH/CESI-POO/blob/master/LICENSE)) so you can grab the code and do whatever you want with them (just respect the [license](https://github.com/Disk-MTH/CESI-POO/blob/master/LICENSE)).
 
 Thanks for reading and good development!
 
