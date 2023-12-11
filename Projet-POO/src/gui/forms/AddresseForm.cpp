@@ -37,7 +37,13 @@ void AddresseForm::buttonValidate_Click(Object^ sender, EventArgs^ e)
 	street = this->textBoxStreet->Text;
 	zipCode = this->comboBoxZipCode->Text;
 	city = this->comboBoxCity->Text;
-	String^ addressTypeId = this->checkBoxDelivery->Checked && this->checkBoxDelivery->Checked ? "3" : this->checkBoxDelivery->Checked ? "2" : this->checkBoxBilling->Checked ? "1" : "";
+	String^ addressTypeId = "";
+	if (this->checkBoxBilling->Checked)
+		addressTypeId = "2";
+	else if (this->checkBoxDelivery->Checked)
+		addressTypeId = "1";
+	if (this->checkBoxBilling->Checked && this->checkBoxDelivery->Checked)
+		addressTypeId = "3";
 
 	if (App::isEmpty("Libelle", street) || App::isEmpty("Code postal", zipCode) || App::isEmpty("Ville", city) || App::isEmpty("Type", addressTypeId))
 	{

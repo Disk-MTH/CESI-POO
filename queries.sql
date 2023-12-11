@@ -93,45 +93,34 @@ WHERE p.deleted = 0
 /* Query to fill OrdersPage */
 
 /* have the sum of ohp.price only count prices when validated is true in the table *payment* */
-
-
 SELECT o.id_order,
        o.reference,
        c.last_name,
        c.first_name,
-       CONVERT(VARCHAR(10), c.birthdate, 103)                                                    AS birthdate,
-       CONVERT(VARCHAR(10), o.issue_date, 103)                                                   AS issue_date,
-       CONVERT(VARCHAR(10), o.expected_delivery_date, 103)                                       AS expected_delivery_date,
-       CONCAT(b.street, ', ', b.zip_code, ', ', b.city)                                          AS billing_address,
-       CONCAT(d.street, ', ', d.zip_code, ', ', d.city)                                          AS delivery_address,
-       ROUND(SUM(ohp.price), 3)                                                                  AS total_amount,
-       ROUND((SELECT SUM(amount) FROM payment WHERE id_order = o.id_order AND validated = 1), 3) AS payed_amount,
-       CONVERT(VARCHAR(10), IIF((SELECT SUM(amount) FROM payment WHERE id_order = o.id_order) = SUM(ohp.price),
+       CONVERT(VARCHAR(10), c.birthdate, 103)              AS birthdate,
+       CONVERT(VARCHAR(10), o.issue_date, 103)             AS issue_date,
+       CONVERT(VARCHAR(10), o.expected_delivery_date, 103) AS expected_delivery_date,
+       CONCAT(b.street, ', ', b.zip_code, ', ', b.city)    AS billing_address,
+       CONCAT(d.street, ', ', d.zip_code, ', ', d.city)    AS delivery_address,
+       ROUND(SUM(ohp.price), 3)                            AS total_amount,
+       ROUND((SELECT SUM(amount) FROM payment WHERE id_order = o.id_order AND validated = 1),
+             3)                                            AS payed_amount,
+       CONVERT(VARCHAR(10), IIF((SELECT ROUND(SUM(amount), 3)
+                                 FROM payment
+                                 WHERE id_order = o.id_order AND validated = 1) = ROUND(SUM(ohp.price), 3),
                                 (SELECT MAX(payment_date) FROM payment WHERE id_order = o.id_order), NULL),
-                            103)                                                                 AS payment_date,
-       SUM(ohp.vat_price)                                                                        AS vat_amount,
-       SUM(ohp.tf_price)                                                                         AS tf_amount
-FROM [
-order] o
+                            103)                           AS payment_date,
+       ROUND(SUM(ohp.vat_price), 3)                        AS vat_amount,
+       ROUND(SUM(ohp.tf_price), 3)                         AS tf_amount
+FROM [order] o
          INNER JOIN customer c
                     ON o.id_customer = c.id_customer
          INNER JOIN address b ON o.id_billing_address = b.id_address
          INNER JOIN address d ON o.id_delivery_address = d.id_address
          INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order
 WHERE o.deleted = 0
-GROUP BY o.id_order,
-         o.reference,
-         o.issue_date,
-         o.expected_delivery_date,
-         c.last_name,
-         c.first_name,
-         c.birthdate,
-         b.street,
-         b.zip_code,
-         b.city,
-         d.street,
-         d.zip_code,
-         d.city;
+GROUP BY o.id_order, o.reference, o.issue_date, o.expected_delivery_date, c.last_name, c.first_name, c.birthdate,
+         b.street, b.zip_code, b.city, d.street, d.zip_code, d.city;
 
 /* Query to fill OrderDetails */
 SELECT p.type,
@@ -320,8 +309,11 @@ FROM staff s
 WHERE s.deleted = 0;
 
 SELECT TOP 1 CONVERT(VARCHAR(10), issue_date, 103) AS first_order_date
-FROM [order]
-         INNER JOIN customer c ON [order].id_customer = c.id_customer
+FROM [
+order]
+         INNER JOIN customer c
+                    ON [
+order].id_customer = c.id_customer
 WHERE c.last_name = 'Gillet'
   AND c.first_name = 'Mathieu';
 
@@ -331,3 +323,21 @@ FROM product p
 WHERE p.deleted = 0
   AND ohp.id_order = 1007
 ORDER BY ohp.quantity DESC;
+
+
+
+SELECT CONCAT(street, ', ', zip_code, ', ', city) AS delivery_address
+FROM address
+WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '%'
+  AND id_address IN (SELECT id_address
+                     FROM customerHasAddress
+                     WHERE id_customer =
+                           (SELECT id_customer FROM customer WHERE last_name = 'Leonie' AND first_name = 'Mathice') AND
+                           (id_address_type = 2
+                        OR id_address_type = 3))
+  AND deleted = 0;
+
+SELECT CONVERT(VARCHAR(10), birthdate, 103) AS birthdate FROM customer WHERE last_name = 'Leonie' AND first_name = 'Mathice';
+
+SELECT TOP 1 CONVERT(VARCHAR(10), issue_date, 103) AS first_order_date FROM [order] INNER JOIN customer c ON [order].id_customer = c.id_customer WHERE c.last_name = 'Laumel' AND c.first_name = 'Stephan' ORDER BY issue_date ASC;
+

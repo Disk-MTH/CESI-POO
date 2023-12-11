@@ -124,15 +124,15 @@ void OrderForm::comboBoxUser_keyPress(Object^ sender, KeyPressEventArgs^ e)
 	retrieveSuggestion(this->comboBoxFirstName, "SELECT first_name FROM customer WHERE first_name LIKE '{data}%' AND last_name LIKE '" + this->comboBoxLastName->Text + "%' AND deleted = 0;");
 	retrieveSuggestion(this->comboBoxLastName, "SELECT last_name FROM customer WHERE last_name LIKE '{data}%' AND first_name LIKE '" + this->comboBoxFirstName->Text + "%' AND deleted = 0;");
 	retrieveSuggestion(this->comboBoxBirthdate, "SELECT CONVERT(VARCHAR(10), birthdate, 103) AS birthdate FROM customer WHERE CONVERT(VARCHAR(10), birthdate, 103) LIKE '{data}%' AND last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "' AND deleted = 0;");
-	retrieveSuggestion(this->comboBoxBillingAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS billing_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 1 OR id_address_type = 3) AND deleted = 0;");
-	retrieveSuggestion(this->comboBoxDeliveryAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS delivery_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND id_address_type = 2 OR id_address_type = 3) AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxBillingAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS billing_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND (id_address_type = 1 OR id_address_type = 3)) AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxDeliveryAddress, "SELECT CONCAT(street, ', ', zip_code, ', ', city) AS delivery_address FROM address WHERE CONCAT(street, ', ', zip_code, ', ', city) LIKE '{data}%' AND id_address IN (SELECT id_address FROM customerHasAddress WHERE id_customer = (SELECT id_customer FROM customer WHERE last_name = '" + this->comboBoxLastName->Text + "' AND first_name = '" + this->comboBoxFirstName->Text + "') AND (id_address_type = 2 OR id_address_type = 3)) AND deleted = 0;");
 }
 
 void OrderForm::comboBoxProduct_keyPress(Object^ sender, KeyPressEventArgs^ e)
 {
-	retrieveSuggestion(this->comboBoxType, "SELECT DISTINCT type FROM product WHERE type LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%';");
-	retrieveSuggestion(this->comboBoxProductName, "SELECT DISTINCT name FROM product WHERE name LIKE '{data}%' AND type LIKE '" + this->comboBoxType->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%';");
-	retrieveSuggestion(this->comboBoxColour, "SELECT DISTINCT colour FROM product WHERE colour LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND type LIKE '" + this->comboBoxType->Text + "%';");
+	retrieveSuggestion(this->comboBoxType, "SELECT DISTINCT type FROM product WHERE type LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%' AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxProductName, "SELECT DISTINCT name FROM product WHERE name LIKE '{data}%' AND type LIKE '" + this->comboBoxType->Text + "%' AND colour LIKE '" + this->comboBoxColour->Text + "%' AND deleted = 0;");
+	retrieveSuggestion(this->comboBoxColour, "SELECT DISTINCT colour FROM product WHERE colour LIKE '{data}%' AND name LIKE '" + this->comboBoxProductName->Text + "%' AND type LIKE '" + this->comboBoxType->Text + "%' AND deleted = 0;");
 }
 
 void OrderForm::boxInt_KeyPress(Object^ sender, KeyPressEventArgs^ e)
@@ -212,26 +212,26 @@ void OrderForm::buttonAdd_Click(Object^ sender, EventArgs^ e)
 		String^ vatPrice = (Convert::ToDouble(vatPriceUnit) * Convert::ToDouble(quantity)).ToString()->Replace(",", ".");
 		String^ price = (Convert::ToDouble(priceUnit) * Convert::ToDouble(quantity)).ToString()->Replace(",", ".");
 
-		/*String^ date = App::isValidDate("Date d'emission", DateTime::Now.ToString());
-		auto dateSplit = date->Split('/');
+		String^ date = App::isValidDate("Date d'emission", DateTime::Now.ToString("dd/MM/yyyy"));
+		auto dateSplit = date->Split('-');
 		
 		DataSet^ customerBirthdate = App::app->db->query("SELECT CONVERT(VARCHAR(10), birthdate, 103) AS birthdate FROM customer WHERE last_name = '" + lastName + "' AND first_name = '" + firstName + "';");
 		auto birthdateSplit = customerBirthdate->Tables[0]->Rows[0]->ItemArray[0]->ToString()->Split('/');
-		if (dateSplit[0] == birthdateSplit[0] && dateSplit[1] == birthdateSplit[1] && dateSplit[2] != birthdateSplit[2])
+		if (birthdateSplit[0] == dateSplit[2] && birthdateSplit[1] == dateSplit[1] && birthdateSplit[2] != dateSplit[0])
 		{
-			tfPrice = (Convert::ToDouble(tfPrice->Replace(".", ",")) * 0.8).ToString()->Replace(",", ".");
-			vatPrice = (Convert::ToDouble(vatPrice->Replace(".", ",")) * 0.8).ToString()->Replace(",", ".");
-			price = (Convert::ToDouble(price->Replace(".", ",")) * 0.8).ToString()->Replace(",", ".");
+			tfPrice = (Convert::ToDouble(tfPrice->Replace(".", ",")) * 0.9).ToString()->Replace(",", ".");
+			vatPrice = (Convert::ToDouble(vatPrice->Replace(".", ",")) * 0.9).ToString()->Replace(",", ".");
+			price = (Convert::ToDouble(price->Replace(".", ",")) * 0.9).ToString()->Replace(",", ".");
 		}
 
-		DataSet^ customerFirstOrder = App::app->db->query("SELECT TOP 1 CONVERT(VARCHAR(10), issue_date, 103) AS first_order_date FROM [order] INNER JOIN customer c ON [order].id_customer = c.id_customer WHERE c.last_name = '" + lastName + "' AND c.first_name = '" + firstName + "';");
+		DataSet^ customerFirstOrder = App::app->db->query("SELECT TOP 1 CONVERT(VARCHAR(10), issue_date, 103) AS first_order_date FROM [order] INNER JOIN customer c ON [order].id_customer = c.id_customer WHERE c.last_name = '" + lastName + "' AND c.first_name = '" + firstName + "' ORDER BY issue_date ASC;");
 		auto firstOrderSplit = customerFirstOrder->Tables[0]->Rows[0]->ItemArray[0]->ToString()->Split('/');
-		if (dateSplit[0] == firstOrderSplit[0] && dateSplit[1] == firstOrderSplit[1] && dateSplit[2] == firstOrderSplit[2])
+		if (firstOrderSplit[0] == dateSplit[2] && firstOrderSplit[1] == dateSplit[1] && firstOrderSplit[2] != dateSplit[0])
 		{
 			tfPrice = (Convert::ToDouble(tfPrice->Replace(".", ",")) * 0.95).ToString()->Replace(",", ".");
 			vatPrice = (Convert::ToDouble(vatPrice->Replace(".", ",")) * 0.95).ToString()->Replace(",", ".");
 			price = (Convert::ToDouble(price->Replace(".", ",")) * 0.95).ToString()->Replace(",", ".");
-		}*/
+		}
 		
 		if (orderHasProductId == "")
 		{
