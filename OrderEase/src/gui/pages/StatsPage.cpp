@@ -130,13 +130,13 @@ void StatsPage::buttonValue_Click(Object^ sender, EventArgs^ e)
 
 void StatsPage::reloadAverageCart()
 {
-	String^ value = App::app->db->query("SELECT total_amount AS average_order_total_price FROM (SELECT ROUND(SUM(ohp.price), 3) / COUNT(o.id_order) AS total_amount FROM [order] o INNER JOIN customer c ON o.id_customer = c.id_customer INNER JOIN address b ON o.id_billing_address = b.id_address INNER JOIN address d ON o.id_delivery_address = d.id_address INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order WHERE o.deleted = 0) AS total_amount;")->Tables[0]->Rows[0]->ItemArray[0]->ToString();
+	String^ value = App::app->db->query("SELECT ROUND(total_amount, 3) AS average_order_total_price FROM (SELECT ROUND(SUM(ohp.price), 3) / COUNT(o.id_order) AS total_amount FROM [order] o INNER JOIN customer c ON o.id_customer = c.id_customer INNER JOIN address b ON o.id_billing_address = b.id_address INNER JOIN address d ON o.id_delivery_address = d.id_address INNER JOIN orderHasProduct ohp ON o.id_order = ohp.id_order WHERE o.deleted = 0) AS total_amount;")->Tables[0]->Rows[0]->ItemArray[0]->ToString();
 	this->labelAverageCart->Text = "Panier moyen : " + value + " $";
 }
 
 void StatsPage::reloadStockValue()
 {
-	String^ value = App::app->db->query("SELECT SUM(p.buy_price * p.quantity) AS total_buy_price_value_of_current_stock FROM product p WHERE p.deleted = 0;")->Tables[0]->Rows[0]->ItemArray[0]->ToString();
+	String^ value = App::app->db->query("SELECT ROUND(SUM(p.buy_price * p.quantity), 3) AS total_buy_price_value_of_current_stock FROM product p WHERE p.deleted = 0;")->Tables[0]->Rows[0]->ItemArray[0]->ToString();
 	this->labelValueStock->Text = value + " $";
 }
 
